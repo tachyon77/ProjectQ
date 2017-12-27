@@ -21,13 +21,13 @@ namespace ProjectQ.Model
         }
     
         public int Id { get; set; }
-        public int user_id { get; set; }
+        public int UserId { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public System.DateTime origin_date { get; set; }
-        public decimal offered_price { get; set; }
-        public bool is_private { get; set; }
-        public bool has_min_qualification { get; set; }
+        public System.DateTime OriginDate { get; set; }
+        public decimal OfferedPrice { get; set; }
+        public bool IsPrivate { get; set; }
+        public bool HasMinQualification { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }

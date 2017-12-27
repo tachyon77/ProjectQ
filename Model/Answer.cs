@@ -15,12 +15,12 @@ namespace ProjectQ.Model
     public partial class Answer
     {
         public int Id { get; set; }
-        public int question_id { get; set; }
-        public int user_id { get; set; }
+        public int QuestionId { get; set; }
+        public int UserId { get; set; }
         public string text { get; set; }
-        public System.DateTime origin_date { get; set; }
-        public bool is_private { get; set; }
-        public System.DateTime expiry_date { get; set; }
+        public System.DateTime OriginDate { get; set; }
+        public bool IsPrivate { get; set; }
+        public System.DateTime ExpiryDate { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }
