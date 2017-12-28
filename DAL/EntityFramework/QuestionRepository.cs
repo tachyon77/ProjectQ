@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL
+namespace ProjectQ.DAL.EntityFramework
 {
-    public interface IQuestionRepository
-    {
-        Task AddQuestion(Question question);
-    }
-
     public class QuestionRepository : IQuestionRepository
     {
         #region Private Members
-        private ProjectQEntities db = new ProjectQEntities();
+        private ProjectQEntities Context;
         #endregion
+
+        public QuestionRepository(ProjectQEntities context)
+        {
+            Context = context;
+        }
         async Task IQuestionRepository.AddQuestion(Question question)
         {
-            db.Questions.Add(question);
-            await db.SaveChangesAsync();
+            Context.Questions.Add(question);
+            await Context.SaveChangesAsync();
         }
     }
 }

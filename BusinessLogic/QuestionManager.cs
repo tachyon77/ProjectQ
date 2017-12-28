@@ -24,13 +24,19 @@ namespace ProjectQ.BusinessLogic
     public class QuestionManager : IQuestionManager
     {
         #region Private Members
-        private IQuestionRepository Repository = new QuestionRepository();
+        private IUnitOfWork UnitOfWork;
         #endregion
 
         #region Public Members
+
+        public QuestionManager(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
+        }
+        
         void IQuestionManager.PostQuestion(Question question)
         {
-            Repository.AddQuestion(question);
+            UnitOfWork.QuestionRepository.AddQuestion(question);
         }
         #endregion
     }
