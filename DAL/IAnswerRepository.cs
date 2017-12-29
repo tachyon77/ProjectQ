@@ -7,8 +7,8 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL
 {
-    public interface IQuestionRepository
+    public interface IAnswerRepository
     {
-        Task Add(Question question);
+        Task AddAnswer(Answer answer);
     }
 }

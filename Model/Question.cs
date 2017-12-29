@@ -22,9 +22,9 @@ namespace ProjectQ.Model
     
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public System.DateTime OriginDate { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> OriginDate { get; set; }
         public decimal OfferedPrice { get; set; }
         public bool IsPrivate { get; set; }
         public bool HasMinQualification { get; set; }

@@ -3,7 +3,7 @@
     [UserId]               INT           NOT NULL,
     [Title]                 VARCHAR (200) NOT NULL,
     [Description]           VARCHAR (MAX) NOT NULL,
-    [OriginDate]           DATE          NOT NULL,
+    [OriginDate]           DATETIME          NULL,
     [OfferedPrice]         DECIMAL (12)  NOT NULL,
     [IsPrivate]            BIT           NOT NULL,
     [HasMinQualification] BIT           NOT NULL,

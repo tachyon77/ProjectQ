@@ -7,19 +7,19 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework
 {
-    public class QuestionRepository : IQuestionRepository
+    public class AnswerRepository : IAnswerRepository
     {
         #region Private Members
         private ProjectQEntities Context;
         #endregion
 
-        public QuestionRepository(ProjectQEntities context)
+        public AnswerRepository(ProjectQEntities context)
         {
             Context = context;
         }
-        async Task IQuestionRepository.Add(Question question)
+        async Task IAnswerRepository.AddAnswer(Answer answer)
         {
-            Context.Questions.Add(question);
+            Context.Answers.Add(answer);
             await Context.SaveChangesAsync();
         }
     }

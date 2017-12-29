@@ -34,9 +34,14 @@ namespace ProjectQ.BusinessLogic
             UnitOfWork = unitOfWork;
         }
         
-        void IQuestionManager.PostQuestion(Question question)
+        void IQuestionManager.Post(Question question)
         {
-            UnitOfWork.QuestionRepository.AddQuestion(question);
+            UnitOfWork.QuestionRepository.Add(question);
+        }
+
+        void IQuestionManager.Update(Question question)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

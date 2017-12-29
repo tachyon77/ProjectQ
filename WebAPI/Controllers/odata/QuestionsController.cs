@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.OData;
 using ProjectQ.Model;
-
+using System.Collections.Generic;
 
 namespace ProjectQ.WebAPI.Controllers.Odata
 {
@@ -25,6 +25,11 @@ namespace ProjectQ.WebAPI.Controllers.Odata
         {
             IQueryable<Question> result = db.Questions.Where(p => p.Id == key);
             return SingleResult.Create(result);
+        }
+
+        public async Task<string> GetTitleFromQuestion([FromODataUri] int key)
+        {
+            return (await db.Questions.FindAsync(key)).Title;
         }
 
         public async Task<IHttpActionResult> Post(Question Question)

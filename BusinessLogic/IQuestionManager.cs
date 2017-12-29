@@ -21,6 +21,7 @@ namespace ProjectQ.BusinessLogic
     /// </summary>
     public interface IQuestionManager
     {
-        void PostQuestion(Question question);
+        void Post(Question question);
+        void Update(Question question);
     }
 }

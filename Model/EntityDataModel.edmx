@@ -23,9 +23,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="description" Type="varchar(max)" Nullable="false" />
-          <Property Name="OriginDate" Type="date" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="OriginDate" Type="datetime" />
           <Property Name="OfferedPrice" Type="decimal" Precision="12" Scale="0" Nullable="false" />
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
           <Property Name="HasMinQualification" Type="bit" Nullable="false" />
@@ -137,9 +137,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OriginDate" Type="DateTime" Precision="3" />
           <Property Name="OfferedPrice" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
           <Property Name="HasMinQualification" Type="Boolean" Nullable="false" />
@@ -223,8 +223,8 @@
                 <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
                 <ScalarProperty Name="OfferedPrice" ColumnName="OfferedPrice" />
                 <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
