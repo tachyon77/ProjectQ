@@ -3,7 +3,7 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework.SqlServer
 {
-    public class SqlServerDbContext : ProjectQEntities
+    public class DbContext : ProjectQEntities
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

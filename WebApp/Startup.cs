@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectQ.BusinessLogic;
+using ProjectQ.DAL;
 
 namespace WebApp
 {
@@ -23,7 +25,12 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-         
+
+            services.AddScoped<IQuestionManager, QuestionManager>();
+            services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();
+            services.AddScoped<
+                ProjectQ.DAL.EntityFramework.ProjectQEntities,
+                ProjectQ.DAL.EntityFramework.SqlServer.DbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,22 +10,22 @@ namespace ProjectQ.DAL.EntityFramework
     public class QuestionRepository : IQuestionRepository
     {
         #region Private Members
-        private ProjectQEntities Context;
+        private ProjectQEntities _context;
         #endregion
 
         public QuestionRepository(ProjectQEntities context)
         {
-            Context = context;
+            _context = context;
         }
         async Task IQuestionRepository.Add(Question question)
         {
-            Context.Questions.Add(question);
-            await Context.SaveChangesAsync();
+            _context.Questions.Add(question);
+            await _context.SaveChangesAsync();
         }
 
         IEnumerable<Question> IQuestionRepository.GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Questions;
         }
 
         Task<Question> IQuestionRepository.GetById(int id)
