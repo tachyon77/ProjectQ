@@ -24,25 +24,36 @@ namespace ProjectQ.BusinessLogic
     public class QuestionManager : IQuestionManager
     {
         #region Private Members
-        private IUnitOfWork UnitOfWork;
+        private IUnitOfWork _unitOfWork;
         #endregion
 
         #region Public Members
 
         public QuestionManager(IUnitOfWork unitOfWork)
         {
-            UnitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
         
-        void IQuestionManager.Post(Question question)
+        async Task IQuestionManager.Add(Question question)
         {
-            UnitOfWork.QuestionRepository.Add(question);
+            await _unitOfWork.QuestionRepository.Add(question);
         }
 
-        void IQuestionManager.Update(Question question)
+        IEnumerable<Question> IQuestionManager.GetAll()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.QuestionRepository.GetAll();
         }
+
+        Task<Question> IQuestionManager.GetById(int id)
+        {
+            return _unitOfWork.QuestionRepository.GetById(id);
+        }
+
+        bool IQuestionManager.QuestionExists(int id)
+        {
+            return _unitOfWork.QuestionRepository.QuestionExists(id);
+        }
+
         #endregion
     }
 }

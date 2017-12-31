@@ -21,7 +21,9 @@ namespace ProjectQ.BusinessLogic
     /// </summary>
     public interface IQuestionManager
     {
-        void Post(Question question);
-        void Update(Question question);
+        Task Add(Question question);
+        IEnumerable<Question> GetAll();
+        Task<Question> GetById(int id);
+        bool QuestionExists(int id);
     }
 }

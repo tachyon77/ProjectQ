@@ -10,5 +10,8 @@ namespace ProjectQ.DAL
     public interface IQuestionRepository
     {
         Task Add(Question question);
+        IEnumerable<Question> GetAll();
+        Task<Question> GetById(int id);
+        bool QuestionExists(int id);
     }
 }
