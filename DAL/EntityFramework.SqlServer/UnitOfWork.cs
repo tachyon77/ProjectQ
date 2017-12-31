@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ProjectQ.Model;
 using ProjectQ.DAL;
 
-namespace ProjectQ.DAL.EntityFramework
+namespace ProjectQ.DAL.EntityFramework.SqlServer
 {
     /// <summary>
     /// Implements Entity Framework based implementation of IUnitOfWork

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectQ.Model;
 
-namespace ProjectQ.Model
+namespace ProjectQ.DAL.EntityFramework.SqlServer
 {
     public class ProjectQEntities : DbContext
     {
