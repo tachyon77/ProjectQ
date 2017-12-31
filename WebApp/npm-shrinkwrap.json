@@ -1,5 +1,5 @@
 {
-  "name": "WebUI",
+  "name": "WebApp",
   "version": "0.0.0",
   "dependencies": {
     "@angular/animations": {
