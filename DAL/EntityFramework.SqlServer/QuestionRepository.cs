@@ -22,5 +22,20 @@ namespace ProjectQ.DAL.EntityFramework.SqlServer
             Context.Questions.Add(question);
             await Context.SaveChangesAsync();
         }
+
+        IEnumerable<Question> IQuestionRepository.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Question> IQuestionRepository.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IQuestionRepository.QuestionExists(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
