@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL.EntityFramework.SqlServer
+namespace ProjectQ.DAL.EntityFramework
 {
     public class QuestionRepository : IQuestionRepository
     {

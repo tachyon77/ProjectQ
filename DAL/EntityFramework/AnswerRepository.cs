@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectQ.DAL;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL.EntityFramework.SqlServer
+namespace ProjectQ.DAL.EntityFramework
 {
-    public class UserRepository:IUserRepository
+    public class AnswerRepository : IAnswerRepository
     {
         #region Private Members
         private ProjectQEntities Context;
         #endregion
 
-        public UserRepository(ProjectQEntities context)
+        public AnswerRepository(ProjectQEntities context)
         {
             Context = context;
         }
-        async Task IUserRepository.AddUser(User user)
+        async Task IAnswerRepository.AddAnswer(Answer answer)
         {
-            Context.Users.Add(user);
+            Context.Answers.Add(answer);
             await Context.SaveChangesAsync();
         }
     }

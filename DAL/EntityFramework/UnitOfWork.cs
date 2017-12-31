@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
-using ProjectQ.DAL;
 
-namespace ProjectQ.DAL.EntityFramework.SqlServer
+namespace ProjectQ.DAL.EntityFramework
 {
     /// <summary>
     /// Implements Entity Framework based implementation of IUnitOfWork
     /// </summary>
     public class UnitOfWork: IUnitOfWork
     {
-        private ProjectQEntities Context = new ProjectQEntities();
+        private readonly ProjectQEntities _context;
         private IQuestionRepository questionRepository;
+
+        public UnitOfWork(ProjectQEntities context)
+        {
+            _context = context;
+        }
 
         IQuestionRepository IUnitOfWork.QuestionRepository
         {
@@ -22,7 +26,7 @@ namespace ProjectQ.DAL.EntityFramework.SqlServer
             {
                 if (questionRepository == null)
                 {
-                    questionRepository = new QuestionRepository(Context);                 
+                    questionRepository = new QuestionRepository(_context);                 
                 }
                 return questionRepository;
             }
@@ -30,7 +34,7 @@ namespace ProjectQ.DAL.EntityFramework.SqlServer
      
         async Task IUnitOfWork.Save()
         {
-            await Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
     }
