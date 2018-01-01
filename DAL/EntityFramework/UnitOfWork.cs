@@ -13,7 +13,7 @@ namespace ProjectQ.DAL.EntityFramework
     public class UnitOfWork: IUnitOfWork
     {
         private readonly ProjectQEntities _context;
-        private IQuestionRepository questionRepository;
+        private IQuestionRepository _questionRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
@@ -24,11 +24,11 @@ namespace ProjectQ.DAL.EntityFramework
         {
             get
             {
-                if (questionRepository == null)
+                if (_questionRepository == null)
                 {
-                    questionRepository = new QuestionRepository(_context);                 
+                    _questionRepository = new QuestionRepository(_context);                 
                 }
-                return questionRepository;
+                return _questionRepository;
             }
         }
      

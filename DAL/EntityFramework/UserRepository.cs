@@ -11,17 +11,17 @@ namespace ProjectQ.DAL.EntityFramework
     public class UserRepository:IUserRepository
     {
         #region Private Members
-        private ProjectQEntities Context;
+        private ProjectQEntities _context;
         #endregion
 
         public UserRepository(ProjectQEntities context)
         {
-            Context = context;
+            _context = context;
         }
         async Task IUserRepository.AddUser(User user)
         {
-            Context.Users.Add(user);
-            await Context.SaveChangesAsync();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
         }
     }
 }

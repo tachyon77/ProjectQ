@@ -10,17 +10,17 @@ namespace ProjectQ.DAL.EntityFramework
     public class AnswerRepository : IAnswerRepository
     {
         #region Private Members
-        private ProjectQEntities Context;
+        private ProjectQEntities _context;
         #endregion
 
         public AnswerRepository(ProjectQEntities context)
         {
-            Context = context;
+            _context = context;
         }
         async Task IAnswerRepository.AddAnswer(Answer answer)
         {
-            Context.Answers.Add(answer);
-            await Context.SaveChangesAsync();
+            _context.Answers.Add(answer);
+            await _context.SaveChangesAsync();
         }
     }
 }
