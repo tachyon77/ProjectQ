@@ -14,6 +14,7 @@ namespace ProjectQ.DAL.EntityFramework
     {
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
+        private IAnswerRepository _answerRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
@@ -31,7 +32,18 @@ namespace ProjectQ.DAL.EntityFramework
                 return _questionRepository;
             }
         }
-     
+
+        IAnswerRepository IUnitOfWork.AnswerRepository
+        {
+            get
+            {
+                if (_answerRepository == null)
+                {
+                    _answerRepository = new AnswerRepository(_context);
+                }
+                return _answerRepository;
+            }
+        }
         async Task IUnitOfWork.Save()
         {
             await _context.SaveChangesAsync();

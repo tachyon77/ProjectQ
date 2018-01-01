@@ -9,7 +9,7 @@ namespace ProjectQ.DAL
     public interface IUnitOfWork
     {
         IQuestionRepository QuestionRepository { get; }
-        //IAnswerRepository AnswerRepository { get; }
+        IAnswerRepository AnswerRepository { get; }
         //IUserRepository UserRepository { get; }
         Task Save();
     }

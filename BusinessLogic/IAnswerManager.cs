@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Text;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL
+namespace ProjectQ.BusinessLogic
 {
-    public interface IAnswerRepository
+    public interface IAnswerManager
     {
         Task Add(Answer answer);
         IEnumerable<Answer> GetAll();

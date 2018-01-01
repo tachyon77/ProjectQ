@@ -17,10 +17,25 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        async Task IAnswerRepository.AddAnswer(Answer answer)
+        async Task IAnswerRepository.Add(Answer answer)
         {
             _context.Answers.Add(answer);
             await _context.SaveChangesAsync();
+        }
+
+        bool IAnswerRepository.AnswerExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Answer> IAnswerRepository.GetAll()
+        {
+            return _context.Answers;
+        }
+
+        Task<Answer> IAnswerRepository.GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
