@@ -29,7 +29,7 @@ export class AddQuestionFormComponent {
     onSubmit(question: Question) {
         this.questionService.add(question)
             .subscribe(() => {
-                this.router.navigate(['/api/Questions']);
+                this.router.navigate(['/display-questions']);
             });
     }
 }

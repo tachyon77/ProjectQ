@@ -36,6 +36,10 @@ namespace ProjectQ.BusinessLogic
         
         async Task IQuestionManager.Add(Question question)
         {
+            // This code will not be present in production
+            question.UserId = DateTime.Now.Second % 3 + 1;
+            // End
+
             await _unitOfWork.QuestionRepository.Add(question);
         }
 

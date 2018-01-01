@@ -21,7 +21,7 @@ export class QuestionService {
     }
 
     add(question: Question) {
-        return this.http.post('questions', question)
+        return this.http.post(this.baseUrl + 'api/Questions', question)
             .map(response => { });
     }
 
