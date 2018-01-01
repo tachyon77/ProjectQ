@@ -1,0 +1,17 @@
+﻿<header>
+    <h2>Ask a question</h2>
+</header>
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit(form.value)">
+    <ul>
+        <li>
+            <label for="Title">Title</label>
+            <input type="text" name="Title" id="Title" formControlName="Title">
+        </li>
+        <li>
+            <label for="Description">Description</label>
+            <input type="text" name="Description" id="Description" formControlName="Description">
+        </li>       
+    </ul>
+    <button type="submit" [disabled]="!form.valid">Save</button>
+</form>

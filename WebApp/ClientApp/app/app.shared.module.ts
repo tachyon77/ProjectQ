@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -8,7 +8,10 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { QuestionsComponent } from './components/questions/questions.component';
+import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
+import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
+import { QuestionService } from './components/questions/questions.service';
+
 import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
@@ -17,19 +20,22 @@ import { CounterComponent } from './components/counter/counter.component';
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        QuestionsComponent,
+        DisplayQuestionsComponent,
+        AddQuestionFormComponent,
         HomeComponent
     ],
+    providers: [QuestionService],
     imports: [
         CommonModule,
         HttpModule,
-        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'questions', component: QuestionsComponent },
+            { path: 'display-questions', component: DisplayQuestionsComponent },
+            { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

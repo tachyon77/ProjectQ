@@ -29,7 +29,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IEnumerable<Question> GetQuestions()
         {
-            return _questionManager.GetAll();
+            return  _questionManager.GetAll();
         }
 
         // GET: api/Questions/5

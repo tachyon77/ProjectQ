@@ -23,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
+    <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
+    <None Remove="ClientApp\app\components\questions\questions.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,7 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\components\questions\questions.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\displayquestions\displayquestions.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
