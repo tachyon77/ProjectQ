@@ -27,6 +27,7 @@ namespace WebApp
             services.AddMvc();
 
             services.AddScoped<IQuestionManager, QuestionManager>();
+            services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();
             services.AddScoped<
                 ProjectQ.DAL.EntityFramework.ProjectQEntities,

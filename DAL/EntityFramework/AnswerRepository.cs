@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework
@@ -28,9 +30,12 @@ namespace ProjectQ.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        IEnumerable<Answer> IAnswerRepository.GetAll()
+        async Task<IEnumerable<Answer>> IAnswerRepository.GetForQuestion(int questionId)
         {
-            return _context.Answers;
+            var answers = await _context.Answers
+                .Where(x => x.QuestionId == questionId)
+                .ToListAsync();
+            return answers;                          
         }
 
         Task<Answer> IAnswerRepository.GetById(int id)

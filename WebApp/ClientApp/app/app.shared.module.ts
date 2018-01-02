@@ -11,7 +11,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
-
+import { AnswerService } from './components/answers/answers.service';
+import { DisplayAnswersComponent } from './components/answers/displayanswers/displayanswers.component';
 import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
@@ -22,9 +23,10 @@ import { CounterComponent } from './components/counter/counter.component';
         FetchDataComponent,
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
+        DisplayAnswersComponent,
         HomeComponent
     ],
-    providers: [QuestionService],
+    providers: [QuestionService, AnswerService],
     imports: [
         CommonModule,
         HttpModule,

@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\answers\answers.service.ts" />
+    <None Remove="ClientApp\app\components\answers\displayanswers\displayanswers.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
@@ -36,10 +38,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\answers\answers.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\displayanswers\displayanswers.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\displayquestions\displayquestions.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\components\answers\addanswer\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

@@ -29,9 +29,9 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.AnswerRepository.Add(Answer);
         }
 
-        IEnumerable<Answer> IAnswerManager.GetAll()
+        async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestion(int questionId)
         {
-            return _unitOfWork.AnswerRepository.GetAll();
+            return await _unitOfWork.AnswerRepository.GetForQuestion(questionId);
         }
 
         Task<Answer> IAnswerManager.GetById(int id)
