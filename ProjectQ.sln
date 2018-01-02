@@ -5,15 +5,17 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{3F7BF257-6A9C-45EB-8C9E-8F62FF7AD84C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{1791718E-1699-4700-A4A6-17CC659860ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{1791718E-1699-4700-A4A6-17CC659860ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{3AD0D9BC-1BD1-4EC3-9942-F9B9E66B455F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{3AD0D9BC-1BD1-4EC3-9942-F9B9E66B455F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGenerator", "ModelGenerator\ModelGenerator.csproj", "{76571DBC-874E-4D79-8BB1-7B44B1F34CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{23F290DB-D2FF-45AB-89A6-0C7FEC61FE71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{23F290DB-D2FF-45AB-89A6-0C7FEC61FE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{4EEE5199-26CE-42B9-A3AE-2BED2367C28D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{4EEE5199-26CE-42B9-A3AE-2BED2367C28D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Tests", "BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{49CD44D1-4514-4791-9852-73960C582E60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{4EEE5199-26CE-42B9-A3AE-2BED2367C28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EEE5199-26CE-42B9-A3AE-2BED2367C28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EEE5199-26CE-42B9-A3AE-2BED2367C28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CD44D1-4514-4791-9852-73960C582E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CD44D1-4514-4791-9852-73960C582E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CD44D1-4514-4791-9852-73960C582E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CD44D1-4514-4791-9852-73960C582E60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
