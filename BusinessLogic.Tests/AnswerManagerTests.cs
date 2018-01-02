@@ -12,27 +12,34 @@ namespace ProjectQ.BusinessLogic.Tests
     [TestFixture]
     public class AnswerManagerTests
     {
+        private Mock<IAnswerRepository> _mockRepo;
+        private Mock<IUnitOfWork> _mockUoW;
+
+        [SetUp]
+        public void Setup()
+        {
+            _mockRepo = new Mock<IAnswerRepository>();
+            _mockUoW = new Mock<IUnitOfWork>();
+
+            _mockUoW
+                .Setup(x => x.AnswerRepository)
+                .Returns(_mockRepo.Object);
+        }
+
         [Test]
         public void ShouldReturnAnswersForAQuestion()
         {
-            var mockRepo = new Mock<IAnswerRepository>();
-            var mockUoW = new Mock<IUnitOfWork>();
-
             var answers = new List<Answer>();
             answers.Add(new Mock<Answer>().Object);
-
-            mockUoW
-                .Setup(x => x.AnswerRepository)
-                .Returns(mockRepo.Object);
 
             var expected = Task
                 .FromResult<IEnumerable<Answer>>
                 (answers);
-            mockRepo
+            _mockRepo
                 .Setup(x => x.GetForQuestion(1))
                 .Returns(expected);
 
-            IAnswerManager a = new AnswerManager(mockUoW.Object);
+            IAnswerManager a = new AnswerManager(_mockUoW.Object);
             var actual = a.GetForQuestion(1).Result;
 
             Assert.That(expected.Result, Is.EquivalentTo(actual));
