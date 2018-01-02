@@ -42,7 +42,7 @@ namespace ProjectQ.BusinessLogic.Tests
             IAnswerManager a = new AnswerManager(_mockUoW.Object);
             var actual = a.GetForQuestion(1).Result;
 
-            Assert.That(expected.Result, Is.EquivalentTo(actual));
+            Assert.That(expected.Result, Is.EqualTo(actual));
         }
     }
 }
