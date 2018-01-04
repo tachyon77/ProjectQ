@@ -20,13 +20,17 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        async Task IAnswerManager.Add(Answer Answer)
+        async Task IAnswerManager.Add(Answer answer)
         {
+            if (!_unitOfWork.QuestionRepository
+                .QuestionExists(answer.QuestionId))
+                throw new Exception();
+
             // This code will not be present in production
-            Answer.UserId = DateTime.Now.Second % 3 + 1;
+            answer.UserId = DateTime.Now.Second % 3 + 1;
             // End
 
-            _unitOfWork.AnswerRepository.Add(Answer);
+            _unitOfWork.AnswerRepository.Add(answer);
             await _unitOfWork.Save();
         }
 

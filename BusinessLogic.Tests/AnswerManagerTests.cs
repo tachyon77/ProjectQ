@@ -28,6 +28,24 @@ namespace ProjectQ.BusinessLogic.Tests
 
             _sut = new AnswerManager(_mockUoW.Object);
         }
+        
+        [Test]
+        public void ShouldThrowExceptionForAddAnswerWithInvalidQuestionId()
+        {
+            var answer = new Mock<Answer>().Object;
+
+            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            mockQuestionRepo
+                .Setup(x => x.QuestionExists(answer.QuestionId))
+                .Returns(false);
+
+            _mockUoW
+                .Setup(x => x.QuestionRepository)
+                .Returns(mockQuestionRepo.Object);
+
+            Assert.ThrowsAsync<Exception>(
+                async () => await _sut.Add(answer));
+        }
 
         [Test]
         public void ShouldAddAnswer()
