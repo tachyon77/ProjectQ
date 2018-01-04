@@ -12,19 +12,19 @@ namespace ProjectQ.BusinessLogic.Tests
     [TestFixture]
     public class AnswerManagerTests
     {
-        private Mock<IAnswerRepository> _mockRepo;       
+        private Mock<IAnswerRepository> _mockAnswerRepo;       
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
 
         [SetUp]
         public void Setup()
         {
-            _mockRepo = new Mock<IAnswerRepository>();
+            _mockAnswerRepo = new Mock<IAnswerRepository>();
             _mockUoW = new Mock<IUnitOfWork>();
 
             _mockUoW
                 .Setup(x => x.AnswerRepository)
-                .Returns(_mockRepo.Object);
+                .Returns(_mockAnswerRepo.Object);
 
             _sut = new AnswerManager(_mockUoW.Object);
         }
@@ -52,9 +52,18 @@ namespace ProjectQ.BusinessLogic.Tests
         {
             var answer = new Mock<Answer>().Object;
 
+            var mockQuestionRepo = new Mock<IQuestionRepository>();
+            mockQuestionRepo
+                .Setup(x => x.QuestionExists(answer.QuestionId))
+                .Returns(true);
+
+            _mockUoW
+                .Setup(x => x.QuestionRepository)
+                .Returns(mockQuestionRepo.Object);
+
             _sut.Add(answer);
 
-            _mockRepo.Verify(x => x.Add(answer), Times.Once);
+            _mockAnswerRepo.Verify(x => x.Add(answer), Times.Once);
             _mockUoW.Verify(x => x.Save(), Times.Once);
         }
 
@@ -67,7 +76,7 @@ namespace ProjectQ.BusinessLogic.Tests
             var expected = Task
                 .FromResult<IEnumerable<Answer>>
                 (answers);
-            _mockRepo
+            _mockAnswerRepo
                 .Setup(x => x.GetForQuestion(1))
                 .Returns(expected);
 
