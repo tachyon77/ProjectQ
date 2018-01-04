@@ -3,9 +3,12 @@
         <div class='col-sm-3'>
             <nav-menu></nav-menu>
         </div>
-        <div class='col-sm-9 body-content'>
+        <div class='col-sm-6 body-content'>
             <router-outlet></router-outlet>
         </div>
+        <div class="col-sm-3">
+            <display-answers [questionId]=1></display-answers>
+        </div>
     </div>
-    <display-answers [questionId]=1></display-answers>
 </div>
+

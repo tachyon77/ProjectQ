@@ -1,4 +1,4 @@
-﻿import { Component, Inject, Input, Injectable } from '@angular/core';
+﻿import { Component, Inject, Input, Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { AnswerService, Answer } from '../answers.service'
 
@@ -7,7 +7,7 @@ import { AnswerService, Answer } from '../answers.service'
     templateUrl: './displayanswers.component.html'
 })
 
-export class DisplayAnswersComponent {
+export class DisplayAnswersComponent implements OnInit{
     public answers: Answer[];
     private _questionId: number;
 
@@ -17,11 +17,13 @@ export class DisplayAnswersComponent {
     }
 
     constructor(
-        private answerService: AnswerService,
-        http: Http) {
-        this.answerService.getForQuestion(1).subscribe(result => {
+        private answerService: AnswerService) {        
+    }
+
+    ngOnInit() {
+        this.answerService.getForQuestion(this._questionId).subscribe(result => {
             this.answers = result as Answer[];
-        }, error => console.error(error));
+        }, error => console.error(error));  
     }
 }
 

@@ -13,6 +13,7 @@ import { AddQuestionFormComponent } from './components/questions/addquestion/add
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { DisplayAnswersComponent } from './components/answers/displayanswers/displayanswers.component';
+import { AddAnswerFormComponent } from './components/answers/addanswer/addanswerform.component';
 import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CounterComponent } from './components/counter/counter.component';
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
         DisplayAnswersComponent,
+        AddAnswerFormComponent,
         HomeComponent
     ],
     providers: [QuestionService, AnswerService],
@@ -38,6 +40,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'display-questions', component: DisplayQuestionsComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
+            { path: 'add-answer-form', component: AddAnswerFormComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

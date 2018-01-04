@@ -35,7 +35,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         bool IQuestionRepository.QuestionExists(int id)
         {
-            throw new NotImplementedException();
+            return _context.Questions.Any(x => x.Id == id);
         }
     }
 }
