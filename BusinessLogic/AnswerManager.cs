@@ -26,7 +26,8 @@ namespace ProjectQ.BusinessLogic
             Answer.UserId = DateTime.Now.Second % 3 + 1;
             // End
 
-            await _unitOfWork.AnswerRepository.Add(Answer);
+            _unitOfWork.AnswerRepository.Add(Answer);
+            await _unitOfWork.Save();
         }
 
         async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestion(int questionId)

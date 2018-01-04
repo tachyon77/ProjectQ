@@ -12,8 +12,9 @@ namespace ProjectQ.BusinessLogic.Tests
     [TestFixture]
     public class AnswerManagerTests
     {
-        private Mock<IAnswerRepository> _mockRepo;
+        private Mock<IAnswerRepository> _mockRepo;       
         private Mock<IUnitOfWork> _mockUoW;
+        private IAnswerManager _sut;
 
         [SetUp]
         public void Setup()
@@ -24,6 +25,19 @@ namespace ProjectQ.BusinessLogic.Tests
             _mockUoW
                 .Setup(x => x.AnswerRepository)
                 .Returns(_mockRepo.Object);
+
+            _sut = new AnswerManager(_mockUoW.Object);
+        }
+
+        [Test]
+        public void ShouldAddAnswer()
+        {
+            var answer = new Mock<Answer>().Object;
+
+            _sut.Add(answer);
+
+            _mockRepo.Verify(x => x.Add(answer), Times.Once);
+            _mockUoW.Verify(x => x.Save(), Times.Once);
         }
 
         [Test]
@@ -39,8 +53,8 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Setup(x => x.GetForQuestion(1))
                 .Returns(expected);
 
-            IAnswerManager a = new AnswerManager(_mockUoW.Object);
-            var actual = a.GetForQuestion(1).Result;
+            
+            var actual = _sut.GetForQuestion(1).Result;
 
             Assert.That(expected.Result, Is.EqualTo(actual));
         }
