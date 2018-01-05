@@ -18,10 +18,9 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        async Task IUserRepository.AddUser(User user)
+        void IUserRepository.AddUser(User user)
         {
             _context.Users.Add(user);
-            await _context.SaveChangesAsync();
         }
     }
 }

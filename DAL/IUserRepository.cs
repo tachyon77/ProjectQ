@@ -9,6 +9,6 @@ namespace ProjectQ.DAL
 {
     public interface IUserRepository
     {
-        Task AddUser(User user);
+        void AddUser(User user);
     }
 }
