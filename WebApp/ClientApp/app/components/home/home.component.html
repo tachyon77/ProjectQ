@@ -2,13 +2,17 @@
 
 <h4 class="text-muted text-center">A place to ask questions fearlessly.</h4>
 
-<br />
 <hr />
 
 <p *ngIf="!questions"><em>Loading...</em></p>
 
 <div class="row">
-    <div class="col-lg-offset-3 col-md-6" *ngIf="questions">
+    <div class="col-md-offset-3 col-md-6">
+        <add-question-form></add-question-form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-3 col-md-6" *ngIf="questions">
         <div *ngFor="let question of questions">
             <h3 class="text-primary">{{ question.title }}</h3>
             <h4 class="text-muted">{{ question.description }}</h4>

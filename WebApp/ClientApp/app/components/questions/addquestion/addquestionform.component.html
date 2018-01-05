@@ -1,17 +1,23 @@
 ﻿<header>
-    <h2>Ask a question</h2>
+    <h4>Ask a question</h4>
 </header>
 <form [formGroup]="form"
       (ngSubmit)="onSubmit(form.value)">
-    <ul>
-        <li>
-            <label for="Title">Title</label>
-            <input type="text" name="Title" id="Title" formControlName="Title">
-        </li>
-        <li>
-            <label for="Description">Description</label>
-            <input type="text" name="Description" id="Description" formControlName="Description">
-        </li>       
-    </ul>
-    <button type="submit" [disabled]="!form.valid">Save</button>
+    <div>    
+        <textarea rows="1" 
+                  class="form-control"
+                  name="Title" id="Title" 
+                  formControlName="Title"></textarea>
+        <label>Details</label>
+        <textarea rows="3" 
+                  class="form-control"
+                  name="Description" id="Description" 
+                  formControlName="Description"></textarea>      
+    </div>
+    <br />
+    <button class="btn btn-success"
+            type="submit" [disabled]="!form.valid">
+        Ask
+    </button>
+      
 </form>
