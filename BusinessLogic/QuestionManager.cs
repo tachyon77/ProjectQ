@@ -40,12 +40,17 @@ namespace ProjectQ.BusinessLogic
             question.UserId = DateTime.Now.Second % 3 + 1;
             // End
 
+            question.OriginDate = DateTime.UtcNow;
+
             await _unitOfWork.QuestionRepository.Add(question);
         }
 
         IEnumerable<Question> IQuestionManager.GetAll()
         {
-            return _unitOfWork.QuestionRepository.GetAll();
+            return _unitOfWork
+                .QuestionRepository
+                .GetAll()
+                .OrderByDescending(x=>x.OriginDate);
         }
 
         Task<Question> IQuestionManager.GetById(int id)
