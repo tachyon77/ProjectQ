@@ -1,16 +1,7 @@
-﻿<h1>Answers</h1>
+﻿<p *ngIf="!answers"><em>Loading...</em></p>
 
-<p *ngIf="!answers"><em>Loading...</em></p>
-
-<table class='table' *ngIf="answers">
-    <thead>
-        <tr>
-            <th>Answer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let answer of answers">
-            <td>{{ answer.text }}</td>
-        </tr>
-    </tbody>
-</table>
+<div *ngIf="answers">
+    <div *ngFor="let answer of answers">
+       {{ answer.text }}
+    </div>
+</div>

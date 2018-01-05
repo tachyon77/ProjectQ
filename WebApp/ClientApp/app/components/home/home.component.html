@@ -3,19 +3,13 @@
 
 <p *ngIf="!questions"><em>Loading...</em></p>
 
-<table class='table' *ngIf="questions">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let question of questions">
-            <td>{{ question.title }}</td>
-            <td>{{ question.description }}</td>
-            <display-answers [questionId]="question.id"></display-answers>
-        </tr>
-    </tbody>
-</table>
+<div *ngIf="questions">
+    <div *ngFor="let question of questions">        
+        <h3>{{ question.title }}</h3>
+        <h4>{{ question.description }}</h4>
+        <hr />
+        <display-answers [questionId]="question.id"></display-answers>
+        
+    </div>
+</div>
 
