@@ -1,15 +1,25 @@
-<h1>Welcome to Project Q!</h1>
-<h2>A place to ask questions fearlessly.</h2>
+<h1 class="text-center">Welcome to Project Q!</h1>
+
+<h4 class="text-muted text-center">A place to ask questions fearlessly.</h4>
+
+<br />
+<hr />
 
 <p *ngIf="!questions"><em>Loading...</em></p>
 
-<div *ngIf="questions">
-    <div *ngFor="let question of questions">        
-        <h3>{{ question.title }}</h3>
-        <h4>{{ question.description }}</h4>
-        <hr />
-        <display-answers [questionId]="question.id"></display-answers>
-        
+<div class="row">
+    <div class="col-lg-offset-3 col-md-6" *ngIf="questions">
+        <div *ngFor="let question of questions">
+            <h3 class="text-primary">{{ question.title }}</h3>
+            <h4 class="text-muted">{{ question.description }}</h4>
+            <hr />
+            <div style="margin-left:2em">
+                <display-answers [questionId]="question.id">
+                </display-answers>
+            </div>
+
+        </div>
     </div>
 </div>
+
 
