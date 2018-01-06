@@ -13,6 +13,7 @@ import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { DisplayAnswersComponent } from './components/answers/displayanswers/displayanswers.component';
 import { AddAnswerFormComponent } from './components/answers/addanswer/addanswerform.component';
+import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin.component'
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { AddAnswerFormComponent } from './components/answers/addanswer/addanswer
         AddQuestionFormComponent,
         DisplayAnswersComponent,
         AddAnswerFormComponent,
+        FacebookLoginComponent,
         HomeComponent
     ],
     providers: [QuestionService, AnswerService],

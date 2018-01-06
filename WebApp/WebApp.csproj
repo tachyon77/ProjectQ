@@ -27,6 +27,7 @@
     <None Remove="ClientApp\app\components\answers\addanswer\addanswerform.component.ts" />
     <None Remove="ClientApp\app\components\answers\answers.service.ts" />
     <None Remove="ClientApp\app\components\answers\displayanswers\displayanswers.component.ts" />
+    <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
@@ -44,6 +45,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\answers\addanswer\addanswerform.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answers.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\displayanswers\displayanswers.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\displayquestions\displayquestions.component.ts" />
