@@ -3,7 +3,11 @@
      data-button-type="continue_with"
      data-show-faces="false" 
      data-size="large"
-     data-auto-logout-link="true"
-     onlogon="checkLoginState()">
+     onlogin="updateStatus()"
+     data-auto-logout-link="true">
 </div>
+
+<button class="btn btn-primary" (click)="showAuthResponse()" >Click Me!</button>
+
+
 

@@ -14,7 +14,6 @@ export class AnswerService {
         @Inject('BASE_URL') private baseUrl: string) { }
 
     getForQuestion(questionId: number) {
-        console.log('question id = ' + questionId);
         return this.http.get(
             this.baseUrl + 'api/Answers/ForQuestion/' + questionId
             ).map(response => {
