@@ -2,7 +2,9 @@
 
 <h4 class="text-muted text-center">A place to ask questions fearlessly.</h4>
 
-<facebook-login></facebook-login>
+<div class="text-center">
+    <facebook-login></facebook-login>
+</div>
 
 <hr />
 
@@ -20,6 +22,9 @@
             <h4 class="text-muted">{{ question.description }}</h4>
             <hr />
             <div style="margin-left:2em">
+                <h4>Write Answer...</h4>
+                <add-answer-form [questionId]="question.id">
+                </add-answer-form>
                 <display-answers [questionId]="question.id">
                 </display-answers>
             </div>

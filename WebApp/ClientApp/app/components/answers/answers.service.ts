@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 export interface Answer {
     QuestionId: number;
     text: string;
+    UserId: number;
 }
 
 @Injectable()

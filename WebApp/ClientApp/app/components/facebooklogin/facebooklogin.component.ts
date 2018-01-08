@@ -27,6 +27,7 @@ export class FacebookLoginComponent{
 
             FB.getLoginStatus(function (response: any) {
                 window.AuthRespose = response;
+                console.log(response);
             });
 
         };
