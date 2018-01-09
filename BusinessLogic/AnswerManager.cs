@@ -31,7 +31,7 @@ namespace ProjectQ.BusinessLogic
             // End
 
             _unitOfWork.AnswerRepository.Add(answer);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
         async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestion(int questionId)

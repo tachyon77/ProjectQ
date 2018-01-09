@@ -21,6 +21,9 @@ export class AddQuestionFormComponent {
             Title: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
+            OfferedPrice: this.formBuilder.control('', Validators.compose([
+                Validators.pattern('[0-9]+'),
+            ])),
             Description: this.formBuilder.control(''),
         });
     }

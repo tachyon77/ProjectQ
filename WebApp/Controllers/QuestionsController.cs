@@ -60,7 +60,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _questionManager.Add(question);
+            await _questionManager.AddAsync(question);
 
             return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }

@@ -64,7 +64,7 @@ namespace ProjectQ.BusinessLogic.Tests
             _sut.Add(answer);
 
             _mockAnswerRepo.Verify(x => x.Add(answer), Times.Once);
-            _mockUoW.Verify(x => x.Save(), Times.Once);
+            _mockUoW.Verify(x => x.SaveAsync(), Times.Once);
         }
 
         [Test]

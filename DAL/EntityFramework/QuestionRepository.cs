@@ -17,7 +17,7 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        async Task IQuestionRepository.Add(Question question)
+        async Task IQuestionRepository.AddAsync(Question question)
         {
             _context.Questions.Add(question);
             await _context.SaveChangesAsync();
@@ -36,6 +36,16 @@ namespace ProjectQ.DAL.EntityFramework
         bool IQuestionRepository.QuestionExists(int id)
         {
             return _context.Questions.Any(x => x.Id == id);
+        }
+
+        async Task IQuestionRepository.UpdateOfferedPrice(
+            int questionId, 
+            decimal offeredPrice)
+        {
+            var question = await 
+                _context.Questions.FindAsync(questionId);
+
+            question.OfferedPrice = offeredPrice;
         }
     }
 }

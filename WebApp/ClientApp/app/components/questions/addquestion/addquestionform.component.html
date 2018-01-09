@@ -1,6 +1,4 @@
-﻿<header>
-    <h4>Ask a question</h4>
-</header>
+﻿
 <form [formGroup]="form"
       (ngSubmit)="onSubmit(form.value)">
     <div>    
@@ -12,7 +10,14 @@
         <textarea rows="3" 
                   class="form-control"
                   name="Description" id="Description" 
-                  formControlName="Description"></textarea>      
+                  formControlName="Description"></textarea> 
+        <h4 class="text-success">$Reward:</h4>
+        <input type="text" 
+               class="form-control"
+               name="OfferedPrice" id="OfferedPrice"
+               formControlName="OfferedPrice"
+               />
+
     </div>
     <br />
     <button class="btn btn-success"

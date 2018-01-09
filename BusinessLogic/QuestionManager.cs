@@ -34,7 +34,8 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
         
-        async Task IQuestionManager.Add(Question question)
+
+        async Task IQuestionManager.AddAsync(Question question)
         {
             // This code will not be present in production
             question.UserId = DateTime.Now.Second % 3 + 1;
@@ -42,7 +43,7 @@ namespace ProjectQ.BusinessLogic
 
             question.OriginDate = DateTime.UtcNow;
 
-            await _unitOfWork.QuestionRepository.Add(question);
+            await _unitOfWork.QuestionRepository.AddAsync(question);
         }
 
         IEnumerable<Question> IQuestionManager.GetAll()
@@ -55,12 +56,22 @@ namespace ProjectQ.BusinessLogic
 
         Task<Question> IQuestionManager.GetById(int id)
         {
-            return _unitOfWork.QuestionRepository.GetById(id);
+            return _unitOfWork
+                .QuestionRepository.GetById(id);
         }
 
         bool IQuestionManager.QuestionExists(int id)
         {
-            return _unitOfWork.QuestionRepository.QuestionExists(id);
+            return _unitOfWork.QuestionRepository
+                .QuestionExists(id);
+        }
+
+        async Task IQuestionManager.UpdateOfferedPriceAsync(
+            int questionId, decimal offeredPrice)
+        {
+            await _unitOfWork.QuestionRepository
+                .UpdateOfferedPrice(questionId, offeredPrice);
+            await _unitOfWork.SaveAsync();
         }
 
         #endregion
