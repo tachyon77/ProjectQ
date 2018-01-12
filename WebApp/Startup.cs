@@ -11,7 +11,7 @@ using ProjectQ.BusinessLogic;
 using ProjectQ.DAL;
 
 namespace WebApp
-{
+{//
     public class Startup
     {
         public Startup(IConfiguration configuration)
