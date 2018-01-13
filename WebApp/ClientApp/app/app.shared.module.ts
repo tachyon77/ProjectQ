@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
@@ -20,6 +21,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
     declarations: [
         AppComponent,
         NavMenuComponent,
+        QuestionDetailComponent,
         QuestionCardComponent,
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
@@ -41,6 +43,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
             { path: 'display-questions', component: DisplayQuestionsComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'add-answer-form', component: AddAnswerFormComponent },
+            { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
