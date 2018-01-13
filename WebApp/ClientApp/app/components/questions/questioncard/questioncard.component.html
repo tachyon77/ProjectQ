@@ -1,0 +1,17 @@
+﻿<p *ngIf="!_question"><em>Loading...</em></p>
+
+<div *ngIf="_question">
+    <div class="card">        
+        <div class="card-body">
+            <h3 class="card-title">
+                <a href="#" class="card-link">
+                    {{_question.title}}
+                </a>
+            </h3>
+            <h6 class="card-subtitle mb-2 text-muted">Asked by MZ</h6>
+            <p class="card-text">{{_question.description}}</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+</div>

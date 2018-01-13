@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
@@ -19,6 +20,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
     declarations: [
         AppComponent,
         NavMenuComponent,
+        QuestionCardComponent,
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
         DisplayAnswersComponent,

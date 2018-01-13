@@ -1,0 +1,15 @@
+﻿.card-body {
+    background-color: white;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+.card{
+    margin-bottom:1em;
+    margin-top:1em;
+}
+
+.card-link{
+    color:black;
+}

@@ -1,33 +1,4 @@
-<p *ngIf="!questions"><em>Loading...</em></p>
-
-<div class="row">
-    <div class="col-md-offset-3 col-md-6">
-        <header>
-            <h4>Ask a question</h4>
-        </header>
-        <add-question-form></add-question-form>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-offset-3 col-md-6" *ngIf="questions">
-        <div *ngFor="let question of questions">
-            <h3 class="text-primary">
-                {{ question.title }} 
-                <span class="text-success">${{question.offeredPrice}}
-                </span>
-            </h3>
-            <h4 class="text-muted">{{ question.description }}</h4>
-            <hr />
-            <div style="margin-left:2em">
-                <h4>Write Answer...</h4>
-                <add-answer-form [questionId]="question.id">
-                </add-answer-form>
-                <display-answers [questionId]="question.id">
-                </display-answers>
-            </div>
-
-        </div>
-    </div>
-</div>
+<display-questions>
+</display-questions>
 
 
