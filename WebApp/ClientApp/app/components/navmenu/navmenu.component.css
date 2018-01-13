@@ -1,11 +1,32 @@
 @media (min-width: 768px) {
+    .navbar-nav.navbar-left {
+        position: absolute;
+        left: 30%;
+    }
+
     .navbar-nav.navbar-center {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
+
     .navbar-nav.navbar-right {
         position: absolute;
         right: 2%;
     }
 }
+
+.navbar {
+    background-color: #ffffff;
+}
+
+.navbar .navbar-brand {
+    color: #000000;
+}
+
+.navbar {
+    border-bottom: 1px solid #e2e0e0;
+}
+
+
+

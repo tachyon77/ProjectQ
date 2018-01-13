@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-fixed-top" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -7,8 +7,10 @@
         </button>
     </div>
     <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <a class='navbar-brand' [routerLink]="['/home']">Project-Q</a>
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a class='navbar-brand' [routerLink]="['/home']">Project-Q</a>
+            </li>        
         </ul>
         <ul class="nav navbar-nav navbar-center">
             <li [routerLinkActive]="['link-active']">
@@ -17,13 +19,8 @@
                 </a>
             </li>
             <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/display-questions']">
-                    <span class='glyphicon glyphicon-fire'></span> Questions
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/add-question-form']">
-                    <span class='glyphicon glyphicon-question-sign'></span> Ask
+                    <span class='glyphicon glyphicon-fire'></span> Ask
                 </a>
             </li>
         </ul>
