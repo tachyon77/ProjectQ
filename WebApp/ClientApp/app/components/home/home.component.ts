@@ -4,7 +4,8 @@ import { QuestionService, Question } from '../questions/questions.service'
 
 @Component({
     selector: 'home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    styleUrls:['./home.component.css'],
 })
 export class HomeComponent {
     public questions: Question[];
