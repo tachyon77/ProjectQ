@@ -2,7 +2,8 @@
 
 <div *ngIf="answers">
     <div *ngFor="let answer of answers">
-        <h4 class="text-info">Answer by User{{answer.userId}}</h4>
-        <p>{{ answer.text }}</p>
+        <hr />
+        <answer-card [answer]="answer" >
+        </answer-card>
     </div>
 </div>

@@ -2,15 +2,26 @@
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
         <span class="question-title">{{question.title}}</span>
-
         <div class="question-description">
             {{question.description}}
         </div>
-
         <hr />
+        <h4>
+            {{answers.length}}
+            <span *ngIf="answers.length==1">
+                Answer
+            </span>
+            <span *ngIf="answers.length!=1">
+                Answers
+            </span>
+        </h4>
 
-        <div>
-            <span class="">{{answers.length}} Answers</span>
+        <div *ngIf="answers">
+            <div *ngFor="let answer of answers">
+                <hr />
+                <answer-card [answer]="answer">
+                </answer-card>
+            </div>
         </div>
     </div>
 

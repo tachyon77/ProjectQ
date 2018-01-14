@@ -21,7 +21,8 @@ export class DisplayAnswersComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.answerService.getForQuestion(this._questionId).subscribe(result => {
+        this.answerService.getForQuestion(this._questionId)
+            .subscribe(result => {
             this.answers = result as Answer[];
         }, error => console.error(error));  
     }

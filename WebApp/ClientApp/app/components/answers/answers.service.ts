@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 export interface Answer {
+    Id: number;
     QuestionId: number;
     text: string;
     UserId: number;
@@ -20,6 +21,14 @@ export class AnswerService {
             ).map(response => {
                 return response.json();
             });
+    }
+
+    getById(answerId: number) {
+        return this.http.get(
+            this.baseUrl + 'api/Answers/' + answerId
+        ).map(response => {
+            return response.json();
+        });
     }
 
     add(answer: Answer) {
