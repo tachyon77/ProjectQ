@@ -26,7 +26,7 @@ namespace ProjectQ.BusinessLogic
             int questionId, 
             decimal offeredPrice);
         IEnumerable<Question> GetAll();
-        Task<Question> GetById(int id);
+        Task<Question> GetByIdAsync(int id);
         bool QuestionExists(int id);
     }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Http } from '@angular/http';
 import { AnswerService, Answer } from '../../answers/answers.service'
-import { Question } from '../questions.service'
+import { QuestionService, Question } from '../questions.service'
 
 @Component({
     selector: 'question-detail',
@@ -13,18 +13,14 @@ import { Question } from '../questions.service'
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
-    private _questionId: number;
+    public question: Question;
     private paramsSubscription: any;
 
-    @Input()
-    set questionId(questionId: number) {
-        this._questionId = questionId;
-    }
-   
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private answerService: AnswerService) {
+        private answerService: AnswerService,
+        private questionService: QuestionService) {
     }
 
     ngOnDestroy() {
@@ -35,10 +31,15 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.paramsSubscription = 
         this.activatedRoute.params
             .subscribe(params => {
-                this._questionId = params['id'];
+                let questionId = Number(params['id']);
 
-                this.answerService.getForQuestion(
-                    this._questionId).subscribe(result => {
+                this.questionService.getById(questionId)
+                    .subscribe(result => {
+                        this.question = result as Question;
+                    }, error => console.error(error));
+
+                this.answerService.getForQuestion(questionId)
+                    .subscribe(result => {
                         this.answers = result as Answer[];
                     }, error => console.error(error));
             });

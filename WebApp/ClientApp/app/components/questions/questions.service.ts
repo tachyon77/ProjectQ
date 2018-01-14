@@ -22,6 +22,13 @@ export class QuestionService {
             });
     }
 
+    getById(id: number) {
+        return this.http.get(this.baseUrl + 'api/Questions/' + id)
+            .map(response => {
+                return response.json();
+            });
+    }
+
     add(question: Question) {
         return this.http.post(this.baseUrl + 'api/Questions', question)
             .map(response => { });

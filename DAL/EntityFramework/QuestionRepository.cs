@@ -28,9 +28,9 @@ namespace ProjectQ.DAL.EntityFramework
             return _context.Questions;
         }
 
-        Task<Question> IQuestionRepository.GetById(int id)
+        async Task<Question> IQuestionRepository.GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Questions.FindAsync(id);
         }
 
         bool IQuestionRepository.QuestionExists(int id)

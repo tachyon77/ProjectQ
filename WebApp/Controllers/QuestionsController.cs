@@ -41,7 +41,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var question = await _questionManager.GetById(id);
+            var question = await _questionManager.GetByIdAsync(id);
 
             if (question == null)
             {

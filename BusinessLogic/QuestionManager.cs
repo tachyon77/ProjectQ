@@ -54,10 +54,10 @@ namespace ProjectQ.BusinessLogic
                 .OrderByDescending(x=>x.OriginDate);
         }
 
-        Task<Question> IQuestionManager.GetById(int id)
+        async Task<Question> IQuestionManager.GetByIdAsync(int id)
         {
-            return _unitOfWork
-                .QuestionRepository.GetById(id);
+            return await _unitOfWork
+                .QuestionRepository.GetByIdAsync(id);
         }
 
         bool IQuestionManager.QuestionExists(int id)
