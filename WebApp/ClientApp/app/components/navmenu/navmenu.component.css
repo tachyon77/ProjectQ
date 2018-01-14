@@ -20,12 +20,12 @@
     background-color: #ffffff;
 }
 
-.navbar .navbar-brand {
-    color: black;
-    font-family:Tahoma;
-    font-weight:600;
-    font-size:larger;
-}
+    .navbar .navbar-brand {
+        color: black;
+        font-family: Helvetica Neue;
+        font-weight: 600;
+        font-size: x-large;
+    }
 
 .nav-item {
     color: #000000;
