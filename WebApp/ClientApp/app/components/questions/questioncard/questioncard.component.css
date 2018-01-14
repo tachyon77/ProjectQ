@@ -3,6 +3,7 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     padding-left: 1em;
+    font-family:Verdana;
 }
 
 .card{
@@ -12,4 +13,10 @@
 
 .card-link{
     color:black;
+}
+
+.card-title{
+    font-family:Tahoma;
+    font-weight:600;
+    font-size:larger;
 }
