@@ -1,28 +1,32 @@
-﻿
-<form [formGroup]="form"
-      (ngSubmit)="onSubmit(form.value)">
-    <div>    
-        <textarea rows="1" 
-                  class="form-control"
-                  name="Title" id="Title" 
-                  formControlName="Title"></textarea>
-        <h4>Details</h4>
-        <textarea rows="3" 
-                  class="form-control"
-                  name="Description" id="Description" 
-                  formControlName="Description"></textarea> 
-        <h4 class="text-success">$Reward:</h4>
-        <input type="text" 
-               class="form-control"
-               name="OfferedPrice" id="OfferedPrice"
-               formControlName="OfferedPrice"
-               />
+﻿<div class="row question-form">
+    <div class="col-md-offset-2 col-md-8">
+        <form [formGroup]="form"
+              (ngSubmit)="onSubmit(form.value)">
+            <div>
+                <h4>Title</h4>
+                <textarea rows="2"
+                          class="form-control"
+                          name="Title" id="Title"
+                          formControlName="Title"></textarea>
+                <h4>Details</h4>
+                <textarea rows="7"
+                          class="form-control"
+                          name="Description" id="Description"
+                          formControlName="Description"></textarea>
+                <h4 class="text-success">$ Reward:</h4>
+                <input type="text"
+                       class="form-control"
+                       name="OfferedPrice" id="OfferedPrice"
+                       formControlName="OfferedPrice" />
 
+            </div>
+            <br />
+            <button class="btn btn-primary"
+                    type="submit" [disabled]="!form.valid">
+                Ask
+            </button>
+
+        </form>
     </div>
-    <br />
-    <button class="btn btn-success"
-            type="submit" [disabled]="!form.valid">
-        Ask
-    </button>
-      
-</form>
+</div>
+

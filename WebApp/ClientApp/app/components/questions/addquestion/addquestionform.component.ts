@@ -7,6 +7,7 @@ import { QuestionService, Question } from '../questions.service'
 @Component({
     selector: 'add-question-form',
     templateUrl: '/addquestionform.component.html',
+    styleUrls: ['/addquestionform.component.css'],
 })
 export class AddQuestionFormComponent {
     form: FormGroup;

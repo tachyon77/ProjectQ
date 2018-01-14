@@ -1,9 +1,0 @@
-﻿<p *ngIf="!answers"><em>Loading...</em></p>
-
-<div *ngIf="answers">
-    <div *ngFor="let answer of answers">
-        <hr />
-        <answer-card [answer]="answer" >
-        </answer-card>
-    </div>
-</div>
