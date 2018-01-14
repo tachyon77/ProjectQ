@@ -57,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\app\components\answers\answercard\" />
     <Folder Include="Screenshots\" />
   </ItemGroup>
 
