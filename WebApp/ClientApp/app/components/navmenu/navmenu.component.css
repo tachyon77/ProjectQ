@@ -1,13 +1,13 @@
 @media (min-width: 768px) {
     .navbar-nav.navbar-left {
         position: absolute;
-        left: 30%;
+        left: 20%;
     }
 
     .navbar-nav.navbar-center {
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 45%;
+        transform: translateX(-45%);
     }
 
     .navbar-nav.navbar-right {
@@ -21,6 +21,13 @@
 }
 
 .navbar .navbar-brand {
+    color: black;
+    font-family:Tahoma;
+    font-weight:600;
+    font-size:larger;
+}
+
+.nav-item {
     color: #000000;
 }
 
