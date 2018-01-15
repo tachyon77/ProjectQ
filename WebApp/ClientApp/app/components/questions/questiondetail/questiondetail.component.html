@@ -13,29 +13,33 @@
 
         <div contenteditable="true"
              *ngIf="isAnswerEditorVisible">
-            <answer-editor [questionId]="question.id" >
+            <answer-editor [questionId]="question.id"
+                           (answerAdded)="onAnswerAdded($event)">
             </answer-editor>
         </div>
 
         <hr />
 
-        <h4>
-            {{answers.length}}
-            <span *ngIf="answers.length==1">
-                Answer
-            </span>
-            <span *ngIf="answers.length!=1">
-                Answers
-            </span>
-        </h4>
+        <div>
+            <h4>
+                {{answers.length}}
+                <span *ngIf="answers.length==1">
+                    Answer
+                </span>
+                <span *ngIf="answers.length!=1">
+                    Answers
+                </span>
+            </h4>
 
-        <div *ngIf="answers">
-            <div *ngFor="let answer of answers">
-                <hr />
-                <answer-card [answer]="answer">
-                </answer-card>
+            <div *ngIf="answers">
+                <div *ngFor="let answer of answers">
+                    <hr />
+                    <answer-card [answer]="answer">                                 >
+                    </answer-card>
+                </div>
             </div>
         </div>
+        
     </div>
 
 </div>

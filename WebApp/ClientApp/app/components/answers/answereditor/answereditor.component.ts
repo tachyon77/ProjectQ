@@ -1,4 +1,4 @@
-﻿import { Component, Inject, Input } from '@angular/core';
+﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { AnswerService, Answer } from '../answers.service'
 export class AnswerEditorComponent {
     form: FormGroup;
     private _questionId: number;
+    @Output() answerAdded = new EventEmitter();
 
     @Input()
     set questionId(questionId: number) {
@@ -34,8 +35,7 @@ export class AnswerEditorComponent {
         answer.QuestionId = this._questionId;
         this.answerService.add(answer)
             .subscribe(() => {
-                //TODO: refresh the current view?
-                this.router.navigate(['/home']);
+                this.answerAdded.emit(answer);
             });
     }
 }

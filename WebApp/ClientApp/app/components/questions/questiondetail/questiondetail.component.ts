@@ -39,8 +39,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.paramsSubscription = 
         this.activatedRoute.params
             .subscribe(params => {
-                let questionId = Number(params['id']);
-
+                let questionId = Number(params['id']);                
                 this.questionService.getById(questionId)
                     .subscribe(result => {
                         this.question = result as Question;
@@ -52,6 +51,10 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
                     }, error => console.error(error));
             });
         
+    }
+
+    onAnswerAdded(answer: Answer) {
+        this.answers.push(answer);
     }
 }
 
