@@ -1,13 +1,20 @@
 ﻿<form [formGroup]="form"
-      (ngSubmit)="onSubmit(form.value)">
+      (ngSubmit)="onSubmit(form.value)"
+      class="answer-editor">
     <textarea rows="3"
                 class="form-control"
                 name="text" id="text"
                 formControlName="text">
     </textarea>
-    <button type="submit" 
-            [disabled]="!form.valid" 
-            class="btn btn-default">
-    Submit
-    </button>
+    
+    <div class="form-group">
+        <button type="submit"
+                [disabled]="!form.valid"
+                class="btn btn-primary">
+            Submit
+        </button>
+    </div>
+        
+    
+    
 </form>
