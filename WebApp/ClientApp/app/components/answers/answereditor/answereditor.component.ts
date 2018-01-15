@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { AnswerService, Answer } from '../answers.service'
 
 @Component({
-    selector: 'add-answer-form',
-    templateUrl: '/addanswerform.component.html',
+    selector: 'answer-editor',
+    templateUrl: '/answereditor.component.html',
+    styleUrls:['/answereditor.component.css'],
 })
-export class AddAnswerFormComponent {
+export class AnswerEditorComponent {
     form: FormGroup;
     private _questionId: number;
 
@@ -33,6 +34,7 @@ export class AddAnswerFormComponent {
         answer.QuestionId = this._questionId;
         this.answerService.add(answer)
             .subscribe(() => {
+                //TODO: refresh the current view?
                 this.router.navigate(['/home']);
             });
     }

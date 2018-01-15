@@ -15,6 +15,7 @@ import { QuestionService, Question } from '../questions.service'
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
     public question: Question;
+    public isAnswerEditorVisible: boolean;
     private paramsSubscription: any;
 
 
@@ -22,6 +23,12 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private answerService: AnswerService,
         private questionService: QuestionService) {
+
+        this.isAnswerEditorVisible = false;
+    }
+
+    OnAnswerClick() {
+        this.isAnswerEditorVisible = true;
     }
 
     ngOnDestroy() {

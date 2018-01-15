@@ -5,7 +5,20 @@
         <div class="question-description">
             {{question.description}}
         </div>
+        <button 
+                class="btn btn-default"
+                (click)="OnAnswerClick()">
+            Answer
+        </button>
+
+        <div contenteditable="true"
+             *ngIf="isAnswerEditorVisible">
+            <answer-editor [questionId]="question.id" >
+            </answer-editor>
+        </div>
+
         <hr />
+
         <h4>
             {{answers.length}}
             <span *ngIf="answers.length==1">

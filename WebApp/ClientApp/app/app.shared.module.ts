@@ -14,7 +14,7 @@ import { AddQuestionFormComponent } from './components/questions/addquestion/add
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
-import { AddAnswerFormComponent } from './components/answers/addanswer/addanswerform.component';
+import { AnswerEditorComponent } from './components/answers/answereditor/answereditor.component';
 import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin.component'
 
 @NgModule({
@@ -26,7 +26,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
         AnswerCardComponent,
-        AddAnswerFormComponent,
+        AnswerEditorComponent,
         FacebookLoginComponent,
         HomeComponent
     ],
@@ -41,7 +41,6 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
-            { path: 'add-answer-form', component: AddAnswerFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: '**', redirectTo: 'home' }
         ])
