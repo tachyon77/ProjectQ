@@ -2,19 +2,14 @@
       (ngSubmit)="onSubmit(form.value)"
       class="answer-editor">
     <textarea rows="3"
-                class="form-control"
-                name="text" id="text"
-                formControlName="text">
+              class="form-control answer-content"
+              name="text" id="text"
+              formControlName="text">
     </textarea>
-    
-    <div class="form-group">
-        <button type="submit"
-                [disabled]="!form.valid"
-                class="btn btn-primary">
-            Submit
-        </button>
-    </div>
-        
-    
-    
+
+    <button type="submit"
+            [disabled]="!form.valid"
+            class="btn btn-primary">
+        Submit
+    </button>  
 </form>
