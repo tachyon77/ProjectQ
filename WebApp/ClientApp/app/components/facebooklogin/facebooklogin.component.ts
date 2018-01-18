@@ -12,7 +12,6 @@ declare var FB: any;
 })
 export class FacebookLoginComponent implements AfterViewInit{
 
-
     ngAfterViewInit() {
         window.checkLoginState = function () {
             FB.getLoginStatus(function (response: any) {
