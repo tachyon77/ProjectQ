@@ -1,18 +1,15 @@
-﻿<div class="fb-login-button" 
+﻿<div id="idUserName"></div>
+<div class="fb-login-button" 
      scope="public_profile,email"
      data-button-type="continue_with"
      data-show-faces="false" 
-     data-size="large"
-     onlogin="updateStatus()"
+     data-size="medium"
+     onlogin="checkLoginState();"
      data-auto-logout-link="true">
 </div>
 
-<div hidden>
-    <button class="btn btn-primary"
-            (click)="showAuthResponse()">
-        Click Me!
-    </button>
-</div>
+
+
 
 
 

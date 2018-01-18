@@ -1,21 +1,34 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, AfterViewInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { AuthenticationService } from '../authentication.service'
 
 declare var window: any;
 declare var FB: any;
+
 
 @Component({
     selector: 'facebook-login',
     templateUrl: './facebooklogin.component.html'
 })
+export class FacebookLoginComponent implements AfterViewInit{
 
-export class FacebookLoginComponent{
 
-    showAuthResponse() {
-        console.log(window.AuthRespose);
-    }
-
-    constructor() {
+    ngAfterViewInit() {
+        window.checkLoginState = function () {
+            FB.getLoginStatus(function (response: any) {
+                if (response.status == 'connected') {
+                    FB.api('/me', function (info: any) {
+                        window.username = info.name;
+                        let e: any = document.getElementById('idUserName');
+                        e.innerHTML = info.name;
+                    });
+                }
+                else {
+                    let e: any = document.getElementById('idUserName');
+                    e.innerHTML = "";
+                }
+            });
+        }
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '430143260734821',
@@ -25,10 +38,7 @@ export class FacebookLoginComponent{
                 version: 'v2.11' // use graph api version 2.11
             });
 
-            FB.getLoginStatus(function (response: any) {
-                window.AuthRespose = response;
-                console.log(response);
-            });
+            window.checkLoginState();
 
         };
 
@@ -40,5 +50,9 @@ export class FacebookLoginComponent{
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+    }
+
+    constructor(private authenticationService: AuthenticationService) {
+       
     }
 }

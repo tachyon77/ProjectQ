@@ -1,6 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-import { QuestionService, Question } from '../questions/questions.service'
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'home',
@@ -8,14 +6,7 @@ import { QuestionService, Question } from '../questions/questions.service'
     styleUrls:['./home.component.css'],
 })
 export class HomeComponent {
-    public questions: Question[];
-
-    constructor(
-        private questionService: QuestionService,
-        http: Http) {
-        this.questionService.get().subscribe(result => {
-            this.questions = result as Question[];
-        }, error => console.error(error));
+    constructor() {
     }
 }
 

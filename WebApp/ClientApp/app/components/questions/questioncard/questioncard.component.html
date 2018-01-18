@@ -4,11 +4,12 @@
     <div class="card">        
         <div class="card-body">
             <h3 class="card-title">
-                <a [routerLink]="['/question-detail', _question.id]"                   
+                <a [routerLink]="['/question-detail', _question.id]"
                    class="card-link">
                     {{_question.title}}
                 </a>
             </h3>
+            ${{_question.offeredPrice}}
             <h6 class="card-subtitle mb-2 text-muted">Asked by MZ</h6>
             <p class="card-text">{{_question.description}}</p>
         </div>

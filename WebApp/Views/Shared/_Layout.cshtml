@@ -9,14 +9,6 @@
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
 </head>
 <body>
-    <script type="text/javascript">
-        function updateStatus() {
-            FB.getLoginStatus(function (response) {
-                window.AuthRespose = response;
-            });
-        }
-        
-    </script>
     @RenderBody()
 
     @RenderSection("scripts", required: false)
