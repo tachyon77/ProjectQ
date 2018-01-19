@@ -2,11 +2,18 @@
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+export interface User {
+    FirstName: string;
+    LastName: string;
+}
+
 export interface Question {
     title: string;
     description: string;
     id: number;
     offeredPrice: number;
+    OriginDate: Date;
+    User: User;
 }
 
 @Injectable()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectQ.DAL.EntityFramework
 {
@@ -25,7 +26,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         IEnumerable<Question> IQuestionRepository.GetAll()
         {
-            return _context.Questions;
+            return _context.Questions.Include(x => x.User);
         }
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)

@@ -10,6 +10,7 @@ export interface User {
 export interface Answer {
     Id: number;
     QuestionId: number;
+    OriginDate: Date;
     text: string;
     UserId: number;
     User: User;

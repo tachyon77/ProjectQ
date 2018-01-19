@@ -26,6 +26,8 @@ namespace ProjectQ.BusinessLogic
                 .QuestionExists(answer.QuestionId))
                 throw new Exception();
 
+            answer.OriginDate = DateTime.UtcNow;
+
             // This code will not be present in production
             answer.UserId = DateTime.Now.Second % 3 + 1;
             // End

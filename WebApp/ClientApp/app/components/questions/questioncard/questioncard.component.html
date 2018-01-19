@@ -10,7 +10,10 @@
                 </a>
             </h3>
             ${{_question.offeredPrice}}
-            <h6 class="card-subtitle mb-2 text-muted">Asked by MZ</h6>
+            <h6 class="card-subtitle mb-2 text-muted">
+                Asked by {{_question.user.firstName}} {{_question.user.lastName}}
+                {{_question.originDate}}
+            </h6>
             <p class="card-text">{{_question.description}}</p>
         </div>
     </div>
