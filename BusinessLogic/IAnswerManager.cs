@@ -9,7 +9,7 @@ namespace ProjectQ.BusinessLogic
     public interface IAnswerManager
     {
         Task Add(Answer answer);
-        Task<IEnumerable<Answer>> GetForQuestion(int questionId);
+        Task<IEnumerable<Answer>> GetForQuestionAsync(int questionId);
         Task<Answer> GetById(int id);
         bool AnswerExists(int id);
     }

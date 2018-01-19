@@ -36,7 +36,7 @@ namespace WebApp.Controllers
         public async Task<IEnumerable<Answer>> 
             GetForQuestion([FromRoute] int questionId)
         {
-            return await _AnswerManager.GetForQuestion(questionId);
+            return await _AnswerManager.GetForQuestionAsync(questionId);
         }
 
 

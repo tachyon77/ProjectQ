@@ -29,9 +29,11 @@ namespace ProjectQ.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        async Task<IEnumerable<Answer>> IAnswerRepository.GetForQuestion(int questionId)
+        async Task<IEnumerable<Answer>> 
+            IAnswerRepository.GetForQuestionAsyc(int questionId)
         {
             var answers = await _context.Answers
+                .Include(x=>x.User)
                 .Where(x => x.QuestionId == questionId)
                 .ToListAsync();
             return answers;                          

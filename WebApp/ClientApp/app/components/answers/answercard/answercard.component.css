@@ -1,1 +1,9 @@
-﻿
+﻿.answer-card{
+    font-family:"Helvetica Neue";
+    font-size:large;
+}
+
+.answer-user {
+    font-weight:600;
+    margin-bottom:1em;
+}

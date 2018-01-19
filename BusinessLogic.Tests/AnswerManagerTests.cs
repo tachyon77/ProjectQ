@@ -77,11 +77,11 @@ namespace ProjectQ.BusinessLogic.Tests
                 .FromResult<IEnumerable<Answer>>
                 (answers);
             _mockAnswerRepo
-                .Setup(x => x.GetForQuestion(1))
+                .Setup(x => x.GetForQuestionAsyc(1))
                 .Returns(expected);
 
             
-            var actual = _sut.GetForQuestion(1).Result;
+            var actual = _sut.GetForQuestionAsync(1).Result;
 
             Assert.That(expected.Result, Is.EqualTo(actual));
         }
