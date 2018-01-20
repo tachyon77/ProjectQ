@@ -35,6 +35,7 @@ export class AnswerEditorComponent {
         answer.QuestionId = this._questionId;
         this.answerService.add(answer)
             .subscribe(() => {
+                console.log("emitting answer " + answer.text);
                 this.answerAdded.emit(answer);
             });
     }

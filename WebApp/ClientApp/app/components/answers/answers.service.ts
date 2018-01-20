@@ -1,10 +1,10 @@
 ﻿import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 export interface User {
-    FirstName: string;
-    LastName: string;
+    firstName: string;
+    lastName: string;
 }
 
 export interface Answer {
@@ -13,13 +13,13 @@ export interface Answer {
     OriginDate: Date;
     text: string;
     UserId: number;
-    User: User;
+    user: User;
 }
 
 @Injectable()
 export class AnswerService {
     constructor(
-        private http: Http,
+        private http: HttpClient,
         @Inject('BASE_URL') private baseUrl: string,
         @Inject('ACCESS_TOKEN') private accessToken: string) { }
 
@@ -27,7 +27,7 @@ export class AnswerService {
         return this.http.get(
             this.baseUrl + 'api/Answers/ForQuestion/' + questionId
             ).map(response => {
-                return response.json();
+                return response;
             });
     }
 
@@ -35,7 +35,7 @@ export class AnswerService {
         return this.http.get(
             this.baseUrl + 'api/Answers/' + answerId
         ).map(response => {
-            return response.json();
+            return response;
         });
     }
 

@@ -1,5 +1,6 @@
-﻿<div class="answer-card">
-    <div class="answer-user">
+﻿<p *ngIf="!_answer"><em>Loading...</em></p>
+<div *ngIf="_answer" class="answer-card">
+    <div class="answer-user" *ngIf="_answer.user">
         {{_answer.user.firstName}} {{_answer.user.lastName}}
         <div class="answer-date">Answered on {{_answer.originDate}}</div>
     </div>

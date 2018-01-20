@@ -2,7 +2,6 @@
     from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Http } from '@angular/http';
 import { AnswerService, Answer } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
 
@@ -54,6 +53,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     }
 
     onAnswerAdded(answer: Answer) {
+        console.log("pushing answer: " + answer.text);
         this.answers.push(answer);
     }
 }

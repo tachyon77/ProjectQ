@@ -1,5 +1,4 @@
 ﻿import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
 import { QuestionService, Question } from '../questions.service'
 
 @Component({
@@ -11,8 +10,7 @@ export class DisplayQuestionsComponent {
     public questions: Question[];
 
     constructor(
-        private questionService: QuestionService,
-        http: Http) {
+        private questionService: QuestionService) {
         this.questionService.get().subscribe(result => {
             this.questions = result as Question[];
         }, error => console.error(error));

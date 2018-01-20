@@ -1,5 +1,7 @@
 ﻿<br />
-<div class="offset-md-2 col-md-8">
+<p *ngIf="!question"><em>Loading...</em></p>
+
+<div *ngIf="question" class="offset-md-2 col-md-8">
     <span class="question-title">{{question.title}}</span>
     <div class="question-description">
         {{question.description}}
@@ -20,14 +22,17 @@
     <hr />
 
     <div>
-        <h4>
-            {{answers.length}} Answer
-        </h4>
+        <div *ngIf="!answers">Loading...
+        </div>
 
         <div *ngIf="answers">
+            <h4>
+                {{answers.length}} Answer
+            </h4>
             <div *ngFor="let answer of answers">
                 <hr />
-                <answer-card [answer]="answer">                                 >
+                <answer-card [answer]="answer">
+                    
                 </answer-card>
             </div>
         </div>
