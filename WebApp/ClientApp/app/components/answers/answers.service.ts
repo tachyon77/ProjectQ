@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-export interface User {
+export class User {
     firstName: string;
     lastName: string;
 }
@@ -21,7 +21,7 @@ export class AnswerService {
     constructor(
         private http: HttpClient,
         @Inject('BASE_URL') private baseUrl: string,
-        @Inject('ACCESS_TOKEN') private accessToken: string) { }
+        @Inject('AUTH_RESPONSE') private authResponse: any) { }
 
     getForQuestion(questionId: number) {
         return this.http.get(

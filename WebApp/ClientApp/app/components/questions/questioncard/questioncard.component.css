@@ -3,7 +3,11 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     padding-left: 1em;
-    font-family:Verdana;
+}
+
+.card-text{
+    margin-top:1em;
+    font-family:Tahoma;
 }
 
 .card{
@@ -15,6 +19,11 @@
     color:black;
 }
 
+.asked-by{
+    font-size:small;
+    color:GrayText;
+
+}
 .card-title {
     font-family: sans-serif;
     font-weight: 600;

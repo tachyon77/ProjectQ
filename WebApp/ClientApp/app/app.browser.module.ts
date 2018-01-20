@@ -13,7 +13,7 @@ declare var window: any;
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
-        { provide: 'ACCESS_TOKEN', useFactory: getAccessToken },
+        { provide: 'AUTH_RESPONSE', useFactory: getAuthResponse },
     ]
 })
 export class AppModule {
@@ -23,6 +23,6 @@ export function getBaseUrl() {
     return document.getElementsByTagName('base')[0].href;
 }
 
-export function getAccessToken() {
-    return window.accessToken;
+export function getAuthResponse() {
+    return window.authResponse;
 }
