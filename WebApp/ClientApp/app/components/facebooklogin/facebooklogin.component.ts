@@ -17,7 +17,7 @@ export class FacebookLoginComponent implements AfterViewInit{
             FB.getLoginStatus(function (response: any) {
                 if (response.status == 'connected') {
                     FB.api('/me', function (info: any) {
-                        window.username = info.name;
+                        window.accessToken = response.authResponse.accessToken;
                         let e: any = document.getElementById('idUserName');
                         e.innerHTML = info.name;
                     });

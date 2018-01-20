@@ -1,39 +1,35 @@
 ﻿<br />
-<div class="row">
-    <div class="col-md-offset-2 col-md-8">
-        <span class="question-title">{{question.title}}</span>
-        <div class="question-description">
-            {{question.description}}
-        </div>
-        <button 
-                class="btn btn-default"
-                (click)="OnAnswerClick()">
-            Answer
-        </button>
+<div class="offset-md-2 col-md-8">
+    <span class="question-title">{{question.title}}</span>
+    <div class="question-description">
+        {{question.description}}
+    </div>
+    <button 
+            class="btn btn-default"
+            (click)="OnAnswerClick()">
+        Answer
+    </button>
 
-        <div contenteditable="true"
-             *ngIf="isAnswerEditorVisible">
-            <answer-editor [questionId]="question.id"
-                           (answerAdded)="onAnswerAdded($event)">
-            </answer-editor>
-        </div>
-
-        <hr />
-
-        <div>
-            <h4>
-                {{answers.length}} Answer
-            </h4>
-
-            <div *ngIf="answers">
-                <div *ngFor="let answer of answers">
-                    <hr />
-                    <answer-card [answer]="answer">                                 >
-                    </answer-card>
-                </div>
-            </div>
-        </div>
-        
+    <div contenteditable="true"
+            *ngIf="isAnswerEditorVisible">
+        <answer-editor [questionId]="question.id"
+                        (answerAdded)="onAnswerAdded($event)">
+        </answer-editor>
     </div>
 
+    <hr />
+
+    <div>
+        <h4>
+            {{answers.length}} Answer
+        </h4>
+
+        <div *ngIf="answers">
+            <div *ngFor="let answer of answers">
+                <hr />
+                <answer-card [answer]="answer">                                 >
+                </answer-card>
+            </div>
+        </div>
+    </div>        
 </div>

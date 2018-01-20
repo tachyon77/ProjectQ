@@ -6,11 +6,11 @@
             <h3 class="card-title">
                 <a [routerLink]="['/question-detail', _question.id]"
                    class="card-link">
-                    {{_question.title}}
+                    {{_question.title}} ${{_question.offeredPrice}}
                 </a>
             </h3>
-            ${{_question.offeredPrice}}
-            <h6 class="card-subtitle mb-2 text-muted">
+            
+            <h6 class="card-subtitle mb-1 text-muted">
                 Asked by {{_question.user.firstName}} {{_question.user.lastName}}
                 {{_question.originDate}}
             </h6>

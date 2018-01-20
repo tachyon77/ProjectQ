@@ -20,7 +20,8 @@ export interface Answer {
 export class AnswerService {
     constructor(
         private http: Http,
-        @Inject('BASE_URL') private baseUrl: string) { }
+        @Inject('BASE_URL') private baseUrl: string,
+        @Inject('ACCESS_TOKEN') private accessToken: string) { }
 
     getForQuestion(questionId: number) {
         return this.http.get(

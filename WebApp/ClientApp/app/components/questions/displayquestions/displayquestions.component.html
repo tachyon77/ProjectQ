@@ -1,6 +1,6 @@
 ﻿<p *ngIf="!questions"><em>Loading...</em></p>
 
-<div *ngIf="questions">
+<div *ngIf="questions" class="question-list">
     <div *ngFor="let question of questions">
         <question-card [question]="question">
         </question-card>

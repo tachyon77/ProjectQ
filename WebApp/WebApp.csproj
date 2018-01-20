@@ -35,6 +35,7 @@
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
+    <None Remove="ClientApp\app\components\questions\displayquestions\displayquestions.component.css" />
     <None Remove="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <None Remove="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
@@ -60,6 +61,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\displayquestions\displayquestions.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\displayquestions\displayquestions.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
