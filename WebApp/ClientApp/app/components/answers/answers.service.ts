@@ -1,5 +1,5 @@
 ﻿import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 export class User {
@@ -40,7 +40,13 @@ export class AnswerService {
     }
 
     add(answer: Answer) {
-        return this.http.post(this.baseUrl + 'api/Answers', answer)
-            .map(response => { });
+        return this.http.post(
+            this.baseUrl + 'api/Answers',
+            answer,
+            {
+                headers: new HttpHeaders()
+                    .set('Authorization', this.authResponse.accessToken),
+            }
+        ).map(response => { });
     }
 }
