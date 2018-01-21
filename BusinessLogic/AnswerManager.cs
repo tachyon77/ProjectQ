@@ -20,7 +20,7 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        async Task IAnswerManager.Add(Answer answer, string email)
+        async Task<int> IAnswerManager.AddAsync(Answer answer, string email)
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
@@ -31,8 +31,10 @@ namespace ProjectQ.BusinessLogic
             answer.UserId = _unitOfWork
                 .UserRepository.GetByEmail(email).Id;
 
-            _unitOfWork.AnswerRepository.Add(answer);
+            await _unitOfWork.AnswerRepository.AddAsync(answer);
             await _unitOfWork.SaveAsync();
+
+            return answer.Id;
         }
 
         async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestionAsync(int questionId)

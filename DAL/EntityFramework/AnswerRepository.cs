@@ -19,9 +19,9 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        void IAnswerRepository.Add(Answer answer)
+        async Task IAnswerRepository.AddAsync(Answer answer)
         {
-            _context.Answers.Add(answer);           
+            await _context.Answers.AddAsync(answer);
         }
 
         bool IAnswerRepository.AnswerExists(int id)

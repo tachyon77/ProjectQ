@@ -12,19 +12,36 @@ namespace ProjectQ.BusinessLogic.Tests
     [TestFixture]
     public class AnswerManagerTests
     {
-        private Mock<IAnswerRepository> _mockAnswerRepo;       
+        private Mock<IAnswerRepository> _mockAnswerRepo;
+        private Mock<IQuestionRepository> _mockQuestionRepo;
+        private Mock<IUserRepository> _mockUserRepo;
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
 
         [SetUp]
         public void Setup()
         {
+            _mockQuestionRepo = new Mock<IQuestionRepository>();
             _mockAnswerRepo = new Mock<IAnswerRepository>();
+            _mockUserRepo = new Mock<IUserRepository>();
+
             _mockUoW = new Mock<IUnitOfWork>();
+
+            _mockUoW
+                .Setup(x => x.QuestionRepository)
+                .Returns(_mockQuestionRepo.Object);
 
             _mockUoW
                 .Setup(x => x.AnswerRepository)
                 .Returns(_mockAnswerRepo.Object);
+
+            _mockUoW
+                .Setup(x => x.UserRepository)
+                .Returns(_mockUserRepo.Object);
+
+            _mockUoW
+                .Setup(x => x.SaveAsync())
+                .Returns(Task.CompletedTask);
 
             _sut = new AnswerManager(_mockUoW.Object);
         }
@@ -44,7 +61,7 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Returns(mockQuestionRepo.Object);
 
             Assert.ThrowsAsync<Exception>(
-                async () => await _sut.Add(answer));
+                async () => await _sut.AddAsync(answer, "tachyon77@gmail.com"));
         }
 
         [Test]
@@ -52,18 +69,22 @@ namespace ProjectQ.BusinessLogic.Tests
         {
             var answer = new Mock<Answer>().Object;
 
-            var mockQuestionRepo = new Mock<IQuestionRepository>();
-            mockQuestionRepo
+            _mockQuestionRepo
                 .Setup(x => x.QuestionExists(answer.QuestionId))
                 .Returns(true);
 
-            _mockUoW
-                .Setup(x => x.QuestionRepository)
-                .Returns(mockQuestionRepo.Object);
+            _mockAnswerRepo
+                .Setup(x => x.AddAsync(answer))
+                .Returns(Task.CompletedTask);
 
-            _sut.Add(answer);
+            _mockUserRepo
+                .Setup(x => x.GetByEmail("tachyon77@gmail.com"))
+                .Returns(new User());
 
-            _mockAnswerRepo.Verify(x => x.Add(answer), Times.Once);
+            var r = _sut.AddAsync(answer, "tachyon77@gmail.com")
+                .Result;
+
+            _mockAnswerRepo.Verify(x => x.AddAsync(answer), Times.Once);
             _mockUoW.Verify(x => x.SaveAsync(), Times.Once);
         }
 

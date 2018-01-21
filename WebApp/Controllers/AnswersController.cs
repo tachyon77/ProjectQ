@@ -73,7 +73,7 @@ namespace WebApp.Controllers
             var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
                    .Select(c => c.Value).SingleOrDefault();
 
-            await _AnswerManager.Add(Answer, email);
+            await _AnswerManager.AddAsync(Answer, email);
 
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }

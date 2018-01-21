@@ -35,15 +35,15 @@ namespace ProjectQ.BusinessLogic
         }
         
 
-        async Task IQuestionManager.AddAsync(Question question)
+        async Task IQuestionManager.AddAsync(Question question, string email)
         {
-            // This code will not be present in production
-            question.UserId = DateTime.Now.Second % 3 + 1;
-            // End
+            question.UserId = _unitOfWork
+                .UserRepository.GetByEmail(email).Id;
 
             question.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.QuestionRepository.AddAsync(question);
+            await _unitOfWork.SaveAsync();
         }
 
         IEnumerable<Question> IQuestionManager.GetAll()

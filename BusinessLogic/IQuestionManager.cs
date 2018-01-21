@@ -21,7 +21,7 @@ namespace ProjectQ.BusinessLogic
     /// </summary>
     public interface IQuestionManager
     {
-        Task AddAsync(Question question);
+        Task AddAsync(Question question, string email);
         Task UpdateOfferedPriceAsync(
             int questionId, 
             decimal offeredPrice);

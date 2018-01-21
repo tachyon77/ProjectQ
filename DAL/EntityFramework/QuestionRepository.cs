@@ -20,8 +20,7 @@ namespace ProjectQ.DAL.EntityFramework
         }
         async Task IQuestionRepository.AddAsync(Question question)
         {
-            _context.Questions.Add(question);
-            await _context.SaveChangesAsync();
+            await _context.Questions.AddAsync(question);
         }
 
         IEnumerable<Question> IQuestionRepository.GetAll()

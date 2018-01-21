@@ -8,7 +8,7 @@ namespace ProjectQ.BusinessLogic
 {
     public interface IAnswerManager
     {
-        Task Add(Answer answer, string email);
+        Task<int> AddAsync(Answer answer, string email);
         Task<IEnumerable<Answer>> GetForQuestionAsync(int questionId);
         Task<Answer> GetById(int id);
         bool AnswerExists(int id);
