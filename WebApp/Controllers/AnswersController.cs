@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WebApp.Controllers
 {
@@ -63,13 +64,16 @@ namespace WebApp.Controllers
         // POST: api/Answers
         [HttpPost]
         public async Task<IActionResult> PostAnswer([FromBody] Answer Answer)
-        {
+        {           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _AnswerManager.Add(Answer);
+            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
+                   .Select(c => c.Value).SingleOrDefault();
+
+            await _AnswerManager.Add(Answer, email);
 
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjectQ.WebApp.Authentication
 {
-    public class CustomAuthOptions : AuthenticationSchemeOptions
+    public class FacebookAuthOptions : AuthenticationSchemeOptions
     {
-        public CustomAuthOptions()
+        public FacebookGraphApiClient Authenticator { get; set; }
+        public FacebookAuthOptions()
         {
-
         }
     }
 }

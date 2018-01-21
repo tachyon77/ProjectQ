@@ -15,6 +15,7 @@ namespace ProjectQ.DAL.EntityFramework
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
         private IAnswerRepository _answerRepository;
+        private IUserRepository _userRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
@@ -42,6 +43,18 @@ namespace ProjectQ.DAL.EntityFramework
                     _answerRepository = new AnswerRepository(_context);
                 }
                 return _answerRepository;
+            }
+        }
+
+        IUserRepository IUnitOfWork.UserRepository
+        {
+            get
+            {
+                if (_userRepository == null)
+                {
+                    _userRepository = new UserRepository(_context);
+                }
+                return _userRepository;
             }
         }
         async Task IUnitOfWork.SaveAsync()

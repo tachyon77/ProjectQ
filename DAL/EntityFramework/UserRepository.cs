@@ -18,9 +18,15 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        void IUserRepository.AddUser(User user)
+        void IUserRepository.Add(User user)
         {
             _context.Users.Add(user);
+        }
+
+        User IUserRepository.GetByEmail(string email)
+        {
+            email = email.ToLower().Trim();
+            return _context.Users.First(x=>x.email.ToLower().Equals(email));
         }
     }
 }

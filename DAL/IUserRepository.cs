@@ -9,6 +9,7 @@ namespace ProjectQ.DAL
 {
     public interface IUserRepository
     {
-        void AddUser(User user);
+        void Add(User user);
+        User GetByEmail(string email);
     }
 }

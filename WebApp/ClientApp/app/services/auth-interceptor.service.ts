@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         var accessToken: string = "";
-        console.log("Intercepting successfully...........");
+
         if (window.authResponse != null) {
             accessToken = window.authResponse.accessToken;
             console.log("accessToken is " + accessToken);

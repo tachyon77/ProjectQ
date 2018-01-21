@@ -2,7 +2,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-declare var window: any;
 
 export class User {
     firstName: string;
@@ -42,14 +41,9 @@ export class AnswerService {
     }
 
     add(answer: Answer) {
-        console.log("answer service : " + window.authResponse);
         return this.http.post(
             this.baseUrl + 'api/Answers',
-            answer,
-            {
-                headers: new HttpHeaders()
-                    .set('Authorization', window.authResponse.accessToken),
-            }
+            answer          
         ).map(response => { });
     }
 }

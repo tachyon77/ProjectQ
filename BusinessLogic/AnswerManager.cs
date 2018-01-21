@@ -20,7 +20,7 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        async Task IAnswerManager.Add(Answer answer)
+        async Task IAnswerManager.Add(Answer answer, string email)
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
@@ -28,9 +28,8 @@ namespace ProjectQ.BusinessLogic
 
             answer.OriginDate = DateTime.UtcNow;
 
-            // This code will not be present in production
-            answer.UserId = DateTime.Now.Second % 3 + 1;
-            // End
+            answer.UserId = _unitOfWork
+                .UserRepository.GetByEmail(email).Id;
 
             _unitOfWork.AnswerRepository.Add(answer);
             await _unitOfWork.SaveAsync();
