@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectQ.BusinessLogic;
 using ProjectQ.DAL;
+using ProjectQ.WebApp.Authentication;
 
 namespace WebApp
 {//
@@ -29,6 +31,26 @@ namespace WebApp
                 options.SerializerSettings.ReferenceLoopHandling =
                                            Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ValidFacebookToken", policy =>
+                    policy.Requirements.Add(new ValidFacebookAccessTokenRequirement()));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, ValidFacebookTokenHandler>();
+            */
+
+            services.AddAuthentication(options =>
+            {
+                // the scheme name has to match the value we're going to use in AuthenticationBuilder.AddScheme(...)
+                options.DefaultAuthenticateScheme = "Custom Scheme";
+                options.DefaultChallengeScheme = "Custom Scheme";
+            })
+            .AddCustomAuth(options =>
+            {             
+            });
+
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
@@ -55,6 +77,8 @@ namespace WebApp
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

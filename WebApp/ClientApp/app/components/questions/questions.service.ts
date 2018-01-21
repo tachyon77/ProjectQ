@@ -20,13 +20,16 @@ export interface Question {
 export class QuestionService {
     constructor(
         private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string) { }
+        @Inject('BASE_URL') private baseUrl: string)
+    { }
 
-    get() {      
+    get() {
         return this.http.get(this.baseUrl + 'api/Questions')
             .map(response => {
                 return response;
             });
+
+
     }
 
     getById(id: number) {

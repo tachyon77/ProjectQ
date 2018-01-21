@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
