@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,7 +27,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         AnswerCardComponent,
         AnswerEditorComponent,
         FacebookLoginComponent,
-        HomeComponent
+        HomeComponent,
     ],
     providers: [
         QuestionService,
