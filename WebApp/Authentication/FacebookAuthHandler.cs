@@ -45,10 +45,7 @@ namespace ProjectQ.WebApp.Authentication
                 return await Task.FromResult(AuthenticateResult.Success(ticket));
             }
 
-            identities = new List<ClaimsIdentity> { new ClaimsIdentity("None") };
-            ticket = new AuthenticationTicket(new ClaimsPrincipal(identities), "None");
-
-            return await Task.FromResult(AuthenticateResult.Success(ticket));
+            return await Task.FromResult(AuthenticateResult.Fail(new Exception("Need to login")));
         }
     }
 }

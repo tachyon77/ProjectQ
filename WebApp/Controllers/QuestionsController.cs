@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
@@ -60,7 +62,10 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _questionManager.AddAsync(question, "tachyon77@gmail.com");
+            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
+                   .Select(c => c.Value).SingleOrDefault();
+
+            await _questionManager.AddAsync(question, email);
 
             return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }

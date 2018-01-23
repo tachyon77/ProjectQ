@@ -15,6 +15,10 @@ export class QuestionCardComponent {
         this._question = question;
     }
 
+    get question() {
+        return this._question;
+    }
+
     constructor() {
     }
 

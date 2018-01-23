@@ -1,20 +1,20 @@
-﻿<p *ngIf="!_question"><em>Loading...</em></p>
+﻿<p *ngIf="!question"><em>Loading...</em></p>
 
-<div *ngIf="_question">
+<div *ngIf="question">
     <div class="card">        
         <div class="card-body">
             <h3 class="card-title">
-                <a [routerLink]="['/question-detail', _question.id]"
+                <a [routerLink]="['/question-detail', question.id]"
                    class="card-link">
-                    {{_question.title}} ${{_question.offeredPrice}}
+                    {{question.title}} ${{question.offeredPrice}}
                 </a>
             </h3>
             
             <h6 class="asked-by">
-                Asked by {{_question.user.firstName}} {{_question.user.lastName}}
-                {{_question.originDate}}
+                Asked by {{question.user.firstName}} {{question.user.lastName}}
+                {{question.originDate}}
             </h6>
-            <p class="card-text">{{_question.description}}</p>
+            <p class="card-text">{{question.description}}</p>
         </div>
     </div>
 </div>

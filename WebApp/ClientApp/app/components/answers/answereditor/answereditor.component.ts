@@ -6,8 +6,8 @@ import { AnswerService, Answer } from '../answers.service'
 
 @Component({
     selector: 'answer-editor',
-    templateUrl: '/answereditor.component.html',
-    styleUrls:['/answereditor.component.css'],
+    templateUrl: './answereditor.component.html',
+    styleUrls:['./answereditor.component.css'],
 })
 export class AnswerEditorComponent {
     form: FormGroup;
