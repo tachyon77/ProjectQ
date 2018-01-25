@@ -22,9 +22,7 @@ namespace ProjectQ.BusinessLogic
     public interface IQuestionManager
     {
         Task AddAsync(Question question, string email);
-        Task UpdateOfferedPriceAsync(
-            int questionId, 
-            decimal offeredPrice);
+        Task UpdateAsync(Question question);
         IEnumerable<Question> GetAll();
         Task<Question> GetByIdAsync(int id);
         bool QuestionExists(int id);

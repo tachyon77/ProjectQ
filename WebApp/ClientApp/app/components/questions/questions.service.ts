@@ -44,4 +44,10 @@ export class QuestionService {
             .map(response => { });
     }
 
+    update(question: Question) {
+        return this.http
+            .put(this.baseUrl + 'api/Questions/' + question.id, question)
+            .map(response => { });
+    }
+
 }

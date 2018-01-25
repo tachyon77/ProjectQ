@@ -66,11 +66,10 @@ namespace ProjectQ.BusinessLogic
                 .QuestionExists(id);
         }
 
-        async Task IQuestionManager.UpdateOfferedPriceAsync(
-            int questionId, decimal offeredPrice)
+        async Task IQuestionManager.UpdateAsync(Question question)
         {
             await _unitOfWork.QuestionRepository
-                .UpdateOfferedPrice(questionId, offeredPrice);
+                .UpdateAsync(question);
             await _unitOfWork.SaveAsync();
         }
 

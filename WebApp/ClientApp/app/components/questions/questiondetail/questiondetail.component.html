@@ -6,23 +6,33 @@
     <div class="question-description">
         {{question.description}}
     </div>
-    <button 
-            class="btn btn-default"
+    <button class="btn btn-default"
+            (click)="OnEditQuestionClick()">
+        Edit Question
+    </button>
+
+    <button class="btn btn-default"
             (click)="OnAnswerClick()">
         Answer
     </button>
 
-    <div contenteditable="true"
-            *ngIf="isAnswerEditorVisible">
+    <div *ngIf="isQuestionEditorVisible">
+        <question-editor [questionId]="question.id"
+                         (questionEdited)="onQuestionEdited($event)">
+        </question-editor>
+    </div>
+
+    <div *ngIf="isAnswerEditorVisible">
         <answer-editor [questionId]="question.id"
-                        (answerAdded)="onAnswerAdded($event)">
+                       (answerAdded)="onAnswerAdded($event)">
         </answer-editor>
     </div>
 
     <hr />
 
     <div>
-        <div *ngIf="!answers">Loading...
+        <div *ngIf="!answers">
+            Loading...
         </div>
 
         <div *ngIf="answers">
@@ -32,9 +42,9 @@
             <div *ngFor="let answer of answers">
                 <hr />
                 <answer-card [answer]="answer">
-                    
+
                 </answer-card>
             </div>
         </div>
-    </div>        
+    </div>
 </div>

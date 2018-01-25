@@ -10,7 +10,7 @@ namespace ProjectQ.DAL
     public interface IQuestionRepository
     {
         Task AddAsync(Question question);
-        Task UpdateOfferedPrice(int questionId, decimal offeredPrice);
+        Task UpdateAsync(Question question);
         IEnumerable<Question> GetAll();
         Task<Question> GetByIdAsync(int id);
         bool QuestionExists(int id);

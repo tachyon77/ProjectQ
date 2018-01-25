@@ -70,6 +70,18 @@ namespace WebApp.Controllers
             return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] Question updated)
+        {
+            if (updated == null || updated.Id != id)
+            {
+                return BadRequest();
+            }
+            await _questionManager.UpdateAsync(updated);
+
+            return new NoContentResult();
+        }
+
         private bool QuestionExists(int id)
         {
             return _questionManager.QuestionExists(id);

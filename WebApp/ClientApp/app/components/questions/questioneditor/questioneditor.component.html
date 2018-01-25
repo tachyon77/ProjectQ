@@ -1,0 +1,31 @@
+﻿<div class="offset-md-2 col-md-8">
+    <form [formGroup]="form"
+            (ngSubmit)="onSubmit(form.value)">
+        <div>
+            <h4>Title</h4>
+            <textarea rows="2"
+                        class="form-control"
+                        name="Title" id="Title"
+                        formControlName="title"></textarea>
+            <h4>Details</h4>
+            <textarea rows="7"
+                        class="form-control"
+                        name="Description" id="Description"
+                        formControlName="description"></textarea>
+            <h4 class="text-success">$ Reward:</h4>
+            <input type="text"
+                    class="form-control"
+                    name="OfferedPrice" id="OfferedPrice"
+                    formControlName="offeredPrice" />
+
+        </div>
+        <br />
+        <button class="btn btn-primary"
+                type="submit" [disabled]="!form.valid">
+            Save
+        </button>
+
+    </form>
+</div>
+
+

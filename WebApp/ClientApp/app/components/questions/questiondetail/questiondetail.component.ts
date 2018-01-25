@@ -15,6 +15,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
     public question: Question;
     public isAnswerEditorVisible: boolean;
+    public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
 
 
@@ -24,10 +25,15 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         private questionService: QuestionService) {
 
         this.isAnswerEditorVisible = false;
+        this.isQuestionEditorVisible = false;
     }
 
     OnAnswerClick() {
         this.isAnswerEditorVisible = true;
+    }
+
+    OnEditQuestionClick() {
+        this.isQuestionEditorVisible = true;
     }
 
     ngOnDestroy() {
@@ -55,6 +61,11 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     onAnswerAdded(answer: Answer) {
         console.log("pushing answer: " + answer.text);
         this.answers.push(answer);
+    }
+
+    onQuestionEdited(question: Question) {
+        console.log("updating question: " + question.description);
+        this.question = question;
     }
 }
 

@@ -39,6 +39,9 @@
     <None Remove="ClientApp\app\components\questions\displayquestions\displayquestions.component.css" />
     <None Remove="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <None Remove="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
+    <None Remove="ClientApp\app\components\questions\questioneditor\questioneditor.component.css" />
+    <None Remove="ClientApp\app\components\questions\questioneditor\questioneditor.component.html" />
+    <None Remove="ClientApp\app\components\questions\questioneditor\questioneditor.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.service.ts" />
     <None Remove="ClientApp\app\services\auth-interceptor.service.ts" />
@@ -60,6 +63,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\answers\answers.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />

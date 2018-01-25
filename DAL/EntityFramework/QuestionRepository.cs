@@ -23,6 +23,16 @@ namespace ProjectQ.DAL.EntityFramework
             await _context.Questions.AddAsync(question);
         }
 
+        async Task IQuestionRepository.UpdateAsync(Question question)
+        {
+            var dbRecord = await _context.Questions.FindAsync(question.Id);
+
+            dbRecord.Title = question.Title;
+            dbRecord.Description = question.Description;
+            dbRecord.OfferedPrice = question.OfferedPrice;
+
+        }
+
         IEnumerable<Question> IQuestionRepository.GetAll()
         {
             return _context.Questions.Include(x => x.User);
@@ -38,14 +48,5 @@ namespace ProjectQ.DAL.EntityFramework
             return _context.Questions.Any(x => x.Id == id);
         }
 
-        async Task IQuestionRepository.UpdateOfferedPrice(
-            int questionId, 
-            decimal offeredPrice)
-        {
-            var question = await 
-                _context.Questions.FindAsync(questionId);
-
-            question.OfferedPrice = offeredPrice;
-        }
     }
 }

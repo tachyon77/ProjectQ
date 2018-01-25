@@ -14,6 +14,7 @@ import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AnswerEditorComponent } from './components/answers/answereditor/answereditor.component';
+import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
 import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin.component'
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         AddQuestionFormComponent,
         AnswerCardComponent,
         AnswerEditorComponent,
+        QuestionEditorComponent,
         FacebookLoginComponent,
         HomeComponent,
     ],
