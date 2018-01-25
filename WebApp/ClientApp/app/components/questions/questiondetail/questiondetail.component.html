@@ -2,25 +2,28 @@
 <p *ngIf="!question"><em>Loading...</em></p>
 
 <div *ngIf="question" class="offset-md-2 col-md-8">
-    <span class="question-title">{{question.title}}</span>
-    <div class="question-description">
-        {{question.description}}
+    <div *ngIf="!isQuestionEditorVisible">
+        <span class="question-title">{{question.title}}</span>
+        <div class="question-description">
+            {{question.description}}
+        </div>
+        <button class="btn btn-default"
+                (click)="OnEditQuestionClick()">
+            Edit Question
+        </button>
+        <button class="btn btn-default"
+                (click)="OnAnswerClick()">
+            Answer
+        </button>
     </div>
-    <button class="btn btn-default"
-            (click)="OnEditQuestionClick()">
-        Edit Question
-    </button>
-
-    <button class="btn btn-default"
-            (click)="OnAnswerClick()">
-        Answer
-    </button>
 
     <div *ngIf="isQuestionEditorVisible">
         <question-editor [question]="question"
                          (questionEdited)="onQuestionEdited($event)">
         </question-editor>
     </div>
+
+
 
     <div *ngIf="isAnswerEditorVisible">
         <answer-editor [questionId]="question.id"
