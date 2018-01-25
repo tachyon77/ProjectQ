@@ -1,10 +1,23 @@
 ﻿<p *ngIf="!_answer"><em>Loading...</em></p>
-<div *ngIf="_answer" class="answer-card">
-    <div class="answer-user" *ngIf="_answer.user">
-        {{_answer.user.firstName}} {{_answer.user.lastName}}
-        <div class="answer-date">Answered on {{_answer.originDate}}</div>
+<div *ngIf="answer" class="answer-card">
+
+    <div *ngIf="!isUpdateAnswerVisible">
+        <div class="answer-user" *ngIf="answer.user">
+            {{answer.user.firstName}} {{answer.user.lastName}}
+            <div class="answer-date">Answered on {{answer.originDate}}</div>
+        </div>
+        <div class="answer-content">
+            {{answer.text}}
+        </div>
+        <button class="btn btn-default"
+                (click)="OnEditClick()">
+            Edit
+        </button>
     </div>
-    <div>
-        {{_answer.text}}
+
+    <div *ngIf="isUpdateAnswerVisible">
+        <update-answer [answer]="answer"
+                       (answerUpdated)="onAnswerUpdated($event)">
+        </update-answer>
     </div>
 </div>

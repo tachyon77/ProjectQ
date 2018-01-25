@@ -5,18 +5,22 @@ import { Router } from '@angular/router';
 import { AnswerService, Answer } from '../answers.service'
 
 @Component({
-    selector: 'answer-editor',
-    templateUrl: './answereditor.component.html',
-    styleUrls:['./answereditor.component.css'],
+    selector: 'update-answer',
+    templateUrl: './updateanswer.component.html',
+    styleUrls:['./updateanswer.component.css'],
 })
-export class AnswerEditorComponent {
+export class UpdateAnswerComponent {
     form: FormGroup;
-    private _questionId: number;
-    @Output() answerAdded = new EventEmitter();
+    private _answer: Answer;
+    @Output() answerUpdated = new EventEmitter();
 
     @Input()
-    set questionId(questionId: number) {
-        this._questionId = questionId;
+    set answer(answer: Answer) {
+        this._answer = answer;
+    }
+
+    get answer() {
+        return this._answer;
     }
 
     constructor(
@@ -26,17 +30,17 @@ export class AnswerEditorComponent {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            text: this.formBuilder.control('', Validators.compose([Validators.required])),            
+            text: this.formBuilder.control(this.answer.text,
+                Validators.compose([Validators.required])),            
         });
     }
 
-
     onSubmit(answer: Answer) {
-        answer.QuestionId = this._questionId;
-        this.answerService.add(answer)
+        answer.id = this.answer.id;
+        this.answerService.update(answer)
             .subscribe(() => {
                 console.log("emitting answer " + answer.text);
-                this.answerAdded.emit(answer);
+                this.answerUpdated.emit(answer);
             });
     }
 }

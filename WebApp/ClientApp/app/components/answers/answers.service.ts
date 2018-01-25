@@ -9,7 +9,7 @@ export class User {
 }
 
 export interface Answer {
-    Id: number;
+    id: number;
     QuestionId: number;
     OriginDate: Date;
     text: string;
@@ -44,6 +44,13 @@ export class AnswerService {
         return this.http.post(
             this.baseUrl + 'api/Answers',
             answer          
+        ).map(response => { });
+    }
+
+    update(answer: Answer) {
+        return this.http.put(
+            this.baseUrl + 'api/Answers/' + answer.id,
+            answer
         ).map(response => { });
     }
 }

@@ -14,22 +14,21 @@ import { QuestionService, Question } from '../questions.service'
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
     public question: Question;
-    public isAnswerEditorVisible: boolean;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
-
+    public isAddAnswerVisible: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private answerService: AnswerService,
         private questionService: QuestionService) {
 
-        this.isAnswerEditorVisible = false;
+        this.isAddAnswerVisible = false;
         this.isQuestionEditorVisible = false;
     }
 
     OnAnswerClick() {
-        this.isAnswerEditorVisible = true;
+        this.isAddAnswerVisible = true;
     }
 
     OnEditQuestionClick() {
@@ -68,6 +67,8 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.question = question;
         this.isQuestionEditorVisible = false;
     }
+    //May be put the answer updater view inside answer card.
+
 }
 
 

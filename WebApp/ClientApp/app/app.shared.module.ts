@@ -13,7 +13,8 @@ import { AddQuestionFormComponent } from './components/questions/addquestion/add
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
-import { AnswerEditorComponent } from './components/answers/answereditor/answereditor.component';
+import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
+import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
 import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin.component'
 
@@ -26,7 +27,8 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         DisplayQuestionsComponent,
         AddQuestionFormComponent,
         AnswerCardComponent,
-        AnswerEditorComponent,
+        AddAnswerComponent,
+        UpdateAnswerComponent,
         QuestionEditorComponent,
         FacebookLoginComponent,
         HomeComponent,

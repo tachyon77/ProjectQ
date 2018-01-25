@@ -8,14 +8,30 @@ import { AnswerService, Answer } from '../answers.service'
 })
 
 export class AnswerCardComponent {
-    public _answer: Answer;
+    private _answer: Answer;
+    public isUpdateAnswerVisible: boolean;
 
     @Input()
     set answer(answer: Answer) {
         this._answer = answer;
     }
 
+    get answer() {
+        return this._answer;
+    }
+
     constructor() {
+        this.isUpdateAnswerVisible = false;
+    }
+
+    OnEditClick() {
+        this.isUpdateAnswerVisible = true;
+    }
+
+    onAnswerUpdated(answer: Answer) {
+        console.log("updating answer: " + answer.text);
+        this.answer = answer;
+        this.isUpdateAnswerVisible = false;
     }
 }
 

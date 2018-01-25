@@ -78,6 +78,19 @@ namespace WebApp.Controllers
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }
 
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] Answer updated)
+        {
+            if (updated == null || updated.Id != id)
+            {
+                return BadRequest();
+            }
+            await _AnswerManager.UpdateAsync(updated);
+
+            return new NoContentResult();
+        }
+
         private bool AnswerExists(int id)
         {
             return _AnswerManager.AnswerExists(id);

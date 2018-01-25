@@ -24,13 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\answers\addanswer\addanswer.component.css" />
+    <None Remove="ClientApp\app\components\answers\addanswer\addanswer.component.html" />
+    <None Remove="ClientApp\app\components\answers\addanswer\addanswer.component.ts" />
     <None Remove="ClientApp\app\components\answers\answercard\answercard.component.css" />
     <None Remove="ClientApp\app\components\answers\answercard\answercard.component.html" />
     <None Remove="ClientApp\app\components\answers\answercard\answercard.component.ts" />
-    <None Remove="ClientApp\app\components\answers\answereditor\answereditor.component.css" />
-    <None Remove="ClientApp\app\components\answers\answereditor\answereditor.component.html" />
-    <None Remove="ClientApp\app\components\answers\answereditor\answereditor.component.ts" />
     <None Remove="ClientApp\app\components\answers\answers.service.ts" />
+    <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.css" />
+    <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.html" />
+    <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.ts" />
     <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
     <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
@@ -54,9 +57,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\components\answers\answereditor\answereditor.component.css" />
-    <TypeScriptCompile Include="ClientApp\app\components\answers\answereditor\answereditor.component.html" />
-    <TypeScriptCompile Include="ClientApp\app\components\answers\answereditor\answereditor.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\addanswer\addanswer.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\addanswer\addanswer.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\addanswer\addanswer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\updateanswer\updateanswer.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\updateanswer\updateanswer.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\answers\updateanswer\updateanswer.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.ts" />

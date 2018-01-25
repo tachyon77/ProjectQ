@@ -10,6 +10,7 @@ namespace ProjectQ.DAL
     public interface IAnswerRepository
     {
         Task AddAsync(Answer answer);
+        Task UpdateAsync(Answer answer);
         Task<IEnumerable<Answer>> GetForQuestionAsyc(int questionId);
         Task<Answer> GetById(int id);
         bool AnswerExists(int id);

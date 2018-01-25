@@ -43,5 +43,12 @@ namespace ProjectQ.DAL.EntityFramework
         {
             throw new NotImplementedException();
         }
+
+        async Task IAnswerRepository.UpdateAsync(Answer answer)
+        {
+            var dbRecord = await _context.Answers.FindAsync(answer.Id);
+
+            dbRecord.text = answer.text;
+        }
     }
 }
