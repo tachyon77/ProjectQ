@@ -1,5 +1,4 @@
-﻿<div class="offset-md-2 col-md-8">
-    <form [formGroup]="form"
+﻿<form [formGroup]="form"
             (ngSubmit)="onSubmit(form.value)">
         <div>
             <h4>Title</h4>
@@ -12,7 +11,7 @@
                         class="form-control"
                         name="Description" id="Description"
                         formControlName="description"></textarea>
-            <h4 class="text-success">$ Reward:</h4>
+            <h4>$ Reward:</h4>
             <input type="text"
                     class="form-control"
                     name="OfferedPrice" id="OfferedPrice"
@@ -26,6 +25,5 @@
         </button>
 
     </form>
-</div>
 
 

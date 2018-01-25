@@ -11,12 +11,16 @@ import { QuestionService, Question } from '../questions.service'
 })
 export class QuestionEditorComponent implements OnInit {
     form: FormGroup;
-    private _questionId: number;
+    private _question: Question;
     @Output() questionEdited = new EventEmitter();
 
     @Input()
-    set questionId(questionId: number) {
-        this._questionId = questionId;
+    set question(question: Question) {
+        this._question = question;
+    }
+
+    get question() {
+        return this._question;
     }
 
     constructor(
@@ -26,18 +30,19 @@ export class QuestionEditorComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            title: this.formBuilder.control('', Validators.compose([
+            title: this.formBuilder.control(this.question.title, Validators.compose([
                 Validators.required,
             ])),
-            offeredPrice: this.formBuilder.control('', Validators.compose([
+            offeredPrice: this.formBuilder.control(this.question.offeredPrice,
+                Validators.compose([
                 Validators.pattern('[0-9]+'),
-            ])),
-            description: this.formBuilder.control(''),
+                ])),
+            description: this.formBuilder.control(this.question.description),
         });
     }
 
     onSubmit(question: Question) {
-        question.id = this._questionId;
+        question.id = this.question.id;
         this.questionService.update(question)
             .subscribe(() => {
                 console.log("emitting question " + question.description);

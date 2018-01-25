@@ -17,7 +17,7 @@
     </button>
 
     <div *ngIf="isQuestionEditorVisible">
-        <question-editor [questionId]="question.id"
+        <question-editor [question]="question"
                          (questionEdited)="onQuestionEdited($event)">
         </question-editor>
     </div>

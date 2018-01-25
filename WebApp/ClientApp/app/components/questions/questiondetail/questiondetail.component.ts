@@ -66,6 +66,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     onQuestionEdited(question: Question) {
         console.log("updating question: " + question.description);
         this.question = question;
+        this.isQuestionEditorVisible = false;
     }
 }
 
