@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
@@ -22,6 +23,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
     declarations: [
         AppComponent,
         NavMenuComponent,
+        ContentEditorComponent,
         QuestionDetailComponent,
         QuestionCardComponent,
         DisplayQuestionsComponent,

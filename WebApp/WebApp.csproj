@@ -34,6 +34,9 @@
     <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.css" />
     <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.html" />
     <None Remove="ClientApp\app\components\answers\updateanswer\updateanswer.component.ts" />
+    <None Remove="ClientApp\app\components\content-editor\contenteditor.component.css" />
+    <None Remove="ClientApp\app\components\content-editor\contenteditor.component.html" />
+    <None Remove="ClientApp\app\components\content-editor\contenteditor.component.ts" />
     <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
     <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
@@ -67,6 +70,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answers.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.css" />

@@ -1,6 +1,5 @@
 ﻿<br />
 <p *ngIf="!question"><em>Loading...</em></p>
-
 <div *ngIf="question" class="offset-md-2 col-md-8">
     <div *ngIf="!isQuestionEditorVisible">
         <span class="question-title">{{question.title}}</span>
@@ -29,17 +28,14 @@
 
     <div *ngIf="isAddAnswerVisible">
         <add-answer [questionId]="question.id"
-                       (answerAdded)="onAnswerAdded($event)">
+                    (answerAdded)="onAnswerAdded($event)">
         </add-answer>
     </div>
-
     <hr />
-
     <div>
         <div *ngIf="!answers">
             Loading...
         </div>
-
         <div *ngIf="answers">
             <h4>
                 {{answers.length}} Answer
