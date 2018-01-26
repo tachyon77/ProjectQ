@@ -25,7 +25,7 @@
 
 
 
-    <div *ngIf="isAnswerEditorVisible">
+    <div *ngIf="isAddAnswerVisible">
         <add-answer [questionId]="question.id"
                        (answerAdded)="onAnswerAdded($event)">
         </add-answer>
