@@ -28,6 +28,7 @@ namespace ProjectQ.Model
         public decimal OfferedPrice { get; set; }
         public bool IsPrivate { get; set; }
         public bool HasMinQualification { get; set; }
+        public bool IsDeleted { get; set; } = false;
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }

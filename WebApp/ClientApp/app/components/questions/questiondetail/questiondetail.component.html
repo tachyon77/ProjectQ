@@ -15,6 +15,10 @@
                 (click)="OnAnswerClick()">
             Answer
         </button>
+        <button class="btn btn-danger delete-question"
+                (click)="OnDeleteQuestionClick()">
+            Delete
+        </button>
     </div>
 
     <div *ngIf="isQuestionEditorVisible">

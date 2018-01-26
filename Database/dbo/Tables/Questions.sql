@@ -7,6 +7,7 @@
     [OfferedPrice]         DECIMAL (12)  NOT NULL,
     [IsPrivate]            BIT           NOT NULL,
     [HasMinQualification] BIT           NOT NULL,
+    [IsDeleted] BIT NOT NULL DEFAULT 0, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Questions_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
 );

@@ -30,12 +30,13 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.Title = question.Title;
             dbRecord.Description = question.Description;
             dbRecord.OfferedPrice = question.OfferedPrice;
-
+            dbRecord.IsDeleted = question.IsDeleted;
         }
 
         IEnumerable<Question> IQuestionRepository.GetAll()
         {
-            return _context.Questions.Include(x => x.User);
+            return _context.Questions.Include(x => x.User)
+                .Where(x=>!x.IsDeleted);
         }
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)

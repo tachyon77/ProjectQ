@@ -35,6 +35,14 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.isQuestionEditorVisible = true;
     }
 
+    OnDeleteQuestionClick() {
+        this.question.isDeleted = true;
+        this.questionService.update(this.question)
+            .subscribe(result => {
+                console.log("Deleting question " + this.question.id);
+            }, error => console.error(error));
+    }
+
     ngOnDestroy() {
         this.paramsSubscription.unsubscribe();
     }
