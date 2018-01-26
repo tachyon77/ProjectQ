@@ -23,8 +23,6 @@
         </question-editor>
     </div>
 
-
-
     <div *ngIf="isAddAnswerVisible">
         <add-answer [questionId]="question.id"
                        (answerAdded)="onAnswerAdded($event)">
@@ -44,7 +42,8 @@
             </h4>
             <div *ngFor="let answer of answers">
                 <hr />
-                <answer-card [answer]="answer">
+                <answer-card [answer]="answer"
+                             (answerDeleted)="onAnswerDeleted($event)">
                 </answer-card>
             </div>
         </div>

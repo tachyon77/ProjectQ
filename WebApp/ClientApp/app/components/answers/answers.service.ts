@@ -10,6 +10,7 @@ export class User {
 
 export interface Answer {
     id: number;
+    isDeleted: boolean;
     QuestionId: number;
     OriginDate: Date;
     text: string;

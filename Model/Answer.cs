@@ -21,6 +21,8 @@ namespace ProjectQ.Model
         public System.DateTime OriginDate { get; set; }
         public bool IsPrivate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }

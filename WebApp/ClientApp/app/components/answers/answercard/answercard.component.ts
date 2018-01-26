@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AnswerService, Answer } from '../answers.service'
 
 @Component({
@@ -10,6 +10,7 @@ import { AnswerService, Answer } from '../answers.service'
 export class AnswerCardComponent {
     private _answer: Answer;
     public isUpdateAnswerVisible: boolean;
+    @Output() answerDeleted = new EventEmitter();
 
     @Input()
     set answer(answer: Answer) {
@@ -20,12 +21,21 @@ export class AnswerCardComponent {
         return this._answer;
     }
 
-    constructor() {
+    constructor(private answerService: AnswerService) {
         this.isUpdateAnswerVisible = false;
     }
 
     OnEditClick() {
         this.isUpdateAnswerVisible = true;
+    }
+
+    OnDeleteClick() {
+        this.answer.isDeleted = true;
+        this.answerService.update(this.answer)
+            .subscribe(() => {
+                console.log("deleting answer " + this.answer.id);
+                this.answerDeleted.emit(this.answer);
+            });
     }
 
     onAnswerUpdated(answer: Answer) {

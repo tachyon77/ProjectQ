@@ -34,7 +34,8 @@ namespace ProjectQ.DAL.EntityFramework
         {
             var answers = await _context.Answers
                 .Include(x=>x.User)
-                .Where(x => x.QuestionId == questionId)
+                .Where( x => x.QuestionId == questionId
+                    &&  !x.IsDeleted)
                 .ToListAsync();
             return answers;                          
         }
@@ -49,6 +50,7 @@ namespace ProjectQ.DAL.EntityFramework
             var dbRecord = await _context.Answers.FindAsync(answer.Id);
 
             dbRecord.text = answer.text;
+            dbRecord.IsDeleted = answer.IsDeleted;
         }
     }
 }

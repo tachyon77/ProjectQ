@@ -62,6 +62,14 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.answers.push(answer);
     }
 
+    onAnswerDeleted(answer: Answer) {
+        console.log("deleting answer: " + answer.id);
+        let index = this.answers.indexOf(answer);
+        if (index >= 0) {
+            this.answers.splice(index, 1);
+        }
+    }
+
     onQuestionEdited(question: Question) {
         console.log("updating question: " + question.description);
         this.question = question;
