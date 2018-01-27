@@ -6,8 +6,11 @@
             <h3 class="card-title">
                 <a [routerLink]="['/question-detail', question.id]"
                    class="card-link">
-                    {{question.title}} ${{question.offeredPrice}}
+                    {{question.title}}
                 </a>
+                <span class="badge badge-secondary badge-success">
+                    ${{question.offeredPrice}}
+                </span>
             </h3>
             
             <h6 class="asked-by">

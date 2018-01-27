@@ -1,51 +1,60 @@
 ﻿<br />
-<p *ngIf="!question"><em>Loading...</em></p>
-<div *ngIf="question" class="offset-md-2 col-md-8">
-    <div *ngIf="!isQuestionEditorVisible">
-        <span class="question-title">{{question.title}}</span>
-        <div class="question-description">
-            {{question.description}}
-        </div>
-        <button class="btn btn-default"
-                (click)="OnEditQuestionClick()">
-            Edit Question
-        </button>
-        <button class="btn btn-default"
-                (click)="OnAnswerClick()">
-            Answer
-        </button>
-        <button class="btn btn-danger delete-question"
-                (click)="OnDeleteQuestionClick()">
-            Delete
-        </button>
-    </div>
+<div class="offset-md-2 col-md-8">
+    <p *ngIf="!question"><em>Loading...</em></p>
+    <div *ngIf="question">
+        <div *ngIf="!isQuestionEditorVisible">
+            <span class="question-title">
+                {{question.title}}
+                <span class="badge badge-secondary badge-success">
+                    ${{question.offeredPrice}}
+                </span>
+            </span>
 
-    <div *ngIf="isQuestionEditorVisible">
-        <question-editor [question]="question"
-                         (questionEdited)="onQuestionEdited($event)">
-        </question-editor>
-    </div>
-
-    <div *ngIf="isAddAnswerVisible">
-        <add-answer [questionId]="question.id"
-                    (answerAdded)="onAnswerAdded($event)">
-        </add-answer>
-    </div>
-    <hr />
-    <div>
-        <div *ngIf="!answers">
-            Loading...
+            <div class="question-description">
+                {{question.description}}
+            </div>
+            <button class="btn btn-default"
+                    (click)="OnEditQuestionClick()">
+                Edit Question
+            </button>
+            <button class="btn btn-default"
+                    (click)="OnAnswerClick()">
+                Answer
+            </button>
+            <button class="btn btn-danger delete-question"
+                    (click)="OnDeleteQuestionClick()">
+                Delete
+            </button>
         </div>
-        <div *ngIf="answers">
-            <h4>
-                {{answers.length}} Answer
-            </h4>
-            <div *ngFor="let answer of answers">
-                <hr />
-                <answer-card [answer]="answer"
-                             (answerDeleted)="onAnswerDeleted($event)">
-                </answer-card>
+
+        <div *ngIf="isQuestionEditorVisible">
+            <question-editor [question]="question"
+                             (questionEdited)="onQuestionEdited($event)">
+            </question-editor>
+        </div>
+
+        <div *ngIf="isAddAnswerVisible">
+            <add-answer [questionId]="question.id"
+                        (answerAdded)="onAnswerAdded($event)">
+            </add-answer>
+        </div>
+        <hr />
+        <div>
+            <div *ngIf="!answers">
+                Loading...
+            </div>
+            <div *ngIf="answers">
+                <h4>
+                    {{answers.length}} Answer
+                </h4>
+                <div *ngFor="let answer of answers">
+                    <hr />
+                    <answer-card [answer]="answer"
+                                 (answerDeleted)="onAnswerDeleted($event)">
+                    </answer-card>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
