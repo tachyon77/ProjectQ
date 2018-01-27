@@ -6,8 +6,8 @@
             {{answer.user.firstName}} {{answer.user.lastName}}
             <div class="answer-date">Answered on {{answer.originDate}}</div>
         </div>
-        <div class="answer-content">
-            {{answer.text}}
+        <div class="answer-content" [innerHTML]="answer.text">
+            
         </div>
         <button class="btn btn-default"
                 (click)="OnEditClick()">
