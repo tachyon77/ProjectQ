@@ -68,6 +68,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     onAnswerAdded(answer: Answer) {
         console.log("pushing answer: " + answer.text);
         this.answers.push(answer);
+        this.isAddAnswerVisible = false;
     }
 
     onAnswerDeleted(answer: Answer) {

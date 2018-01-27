@@ -8,12 +8,26 @@ import { Router } from '@angular/router';
     styleUrls:['./contenteditor.component.css'],
 })
 export class ContentEditorComponent {
-    form: FormGroup;
+    public curContent: string;
+    public newContent: string;
+    @Output() contentChanged = new EventEmitter();
 
-    public content: string;
+    @Input()
+    set content(c: string) {
+        this.curContent = c;
+        this.newContent = c;
+    }
+
+    get content() {
+        return this.newContent;
+    }
 
     constructor(
         private formBuilder: FormBuilder) {
+    }
+
+    onContentChange() {
+        this.contentChanged.emit(this.newContent);     
     }
 
     ngOnInit() {

@@ -12,9 +12,9 @@
     </div>
     <div #el contenteditable="true"
          class="content"
-         (input)="content=el.innerHTML">        
+         (input)="newContent=el.innerHTML;onContentChange()">
+        {{curContent}}
     </div>
-    <div contenteditable="true">{{content}}</div>
 </div>
 
 

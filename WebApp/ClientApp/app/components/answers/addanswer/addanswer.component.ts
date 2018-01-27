@@ -12,11 +12,16 @@ import { AnswerService, Answer } from '../answers.service'
 export class AddAnswerComponent {
     form: FormGroup;
     private _questionId: number;
+    private answerText: string;
     @Output() answerAdded = new EventEmitter();
 
     @Input()
     set questionId(questionId: number) {
         this._questionId = questionId;
+    }
+
+    onContentChange(content: string) {
+        this.answerText = content;
     }
 
     constructor(
@@ -31,11 +36,14 @@ export class AddAnswerComponent {
     }
 
 
-    onSubmit(answer: Answer) {
+    onSubmit() {
+        let answer: Answer = new Answer();
         answer.QuestionId = this._questionId;
+        answer.text = this.answerText;
+
         this.answerService.add(answer)
             .subscribe(() => {
-                console.log("emitting answer " + answer.text);
+                console.log("emitting answer " + this.answerText);
                 this.answerAdded.emit(answer);
             });
     }

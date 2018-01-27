@@ -1,15 +1,10 @@
-﻿<form [formGroup]="form"
-      (ngSubmit)="onSubmit(form.value)"
-      class="answer-editor">
-    <textarea rows="3"
-              class="form-control answer-content"
-              name="text" id="text"
-              formControlName="text">
-    </textarea>
-
-    <button type="submit"
-            [disabled]="!form.valid"
-            class="btn btn-primary">
-        Submit
-    </button>  
-</form>
+﻿<div class="content-editor-container">
+    <content-editor (contentChanged)="onContentChange($event)">
+    </content-editor>   
+</div>
+<button type="submit"
+        (click)="onSubmit()"
+        class="btn btn-primary">
+    Submit
+</button>
+ 

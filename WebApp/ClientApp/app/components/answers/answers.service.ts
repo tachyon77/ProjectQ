@@ -8,7 +8,7 @@ export class User {
     lastName: string;
 }
 
-export interface Answer {
+export class Answer {
     id: number;
     isDeleted: boolean;
     QuestionId: number;
