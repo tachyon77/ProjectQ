@@ -53,6 +53,7 @@ namespace WebApp
             });
 
 
+            services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();

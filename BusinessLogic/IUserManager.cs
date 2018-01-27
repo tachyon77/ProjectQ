@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL
+namespace ProjectQ.BusinessLogic
 {
-    public interface IUserRepository
+    /// <summary>
+    /// Register user
+    /// </summary>
+    public interface IUserManager
     {
         Task AddAsync(User user);
         bool UserExists(string email);
-        User GetByEmail(string email);
     }
 }

@@ -7,14 +7,34 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ProjectQ.BusinessLogic;
 
 namespace ProjectQ.WebApp.Authentication
 {
     internal class FacebookAuthHandler : AuthenticationHandler<FacebookAuthOptions>
     {
-        public FacebookAuthHandler(IOptionsMonitor<FacebookAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+        private readonly IUserManager _userManager;
+
+        public FacebookAuthHandler(
+            IUserManager userManager,
+            IOptionsMonitor<FacebookAuthOptions> options, 
+            ILoggerFactory logger, UrlEncoder encoder, 
+            ISystemClock clock) : base(options, logger, encoder, clock)
         {
-            // store custom services here...
+            _userManager = userManager;
+        }
+
+        private void AddIfNecessary(FacebookUser user)
+        {
+            if (!_userManager.UserExists(user.Email))
+            {
+                _userManager.AddAsync(new Model.User()
+                {
+                    email = user.Email,
+                    FirstName = user.Name,
+                    LastName = "",                
+                });
+            }
         }
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
@@ -41,6 +61,8 @@ namespace ProjectQ.WebApp.Authentication
 
                 ticket = new AuthenticationTicket(
                     new ClaimsPrincipal(identities), "Facebook Auth");
+
+                AddIfNecessary(userInfo);
 
                 return await Task.FromResult(AuthenticateResult.Success(ticket));
             }

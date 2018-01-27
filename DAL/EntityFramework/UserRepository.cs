@@ -18,15 +18,20 @@ namespace ProjectQ.DAL.EntityFramework
         {
             _context = context;
         }
-        void IUserRepository.Add(User user)
+        async Task IUserRepository.AddAsync(User user)
         {
-            _context.Users.Add(user);
+            await _context.Users.AddAsync(user);
         }
 
         User IUserRepository.GetByEmail(string email)
         {
             email = email.ToLower().Trim();
             return _context.Users.First(x=>x.email.ToLower().Equals(email));
+        }
+
+        bool IUserRepository.UserExists(string email)
+        {
+            return _context.Users.Any(x => x.email.Equals(email));
         }
     }
 }
