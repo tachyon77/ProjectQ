@@ -48,6 +48,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
             { path: 'home', component: HomeComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
+            { path: 'content-editor', component: ContentEditorComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

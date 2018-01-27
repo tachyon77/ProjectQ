@@ -10,8 +10,11 @@ import { Router } from '@angular/router';
 export class ContentEditorComponent {
     form: FormGroup;
 
+    public content: string;
+
     constructor(
-        private formBuilder: FormBuilder) { }
+        private formBuilder: FormBuilder) {
+    }
 
     ngOnInit() {
         
