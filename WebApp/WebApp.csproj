@@ -50,6 +50,7 @@
     <None Remove="ClientApp\app\components\questions\questioneditor\questioneditor.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.service.ts" />
+    <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\auth-interceptor.service.ts" />
   </ItemGroup>
 
@@ -86,6 +87,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\auth-interceptor.service.ts" />
   </ItemGroup>
 

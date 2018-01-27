@@ -11,6 +11,7 @@
         </div>
     </div>
     <div #el contenteditable="true"
+         [focus]="emitFocusEvent"
          class="content"
          (input)="newContent=el.innerHTML;onContentChange()">
         {{curContent}}
