@@ -1,5 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AnswerService, Answer } from '../answers.service'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
     selector: 'answer-card',
@@ -8,6 +9,7 @@ import { AnswerService, Answer } from '../answers.service'
 })
 
 export class AnswerCardComponent {
+    answerContent: SafeHtml;
     private _answer: Answer;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
@@ -15,13 +17,18 @@ export class AnswerCardComponent {
     @Input()
     set answer(answer: Answer) {
         this._answer = answer;
+        this.answerContent =
+            this.sanitizer.bypassSecurityTrustHtml(answer.text);
     }
 
     get answer() {
-        return this._answer;
+        return this._answer; 
     }
 
-    constructor(private answerService: AnswerService) {
+    constructor(
+        private answerService: AnswerService,
+        private sanitizer: DomSanitizer
+    ) {
         this.isUpdateAnswerVisible = false;
     }
 
@@ -39,7 +46,7 @@ export class AnswerCardComponent {
     }
 
     onAnswerUpdated(answer: Answer) {
-        console.log("updating answer: " + answer.text);
+        console.log("updating answer: " + answer.id);
         this.answer = answer;
         this.isUpdateAnswerVisible = false;
     }

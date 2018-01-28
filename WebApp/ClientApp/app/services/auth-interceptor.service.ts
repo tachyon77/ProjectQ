@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (window.authResponse != null) {
             accessToken = window.authResponse.accessToken;
-            console.log("accessToken is " + accessToken);
+            console.log("accessToken received");
         }
         // add a custom header
         const customReq = request.clone({

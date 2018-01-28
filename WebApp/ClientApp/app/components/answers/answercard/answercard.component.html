@@ -6,7 +6,7 @@
             {{answer.user.firstName}} {{answer.user.lastName}}
             <div class="answer-date">Answered on {{answer.originDate}}</div>
         </div>
-        <div class="answer-content" [innerHTML]="answer.text">
+        <div [innerHTML]="answerContent">
             
         </div>
         <button class="btn btn-default"

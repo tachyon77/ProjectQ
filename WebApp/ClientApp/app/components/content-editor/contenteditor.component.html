@@ -1,7 +1,11 @@
 ﻿<div class="content-editor">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary"><b>B</b></button>
+            <button type="button" 
+                    (click)="onBold($event)"
+                    class="btn btn-secondary">
+                <b>B</b>
+            </button>
             <button type="button" class="btn btn-secondary"><i>I</i></button>
             <button type="button" class="btn btn-secondary"><u>U</u></button>
         </div>
@@ -11,10 +15,11 @@
         </div>
     </div>
     <div #el contenteditable="true"
+         id="editor-777"
          [focus]="emitFocusEvent"
          class="content"
          [innerHTML]="curContent"
-         (input)="newContent=el.innerHTML;onContentChange()">
+         (input)="newContent=el.innerHTML;onContentChange($event)">
         {{curContent}}
     </div>
 </div>

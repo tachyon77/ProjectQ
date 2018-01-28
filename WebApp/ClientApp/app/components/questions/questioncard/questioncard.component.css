@@ -21,11 +21,12 @@
 
 .asked-by{
     font-size:small;
+    font-family:Verdana;
     color:GrayText;
 
 }
 .card-title {
     font-family: sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     font-size: large;
 }
