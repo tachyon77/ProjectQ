@@ -2,12 +2,18 @@
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" 
-                    (click)="onBold($event)"
+                    (click)="onBold()"
                     class="btn btn-secondary">
                 <b>B</b>
             </button>
-            <button type="button" class="btn btn-secondary"><i>I</i></button>
-            <button type="button" class="btn btn-secondary"><u>U</u></button>
+            <button type="button" 
+                    (click)="onItalic()"
+                    class="btn btn-secondary"><i>I</i>
+            </button>
+            <button type="button" 
+                    (click)="onUnderline()"
+                    class="btn btn-secondary"><u>U</u>
+            </button>
         </div>
         <div class="btn-group mr-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-secondary">link</button>

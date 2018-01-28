@@ -30,43 +30,23 @@ export class ContentEditorComponent implements AfterViewInit{
     constructor(private sanitizer: DomSanitizer) {
     }
 
-    selectionIsBold() {
-        var isBold = false;
-        if (document.queryCommandState) {
-            isBold = document.queryCommandState("bold");
-        }
-        return isBold;
-    }
-
     onContentChange(event: any) {
         this.contentChanged.emit(this.newContent);     
     }
 
-    onBold(event: MouseEvent) {
-        let isBold = this.selectionIsBold();
-        var sel, range;
-        if (event.view.getSelection) {
-            sel = event.view.getSelection();
-            let originalText = sel.toString();
-            if (sel.rangeCount) {
-                range = sel.getRangeAt(0);
-                range.deleteContents();
-                let node: Element = document.createElement("bold");
-                if (isBold) {
-                    node.innerHTML = "<span style='font-weight:normal'>"
-                        + originalText + "</span>";
-                } else {
-                    node.innerHTML = "<span style='font-weight:bold'>"
-                        + originalText + "</span>";
-                }
+    onBold() {
+        this.formatText('bold');
+    }
 
-                range.insertNode(node);
-                let editor: Element = document
-                    .getElementById("editor-777") as Element;
-                this.newContent = editor.innerHTML;
-                this.onContentChange(event);
+    onItalic() {
+        this.formatText('italic');
+    }
 
-            }
-        } 
+    onUnderline() {
+        this.formatText('underline');
+    }
+
+    formatText(command: string) {
+        document.execCommand(command, false, null);
     }
 }
