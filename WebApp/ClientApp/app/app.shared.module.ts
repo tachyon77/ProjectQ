@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FocusDirective } from './directives/focus.directive'
+import { ModalDialogComponent } from './components/modaldialog/modaldialog.component'
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +26,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         AppComponent,
         NavMenuComponent,
         FocusDirective,
+        ModalDialogComponent,
         ContentEditorComponent,
         QuestionDetailComponent,
         QuestionCardComponent,

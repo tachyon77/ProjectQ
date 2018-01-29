@@ -5,6 +5,16 @@
     min-height: 200px;
 }
 
+.content-toolbar {
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+}
+
+.url-input {
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
+}
+
 [contenteditable]:focus {
     outline: 0px solid transparent;
 }

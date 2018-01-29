@@ -8,6 +8,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
     styleUrls:['./contenteditor.component.css'],
 })
 export class ContentEditorComponent implements AfterViewInit{
+    imgURL: string;
     curContent: SafeHtml;
     public newContent: string;
     @Output() contentChanged = new EventEmitter();
@@ -23,15 +24,25 @@ export class ContentEditorComponent implements AfterViewInit{
         return this.newContent;
     }
 
+
     ngAfterViewInit() {
         this.emitFocusEvent.emit(true);
+        
     }
 
     constructor(private sanitizer: DomSanitizer) {
     }
 
+
     onContentChange(event: any) {
-        this.contentChanged.emit(this.newContent);     
+        this.contentChanged.emit(this.newContent);  
+    }
+
+
+    onInsertImage() {
+        this.emitFocusEvent.emit(true);
+        var html = "<img class='img-fluid' src='" + this.imgURL + "'>";
+        document.execCommand("insertHTML", false, html);
     }
 
     onBold() {
