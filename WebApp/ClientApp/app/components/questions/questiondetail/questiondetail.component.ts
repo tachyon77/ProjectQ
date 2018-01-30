@@ -36,7 +36,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     }
 
     OnDeleteQuestionClick() {
-        this.question.isDeleted = true;
+        this.question.isDeleted = !this.question.isDeleted;
         this.questionService.update(this.question)
             .subscribe(result => {
                 console.log("Deleting question " + this.question.id);

@@ -3,12 +3,17 @@
     <p *ngIf="!question"><em>Loading...</em></p>
     <div *ngIf="question">
         <div *ngIf="!isQuestionEditorVisible">
-            <span class="question-title">
-                {{question.title}}
+            <div class="question-title">
+                <div *ngIf="question.isDeleted">
+                    <del>{{question.title}}</del>
+                </div>
+                <div *ngIf="!question.isDeleted">
+                    {{question.title}}
+                </div>
                 <span class="badge badge-secondary badge-success">
                     ${{question.offeredPrice}}
                 </span>
-            </span>
+            </div>
 
             <div class="question-description">
                 {{question.description}}
@@ -23,7 +28,8 @@
             </button>
             <button class="btn btn-danger delete-question"
                     (click)="OnDeleteQuestionClick()">
-                Delete
+                <span *ngIf="question.isDeleted">Undelete</span>
+                <span *ngIf="!question.isDeleted">Delete</span>
             </button>
         </div>
 
