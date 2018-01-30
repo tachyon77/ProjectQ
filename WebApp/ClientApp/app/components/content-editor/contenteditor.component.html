@@ -19,7 +19,7 @@
             </button>
         </div>
         <div class="input-group">
-            <input type="text" class="form-control url-input"
+            <input #x type="text" class="form-control url-input"
                    placeholder="Image URL..."
                    [(ngModel)]="imgURL"
                    aria-label="Input group example"
@@ -35,6 +35,7 @@
     </div>
     <div #el contenteditable="true"
          [focus]="emitFocusEvent"
+         (blur)="onBlur()"
          class="content"
          [innerHTML]="curContent"
          (input)="newContent=el.innerHTML;onContentChange($event)">

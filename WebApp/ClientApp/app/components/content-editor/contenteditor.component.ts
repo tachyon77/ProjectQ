@@ -9,6 +9,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 })
 export class ContentEditorComponent implements AfterViewInit{
     imgURL: string;
+    editPosition: Range;
     curContent: SafeHtml;
     public newContent: string;
     @Output() contentChanged = new EventEmitter();
@@ -27,7 +28,7 @@ export class ContentEditorComponent implements AfterViewInit{
 
     ngAfterViewInit() {
         this.emitFocusEvent.emit(true);
-        
+        this.saveSelection();
     }
 
     constructor(private sanitizer: DomSanitizer) {
@@ -35,14 +36,38 @@ export class ContentEditorComponent implements AfterViewInit{
 
 
     onContentChange(event: any) {
-        this.contentChanged.emit(this.newContent);  
+        this.contentChanged.emit(this.newContent); 
     }
 
+    saveSelection() {
+        if (window.getSelection) {
+            var sel = window.getSelection();
+            if (sel.getRangeAt && sel.rangeCount) {
+                this.editPosition = sel.getRangeAt(0);
+                console.log("saving");
+            }
+        } 
+    }
+
+    restoreSelection() {
+        if (this.editPosition) {
+             console.log("restoring");
+            if (window.getSelection) {
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(this.editPosition);
+            } 
+        }
+    }
 
     onInsertImage() {
-        this.emitFocusEvent.emit(true);
+        this.restoreSelection();
         var html = "<img class='img-fluid' src='" + this.imgURL + "'>";
         document.execCommand("insertHTML", false, html);
+    }
+
+    onBlur() {
+        this.saveSelection();
     }
 
     onBold() {
