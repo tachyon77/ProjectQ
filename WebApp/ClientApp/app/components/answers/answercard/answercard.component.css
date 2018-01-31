@@ -12,6 +12,15 @@
     margin-bottom:1em;
 }
 
+.active-answer{
+
+}
+
+.deleted-answer {
+    opacity: 0.2; /* Real browsers */
+    filter: alpha(opacity = 20); /* MSIE */
+}
+
 .answer-date{
     font-weight:400;
     color:#adaaaa;

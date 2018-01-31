@@ -37,11 +37,10 @@ export class AnswerCardComponent {
     }
 
     OnDeleteClick() {
-        this.answer.isDeleted = true;
+        this.answer.isDeleted = !this.answer.isDeleted;
         this.answerService.update(this.answer)
             .subscribe(() => {
-                console.log("deleting answer " + this.answer.id);
-                this.answerDeleted.emit(this.answer);
+                //this.answerDeleted.emit(this.answer);
             });
     }
 

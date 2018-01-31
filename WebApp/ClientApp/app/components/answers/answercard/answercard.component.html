@@ -7,7 +7,10 @@
             <div class="answer-date">Answered on {{answer.originDate}}</div>
         </div>
         <div [innerHTML]="answerContent"
-             class="answer-content">            
+             [ngClass]="{
+             'answer-content': true, 
+             'active-answer-active': !answer.isDeleted, 
+             'deleted-answer': answer.isDeleted}">           
         </div>
         <button class="btn btn-default"
                 (click)="OnEditClick()">
@@ -15,7 +18,8 @@
         </button>
         <button class="btn btn-default"
                 (click)="OnDeleteClick()">
-            Delete
+            <span *ngIf="answer.isDeleted">Undelete</span>
+            <span *ngIf="!answer.isDeleted">Delete</span>
         </button>
     </div>
 
