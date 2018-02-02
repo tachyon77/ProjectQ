@@ -66,8 +66,16 @@ namespace ProjectQ.BusinessLogic
                 .QuestionExists(id);
         }
 
-        async Task IQuestionManager.UpdateAsync(Question question)
+        async Task IQuestionManager.UpdateAsync(Question question, string email)
         {
+            var currentUserId = _unitOfWork
+                .UserRepository.GetByEmail(email).Id;
+
+            if (question.IsDeleted && question.UserId != currentUserId)
+            {
+                throw new Exception("Unauthorized");
+            }
+
             await _unitOfWork.QuestionRepository
                 .UpdateAsync(question);
             await _unitOfWork.SaveAsync();

@@ -41,7 +41,9 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)
         {
-            return await _context.Questions.FindAsync(id);
+            return await _context.Questions
+                .Include(x => x.User)
+                .SingleAsync(x=>x.Id == id);
         }
 
         bool IQuestionRepository.QuestionExists(int id)

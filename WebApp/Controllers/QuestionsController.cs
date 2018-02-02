@@ -77,7 +77,11 @@ namespace WebApp.Controllers
             {
                 return BadRequest();
             }
-            await _questionManager.UpdateAsync(updated);
+
+            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
+                   .Select(c => c.Value).SingleOrDefault();
+
+            await _questionManager.UpdateAsync(updated, email);
 
             return new NoContentResult();
         }

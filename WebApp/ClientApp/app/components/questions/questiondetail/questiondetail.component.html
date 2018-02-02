@@ -26,7 +26,8 @@
                     (click)="OnAnswerClick()">
                 Answer
             </button>
-            <button class="btn btn-danger delete-question"
+            <button *ngIf="currentUserEmail && question.user.email==currentUserEmail"
+                    class="btn btn-danger delete-question"
                     (click)="OnDeleteQuestionClick()">
                 <span *ngIf="question.isDeleted">Undelete</span>
                 <span *ngIf="!question.isDeleted">Delete</span>

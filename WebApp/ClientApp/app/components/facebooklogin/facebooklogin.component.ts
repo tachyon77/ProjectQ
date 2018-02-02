@@ -1,6 +1,6 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
 import { Router } from "@angular/router";
-
+import { IdentityService } from '../../services/identity.service';
 declare var window: any;
 declare var FB: any;
 
@@ -16,11 +16,12 @@ export class FacebookLoginComponent implements AfterViewInit{
         window.checkLoginState = function () {
             FB.getLoginStatus(function (response: any) {
                 if (response.status == 'connected') {
-                    FB.api('/me', function (info: any) {
+                    FB.api('/me?fields=name,email', function (info: any) {
                         window.authResponse = response.authResponse;
                         let e: any = document.getElementById('idUserName');
                         e.innerHTML = info.name;
-                    });
+                        window.user = info;
+                    });               
                 }
                 else {
                     let e: any = document.getElementById('idUserName');
@@ -48,10 +49,11 @@ export class FacebookLoginComponent implements AfterViewInit{
             js = d.createElement(s); js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
+
         }(document, 'script', 'facebook-jssdk'));
     }
 
-    constructor() {
+    constructor(private identityService:IdentityService) {
        
     }
 }

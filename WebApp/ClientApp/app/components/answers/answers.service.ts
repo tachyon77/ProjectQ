@@ -1,12 +1,7 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../../services/identity.service'
 import 'rxjs/add/operator/map';
-
-
-export class User {
-    firstName: string;
-    lastName: string;
-}
 
 export class Answer {
     id: number;

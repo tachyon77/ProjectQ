@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AnswerService, Answer } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
+import { IdentityService, User } from '../../../services/identity.service'
 
 @Component({
     selector: 'question-detail',
@@ -14,17 +15,20 @@ import { QuestionService, Question } from '../questions.service'
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
     public question: Question;
+    public currentUserEmail: string;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
+        private identityService: IdentityService,
         private answerService: AnswerService,
         private questionService: QuestionService) {
 
         this.isAddAnswerVisible = false;
         this.isQuestionEditorVisible = false;
+        this.currentUserEmail = this.identityService.currentUserEmail;
     }
 
     OnAnswerClick() {

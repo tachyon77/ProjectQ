@@ -11,18 +11,26 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+import { IdentityService } from './identity.service';
+
 
 declare var window: any;
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
+    constructor(private identityService: IdentityService) {
+
+    }
+
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         var accessToken: string = "";
 
         if (window.authResponse != null) {
-            accessToken = window.authResponse.accessToken;
-            console.log("accessToken received");
+            accessToken = window.authResponse.accessToken;            
+            this.identityService.currentUserEmail = window.user.email;
+            console.log("email: " + window.user.email);
         }
         // add a custom header
         const customReq = request.clone({

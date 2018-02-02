@@ -1,11 +1,8 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../../services/identity.service'
 import 'rxjs/add/operator/map';
 
-export interface User {
-    firstName: string;
-    lastName: string;
-}
 
 export interface Question {
     title: string;

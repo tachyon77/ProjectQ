@@ -14,6 +14,7 @@ import { DisplayQuestionsComponent } from './components/questions/displayquestio
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
+import { IdentityService } from './services/identity.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
 import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
@@ -39,7 +40,8 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
     ],
     providers: [
         QuestionService,
-        AnswerService],
+        AnswerService,
+        IdentityService],
     imports: [
         CommonModule,
         HttpClientModule,
