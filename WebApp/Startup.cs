@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjectQ.BusinessLogic;
 using ProjectQ.DAL;
 using ProjectQ.WebApp.Authentication;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp
 {//
@@ -30,6 +33,13 @@ namespace WebApp
             {
                 options.SerializerSettings.ReferenceLoopHandling =
                                            Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             /*services.AddAuthorization(options =>
@@ -63,7 +73,10 @@ namespace WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env,
+            IAntiforgery antiforgery)
         {
             if (env.IsDevelopment())
             {
@@ -81,6 +94,25 @@ namespace WebApp
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.Use(async (context, next) =>
+            {
+                string path = context.Request.Path.Value;
+                if (string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
+                {
+                    // XSRF-TOKEN used by angular in the http if provided
+                    var tokens = antiforgery.GetAndStoreTokens(context);
+                    context.Response.Cookies.Append("XSRF-TOKEN",
+                      tokens.RequestToken, new CookieOptions
+                      {
+                          HttpOnly = false
+                      }
+                    );
+                }
+
+                await next();
+            });
 
             app.UseMvc(routes =>
             {
