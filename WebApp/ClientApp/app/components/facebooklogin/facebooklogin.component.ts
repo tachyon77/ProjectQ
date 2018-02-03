@@ -1,6 +1,6 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { IdentityService } from '../../services/identity.service';
+
 declare var window: any;
 declare var FB: any;
 
@@ -10,7 +10,7 @@ declare var FB: any;
     templateUrl: './facebooklogin.component.html',
     styleUrls:['./facebooklogin.component.css'],
 })
-export class FacebookLoginComponent implements AfterViewInit{
+export class FacebookLoginComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         window.checkLoginState = function () {
@@ -53,7 +53,7 @@ export class FacebookLoginComponent implements AfterViewInit{
         }(document, 'script', 'facebook-jssdk'));
     }
 
-    constructor(private identityService:IdentityService) {
+    constructor() {
        
     }
 }

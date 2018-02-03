@@ -15,7 +15,7 @@ declare var window: any;
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, 
+        //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, 
     ]
 })
 export class AppModule {

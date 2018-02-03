@@ -17,7 +17,7 @@ import { IdentityService } from './identity.service';
 declare var window: any;
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor {
 
     constructor(private identityService: IdentityService) {
 

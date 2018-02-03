@@ -1,7 +1,7 @@
 import { NgModule  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FocusDirective } from './directives/focus.directive'
 import { AppComponent } from './components/app/app.component';
@@ -45,6 +45,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
     imports: [
         CommonModule,
         HttpClientModule,
+        HttpClientXsrfModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot([
