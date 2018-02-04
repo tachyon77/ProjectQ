@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FocusDirective } from './directives/focus.directive'
 import { AppComponent } from './components/app/app.component';
+import { LandingPageComponent } from './components/landingpage/landingpage.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
@@ -24,6 +25,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
 @NgModule({
     declarations: [
         AppComponent,
+        LandingPageComponent,
         NavMenuComponent,
         FocusDirective,
         ContentEditorComponent,

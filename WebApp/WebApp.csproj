@@ -53,6 +53,7 @@
     <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\auth-interceptor.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
+    <None Remove="ClientApp\app\services\login.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,11 +91,13 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\auth-interceptor.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\login.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Screenshots\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

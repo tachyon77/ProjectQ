@@ -1,0 +1,50 @@
+<div class="text-center">
+    <h1>Welcome to  Project-Q</h1>
+    <br />
+    <img src="../../../../wwwroot/images/eagle.jpg"
+         class="center-block img-responsive" />
+    <div class="engraved-text">A place to ask questions fearlessly.</div>
+</div>
+<br />
+<div class="login-form text-center">
+    <form [formGroup]="form"
+          class="login-form"
+          (ngSubmit)="onSubmit(form.value)">
+        <div>
+            <input type="text"
+                   autofocus
+                   autocomplete="on"
+                   class="login-control"
+                   placeholder="Email"
+                   name="email" id="email"
+                   formControlName="email" />
+        </div>
+        <div>
+            <input type="password"
+                   autocomplete="on"
+                   class="login-control"
+                   placeholder="Password"
+                   name="password" id="password"
+                   formControlName="password" />
+        </div>
+        
+        <div>
+            <button type="submit" 
+                    class="login-control btn btn-light"
+                    [disabled]="!form.valid">
+                Login
+            </button>
+            <button type="button"
+                    class="login-control btn btn-light">
+                Register
+            </button>
+        </div>
+        
+
+    </form>
+</div>
+
+
+
+
+
