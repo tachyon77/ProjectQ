@@ -25,6 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+        console.log("http intercepted.");
+
         var accessToken: string = "";
 
         if (window.authResponse != null) {
@@ -32,12 +34,11 @@ export class AuthInterceptor implements HttpInterceptor {
             this.identityService.currentUserEmail = window.user.email;
             console.log("email: " + window.user.email);
         }
+     
         // add a custom header
         const customReq = request.clone({
-            headers: new HttpHeaders()
-                .set('Authorization', accessToken),
+            headers: request.headers.set('Authorization', accessToken) 
         });
-
         // pass on the modified request object
         return next.handle(customReq);
     }

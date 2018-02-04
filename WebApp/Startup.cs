@@ -98,8 +98,8 @@ namespace WebApp
             app.Use(async (context, next) =>
             {
                 string path = context.Request.Path.Value;
-                if (string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
+                //if (string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
+                //    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
                 {
                     // XSRF-TOKEN used by angular in the http if provided
                     var tokens = antiforgery.GetAndStoreTokens(context);

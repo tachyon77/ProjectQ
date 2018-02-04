@@ -16,35 +16,32 @@ export interface Question {
 
 @Injectable()
 export class QuestionService {
-    constructor(
-        private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string)
-    { }
+
+    constructor(private http: HttpClient) {
+    }
 
     get() {
-        return this.http.get(this.baseUrl + 'api/Questions')
+        return this.http.get('api/Questions')
             .map(response => {
                 return response;
             });
-
-
     }
 
     getById(id: number) {
-        return this.http.get(this.baseUrl + 'api/Questions/' + id)
+        return this.http.get('api/Questions/' + id)
             .map(response => {
                 return response;
             });
     }
 
     add(question: Question) {
-        return this.http.post(this.baseUrl + 'api/Questions', question)
+        return this.http.post('api/Questions', question)
             .map(response => { });
     }
 
     update(question: Question) {
         return this.http
-            .put(this.baseUrl + 'api/Questions/' + question.id, question)
+            .put('api/Questions/' + question.id, question)
             .map(response => { });
     }
 
