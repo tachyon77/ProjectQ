@@ -52,6 +52,24 @@
     <Compile Include="Answer.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRoleClaim.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserToken.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,9 +87,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
-      <DependentUpon>EntityData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
   </ItemGroup>

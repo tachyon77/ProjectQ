@@ -9,8 +9,8 @@ namespace ProjectQ.DAL
 {
     public interface IUserRepository
     {
-        Task AddAsync(User user);
+        Task AddAsync(ApplicationUser user);
         bool UserExists(string email);
-        User GetByEmail(string email);
+        ApplicationUser GetByEmail(string email);
     }
 }

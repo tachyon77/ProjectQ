@@ -10,7 +10,6 @@ namespace ProjectQ.DAL
     {
         IQuestionRepository QuestionRepository { get; }
         IAnswerRepository AnswerRepository { get; }
-        IUserRepository UserRepository { get; }
         Task SaveAsync();
     }
 }

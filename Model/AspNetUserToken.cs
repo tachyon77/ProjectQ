@@ -12,18 +12,11 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Answer
+    public partial class AspNetUserToken
     {
-        public int Id { get; set; }
-        public int QuestionId { get; set; }
         public string UserId { get; set; }
-        public string text { get; set; }
-        public System.DateTime OriginDate { get; set; }
-        public bool IsPrivate { get; set; }
-        public System.DateTime ExpiryDate { get; set; }
-        public bool IsDeleted { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Question Question { get; set; }
+        public string LoginProvider { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

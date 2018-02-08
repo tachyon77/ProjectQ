@@ -36,10 +36,6 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Returns(_mockAnswerRepo.Object);
 
             _mockUoW
-                .Setup(x => x.UserRepository)
-                .Returns(_mockUserRepo.Object);
-
-            _mockUoW
                 .Setup(x => x.SaveAsync())
                 .Returns(Task.CompletedTask);
 
@@ -79,7 +75,7 @@ namespace ProjectQ.BusinessLogic.Tests
 
             _mockUserRepo
                 .Setup(x => x.GetByEmail("tachyon77@gmail.com"))
-                .Returns(new User());
+                .Returns(new ApplicationUser());
 
             var r = _sut.AddAsync(answer, "tachyon77@gmail.com")
                 .Result;

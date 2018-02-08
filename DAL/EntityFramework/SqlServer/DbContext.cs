@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework.SqlServer

@@ -15,12 +15,12 @@ import { DisplayQuestionsComponent } from './components/questions/displayquestio
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
+import { LoginService } from './services/login.service';
 import { IdentityService } from './services/identity.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
 import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
-import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin.component'
 
 @NgModule({
     declarations: [
@@ -37,11 +37,11 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         AddAnswerComponent,
         UpdateAnswerComponent,
         QuestionEditorComponent,
-        FacebookLoginComponent,
         HomeComponent,
     ],
     providers: [
         QuestionService,
+        LoginService,
         AnswerService,
         IdentityService],
     imports: [
@@ -52,6 +52,7 @@ import { FacebookLoginComponent } from './components/facebooklogin/facebooklogin
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'landing-page', component: LandingPageComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: 'content-editor', component: ContentEditorComponent },

@@ -10,12 +10,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectQ.BusinessLogic;
 using ProjectQ.DAL;
-using ProjectQ.WebApp.Authentication;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using ProjectQ.Model;
+using Microsoft.EntityFrameworkCore;
 
-namespace WebApp
+namespace ProjectQ.WebApp
 {//
     public class Startup
     {
@@ -37,33 +40,52 @@ namespace WebApp
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                options.UseSqlServer("Data Source=DESKTOP-EC84EI0;Initial Catalog=ProjectQ;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True"
+            ));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Expiration = TimeSpan.FromDays(150);
+                options.LoginPath = ""; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
+                options.LogoutPath = ""; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
+                options.AccessDeniedPath = ""; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
+                options.SlidingExpiration = true;
+            });
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
-            /*services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ValidFacebookToken", policy =>
-                    policy.Requirements.Add(new ValidFacebookAccessTokenRequirement()));
-            });
 
-            services.AddSingleton<IAuthorizationHandler, ValidFacebookTokenHandler>();
-            */
-
-            services.AddAuthentication(options =>
-            {
-                // the scheme name has to match the value we're going to use in AuthenticationBuilder.AddScheme(...)
-                options.DefaultAuthenticateScheme = "Facebook Auth";
-                options.DefaultChallengeScheme = "Facebook Auth";
-            })
-            .AddCustomAuth(options =>
-            {
-                options.Authenticator = new FacebookGraphApiClient();
-            });
-
-
-            services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();
@@ -97,20 +119,14 @@ namespace WebApp
 
             app.Use(async (context, next) =>
             {
-                string path = context.Request.Path.Value;
-                //if (string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
-                //    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
-                {
-                    // XSRF-TOKEN used by angular in the http if provided
-                    var tokens = antiforgery.GetAndStoreTokens(context);
-                    context.Response.Cookies.Append("XSRF-TOKEN",
-                      tokens.RequestToken, new CookieOptions
-                      {
-                          HttpOnly = false
-                      }
-                    );
-                }
-
+                // XSRF-TOKEN used by angular in the http if provided
+                var tokens = antiforgery.GetAndStoreTokens(context);
+                context.Response.Cookies.Append("XSRF-TOKEN",
+                    tokens.RequestToken, new CookieOptions
+                    {
+                        HttpOnly = false
+                    }
+                );
                 await next();
             });
 

@@ -28,9 +28,6 @@ namespace ProjectQ.BusinessLogic
 
             answer.OriginDate = DateTime.UtcNow;
 
-            answer.UserId = _unitOfWork
-                .UserRepository.GetByEmail(email).Id;
-
             await _unitOfWork.AnswerRepository.AddAsync(answer);
             await _unitOfWork.SaveAsync();
 

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService, LoginForm } from '../../services/login.service';
 
 @Component({
     selector: 'landing-page',
@@ -13,26 +14,25 @@ export class LandingPageComponent {
 
     constructor(
         private formBuilder: FormBuilder,
-        //private questionService: QuestionService,
+        private loginService: LoginService,
         private router: Router) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            email: this.formBuilder.control('', Validators.compose([
+            Email: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
-            password: this.formBuilder.control('', Validators.compose([
+            Password: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
         });
     }
 
 
-    onSubmit(loginFoem: LoginForm) {
-        this.questionService.add(question)
-            .subscribe(() => {
-                this.router.navigate(['/home']);
-            });
+    onSubmit(loginForm: LoginForm) {
+        this.loginService.login(loginForm).subscribe(result => {
+            console.log(result);
+        }, error => console.error(error));
     }
 
 

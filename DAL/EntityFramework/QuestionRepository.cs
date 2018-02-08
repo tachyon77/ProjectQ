@@ -35,14 +35,14 @@ namespace ProjectQ.DAL.EntityFramework
 
         IEnumerable<Question> IQuestionRepository.GetAll()
         {
-            return _context.Questions.Include(x => x.User)
+            return _context.Questions.Include(x => x.AspNetUser)
                 .Where(x=>!x.IsDeleted);
         }
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)
         {
             return await _context.Questions
-                .Include(x => x.User)
+                .Include(x => x.AspNetUser)
                 .SingleAsync(x=>x.Id == id);
         }
 

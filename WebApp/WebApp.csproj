@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="Unity" Version="5.5.2" />
   </ItemGroup>
@@ -37,8 +37,6 @@
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.ts" />
-    <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
-    <None Remove="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
@@ -76,8 +74,6 @@
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.css" />
-    <TypeScriptCompile Include="ClientApp\app\components\facebooklogin\facebooklogin.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioneditor\questioneditor.component.ts" />

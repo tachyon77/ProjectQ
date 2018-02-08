@@ -37,8 +37,6 @@ namespace ProjectQ.BusinessLogic
 
         async Task IQuestionManager.AddAsync(Question question, string email)
         {
-            question.UserId = _unitOfWork
-                .UserRepository.GetByEmail(email).Id;
 
             question.OriginDate = DateTime.UtcNow;
 
@@ -68,8 +66,7 @@ namespace ProjectQ.BusinessLogic
 
         async Task IQuestionManager.UpdateAsync(Question question, string email)
         {
-            var currentUserId = _unitOfWork
-                .UserRepository.GetByEmail(email).Id;
+            var currentUserId = "";
 
             if (question.IsDeleted && question.UserId != currentUserId)
             {

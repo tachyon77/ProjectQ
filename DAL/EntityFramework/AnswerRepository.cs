@@ -33,7 +33,7 @@ namespace ProjectQ.DAL.EntityFramework
             IAnswerRepository.GetForQuestionAsyc(int questionId)
         {
             var answers = await _context.Answers
-                .Include(x=>x.User)
+                .Include(x=>x.AspNetUser)
                 .Where( x => x.QuestionId == questionId
                     &&  !x.IsDeleted)
                 .ToListAsync();

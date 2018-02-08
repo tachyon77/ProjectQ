@@ -8,6 +8,8 @@ using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace WebApp.Controllers
 {

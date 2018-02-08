@@ -16,13 +16,14 @@ namespace ProjectQ.Model
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string text { get; set; }
         public System.DateTime OriginDate { get; set; }
         public bool IsPrivate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
+        public bool IsDeleted { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Question Question { get; set; }
-        public virtual User User { get; set; }
     }
 }

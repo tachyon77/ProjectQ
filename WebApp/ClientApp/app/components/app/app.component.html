@@ -1,6 +1,11 @@
-<landing-page></landing-page>
-<!--nav-menu></!--nav-menu>
-<div class="body-content">
-   <router-outlet></router-outlet>    
-</div-->
+<div *ngIf="isLoggedIn">
+    <nav-menu></nav-menu>
+    <div class="body-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div *ngIf="!isLoggedIn">
+    <landing-page></landing-page>
+</div>
+
 
