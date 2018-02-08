@@ -9,8 +9,6 @@ export class Answer {
     QuestionId: number;
     OriginDate: Date;
     text: string;
-    UserId: number;
-    user: User;
 }
 
 @Injectable()

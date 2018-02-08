@@ -12,6 +12,8 @@ export class DisplayQuestionsComponent {
     constructor(
         private questionService: QuestionService) {
         this.questionService.get().subscribe(result => {
+            console.log("questions = ");
+            console.log(result);
             this.questions = result as Question[];
         }, error => console.error(error));
     }

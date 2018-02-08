@@ -112,4 +112,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ExpiryDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b705c8a8-9c6c-4479-951c-744384b33e0d" ChangeDateTime="02/08/2018 05:07:17">
+    <Property Name="ElementName" Value="[dbo].[Questions].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Questions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AspNetUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="66002c98-4075-4336-b862-6bf512b337ac" ChangeDateTime="02/08/2018 05:07:27">
+    <Property Name="ElementName" Value="[dbo].[Answers].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Answers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AspNetUserId" />
+  </Operation>
 </Operations>

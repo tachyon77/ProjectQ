@@ -26,6 +26,14 @@ namespace ProjectQ.WebApp.Controllers
             _signInManager = signInManager;
         }
 
+        [HttpGet("user")]
+        public bool
+           GetUser()
+        {
+            return this.User.Identity.IsAuthenticated;
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> PostAccount([FromBody] LoginForm data)
         {

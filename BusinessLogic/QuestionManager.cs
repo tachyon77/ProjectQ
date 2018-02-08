@@ -68,7 +68,7 @@ namespace ProjectQ.BusinessLogic
         {
             var currentUserId = "";
 
-            if (question.IsDeleted && question.UserId != currentUserId)
+            if (question.IsDeleted && question.AspNetUserId != currentUserId)
             {
                 throw new Exception("Unauthorized");
             }

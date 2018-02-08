@@ -1,5 +1,5 @@
 ﻿import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 export class User {
@@ -12,9 +12,13 @@ export class User {
 @Injectable()
 export class IdentityService {
 
-    public currentUserEmail: string;
-
-    constructor() {
+    constructor(private http: HttpClient) {
     }
-    
+
+    get() {
+        return this.http.get('api/account/user')
+            .map(response => {
+                return response;
+            });
+    }
 }

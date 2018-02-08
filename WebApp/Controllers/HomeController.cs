@@ -11,6 +11,7 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["IsLoggedIn"] = true;
             return View();
         }
 

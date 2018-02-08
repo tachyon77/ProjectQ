@@ -11,7 +11,6 @@ export interface Question {
     isDeleted: boolean;
     offeredPrice: number;
     OriginDate: Date;
-    user: User;
 }
 
 @Injectable()

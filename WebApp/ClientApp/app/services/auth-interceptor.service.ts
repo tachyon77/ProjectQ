@@ -11,7 +11,6 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
-import { IdentityService } from './identity.service';
 
 
 declare var window: any;
@@ -19,7 +18,7 @@ declare var window: any;
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private identityService: IdentityService) {
+    constructor() {
 
     }
 
@@ -31,8 +30,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (window.authResponse != null) {
             accessToken = window.authResponse.accessToken;            
-            this.identityService.currentUserEmail = window.user.email;
-            console.log("email: " + window.user.email);
         }
      
         // add a custom header

@@ -15,7 +15,6 @@ import { IdentityService, User } from '../../../services/identity.service'
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answers: Answer[];
     public question: Question;
-    public currentUserEmail: string;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
@@ -28,7 +27,6 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
         this.isAddAnswerVisible = false;
         this.isQuestionEditorVisible = false;
-        this.currentUserEmail = this.identityService.currentUserEmail;
     }
 
     OnAnswerClick() {
