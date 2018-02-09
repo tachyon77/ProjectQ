@@ -20,12 +20,13 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        async Task<int> IAnswerManager.AddAsync(Answer answer, string email)
+        async Task<int> IAnswerManager.AddAsync(Answer answer, string userId)
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
                 throw new Exception();
 
+            answer.AspNetUserId = userId;
             answer.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);

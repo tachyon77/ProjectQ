@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Controllers
 {
@@ -15,6 +13,7 @@ namespace WebApp.Controllers
     [Route("api/Answers")]
     public class AnswersController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAnswerManager _AnswerManager;
 
         /// <summary>
@@ -23,9 +22,12 @@ namespace WebApp.Controllers
         /// <param name="unitOfWork"></param>
         /// <param name="AnswerManager"></param>
         public AnswersController(
-            IAnswerManager AnswerManager)
+            IAnswerManager AnswerManager,
+            UserManager<ApplicationUser> userManager
+            )
         {
             _AnswerManager = AnswerManager;
+            _userManager = userManager;
         }
         // GET: api/Answers
         [HttpGet]
@@ -70,10 +72,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
-                   .Select(c => c.Value).SingleOrDefault();
-
-            await _AnswerManager.AddAsync(Answer, email);
+            await _AnswerManager.AddAsync(Answer, _userManager.GetUserId(User));
 
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }

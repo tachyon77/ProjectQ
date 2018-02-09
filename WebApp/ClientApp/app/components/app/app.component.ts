@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     userName: string;
-    isLoggedIn: boolean = false;
+    isLoggedIn: boolean = true;
 
     constructor(
         private identityService: IdentityService,

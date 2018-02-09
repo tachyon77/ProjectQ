@@ -2,8 +2,8 @@
 <div *ngIf="answer" class="answer-card">
 
     <div *ngIf="!isUpdateAnswerVisible">
-        <div class="answer-user" *ngIf="answer.user">
-            {{answer.user.firstName}} {{answer.user.lastName}}
+        <div class="answer-user" *ngIf="answer.aspNetUser">
+            {{answer.aspNetUser.email}}
             <div class="answer-date">Answered on {{answer.originDate}}</div>
         </div>
         <div [innerHTML]="answerContent"

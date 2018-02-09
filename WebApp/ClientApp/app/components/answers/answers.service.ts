@@ -9,19 +9,18 @@ export class Answer {
     QuestionId: number;
     OriginDate: Date;
     text: string;
-    aspNet: AspNetUser;
+    aspNetUser: AspNetUser;
 }
 
 @Injectable()
 export class AnswerService {
     constructor(
-        private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string) {
+        private http: HttpClient) {
     }
 
     getForQuestion(questionId: number) {
         return this.http.get(
-            this.baseUrl + 'api/Answers/ForQuestion/' + questionId
+            'api/Answers/ForQuestion/' + questionId
             ).map(response => {
                 return response;
             });
@@ -29,7 +28,7 @@ export class AnswerService {
 
     getById(answerId: number) {
         return this.http.get(
-            this.baseUrl + 'api/Answers/' + answerId
+            'api/Answers/' + answerId
         ).map(response => {
             return response;
         });
@@ -37,14 +36,14 @@ export class AnswerService {
 
     add(answer: Answer) {
         return this.http.post(
-            this.baseUrl + 'api/Answers',
+            'api/Answers',
             answer          
         ).map(response => { });
     }
 
     update(answer: Answer) {
         return this.http.put(
-            this.baseUrl + 'api/Answers/' + answer.id,
+            'api/Answers/' + answer.id,
             answer
         ).map(response => { });
     }
