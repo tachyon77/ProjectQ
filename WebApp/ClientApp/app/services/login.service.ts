@@ -18,7 +18,7 @@ export class LoginService {
         console.log(formData);
         return this.http.post('api/Account', formData)
             .map(response => {
-                return response;
+                return response as string;
             });
     }
 

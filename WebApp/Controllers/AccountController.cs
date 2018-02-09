@@ -26,11 +26,11 @@ namespace ProjectQ.WebApp.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet("user")]
-        public bool
-           GetUser()
+        [HttpGet("username")]
+        public string
+           GetUserName()
         {
-            return this.User.Identity.IsAuthenticated;
+            return _signInManager.UserManager.GetUserName(User);
         }
 
 
@@ -45,21 +45,21 @@ namespace ProjectQ.WebApp.Controllers
                     .PasswordSignInAsync(data.Email, data.Password, true, false);
                 if (result.Succeeded)
                 {
-                    return Ok(true);
+                    return Ok(data.Email);
                 }
                 else
                 {
-                    return Ok(false);
+                    return Ok("");
                 }
             }
             return Ok(false);
         }
 
-        /*[HttpPost]
+        [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToPage("/Index");
-        }*/
+            return Ok();
+        }
     }
 }

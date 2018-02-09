@@ -1,11 +1,16 @@
 <div *ngIf="isLoggedIn">
-    <nav-menu></nav-menu>
-    <div class="body-content">
-        <router-outlet></router-outlet>
-    </div>
+    <nav-menu [userName]="userName"
+              (loggedOut)="onLogout($event)">
+    </nav-menu>
+    <router-outlet></router-outlet>
 </div>
 <div *ngIf="!isLoggedIn">
-    <landing-page></landing-page>
+    <landing-page (loggedIn)="onLogin($event)">
+    </landing-page>
 </div>
+
+
+
+
 
 

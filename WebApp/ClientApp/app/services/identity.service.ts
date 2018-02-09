@@ -15,8 +15,13 @@ export class IdentityService {
     constructor(private http: HttpClient) {
     }
 
+    logout() {
+        return this.http.post('api/account/logout', null)
+            .map(response => { });
+    }
+
     get() {
-        return this.http.get('api/account/user')
+        return this.http.get('api/account/username')
             .map(response => {
                 return response;
             });

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService, LoginForm } from '../../services/login.service';
@@ -10,12 +10,16 @@ import { LoginService, LoginForm } from '../../services/login.service';
 })
 export class LandingPageComponent {
 
+    @Output() loggedIn = new EventEmitter();
     form: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder,
         private loginService: LoginService,
-        private router: Router) { }
+        private router: Router) {
+
+        this.router.onSameUrlNavigation = 'reload';
+    }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
@@ -31,7 +35,11 @@ export class LandingPageComponent {
 
     onSubmit(loginForm: LoginForm) {
         this.loginService.login(loginForm).subscribe(result => {
+            console.log("login result: ");
             console.log(result);
+            if (result != null && result.length > 0) {
+                this.loggedIn.emit(result);
+            }
         }, error => console.error(error));
     }
 
