@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Controllers
 {
@@ -17,6 +15,7 @@ namespace WebApp.Controllers
     [Route("api/Questions")]
     public class QuestionsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IQuestionManager _questionManager;
 
         /// <summary>
@@ -25,9 +24,12 @@ namespace WebApp.Controllers
         /// <param name="unitOfWork"></param>
         /// <param name="questionManager"></param>
         public QuestionsController(
-            IQuestionManager questionManager)
+            IQuestionManager questionManager,
+            UserManager<ApplicationUser> userManager
+            )
         {
             _questionManager = questionManager;
+            _userManager = userManager;
         }
         // GET: api/Questions
         [HttpGet]
@@ -64,10 +66,8 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
-                   .Select(c => c.Value).SingleOrDefault();
-
-            await _questionManager.AddAsync(question, email);
+            await _questionManager.
+                AddAsync(question, _userManager.GetUserId(User));
 
             return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AnswerService, Answer } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
-import { IdentityService, User } from '../../../services/identity.service'
+import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
 @Component({
     selector: 'question-detail',

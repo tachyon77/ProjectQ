@@ -2,11 +2,9 @@
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-export class User {
+export class AspNetUser {
     id: number;
     email: string;
-    firstName: string;
-    lastName: string;
 }
 
 @Injectable()

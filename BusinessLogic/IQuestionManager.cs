@@ -21,8 +21,8 @@ namespace ProjectQ.BusinessLogic
     /// </summary>
     public interface IQuestionManager
     {
-        Task AddAsync(Question question, string email);
-        Task UpdateAsync(Question question, string email);
+        Task AddAsync(Question question, string userId);
+        Task UpdateAsync(Question question, string userId);
         IEnumerable<Question> GetAll();
         Task<Question> GetByIdAsync(int id);
         bool QuestionExists(int id);

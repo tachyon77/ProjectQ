@@ -35,9 +35,9 @@ namespace ProjectQ.BusinessLogic
         }
         
 
-        async Task IQuestionManager.AddAsync(Question question, string email)
+        async Task IQuestionManager.AddAsync(Question question, string userId)
         {
-
+            question.AspNetUserId = userId;
             question.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.QuestionRepository.AddAsync(question);
