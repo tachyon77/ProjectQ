@@ -24,4 +24,10 @@ export class IdentityService {
                 return response;
             });
     }
+
+    refreshCSRFToken() {
+        console.log("refrshing CSRF token");
+        return this.http.get('api/Account/refreshtoken')
+            .map(response => { });
+    }
 }

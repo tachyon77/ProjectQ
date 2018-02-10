@@ -55,6 +55,13 @@ namespace ProjectQ.WebApp.Controllers
             return Ok(false);
         }
 
+        [HttpGet("refreshtoken")]
+        public IActionResult GetRefreshToken()
+        {
+            return Ok();
+        }
+
+
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {

@@ -21,8 +21,6 @@ export class AppComponent {
     onLogin(uname: string) {
         this.userName = uname;
         this.isLoggedIn = true;
-        console.log("reloading after log in");
-        this.router.navigate(['/home']);
     }
 
     onLogout() {
@@ -30,7 +28,8 @@ export class AppComponent {
             .subscribe(result => {
                 this.userName = '';
                 this.isLoggedIn = false;
-                this.router.navigate(['/home']);
+                this.identityService.refreshCSRFToken()
+                    .subscribe();
             });
     }
 
