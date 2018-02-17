@@ -16,7 +16,7 @@ namespace ProjectQ.Model
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
-        public string UserId { get; set; }
+        public string AspNetUserId { get; set; }
         public string text { get; set; }
         public System.DateTime OriginDate { get; set; }
         public bool IsPrivate { get; set; }

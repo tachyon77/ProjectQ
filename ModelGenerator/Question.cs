@@ -21,7 +21,7 @@ namespace ProjectQ.Model
         }
     
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string AspNetUserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> OriginDate { get; set; }

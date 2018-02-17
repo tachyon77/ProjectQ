@@ -82,6 +82,24 @@ namespace ProjectQ.WebApp.Controllers
         }
 
 
+        private string EmailConfirmationLink(IUrlHelper urlHelper, string userId, string code, string scheme)
+        {
+            return urlHelper.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { userId, code },
+                protocol: scheme);
+        }
+
+        [HttpGet("register")]
+        public async Task<IActionResult> Confirm(string userId, string code)
+        {
+            var user = await _signInManager.UserManager.FindByIdAsync(userId);
+            await _signInManager.UserManager.ConfirmEmailAsync(user, code);
+            return Redirect("/home");
+        }
+
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationForm data)
         {
@@ -91,18 +109,16 @@ namespace ProjectQ.WebApp.Controllers
                 .UserManager
                 .CreateAsync(user, data.Password);
 
-            await _emailSender.SendEmailAsync(
-                data.Email, "Confirm your email", "This is the code");
-                
             if (result.Succeeded)
             {
-                var code = await _signInManager
-                    .UserManager
-                    .GenerateEmailConfirmationTokenAsync(user);
+                var userManager = _signInManager.UserManager;
 
-                await _emailSender.SendEmailAsync("", "", "");
-
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = EmailConfirmationLink(Url, user.Id, code, Request.Scheme);
+                await _emailSender.SendEmailAsync(
+                    data.Email,
+                    "Confirm registration",
+                    callbackUrl);
                 return Ok();
             }
           

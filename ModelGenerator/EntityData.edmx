@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuestionId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="text" Type="varchar(max)" Nullable="false" />
           <Property Name="OriginDate" Type="date" Nullable="false" />
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
@@ -99,7 +99,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="OriginDate" Type="datetime" />
@@ -118,7 +118,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Answers">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="AspNetUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,7 +214,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Questions">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="AspNetUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,7 +309,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
@@ -401,7 +401,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OriginDate" Type="DateTime" Precision="3" />
@@ -422,7 +422,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Answer">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="AspNetUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -490,7 +490,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Question">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="AspNetUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -512,7 +512,7 @@
                 <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
                 <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
                 <ScalarProperty Name="text" ColumnName="text" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -599,7 +599,7 @@
                 <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
