@@ -7,10 +7,50 @@ export class AspNetUser {
     email: string;
 }
 
+export class LoginCredential {
+    Email: string;
+    Password: string;
+}
+
+export class RegistrationForm {
+    Email: string;
+    Password: string;
+    ConfirmEmailCode: string;
+}
+
+
+
 @Injectable()
 export class IdentityService {
 
     constructor(private http: HttpClient) {
+    }
+
+    register(regForm: RegistrationForm) {
+        console.log("posting registration request");
+        console.log(regForm);
+        return this.http.post('api/Account/Register', regForm)
+            .map(response => {
+                return response as string;
+            });
+    }
+
+    confirmRegistration(regForm: RegistrationForm) {
+        console.log("posting registration confirmation");
+        console.log(regForm);
+        return this.http.post('api/Account/Confirm', regForm)
+            .map(response => {
+                return response as string;
+            });
+    }
+
+    login(credential: LoginCredential) {
+        console.log("posting login request");
+        console.log(credential);
+        return this.http.post('api/Account', credential)
+            .map(response => {
+                return response as string;
+            });
     }
 
     logout() {

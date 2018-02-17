@@ -6,43 +6,37 @@
     <div class="engraved-text">A place to ask questions fearlessly.</div>
 </div>
 <br />
-<div class="login-form text-center">
-    <form [formGroup]="form"
-          class="login-form"
-          (ngSubmit)="onSubmit(form.value)">
-        <div>
-            <input type="text"
-                   autofocus
-                   autocomplete="on"
-                   class="login-control"
-                   placeholder="Email"
-                   name="email" id="email"
-                   formControlName="Email" />
-        </div>
-        <div>
-            <input type="password"
-                   autocomplete="on"
-                   class="login-control"
-                   placeholder="Password"
-                   name="password" id="password"
-                   formControlName="Password" />
-        </div>
-        
-        <div>
-            <button type="submit" 
-                    class="login-control btn btn-light"
-                    [disabled]="!form.valid">
-                Login
-            </button>
-            <button type="button"
-                    class="login-control btn btn-light">
-                Register
-            </button>
-        </div>
-        
+<div *ngIf="showLoginForm"
+     class="login-form">
+    <login-form (loggedIn)="onLoggedIn($event)"
+                (showRegistration)="onShowRegistration()">
 
-    </form>
+    </login-form>
+    <div class="text-center">
+        <button type="button"
+                (click)="onShowRegistration()"
+                class="login-control btn btn-light">
+            Register
+        </button>
+    </div>
+    
 </div>
+
+<div *ngIf="!showLoginForm" class="login-form">
+    <registration-form (registrationCompleted)="onRegistrationCompleted()"
+                       (showLogin)="onShowLogin()">
+
+    </registration-form>
+    <div class="text-center">
+        <button type="button"
+                (click)="onShowLogin()"
+                class="login-control btn btn-light">
+            Login
+        </button>
+    </div>
+</div>
+
+
 
 
 

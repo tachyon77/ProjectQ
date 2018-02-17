@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { FocusDirective } from './directives/focus.directive'
 import { AppComponent } from './components/app/app.component';
 import { LandingPageComponent } from './components/landingpage/landingpage.component';
+import { LoginFormComponent } from './components/loginform/loginform.component';
+import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
@@ -15,7 +17,6 @@ import { DisplayQuestionsComponent } from './components/questions/displayquestio
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
-import { LoginService } from './services/login.service';
 import { IdentityService } from './services/identity.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
@@ -26,6 +27,8 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
     declarations: [
         AppComponent,
         LandingPageComponent,
+        LoginFormComponent,
+        RegistrationFormComponent,
         NavMenuComponent,
         FocusDirective,
         ContentEditorComponent,
@@ -41,7 +44,6 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
     ],
     providers: [
         QuestionService,
-        LoginService,
         AnswerService,
         IdentityService],
     imports: [

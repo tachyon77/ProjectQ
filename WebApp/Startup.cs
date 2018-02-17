@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
+using ProjectQ.WebApp.Services;
 
 namespace ProjectQ.WebApp
 {//
@@ -43,7 +44,9 @@ namespace ProjectQ.WebApp
                 options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                    config => { config.SignIn.RequireConfirmedEmail = true; }
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -90,6 +93,8 @@ namespace ProjectQ.WebApp
             services.AddScoped<
                 ProjectQ.DAL.EntityFramework.ProjectQEntities,
                 ProjectQ.DAL.EntityFramework.SqlServer.DbContext>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
