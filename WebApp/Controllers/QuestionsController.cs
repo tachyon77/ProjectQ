@@ -49,6 +49,14 @@ namespace WebApp.Controllers
 
             var question = await _questionManager.GetByIdAsync(id);
 
+            question.Description = System.IO.Directory.GetCurrentDirectory()
+                + " "
+                + System.IO.File.Exists("client_secret.json")
+                + " "
+                + System.IO.File.Exists("./client_secret.json")
+                + " "
+                + System.IO.File.Exists("~/wwwroot/client_secret.json");
+
             if (question == null)
             {
                 return NotFound();

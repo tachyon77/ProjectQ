@@ -86,6 +86,7 @@ namespace ProjectQ.WebApp
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
+            services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
