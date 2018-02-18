@@ -118,7 +118,7 @@ namespace ProjectQ.WebApp.Controllers
                 await _emailSender.SendEmailAsync(
                     data.Email,
                     "Confirm registration",
-                    callbackUrl);
+                    "Click <a href=" + callbackUrl + ">here</a> to confirm your registration.");
                 return Ok();
             }
           
