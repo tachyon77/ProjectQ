@@ -36,7 +36,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="logoutClick()">
+                <a class="nav-link" 
+                   [routerLink]="['/home']"
+                   (click)="logoutClick()">
                     Logout
                 </a>
             </li>
