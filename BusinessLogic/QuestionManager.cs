@@ -44,12 +44,12 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
-        IEnumerable<Question> IQuestionManager.GetAll()
+        async Task<IEnumerable<QuestionPreview>> IQuestionManager.GetAll()
         {
-            return _unitOfWork
+            return (await _unitOfWork
                 .QuestionRepository
-                .GetAll()
-                .OrderByDescending(x=>x.OriginDate);
+                .GetAll())
+                .OrderByDescending(x=>x.Question.OriginDate);
         }
 
         async Task<Question> IQuestionManager.GetByIdAsync(int id)

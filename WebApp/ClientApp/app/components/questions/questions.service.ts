@@ -1,6 +1,7 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AspNetUser } from '../../services/identity.service'
+import { Answer } from '../answers/answers.service'
 import 'rxjs/add/operator/map';
 
 
@@ -12,6 +13,12 @@ export interface Question {
     offeredPrice: number;
     OriginDate: Date;
     aspNetUser: AspNetUser;
+}
+
+export interface QuestionPreview {
+    Question: Question;
+    AnswerCount: number;
+    PreviewAnswer: Answer;
 }
 
 @Injectable()

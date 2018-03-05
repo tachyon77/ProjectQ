@@ -33,10 +33,22 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.IsDeleted = question.IsDeleted;
         }
 
-        IEnumerable<Question> IQuestionRepository.GetAll()
+        async Task<IEnumerable<QuestionPreview>> IQuestionRepository.GetAll()
         {
-            return _context.Questions.Include(x => x.AspNetUser)
-                .Where(x=>!x.IsDeleted);
+            var data = await (from question in _context.Questions
+                   .Include(x => x.AspNetUser)
+                   .Where(x => !x.IsDeleted)
+                         select new QuestionPreview()
+                         {
+                             Question = question,
+                             AnswerCount = question.Answers != null? question.Answers.Where(a=>!a.IsDeleted).Count() : 0,
+                             PreviewAnswer = 
+                                question.Answers != null ?
+                                    question.Answers.Where(a => !a.IsDeleted).OrderByDescending(y=>y.OriginDate).FirstOrDefault() 
+                                    : 
+                                    null
+                         }).ToListAsync();
+            return data;
         }
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)

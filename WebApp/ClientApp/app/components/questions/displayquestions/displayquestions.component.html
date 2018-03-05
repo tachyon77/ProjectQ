@@ -2,7 +2,7 @@
 
 <div *ngIf="questions" class="question-list">
     <div *ngFor="let question of questions">
-        <question-card [question]="question">
+        <question-card [questionPreview]="question">
         </question-card>
     </div>
 </div>

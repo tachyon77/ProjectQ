@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { Question } from '../questions.service'
+import { QuestionPreview } from '../questions.service'
 
 @Component({
     selector: 'question-card',
@@ -8,15 +8,15 @@ import { Question } from '../questions.service'
     styleUrls: ['./questioncard.component.css']
 })
 export class QuestionCardComponent {
-    private _question: Question;
+    private _questionPreview: QuestionPreview;
 
     @Input()
-    set question(question: Question) {
-        this._question = question;
+    set questionPreview(question: QuestionPreview) {
+        this._questionPreview = question;
     }
 
-    get question() {
-        return this._question;
+    get questionPreview() {
+        return this._questionPreview;
     }
 
     constructor() {

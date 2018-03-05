@@ -1,5 +1,5 @@
 ﻿import { Component, Inject } from '@angular/core';
-import { QuestionService, Question } from '../questions.service'
+import { QuestionService, QuestionPreview } from '../questions.service'
 
 @Component({
     selector: 'display-questions',
@@ -7,12 +7,12 @@ import { QuestionService, Question } from '../questions.service'
     styleUrls: ['./displayquestions.component.css'],
 })
 export class DisplayQuestionsComponent {
-    public questions: Question[];
+    public questions: QuestionPreview[];
 
     constructor(
         private questionService: QuestionService) {
         this.questionService.get().subscribe(result => {
-            this.questions = result as Question[];
+            this.questions = result as QuestionPreview[];
         }, error => console.error(error));
     }
 }
