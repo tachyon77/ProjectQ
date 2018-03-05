@@ -17,8 +17,8 @@ export interface Question {
 
 export interface QuestionPreview {
     Question: Question;
-    AnswerCount: number;
-    PreviewAnswer: Answer;
+    answerCount: number;
+    previewAnswer: Answer;
 }
 
 @Injectable()

@@ -19,8 +19,8 @@
             </h6>
             <p class="card-text">{{questionPreview.question.description}}</p>
             <em>{{questionPreview.answerCount}} answers</em>
-            <div *ngIf="questionPreview.answerCount > 0">
-                {{questionPreview.previewAnswer.text}}
+            <div *ngIf="questionPreview.answerCount > 0"
+                 [innerHTML]="previewAnswerContent">
             </div>
         </div>
     </div>
