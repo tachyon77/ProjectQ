@@ -25,7 +25,7 @@ namespace ProjectQ.WebApp.Services
         {
             var apiKey = _configuration.GetSection("SENDGRID_API_KEY").Value;
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("admin@wavenet.io");
+            var from = new EmailAddress("admin@sharedmem.com");
             List<EmailAddress> tos = new List<EmailAddress>
               {
                   new EmailAddress(email)

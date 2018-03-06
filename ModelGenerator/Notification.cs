@@ -12,12 +12,13 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserLogin
+    public partial class Notification
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string ProviderDisplayName { get; set; }
-        public string UserId { get; set; }
+        public int Id { get; set; }
+        public string AspNetUserId { get; set; }
+        public bool IsSeen { get; set; }
+        public System.DateTime OriginDate { get; set; }
+        public string EventDescription { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

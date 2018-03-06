@@ -19,7 +19,7 @@ export class QuestionCardComponent {
         if (this._questionPreview.answerCount > 0) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(
-                    this._questionPreview.previewAnswer.text.substring(0, 100));
+                    this._questionPreview.previewAnswer.text.substring(0, 200));
         }
     }
 

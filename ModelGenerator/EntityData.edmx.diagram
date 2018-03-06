@@ -4,22 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="90cda34f365649e1a0898e0389e7e7b8" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="7.5" PointY="8" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetRoleClaim" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="16.5" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="13.75" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="3" PointY="8" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUserToken" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="5.25" PointY="6.125" />
+      <Diagram DiagramId="90cda34f365649e1a0898e0389e7e7b8" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="9.75" />
         <AssociationConnector Association="ProjectQModel.FK_Answers_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" />
-        <AssociationConnector Association="ProjectQModel.FK_AspNetUserClaims_AspNetUsers_UserId" />
-        <AssociationConnector Association="ProjectQModel.FK_AspNetUserLogins_AspNetUsers_UserId" />
+        <AssociationConnector Association="ProjectQModel.FK_Notifications_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Questions_AspNetUsers" />
-        <AssociationConnector Association="ProjectQModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

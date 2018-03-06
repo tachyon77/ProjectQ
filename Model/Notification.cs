@@ -12,13 +12,14 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoleClaim
+    public partial class Notification
     {
         public int Id { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
-        public int RoleId { get; set; }
+        public string AspNetUserId { get; set; }
+        public bool IsSeen { get; set; }
+        public System.DateTime OriginDate { get; set; }
+        public string EventDescription { get; set; }
     
-        public virtual AspNetRole AspNetRole { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
