@@ -33,7 +33,12 @@ namespace ProjectQ.WebApp.Services
 
             var htmlContent = body;
             var displayRecipients = false; // set this to true if you want recipients to see each others mail id 
-            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, "", htmlContent, false);
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(
+                from, 
+                tos, 
+                subject, 
+                "", 
+                htmlContent, displayRecipients);
             var response = await client.SendEmailAsync(msg);
         }
     }

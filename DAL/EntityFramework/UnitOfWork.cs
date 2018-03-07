@@ -15,6 +15,7 @@ namespace ProjectQ.DAL.EntityFramework
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
         private IAnswerRepository _answerRepository;
+        private INotificationRepository _notificationRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
@@ -44,12 +45,22 @@ namespace ProjectQ.DAL.EntityFramework
                 return _answerRepository;
             }
         }
+        
+        INotificationRepository IUnitOfWork.NotificationRepository
+        {
+            get
+            {
+                if (_notificationRepository == null)
+                {
+                    _notificationRepository = new NotificationRepository(_context);
+                }
+                return _notificationRepository;
+            }
+        }
 
-      
         async Task IUnitOfWork.SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
-
     }
 }

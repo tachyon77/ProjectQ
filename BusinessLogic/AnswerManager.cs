@@ -24,12 +24,28 @@ namespace ProjectQ.BusinessLogic
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
-                throw new Exception();
+                throw new Exception("Question does not exist.");
+
+            var question = await 
+                _unitOfWork
+                .QuestionRepository.GetByIdAsync(answer.QuestionId);
 
             answer.AspNetUserId = userId;
             answer.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
+
+            await _unitOfWork.NotificationRepository.AddAsync(
+                new Notification()
+                {
+                    IsSeen = false,
+                    OriginDate = answer.OriginDate,
+                    AspNetUserId = question.AspNetUserId,
+                    EventDescription = 
+                        "New answer for " + question.Title.Substring(0,25) + " ...",
+                }
+            );
+
             await _unitOfWork.SaveAsync();
 
             return answer.Id;
