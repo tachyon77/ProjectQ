@@ -26,9 +26,12 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         async Task<IEnumerable<Notification>> INotificationRepository.GetUnseenForUserAsyc(
-            int userId)
+            string userId)
         {
-            return await _context.Notifications.Where(x => !x.IsSeen).ToListAsync();
+            return await _context
+                .Notifications
+                .Where(x => !x.IsSeen && x.AspNetUserId.Equals(userId))
+                .ToListAsync();
         }
 
         async Task INotificationRepository.UpdateAsync(Notification notification)

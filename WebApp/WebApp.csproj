@@ -51,6 +51,7 @@
     <None Remove="ClientApp\app\components\questions\questions.service.ts" />
     <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
+    <None Remove="ClientApp\app\services\notification.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,6 +87,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\notification.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,13 +1,28 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Notification, NotificationService } from '../../services/notification.service'
 @Component({
     selector: 'nav-menu',
     templateUrl: './navmenu.component.html',
     styleUrls: ['./navmenu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements AfterViewInit{
     private _userName: string;
+    private _notificationCount: number;
+    private _notifications: Notification[];
+
     @Output() loggedOut = new EventEmitter();
+
+    constructor(private notificationService: NotificationService) {
+
+    }
+
+    ngAfterViewInit() {
+        this.notificationService.getUnseenForUser()
+            .subscribe(result => {
+                this._notifications = result as Notification[];
+                this._notificationCount = this._notifications.length;
+            }, error => console.error(error));
+    }
 
     @Input()
     set userName(name: string) {
@@ -19,7 +34,11 @@ export class NavMenuComponent {
     }
 
     get notificationCount() {
-        return 19;
+        return this._notificationCount;
+    }
+
+    get notifications() {
+        return this._notifications
     }
 
     logoutClick() {

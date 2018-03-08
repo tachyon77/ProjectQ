@@ -18,6 +18,7 @@ import { AddQuestionFormComponent } from './components/questions/addquestion/add
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
 import { IdentityService } from './services/identity.service';
+import { NotificationService } from './services/notification.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
 import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
@@ -45,7 +46,9 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
     providers: [
         QuestionService,
         AnswerService,
-        IdentityService],
+        IdentityService,
+        NotificationService
+    ],
     imports: [
         CommonModule,
         HttpClientModule,
