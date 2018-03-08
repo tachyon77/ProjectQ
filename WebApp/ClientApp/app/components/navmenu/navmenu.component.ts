@@ -15,7 +15,11 @@ export class NavMenuComponent {
     }
 
     get userName() {
-        return this._userName
+        return this._userName;
+    }
+
+    get notificationCount() {
+        return 19;
     }
 
     logoutClick() {

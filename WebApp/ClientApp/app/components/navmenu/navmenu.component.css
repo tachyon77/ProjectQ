@@ -13,9 +13,24 @@
     border-bottom: 1px solid #e2e0e0;
 }
 
+.notification-badge {
+    position: relative;
+}
 
-
-
-
+.notification-badge[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    font-size: .7em;
+    background: #b70000;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow:none;
+}
 
 
