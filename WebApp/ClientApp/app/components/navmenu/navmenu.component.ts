@@ -17,6 +17,25 @@ export class NavMenuComponent implements AfterViewInit{
     }
 
     ngAfterViewInit() {
+
+        var scheme = "ws";
+        var port = document.location.port ? (":" + document.location.port) : "";
+        var connectionUrl = scheme + "://" + document.location.hostname + port + "/api/Notifications/ws";
+
+        var socket = new WebSocket(connectionUrl);
+        socket.onopen = function (event) {
+            console.log("connection open!");
+        };
+        socket.onclose = function (event) {
+            
+        };
+        socket.onerror = function (event) {
+            console.log("websocket errror.");
+        };
+        socket.onmessage = function (event) {
+            
+        };
+
         this.notificationService.getUnseenForUser()
             .subscribe(result => {
                 this._notifications = result as Notification[];

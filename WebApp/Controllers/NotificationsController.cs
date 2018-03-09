@@ -8,6 +8,7 @@ using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using System.Net.WebSockets;
 
 namespace WebApp.Controllers
 {
@@ -32,12 +33,28 @@ namespace WebApp.Controllers
             _userManager = userManager;
         }
         // GET: api/Notifications
-        [HttpGet]
+        [HttpGet("unseen")]
         async public Task<IEnumerable<Notification>> GetUnseen()
         {
             return  await _notificationManager
                 .GetForUserAsync(
                 _userManager.GetUserId(User));
+        }
+
+        // GET: api/Notifications/ws
+        [HttpGet("ws")]
+        async public Task GetWs()
+        {
+            var context = Request.HttpContext;
+            if (context.WebSockets.IsWebSocketRequest)
+            {
+                WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                Console.WriteLine(webSocket.ToString());
+            }
+            else
+            {
+                context.Response.StatusCode = 400;
+            }
         }
     }
 }

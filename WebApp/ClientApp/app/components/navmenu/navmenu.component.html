@@ -41,7 +41,9 @@
                     Notifications
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
+                    <div *ngFor="let notification of notifications">
+                        <a href="">{{notification.eventDescription}}</a>
+                    </div>
                 </div>
             </li>
 

@@ -13,7 +13,7 @@ export class NotificationService {
     }
 
     getUnseenForUser() {
-        return this.http.get('api/notifications/')
+        return this.http.get('api/notifications/unseen')
             .map(response => {
                 return response;
             });
