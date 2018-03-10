@@ -32,15 +32,15 @@
             <li class="nav-item dropdown"
                 [routerLinkActive]="['link-active']">
                 <div class="ppp">
-                    <a [ngClass]="{'nav-link': true, 'notification-badge': notificationCount}"
+                    <a [ngClass]=
+                       "{'nav-link': true, 'notification-badge': notificationCount, 'pointer-cursor': true}"
                        attr.data-badge={{notificationCount}}
                        (click)="toggleNotification()">
                         Notifications
                     </a>
                     <div class="ccc" *ngIf="isNotificationsVisible">
-                        <div *ngFor="let notification of notifications">
-                            <p>{{notification.eventDescription}}</p>
-                        </div>
+                        <notification-popover>
+                        </notification-popover>
                     </div>
                 </div>
             </li>

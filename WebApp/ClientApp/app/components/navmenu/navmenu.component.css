@@ -39,6 +39,14 @@
 
 .ccc{
     position:absolute;
-    top:2em;
+    background-color:white;
+    padding:1em;
+    border:1px solid lightgrey;
+    width:300px;
+    top:3em;
+    left:10px;
 }
 
+.pointer-cursor {
+    cursor: pointer;
+}

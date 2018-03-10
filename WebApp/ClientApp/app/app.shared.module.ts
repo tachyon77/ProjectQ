@@ -9,6 +9,7 @@ import { LandingPageComponent } from './components/landingpage/landingpage.compo
 import { LoginFormComponent } from './components/loginform/loginform.component';
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
@@ -31,6 +32,7 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         LoginFormComponent,
         RegistrationFormComponent,
         NavMenuComponent,
+        NotificationPopoverComponent,
         FocusDirective,
         ContentEditorComponent,
         QuestionDetailComponent,
