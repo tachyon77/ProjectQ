@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 export class Notification {
-    eventDescription: string;
+    id: number;
+    EventDescription: string;
+    OriginData: Date;
 }
 
 @Injectable()

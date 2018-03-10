@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.DAL;
 using ProjectQ.Model;
+using ProjectQ.BusinessLogic.Services;
 
 namespace ProjectQ.BusinessLogic
 {
@@ -11,13 +12,17 @@ namespace ProjectQ.BusinessLogic
     {
         #region Private Members
         private IUnitOfWork _unitOfWork;
+        private INotificationSender _notificationSender;
         #endregion
 
         #region Public Members
 
-        public AnswerManager(IUnitOfWork unitOfWork)
+        public AnswerManager(
+            IUnitOfWork unitOfWork,
+            INotificationSender notificationSender)
         {
             _unitOfWork = unitOfWork;
+            _notificationSender = notificationSender;
         }
 
         async Task<int> IAnswerManager.AddAsync(Answer answer, string userId)
@@ -35,18 +40,23 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
 
-            await _unitOfWork.NotificationRepository.AddAsync(
+            var notification =
                 new Notification()
                 {
                     IsSeen = false,
                     OriginDate = answer.OriginDate,
                     AspNetUserId = question.AspNetUserId,
-                    EventDescription = 
-                        "New answer for " + question.Title.Substring(0,25) + " ...",
-                }
-            );
+                    EventDescription =
+                        "New answer for " + question.Title.Substring(0, 25) + " ...",
+                };
+
+            await _unitOfWork.NotificationRepository.AddAsync(notification);
 
             await _unitOfWork.SaveAsync();
+
+            await _notificationSender.SendAsync(
+                new List<string>() { question.AspNetUserId }, 
+                notification);
 
             return answer.Id;
         }

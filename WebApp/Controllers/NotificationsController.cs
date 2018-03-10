@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
+using ProjectQ.BusinessLogic.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using System.Net.WebSockets;
+using System.Text;
+using System.Threading;
 
 namespace WebApp.Controllers
 {
@@ -18,6 +21,7 @@ namespace WebApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly INotificationManager _notificationManager;
+        private readonly INotificationSender _notificationSender;
 
         /// <summary>
         /// Dependency Injector Constructor.
@@ -26,11 +30,13 @@ namespace WebApp.Controllers
         /// <param name="questionManager"></param>
         public NotificationsController(
             INotificationManager notificationManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            INotificationSender notificationSender
             )
         {
             _notificationManager = notificationManager;
             _userManager = userManager;
+            _notificationSender = notificationSender;
         }
         // GET: api/Notifications
         [HttpGet("unseen")]
@@ -48,8 +54,24 @@ namespace WebApp.Controllers
             var context = Request.HttpContext;
             if (context.WebSockets.IsWebSocketRequest)
             {
-                WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                Console.WriteLine(webSocket.ToString());
+                var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                _notificationSender.Subscribe(
+                    _userManager.GetUserId(User), webSocket);
+
+                var data = "ping";
+                var encoded = Encoding.UTF8.GetBytes(data);
+                var buffer = new ArraySegment<Byte>(
+                    encoded, 0, encoded.Length);
+
+                while (true)
+                {
+                    await webSocket.SendAsync(
+                        buffer, WebSocketMessageType.Text,
+                        true,
+                        CancellationToken.None);
+
+                    Thread.Sleep(10000);
+                }
             }
             else
             {

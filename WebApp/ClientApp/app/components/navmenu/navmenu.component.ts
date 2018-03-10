@@ -7,13 +7,18 @@ import { Notification, NotificationService } from '../../services/notification.s
 })
 export class NavMenuComponent implements AfterViewInit{
     private _userName: string;
+    private _isNotificationsVisible: boolean;
     private _notificationCount: number;
     private _notifications: Notification[];
 
     @Output() loggedOut = new EventEmitter();
 
     constructor(private notificationService: NotificationService) {
+        this._notifications = [];
+    }
 
+    toggleNotification() {
+        this._isNotificationsVisible = !this._isNotificationsVisible;
     }
 
     ngAfterViewInit() {
@@ -32,8 +37,14 @@ export class NavMenuComponent implements AfterViewInit{
         socket.onerror = function (event) {
             console.log("websocket errror.");
         };
-        socket.onmessage = function (event) {
-            
+        socket.onmessage = (event) => {
+            console.log(event);
+            var data = event.data;
+            if (data != "ping")
+            {
+                var notification = JSON.parse(data) as Notification;
+                this._notifications.push(notification);
+            }
         };
 
         this.notificationService.getUnseenForUser()
@@ -41,6 +52,10 @@ export class NavMenuComponent implements AfterViewInit{
                 this._notifications = result as Notification[];
                 this._notificationCount = this._notifications.length;
             }, error => console.error(error));
+    }
+
+    get isNotificationsVisible() {
+        return this._isNotificationsVisible;
     }
 
     @Input()
@@ -53,7 +68,7 @@ export class NavMenuComponent implements AfterViewInit{
     }
 
     get notificationCount() {
-        return this._notificationCount;
+        return this._notifications.length;
     }
 
     get notifications() {

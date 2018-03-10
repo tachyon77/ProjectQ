@@ -31,28 +31,18 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown"
                 [routerLinkActive]="['link-active']">
-                <a [ngClass]="{'nav-link': true, 'notification-badge': notificationCount}"
-                   href=""
-                   id="navbarDropdownMenuLink"
-                   data-toggle="dropdown"
-                   aria-haspopup="true"
-                   aria-expanded="false"
-                   attr.data-badge={{notificationCount}}>
-                    Notifications
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <div *ngFor="let notification of notifications">
-                        <a href="">{{notification.eventDescription}}</a>
+                <div class="ppp">
+                    <a [ngClass]="{'nav-link': true, 'notification-badge': notificationCount}"
+                       attr.data-badge={{notificationCount}}
+                       (click)="toggleNotification()">
+                        Notifications
+                    </a>
+                    <div class="ccc" *ngIf="isNotificationsVisible">
+                        <div *ngFor="let notification of notifications">
+                            <p>{{notification.eventDescription}}</p>
+                        </div>
                     </div>
                 </div>
-
-                <button type="button" class="btn btn-secondary" 
-                        data-container="body" data-toggle="popover" 
-                        data-placement="bottom" 
-                        data-content="Hi there">
-                    Popover on bottom
-                </button>
-
             </li>
 
             <li class="nav-item"

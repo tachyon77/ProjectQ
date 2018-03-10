@@ -11,6 +11,7 @@ namespace ProjectQ.Model
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class Notification
     {
@@ -20,6 +21,7 @@ namespace ProjectQ.Model
         public System.DateTime OriginDate { get; set; }
         public string EventDescription { get; set; }
     
+        [JsonIgnore]
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

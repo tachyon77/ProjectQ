@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectQ.BusinessLogic;
+using ProjectQ.BusinessLogic.Services;
 using ProjectQ.DAL;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
@@ -97,6 +98,7 @@ namespace ProjectQ.WebApp
                 ProjectQ.DAL.EntityFramework.SqlServer.DbContext>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddSingleton<INotificationSender, NotificationSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
