@@ -17,6 +17,10 @@ export class NavMenuComponent implements AfterViewInit{
         this._notifications = [];
     }
 
+    onNotificationDismissed() {
+        this._isNotificationsVisible = false;
+    }
+
     toggleNotification() {
         this._isNotificationsVisible = !this._isNotificationsVisible;
     }

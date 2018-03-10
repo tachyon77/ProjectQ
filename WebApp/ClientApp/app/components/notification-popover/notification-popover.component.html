@@ -1,3 +1,6 @@
-<div *ngFor="let notification of notifications">
-    <p>{{notification.eventDescription}}</p>
+<div class="arrow-up"></div>
+<div *ngIf="visible" class="notification-popover">
+    <div *ngFor="let notification of notifications">
+        <p>{{notification.eventDescription}}</p>
+    </div>
 </div>

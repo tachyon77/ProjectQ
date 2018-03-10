@@ -1,22 +1,47 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Notification, NotificationService } from '../../services/notification.service'
 @Component({
     selector: 'notification-popover',
     templateUrl: './notification-popover.component.html',
-    styleUrls: ['./notification-popover.component.css']
+    styleUrls: ['./notification-popover.component.css'],
+    host: {
+        '(document:click)': 'onClick($event)',
+    },
 })
 export class NotificationPopoverComponent{
     private _notificationCount: number;
+    private fistClick: boolean = true;
+    public visible: boolean = true;
     private _notifications: Notification[];
 
-    constructor(private notificationService: NotificationService) {
-        this._notifications = [];
+    @Output() notificationDismissed = new EventEmitter();
 
+    constructor(
+        private notificationService: NotificationService,
+        private _eref: ElementRef
+    ) {
+        this._notifications = [];
+        this.visible = true;
+        this.fistClick = true;
         this.notificationService.getUnseenForUser()
             .subscribe(result => {
                 this._notifications = result as Notification[];
                 this._notificationCount = this._notifications.length;
             }, error => console.error(error));
+    }
+
+
+    onClick(event:any) {
+        if (!this._eref.nativeElement.contains(event.target)) {
+            if (!this.fistClick) {
+                this.notificationDismissed.emit();
+                this.visible = false;
+            }
+            else {
+                this.fistClick = false;
+            }
+        }
+            
     }
 
     get notificationCount() {

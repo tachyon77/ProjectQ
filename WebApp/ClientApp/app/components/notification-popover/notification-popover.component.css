@@ -1,1 +1,15 @@
+.notification-popover {
+    background-color: white;
+    padding: 1em;
+    border: 1px solid lightgrey;
+    width: 300px;
+}
 
+.arrow-up {
+    width: 0;
+    height: 0;
+    background-color: white;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid lightgrey;
+}

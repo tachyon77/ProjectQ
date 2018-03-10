@@ -33,18 +33,14 @@
     box-shadow:none;
 }
 
-.ppp{
+.notification-parent{
     position:relative;
 }
 
-.ccc{
+.notification-popover{
     position:absolute;
-    background-color:white;
-    padding:1em;
-    border:1px solid lightgrey;
-    width:300px;
-    top:3em;
-    left:10px;
+    left:20px;
+    top:2em;
 }
 
 .pointer-cursor {
