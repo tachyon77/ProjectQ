@@ -20,7 +20,9 @@ namespace ProjectQ.Model
         public bool IsSeen { get; set; }
         public System.DateTime OriginDate { get; set; }
         public string EventDescription { get; set; }
-    
+        public string Link { get; set; }
+
+
         [JsonIgnore]
         public virtual AspNetUser AspNetUser { get; set; }
     }

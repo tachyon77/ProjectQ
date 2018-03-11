@@ -5,5 +5,6 @@
     [IsSeen] BIT NOT NULL DEFAULT 0, 
     [OriginDate] DATETIME NOT NULL, 
     [EventDescription] NVARCHAR(MAX) NOT NULL, 
+    [Link] NVARCHAR(450) NULL, 
     CONSTRAINT [FK_Notifications_AspNetUsers] FOREIGN KEY ([AspNetUserId]) REFERENCES [AspNetUsers]([Id]) ON DELETE CASCADE
 )

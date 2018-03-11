@@ -2,10 +2,11 @@
     <div class="notification-content">
         <div *ngFor="let notification of notifications">
             <p class="pointer-cursor" (click)="onNotificationClick(notification.link)">
-                <em>
+                <a href={{notification.link}}>
                     {{notification.eventDescription}}
-                </em>
+                </a>
             </p>
+            <hr />
         </div>
     </div>
 </div>

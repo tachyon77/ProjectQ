@@ -47,7 +47,8 @@ namespace ProjectQ.BusinessLogic
                     OriginDate = answer.OriginDate,
                     AspNetUserId = question.AspNetUserId,
                     EventDescription =
-                        "New answer for " + question.Title.Substring(0, 25) + " ...",
+                        "New answer for \"" + question.Title.Substring(0, 25) + " ...\"",
+                    Link = "/question-detail/" + question.Id
                 };
 
             await _unitOfWork.NotificationRepository.AddAsync(notification);

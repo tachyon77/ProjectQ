@@ -21,14 +21,15 @@
 .notification-content{
     padding:1em;
     overflow-y:scroll;
-    height:300px;
+    height:auto;
+    max-height:300px;
 }
 
 .arrow_box {
     position: relative;
     background: white;
     border: 1px solid lightgray;
-    width: 300px;
+    width: 400px;
     height:auto;
 }
 
@@ -56,3 +57,25 @@
         border-width: 8px;
         margin-left: -8px;
     }
+
+
+a:link {
+    color: black;
+    font-weight:400;
+}
+
+/* visited link */
+a:visited {
+    color:black;
+    font-weight:400;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}

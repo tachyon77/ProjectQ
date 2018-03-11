@@ -6,6 +6,7 @@ export class Notification {
     id: number;
     EventDescription: string;
     OriginData: Date;
+    Link: string;
 }
 
 @Injectable()
