@@ -126,4 +126,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AspNetUserId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="561ba079-8a19-45dd-bc19-e39e9e79a5a5" ChangeDateTime="03/11/2018 21:05:05">
+    <Property Name="ElementName" Value="[dbo].[AnswerLikes].[Asp]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerLikes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AspNetUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="79847653-a564-4600-9044-324ddf09aae0" ChangeDateTime="03/11/2018 21:06:28">
+    <Property Name="ElementName" Value="[dbo].[AnswerLikes].[Rate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerLikes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Score" />
+  </Operation>
 </Operations>

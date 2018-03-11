@@ -12,26 +12,17 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Answer
+    public partial class AnswerLike
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Answer()
-        {
-            this.AnswerLikes = new HashSet<AnswerLike>();
-        }
-    
         public int Id { get; set; }
-        public int QuestionId { get; set; }
         public string AspNetUserId { get; set; }
-        public string text { get; set; }
+        public int AnswerId { get; set; }
         public System.DateTime OriginDate { get; set; }
-        public bool IsPrivate { get; set; }
-        public System.DateTime ExpiryDate { get; set; }
+        public System.DateTime LastUpdated { get; set; }
         public bool IsDeleted { get; set; }
+        public int Score { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerLike> AnswerLikes { get; set; }
+        public virtual Answer Answer { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Question Question { get; set; }
     }
 }

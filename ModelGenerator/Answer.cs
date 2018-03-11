@@ -14,6 +14,12 @@ namespace ProjectQ.Model
     
     public partial class Answer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Answer()
+        {
+            this.AnswerLikes = new HashSet<AnswerLike>();
+        }
+    
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public string AspNetUserId { get; set; }
@@ -23,6 +29,8 @@ namespace ProjectQ.Model
         public System.DateTime ExpiryDate { get; set; }
         public bool IsDeleted { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnswerLike> AnswerLikes { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Question Question { get; set; }
     }

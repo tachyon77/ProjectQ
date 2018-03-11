@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProjectQModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerLikes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="AnswerId" Type="int" Nullable="false" />
+          <Property Name="OriginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="Id" />
@@ -17,6 +29,15 @@
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -47,6 +68,7 @@
           <Property Name="IsSeen" Type="bit" Nullable="false" />
           <Property Name="OriginDate" Type="datetime" Nullable="false" />
           <Property Name="EventDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="450" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -62,6 +84,32 @@
           <Property Name="HasMinQualification" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AnswerLikes_Answers">
+          <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
+          <End Role="AnswerLikes" Type="Self.AnswerLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerLikes">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerLikes_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnswerLikes" Type="Self.AnswerLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerLikes">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Answers_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -117,10 +165,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProjectQModelStoreContainer">
+          <EntitySet Name="AnswerLikes" EntityType="Self.AnswerLikes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnswerLikes_Answers" Association="Self.FK_AnswerLikes_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="AnswerLikes" EntitySet="AnswerLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerLikes_AspNetUsers" Association="Self.FK_AnswerLikes_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AnswerLikes" EntitySet="AnswerLikes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Answers_AspNetUsers" Association="Self.FK_Answers_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Answers" EntitySet="Answers" />
@@ -143,10 +201,20 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectQModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProjectQEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnswerLikes" EntityType="ProjectQModel.AnswerLike" />
           <EntitySet Name="Answers" EntityType="ProjectQModel.Answer" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="ProjectQModel.AspNetRoleClaim" />
           <EntitySet Name="AspNetUsers" EntityType="ProjectQModel.AspNetUser" />
           <EntitySet Name="Notifications" EntityType="ProjectQModel.Notification" />
           <EntitySet Name="Questions" EntityType="ProjectQModel.Question" />
+          <AssociationSet Name="FK_AnswerLikes_Answers" Association="ProjectQModel.FK_AnswerLikes_Answers">
+            <End Role="Answer" EntitySet="Answers" />
+            <End Role="AnswerLike" EntitySet="AnswerLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerLikes_AspNetUsers" Association="ProjectQModel.FK_AnswerLikes_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AnswerLike" EntitySet="AnswerLikes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Answers_AspNetUsers" Association="ProjectQModel.FK_Answers_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Answer" EntitySet="Answers" />
@@ -164,6 +232,20 @@
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AnswerLike">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerId" Type="Int32" Nullable="false" />
+          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerLikes_Answers" FromRole="AnswerLike" ToRole="Answer" />
+          <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_AnswerLikes_AspNetUsers" FromRole="AnswerLike" ToRole="AspNetUser" />
+        </EntityType>
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="Id" />
@@ -176,8 +258,18 @@
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AnswerLikes" Relationship="ProjectQModel.FK_AnswerLikes_Answers" FromRole="Answer" ToRole="AnswerLike" />
           <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Answers_AspNetUsers" FromRole="Answer" ToRole="AspNetUser" />
           <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -198,6 +290,7 @@
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnswerLikes" Relationship="ProjectQModel.FK_AnswerLikes_AspNetUsers" FromRole="AspNetUser" ToRole="AnswerLike" />
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_AspNetUsers" FromRole="AspNetUser" ToRole="Answer" />
           <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_AspNetUsers" FromRole="AspNetUser" ToRole="Notification" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_AspNetUsers" FromRole="AspNetUser" ToRole="Question" />
@@ -211,6 +304,7 @@
           <Property Name="IsSeen" Type="Boolean" Nullable="false" />
           <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EventDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Notifications_AspNetUsers" FromRole="Notification" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Question">
@@ -229,6 +323,32 @@
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Question" ToRole="Answer" />
           <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Questions_AspNetUsers" FromRole="Question" ToRole="AspNetUser" />
         </EntityType>
+        <Association Name="FK_AnswerLikes_Answers">
+          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerLike" Role="AnswerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerLike">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerLikes_AspNetUsers">
+          <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectQModel.AnswerLike" Role="AnswerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerLike">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Answers_AspNetUsers">
           <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -289,6 +409,19 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProjectQModelStoreContainer" CdmEntityContainer="ProjectQEntities">
+          <EntitySetMapping Name="AnswerLikes">
+            <EntityTypeMapping TypeName="ProjectQModel.AnswerLike">
+              <MappingFragment StoreEntitySet="AnswerLikes">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Answers">
             <EntityTypeMapping TypeName="ProjectQModel.Answer">
               <MappingFragment StoreEntitySet="Answers">
@@ -299,6 +432,16 @@
                 <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoleClaims">
+            <EntityTypeMapping TypeName="ProjectQModel.AspNetRoleClaim">
+              <MappingFragment StoreEntitySet="AspNetRoleClaims">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -327,6 +470,7 @@
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="ProjectQModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
                 <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
                 <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
