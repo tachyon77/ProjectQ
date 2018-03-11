@@ -13,6 +13,8 @@ export class AnswerCardComponent {
     private _answer: Answer;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
+    public rating: boolean[];
+
 
     @Input()
     set answer(answer: Answer) {
@@ -20,6 +22,17 @@ export class AnswerCardComponent {
         this.answerContent =
             this.sanitizer.bypassSecurityTrustHtml(answer.text);
     }
+
+    rate(score: number) {
+        console.log("Rated: " + score+1);
+
+        for (var i = 0; i < 6; i++) {
+            this.rating[i] = false;
+        }
+        this.rating[score] = true;
+    }
+
+
 
     get answer() {
         return this._answer; 
@@ -30,6 +43,7 @@ export class AnswerCardComponent {
         private sanitizer: DomSanitizer
     ) {
         this.isUpdateAnswerVisible = false;
+        this.rating = [false, false, false, false, false, true];
     }
 
     OnEditClick() {

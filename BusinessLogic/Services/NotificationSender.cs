@@ -43,6 +43,11 @@ namespace ProjectQ.BusinessLogic.Services
             IEnumerable<string> userIds, 
             Notification notification)
         {
+            var data = ToJson(notification);
+            var encoded = Encoding.UTF8.GetBytes(data);
+            var buffer = new ArraySegment<Byte>(
+                encoded, 0, encoded.Length);
+
             foreach (var userId in userIds)
             {
                 if(_websockets.ContainsKey(userId))
@@ -51,11 +56,6 @@ namespace ProjectQ.BusinessLogic.Services
                     {
                         if (ws.State.Equals(WebSocketState.Open))
                         {
-                            var data = ToJson(notification);
-                            var encoded = Encoding.UTF8.GetBytes(data);
-                            var buffer = new ArraySegment<Byte>(
-                                encoded, 0, encoded.Length);
-
                             await ws.SendAsync(
                                 buffer, WebSocketMessageType.Text,
                                 true,

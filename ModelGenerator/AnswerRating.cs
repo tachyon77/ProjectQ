@@ -12,7 +12,7 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerLike
+    public partial class AnswerRating
     {
         public int Id { get; set; }
         public string AspNetUserId { get; set; }
@@ -20,7 +20,7 @@ namespace ProjectQ.Model
         public System.DateTime OriginDate { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public bool IsDeleted { get; set; }
-        public int Score { get; set; }
+        public int Rating { get; set; }
     
         public virtual Answer Answer { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

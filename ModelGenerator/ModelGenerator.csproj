@@ -52,10 +52,7 @@
     <Compile Include="Answer.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
-    <Compile Include="AnswerLike.cs">
-      <DependentUpon>EntityData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetRoleClaim.cs">
+    <Compile Include="AnswerRating.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUser.cs">

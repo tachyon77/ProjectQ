@@ -17,7 +17,7 @@ namespace ProjectQ.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
-            this.AnswerLikes = new HashSet<AnswerLike>();
+            this.AnswerRatings = new HashSet<AnswerRating>();
             this.Answers = new HashSet<Answer>();
             this.Notifications = new HashSet<Notification>();
             this.Questions = new HashSet<Question>();
@@ -40,7 +40,7 @@ namespace ProjectQ.Model
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerLike> AnswerLikes { get; set; }
+        public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

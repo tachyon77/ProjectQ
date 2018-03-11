@@ -17,7 +17,7 @@ namespace ProjectQ.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Answer()
         {
-            this.AnswerLikes = new HashSet<AnswerLike>();
+            this.AnswerRatings = new HashSet<AnswerRating>();
         }
     
         public int Id { get; set; }
@@ -30,7 +30,7 @@ namespace ProjectQ.Model
         public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerLike> AnswerLikes { get; set; }
+        public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Question Question { get; set; }
     }

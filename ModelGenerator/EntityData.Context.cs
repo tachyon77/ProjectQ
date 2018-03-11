@@ -25,9 +25,8 @@ namespace ProjectQ.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AnswerLike> AnswerLikes { get; set; }
+        public virtual DbSet<AnswerRating> AnswerRatings { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
-        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
