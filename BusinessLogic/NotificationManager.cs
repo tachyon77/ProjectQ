@@ -29,9 +29,13 @@ namespace ProjectQ.BusinessLogic
                 .GetUnseenForUserAsyc(userId);
         }
 
-        Task INotificationManager.UpdateAsync(Notification notification)
+        async Task INotificationManager.MarkSeenAsync(int id)
         {
-            throw new NotImplementedException();
+            var notification = await _unitOfWork
+                .NotificationRepository.GetByIdAsync(id);
+            notification.IsSeen = true;
+
+            await _unitOfWork.SaveAsync();
         }
 
 

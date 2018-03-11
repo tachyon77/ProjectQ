@@ -23,15 +23,16 @@ export class NotificationPopoverComponent{
         this._notifications = [];
         this.visible = true;
         this.fistClick = true;
-        this.notificationService.getUnseenForUser()
+        this.notificationService.getUnseen()
             .subscribe(result => {
                 this._notifications = result as Notification[];
                 this._notificationCount = this._notifications.length;
             }, error => console.error(error));
     }
 
-    onNotificationClick(link: string) {
-        
+    onNotificationClick(id: number) {
+        this.notificationService.markAsSeen(id)
+            .subscribe(result => { });
     }
 
     onClick(event:any) {

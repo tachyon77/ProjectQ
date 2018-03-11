@@ -15,8 +15,16 @@ export class NotificationService {
     constructor(private http: HttpClient) {
     }
 
-    getUnseenForUser() {
+    getUnseen() {
         return this.http.get('api/notifications/unseen')
+            .map(response => {
+                return response;
+            });
+    }
+
+    markAsSeen(id: number) {
+        console.log('marking as seen:' + id);
+        return this.http.post('api/notifications/markseen', id)
             .map(response => {
                 return response;
             });

@@ -8,7 +8,7 @@ namespace ProjectQ.BusinessLogic
 {
     public interface INotificationManager
     { 
-        Task UpdateAsync(Notification notification);
+        Task MarkSeenAsync(int id);
         Task<IEnumerable<Notification>> GetForUserAsync(string userId);
     }
 }

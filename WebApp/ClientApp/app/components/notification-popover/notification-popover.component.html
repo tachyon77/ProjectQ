@@ -1,7 +1,7 @@
 <div *ngIf="visible" class="arrow_box">
     <div class="notification-content">
         <div *ngFor="let notification of notifications">
-            <p class="pointer-cursor" (click)="onNotificationClick(notification.link)">
+            <p class="pointer-cursor" (click)="onNotificationClick(notification.id)">
                 <a href={{notification.link}}>
                     {{notification.eventDescription}}
                 </a>

@@ -47,6 +47,13 @@ namespace WebApp.Controllers
                 _userManager.GetUserId(User));
         }
 
+        // POST: api/Notifications
+        [HttpPost("markseen")]
+        async public Task MarkSeen([FromBody] int id)
+        {
+            await _notificationManager.MarkSeenAsync(id);
+        }
+
         // GET: api/Notifications/ws
         [HttpGet("ws")]
         async public Task GetWs()

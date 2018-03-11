@@ -25,6 +25,11 @@ namespace ProjectQ.DAL.EntityFramework
             await _context.Notifications.AddAsync(notification);
         }
 
+        async Task<Notification> INotificationRepository.GetByIdAsync(int id)
+        {
+            return await _context.Notifications.FindAsync(id);
+        }
+
         async Task<IEnumerable<Notification>> INotificationRepository.GetUnseenForUserAsyc(
             string userId)
         {

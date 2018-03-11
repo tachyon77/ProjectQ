@@ -51,7 +51,7 @@ export class NavMenuComponent implements AfterViewInit{
             }
         };
 
-        this.notificationService.getUnseenForUser()
+        this.notificationService.getUnseen()
             .subscribe(result => {
                 this._notifications = result as Notification[];
                 this._notificationCount = this._notifications.length;
