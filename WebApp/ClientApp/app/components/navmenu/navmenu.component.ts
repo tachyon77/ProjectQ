@@ -35,8 +35,9 @@ export class NavMenuComponent implements AfterViewInit{
         socket.onopen = function (event) {
             console.log("connection open!");
         };
+
         socket.onclose = function (event) {
-            
+            console.log("webscocket closed.");
         };
         socket.onerror = function (event) {
             console.log("websocket errror.");

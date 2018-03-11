@@ -9,6 +9,7 @@ namespace ProjectQ.BusinessLogic.Services
 {
     public interface INotificationSender
     {
+        void Unsubscribe(string userId, WebSocket webSocket);
         void Subscribe(string userId, WebSocket webSocket);
         Task SendAsync(
             IEnumerable<string> recipientUserIds, 

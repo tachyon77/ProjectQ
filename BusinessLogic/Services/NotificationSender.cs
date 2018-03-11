@@ -50,11 +50,22 @@ namespace ProjectQ.BusinessLogic.Services
                         }
                         else
                         {
-                            _websockets[userId].Remove(ws);
-                            if (!_websockets[userId].Any())
-                                _websockets.Remove(userId);
+                            ((INotificationSender)this).Unsubscribe(userId, ws);
                         }
                     }
+                }
+            }
+        }
+
+        void INotificationSender.Unsubscribe(string userId, WebSocket webSocket)
+        {
+            if (_websockets.ContainsKey(userId))
+            {
+                if (_websockets[userId].Contains(webSocket))
+                {
+                    _websockets[userId].Remove(webSocket);
+                    if (!_websockets[userId].Any())
+                        _websockets.Remove(userId);
                 }
             }
         }

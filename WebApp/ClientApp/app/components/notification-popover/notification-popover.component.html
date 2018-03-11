@@ -1,6 +1,6 @@
 <div *ngIf="visible" class="arrow_box">
     <div class="notification-content">
-        <div *ngIf="!notifications.length">
+        <div *ngIf="!notifications.length" class="text-center">
             <span class="text-muted">No unread notifications.</span>
         </div>
         <div *ngFor="let notification of notifications">

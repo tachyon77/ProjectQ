@@ -70,7 +70,7 @@ namespace WebApp.Controllers
                 var buffer = new ArraySegment<Byte>(
                     encoded, 0, encoded.Length);
 
-                while (true)
+                while (!context.RequestAborted.IsCancellationRequested)
                 {
                     await webSocket.SendAsync(
                         buffer, WebSocketMessageType.Text,
@@ -79,6 +79,8 @@ namespace WebApp.Controllers
 
                     Thread.Sleep(10000);
                 }
+                _notificationSender.Unsubscribe(
+                    _userManager.GetUserId(User), webSocket);
             }
             else
             {
