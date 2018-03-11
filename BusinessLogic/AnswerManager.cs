@@ -40,14 +40,18 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
 
+            var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
             var notification =
                 new Notification()
                 {
                     IsSeen = false,
                     OriginDate = answer.OriginDate,
                     AspNetUserId = question.AspNetUserId,
+
                     EventDescription =
-                        "New answer for \"" + question.Title.Substring(0, 25) + " ...\"",
+                        "New answer for \"" 
+                        + question.Title.Substring(0, notificationLength) 
+                        + " ...\"",
                     Link = "/question-detail/" + question.Id
                 };
 

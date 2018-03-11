@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Moq;
 using ProjectQ.DAL;
 using ProjectQ.Model;
+using ProjectQ.BusinessLogic.Services;
 
 namespace ProjectQ.BusinessLogic.Tests
 {
@@ -17,6 +18,7 @@ namespace ProjectQ.BusinessLogic.Tests
         private Mock<IUserRepository> _mockUserRepo;
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
+        private Mock<INotificationSender> _mockNS;
 
         [SetUp]
         public void Setup()
@@ -24,6 +26,7 @@ namespace ProjectQ.BusinessLogic.Tests
             _mockQuestionRepo = new Mock<IQuestionRepository>();
             _mockAnswerRepo = new Mock<IAnswerRepository>();
             _mockUserRepo = new Mock<IUserRepository>();
+            _mockNS = new Mock<INotificationSender>();
 
             _mockUoW = new Mock<IUnitOfWork>();
 
@@ -39,7 +42,7 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Setup(x => x.SaveAsync())
                 .Returns(Task.CompletedTask);
 
-            _sut = new AnswerManager(_mockUoW.Object);
+            _sut = new AnswerManager(_mockUoW.Object, _mockNS.Object);
         }
         
         [Test]
