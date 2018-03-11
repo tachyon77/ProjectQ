@@ -1,5 +1,8 @@
 <div *ngIf="visible" class="arrow_box">
     <div class="notification-content">
+        <div *ngIf="!notifications.length">
+            <span class="text-muted">No unread notifications.</span>
+        </div>
         <div *ngFor="let notification of notifications">
             <p class="pointer-cursor" (click)="onNotificationClick(notification.id)">
                 <a href={{notification.link}}>
