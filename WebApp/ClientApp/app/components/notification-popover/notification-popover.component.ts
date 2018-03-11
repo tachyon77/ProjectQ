@@ -30,6 +30,9 @@ export class NotificationPopoverComponent{
             }, error => console.error(error));
     }
 
+    onNotificationClick(link: string) {
+        
+    }
 
     onClick(event:any) {
         if (!this._eref.nativeElement.contains(event.target)) {

@@ -39,8 +39,8 @@
 
 .notification-popover{
     position:absolute;
-    left:20px;
-    top:2em;
+    left:-80px;
+    top:2.5em;
 }
 
 .pointer-cursor {

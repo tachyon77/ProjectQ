@@ -13,3 +13,46 @@
     border-right: 7px solid transparent;
     border-bottom: 10px solid lightgrey;
 }
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.notification-content{
+    padding:1em;
+    overflow-y:scroll;
+    height:300px;
+}
+
+.arrow_box {
+    position: relative;
+    background: white;
+    border: 1px solid lightgray;
+    width: 300px;
+    height:auto;
+}
+
+    .arrow_box:after, .arrow_box:before {
+        bottom: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .arrow_box:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-bottom-color: white;
+        border-width: 5px;
+        margin-left: -5px;
+    }
+
+    .arrow_box:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-bottom-color: lightgray;
+        border-width: 8px;
+        margin-left: -8px;
+    }

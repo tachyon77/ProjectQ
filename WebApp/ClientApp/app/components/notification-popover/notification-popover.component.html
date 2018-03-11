@@ -1,6 +1,12 @@
-<div class="arrow-up"></div>
-<div *ngIf="visible" class="notification-popover">
-    <div *ngFor="let notification of notifications">
-        <p>{{notification.eventDescription}}</p>
+<div *ngIf="visible" class="arrow_box">
+    <div class="notification-content">
+        <div *ngFor="let notification of notifications">
+            <p class="pointer-cursor" (click)="onNotificationClick(notification.link)">
+                <em>
+                    {{notification.eventDescription}}
+                </em>
+            </p>
+        </div>
     </div>
 </div>
+
