@@ -7,14 +7,15 @@ using ProjectQ.Model;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace ProjectQ.BusinessLogic.Services
 {
     public class NotificationSender : INotificationSender
     {
         #region private fields
-        private Dictionary<string, List<WebSocket>> _websockets
-            = new Dictionary<string, List<WebSocket>>();
+        private ConcurrentDictionary<string, List<WebSocket>> _websockets
+            = new ConcurrentDictionary<string, List<WebSocket>>();
         #endregion
 
         void INotificationSender.Subscribe(string userId, WebSocket webSocket)
@@ -23,6 +24,19 @@ namespace ProjectQ.BusinessLogic.Services
                 _websockets[userId] = new List<WebSocket>();
 
             _websockets[userId].Add(webSocket);
+        }
+
+        private string ToJson(Notification notification)
+        {
+            var settings = new JsonSerializerSettings();
+            settings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            settings.Formatting = Formatting.Indented;
+
+            // Do the serialization and output to the console
+            string json = JsonConvert.SerializeObject(notification, settings);
+
+            return json;
         }
 
         async Task INotificationSender.SendAsync(
@@ -37,7 +51,7 @@ namespace ProjectQ.BusinessLogic.Services
                     {
                         if (ws.State.Equals(WebSocketState.Open))
                         {
-                            var data = JsonConvert.SerializeObject(notification);
+                            var data = ToJson(notification);
                             var encoded = Encoding.UTF8.GetBytes(data);
                             var buffer = new ArraySegment<Byte>(
                                 encoded, 0, encoded.Length);
@@ -65,7 +79,10 @@ namespace ProjectQ.BusinessLogic.Services
                 {
                     _websockets[userId].Remove(webSocket);
                     if (!_websockets[userId].Any())
-                        _websockets.Remove(userId);
+                    {
+                        List<WebSocket> value;
+                        _websockets.TryRemove(userId, out value);
+                    }
                 }
             }
         }
