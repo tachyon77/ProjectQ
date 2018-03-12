@@ -82,7 +82,7 @@ namespace ProjectQ.BusinessLogic
 
         Task<Answer> IAnswerManager.GetById(int id)
         {
-            return _unitOfWork.AnswerRepository.GetById(id);
+            return _unitOfWork.AnswerRepository.GetByIdAsync(id);
         }
 
         bool IAnswerManager.AnswerExists(int id)

@@ -11,6 +11,7 @@ namespace ProjectQ.DAL
         IQuestionRepository QuestionRepository { get; }
         IAnswerRepository AnswerRepository { get; }
         INotificationRepository NotificationRepository { get; }
+        IAnswerRatingRepository AnswerRatingRepository { get; }
         Task SaveAsync();
     }
 }

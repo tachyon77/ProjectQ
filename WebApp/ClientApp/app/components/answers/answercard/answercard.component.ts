@@ -1,5 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AnswerService, Answer } from '../answers.service'
+import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
@@ -30,9 +31,13 @@ export class AnswerCardComponent {
             this.rating[i] = false;
         }
         this.rating[score] = true;
+
+        var answerRating = new AnswerRating();
+        answerRating.AnswerId = this._answer.id;
+        answerRating.Rating = score;
+        this.answerRatingService.postRating(answerRating)
+            .subscribe((result) => { });
     }
-
-
 
     get answer() {
         return this._answer; 
@@ -40,6 +45,7 @@ export class AnswerCardComponent {
 
     constructor(
         private answerService: AnswerService,
+        private answerRatingService: AnswerRatingService,
         private sanitizer: DomSanitizer
     ) {
         this.isUpdateAnswerVisible = false;

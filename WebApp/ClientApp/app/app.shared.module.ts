@@ -18,6 +18,7 @@ import { DisplayQuestionsComponent } from './components/questions/displayquestio
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { QuestionService } from './components/questions/questions.service';
 import { AnswerService } from './components/answers/answers.service';
+import { AnswerRatingService } from './services/answerrating.service';
 import { IdentityService } from './services/identity.service';
 import { NotificationService } from './services/notification.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
@@ -49,7 +50,8 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         QuestionService,
         AnswerService,
         IdentityService,
-        NotificationService
+        NotificationService,
+        AnswerRatingService
     ],
     imports: [
         CommonModule,

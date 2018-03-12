@@ -15,6 +15,7 @@ namespace ProjectQ.DAL.EntityFramework
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
         private IAnswerRepository _answerRepository;
+        private IAnswerRatingRepository _answerRatingRepository;
         private INotificationRepository _notificationRepository;
 
         public UnitOfWork(ProjectQEntities context)
@@ -45,7 +46,19 @@ namespace ProjectQ.DAL.EntityFramework
                 return _answerRepository;
             }
         }
-        
+
+        IAnswerRatingRepository IUnitOfWork.AnswerRatingRepository
+        {
+            get
+            {
+                if (_answerRatingRepository == null)
+                {
+                    _answerRatingRepository = new AnswerRatingRepository(_context);
+                }
+                return _answerRatingRepository;
+            }
+        }
+
         INotificationRepository IUnitOfWork.NotificationRepository
         {
             get

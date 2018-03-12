@@ -40,9 +40,9 @@ namespace ProjectQ.DAL.EntityFramework
             return answers;                          
         }
 
-        Task<Answer> IAnswerRepository.GetById(int id)
+        async Task<Answer> IAnswerRepository.GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Answers.FindAsync(id);
         }
 
         async Task IAnswerRepository.UpdateAsync(Answer answer)

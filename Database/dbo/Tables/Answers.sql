@@ -3,7 +3,7 @@
     [QuestionId] INT           NOT NULL,
     [AspNetUserId]     NVARCHAR(450)           NOT NULL,
     [Text]        VARCHAR (MAX) NOT NULL,
-    [OriginDate] DATE          NOT NULL,
+    [OriginDate] DATETIME          NOT NULL,
     [IsPrivate]  BIT           NOT NULL,
     [ExpiryDate] DATE          NOT NULL,
     [IsDeleted] BIT NOT NULL DEFAULT 0, 
