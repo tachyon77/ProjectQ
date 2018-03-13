@@ -36,10 +36,10 @@ namespace ProjectQ.DAL.EntityFramework
         async Task<IEnumerable<QuestionPreview>> IQuestionRepository.GetAll()
         {
             var data = await (from question in _context.Questions
-                   .Include(x => x.AspNetUser)
                    .Where(x => !x.IsDeleted)
                          select new QuestionPreview()
                          {
+                             Asker = question.AspNetUser,
                              Question = question,
                              AnswerCount = question.Answers != null? question.Answers.Where(a=>!a.IsDeleted).Count() : 0,
                              PreviewAnswer = 

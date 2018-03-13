@@ -12,7 +12,7 @@ export interface Question {
     isDeleted: boolean;
     offeredPrice: number;
     OriginDate: Date;
-    aspNetUser: AspNetUser;
+    Asker: AspNetUser;
 }
 
 export interface QuestionPreview {

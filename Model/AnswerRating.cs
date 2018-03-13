@@ -12,7 +12,7 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerRating
+    using Newtonsoft.Json; public partial class AnswerRating
     {
         public int Id { get; set; }
         public string AspNetUserId { get; set; }
@@ -22,7 +22,7 @@ namespace ProjectQ.Model
         public bool IsDeleted { get; set; }
         public int Rating { get; set; }
     
-        public virtual Answer Answer { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
+        [JsonIgnore] public virtual Answer Answer { get; set; }
+        [JsonIgnore] public virtual AspNetUser AspNetUser { get; set; }
     }
 }
