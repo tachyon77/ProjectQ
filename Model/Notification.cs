@@ -12,7 +12,7 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    using Newtonsoft.Json; public partial class Notification
+    public partial class Notification
     {
         public int Id { get; set; }
         public string AspNetUserId { get; set; }
@@ -21,6 +21,6 @@ namespace ProjectQ.Model
         public string EventDescription { get; set; }
         public string Link { get; set; }
     
-        [JsonIgnore] public virtual AspNetUser AspNetUser { get; set; }
+         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

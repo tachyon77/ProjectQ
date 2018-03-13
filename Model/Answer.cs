@@ -12,7 +12,7 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    using Newtonsoft.Json; public partial class Answer
+    public partial class Answer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Answer()
@@ -30,8 +30,8 @@ namespace ProjectQ.Model
         public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore] public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
-        [JsonIgnore] public virtual AspNetUser AspNetUser { get; set; }
-        [JsonIgnore] public virtual Question Question { get; set; }
+         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
+         public virtual AspNetUser AspNetUser { get; set; }
+         public virtual Question Question { get; set; }
     }
 }
