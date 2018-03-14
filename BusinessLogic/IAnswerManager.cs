@@ -10,7 +10,7 @@ namespace ProjectQ.BusinessLogic
     {
         Task<int> AddAsync(Answer answer, string userId);
         Task UpdateAsync(Answer answer);
-        Task<IEnumerable<Answer>> GetForQuestionAsync(int questionId);
+        Task<IEnumerable<AnswerDetail>> GetForQuestionAsync(int questionId);
         Task<Answer> GetById(int id);
         bool AnswerExists(int id);
     }

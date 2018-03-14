@@ -12,6 +12,11 @@ export class Answer {
     aspNetUser: AspNetUser;
 }
 
+export class AnswerDetail {
+    answer: Answer;
+    answerer: AspNetUser;
+}
+
 @Injectable()
 export class AnswerService {
     constructor(

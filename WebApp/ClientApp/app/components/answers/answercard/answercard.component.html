@@ -1,10 +1,10 @@
-﻿<p *ngIf="!answer"><em>Loading...</em></p>
-<div *ngIf="answer" class="answer-card">
+﻿<p *ngIf="!answerDetail"><em>Loading...</em></p>
+<div *ngIf="answerDetail" class="answer-card">
 
     <div *ngIf="!isUpdateAnswerVisible">
-        <div class="answer-user" *ngIf="answer.aspNetUser">
-            {{answer.aspNetUser.email}}
-            <div class="answer-date">Answered on {{answer.originDate}}</div>
+        <div class="answer-user" *ngIf="answerDetail.answerer">
+            {{answerDetail.answerer.email}}
+            <div class="answer-date">Answered on {{answerDetail.answer.originDate}}</div>
         </div>
 
         <div class="rating" *ngIf="rating[5]">
@@ -53,7 +53,7 @@
         <div [innerHTML]="answerContent"
              [ngClass]="{
              'answer-content': true,
-             'deleted-answer': answer.isDeleted}">
+             'deleted-answer': answerDetail.answer.isDeleted}">
         </div>
         <button class="btn btn-default"
                 (click)="OnEditClick()">
@@ -61,13 +61,13 @@
         </button>
         <button class="btn btn-default"
                 (click)="OnDeleteClick()">
-            <span *ngIf="answer.isDeleted">Undelete</span>
-            <span *ngIf="!answer.isDeleted">Delete</span>
+            <span *ngIf="answerDetail.answer.isDeleted">Undelete</span>
+            <span *ngIf="!answerDetail.answer.isDeleted">Delete</span>
         </button>
     </div>
 
     <div *ngIf="isUpdateAnswerVisible">
-        <update-answer [answer]="answer"
+        <update-answer [answer]="answerDeail.answer"
                        (answerUpdated)="onAnswerUpdated($event)">
         </update-answer>
     </div>

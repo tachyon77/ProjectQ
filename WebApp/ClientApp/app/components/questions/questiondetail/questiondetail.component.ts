@@ -2,7 +2,7 @@
     from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AnswerService, Answer } from '../../answers/answers.service'
+import { AnswerService, Answer, AnswerDetail } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
 import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
@@ -13,7 +13,7 @@ import { IdentityService, AspNetUser } from '../../../services/identity.service'
 })
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
-    public answers: Answer[];
+    public answerDetails: AnswerDetail[];
     public question: Question;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
@@ -61,7 +61,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
                 this.answerService.getForQuestion(questionId)
                     .subscribe(result => {
-                        this.answers = result as Answer[];
+                        this.answerDetails = result as AnswerDetail[];
                     }, error => console.error(error));
             });
         
@@ -69,15 +69,17 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
     onAnswerAdded(answer: Answer) {
         console.log("pushing answer: " + answer.text);
-        this.answers.push(answer);
+        var answerDetail = new AnswerDetail();
+        answerDetail.answer = answer;
+        this.answerDetails.push(answerDetail);
         this.isAddAnswerVisible = false;
     }
 
-    onAnswerDeleted(answer: Answer) {
-        console.log("deleting answer: " + answer.id);
-        let index = this.answers.indexOf(answer);
+    onAnswerDeleted(answerDetail: AnswerDetail) {
+        console.log("deleting answer: " + answerDetail.answer.id);
+        let index = this.answerDetails.indexOf(answerDetail);
         if (index >= 0) {
-            this.answers.splice(index, 1);
+            this.answerDetails.splice(index, 1);
         }
     }
 

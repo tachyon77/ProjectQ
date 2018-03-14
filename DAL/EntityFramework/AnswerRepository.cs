@@ -29,15 +29,21 @@ namespace ProjectQ.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        async Task<IEnumerable<Answer>> 
+        async Task<IEnumerable<AnswerDetail>> 
             IAnswerRepository.GetForQuestionAsyc(int questionId)
         {
-            var answers = await _context.Answers
-                .Include(x=>x.AspNetUser)
-                .Where( x => x.QuestionId == questionId
-                    &&  !x.IsDeleted)
-                .ToListAsync();
-            return answers;                          
+            var answers =
+                from answer in _context.Answers
+                .Where(
+                    x => !x.IsDeleted && x.QuestionId == questionId
+                )
+                select new AnswerDetail()
+                {
+                    Answerer = answer.AspNetUser.flatten(),
+                    Answer = answer.flatten()
+                };
+       
+            return await answers.ToListAsync();                          
         }
 
         async Task<Answer> IAnswerRepository.GetByIdAsync(int id)

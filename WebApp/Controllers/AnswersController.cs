@@ -37,7 +37,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet("ForQuestion/{questionId}")]
-        public async Task<IEnumerable<Answer>> 
+        public async Task<IEnumerable<AnswerDetail>> 
             GetForQuestion([FromRoute] int questionId)
         {
             return await _AnswerManager.GetForQuestionAsync(questionId);

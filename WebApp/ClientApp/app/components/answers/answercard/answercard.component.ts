@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, Answer } from '../answers.service'
+import { AnswerService, AnswerDetail } from '../answers.service'
 import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
@@ -11,17 +11,17 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 export class AnswerCardComponent {
     answerContent: SafeHtml;
-    private _answer: Answer;
+    private _answerDetail: AnswerDetail;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
     public rating: boolean[];
 
 
     @Input()
-    set answer(answer: Answer) {
-        this._answer = answer;
+    set answerDetail(answerDetail: AnswerDetail) {
+        this._answerDetail = answerDetail;
         this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answer.text);
+            this.sanitizer.bypassSecurityTrustHtml(answerDetail.answer.text);
     }
 
     rate(score: number) {
@@ -33,14 +33,14 @@ export class AnswerCardComponent {
         this.rating[score] = true;
 
         var answerRating = new AnswerRating();
-        answerRating.AnswerId = this._answer.id;
+        answerRating.AnswerId = this._answerDetail.answer.id;
         answerRating.Rating = score;
         this.answerRatingService.postRating(answerRating)
             .subscribe((result) => { });
     }
 
-    get answer() {
-        return this._answer; 
+    get answerDetail() {
+        return this._answerDetail; 
     }
 
     constructor(
@@ -57,16 +57,16 @@ export class AnswerCardComponent {
     }
 
     OnDeleteClick() {
-        this.answer.isDeleted = !this.answer.isDeleted;
-        this.answerService.update(this.answer)
+        this._answerDetail.answer.isDeleted = !this._answerDetail.answer.isDeleted;
+        this.answerService.update(this._answerDetail.answer)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
             });
     }
 
-    onAnswerUpdated(answer: Answer) {
-        console.log("updating answer: " + answer.id);
-        this.answer = answer;
+    onAnswerUpdated(answerDetail: AnswerDetail) {
+        console.log("updating answer: " + answerDetail.answer.id);
+        this._answerDetail = answerDetail;
         this.isUpdateAnswerVisible = false;
     }
 }

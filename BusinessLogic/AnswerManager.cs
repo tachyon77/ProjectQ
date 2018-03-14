@@ -73,7 +73,8 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
-        async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestionAsync(int questionId)
+        async Task<IEnumerable<AnswerDetail>> IAnswerManager.GetForQuestionAsync(
+            int questionId)
         {
             return await _unitOfWork
                 .AnswerRepository
