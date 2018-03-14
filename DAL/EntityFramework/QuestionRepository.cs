@@ -39,12 +39,14 @@ namespace ProjectQ.DAL.EntityFramework
                    .Where(x => !x.IsDeleted)
                          select new QuestionPreview()
                          {
-                             Asker = question.AspNetUser,
-                             Question = question,
+                             Asker = question.AspNetUser.flatten(),
+                             Question = question.flatten(),
                              AnswerCount = question.Answers != null? question.Answers.Where(a=>!a.IsDeleted).Count() : 0,
                              PreviewAnswer = 
-                                question.Answers != null ?
-                                    question.Answers.Where(a => !a.IsDeleted).OrderByDescending(y=>y.OriginDate).FirstOrDefault() 
+                                question.Answers != null && question.Answers.Any()?
+                                    question.Answers.Where(a => !a.IsDeleted)
+                                    .OrderByDescending(y=>y.OriginDate)
+                                    .FirstOrDefault().flatten() 
                                     : 
                                     null
                          }).ToListAsync();
@@ -53,9 +55,8 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)
         {
-            return await _context.Questions
-                .Include(x => x.AspNetUser)
-                .SingleAsync(x=>x.Id == id);
+            return (await _context.Questions
+                .SingleAsync(x=>x.Id == id)).flatten();
         }
 
         bool IQuestionRepository.QuestionExists(int id)

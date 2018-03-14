@@ -12,6 +12,7 @@ export class DisplayQuestionsComponent {
     constructor(
         private questionService: QuestionService) {
         this.questionService.get().subscribe(result => {
+            console.log(result);
             this.questions = result as QuestionPreview[];
         }, error => console.error(error));
     }

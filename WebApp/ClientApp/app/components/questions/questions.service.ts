@@ -11,14 +11,14 @@ export interface Question {
     id: number;
     isDeleted: boolean;
     offeredPrice: number;
-    OriginDate: Date;
-    Asker: AspNetUser;
+    originDate: Date;
+    asker: AspNetUser;
 }
 
 export interface QuestionPreview {
     Question: Question;
-    answerCount: number;
-    previewAnswer: Answer;
+    AnswerCount: number;
+    PreviewAnswer: Answer;
 }
 
 @Injectable()

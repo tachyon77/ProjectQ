@@ -16,10 +16,10 @@ export class QuestionCardComponent {
     @Input()
     set questionPreview(question: QuestionPreview) {
         this._questionPreview = question;
-        if (this._questionPreview.answerCount > 0) {
+        if (this._questionPreview.AnswerCount > 0) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(
-                    this._questionPreview.previewAnswer.text.substring(0, 200));
+                    this._questionPreview.PreviewAnswer.text.substring(0, 200));
         }
     }
 
