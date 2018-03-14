@@ -7,47 +7,47 @@
             <div class="answer-date">Answered on {{answerDetail.answer.originDate}}</div>
         </div>
 
-        <div class="rating" *ngIf="rating[5]">
-            <span (click)="rate(4)">☆</span>
-            <span (click)="rate(3)">☆</span>
-            <span (click)="rate(2)">☆</span>
-            <span (click)="rate(1)">☆</span>
-            <span (click)="rate(0)">☆</span>
-        </div>
         <div class="rating" *ngIf="rating[0]">
+            <span (click)="rate(5)">☆</span>
             <span (click)="rate(4)">☆</span>
             <span (click)="rate(3)">☆</span>
             <span (click)="rate(2)">☆</span>
             <span (click)="rate(1)">☆</span>
-            <span (click)="rate(0)">★</span>
         </div>
         <div class="rating" *ngIf="rating[1]">
+            <span (click)="rate(5)">☆</span>
             <span (click)="rate(4)">☆</span>
             <span (click)="rate(3)">☆</span>
             <span (click)="rate(2)">☆</span>
             <span (click)="rate(1)">★</span>
-            <span (click)="rate(0)">★</span>
         </div>
         <div class="rating" *ngIf="rating[2]">
+            <span (click)="rate(5)">☆</span>
             <span (click)="rate(4)">☆</span>
             <span (click)="rate(3)">☆</span>
             <span (click)="rate(2)">★</span>
             <span (click)="rate(1)">★</span>
-            <span (click)="rate(0)">★</span>
         </div>
         <div class="rating" *ngIf="rating[3]">
+            <span (click)="rate(5)">☆</span>
             <span (click)="rate(4)">☆</span>
             <span (click)="rate(3)">★</span>
             <span (click)="rate(2)">★</span>
             <span (click)="rate(1)">★</span>
-            <span (click)="rate(0)">★</span>
         </div>
         <div class="rating" *ngIf="rating[4]">
+            <span (click)="rate(5)">☆</span>
             <span (click)="rate(4)">★</span>
             <span (click)="rate(3)">★</span>
             <span (click)="rate(2)">★</span>
             <span (click)="rate(1)">★</span>
-            <span (click)="rate(0)">★</span>
+        </div>
+        <div class="rating" *ngIf="rating[5]">
+            <span (click)="rate(5)">★</span>
+            <span (click)="rate(4)">★</span>
+            <span (click)="rate(3)">★</span>
+            <span (click)="rate(2)">★</span>
+            <span (click)="rate(1)">★</span>
         </div>
 
         <div [innerHTML]="answerContent"

@@ -1,6 +1,8 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AspNetUser } from '../../services/identity.service'
+import { AnswerRating } from '../../services/answerrating.service'
+
 import 'rxjs/add/operator/map';
 
 export class Answer {
@@ -15,6 +17,7 @@ export class Answer {
 export class AnswerDetail {
     answer: Answer;
     answerer: AspNetUser;
+    rating: AnswerRating;
 }
 
 @Injectable()

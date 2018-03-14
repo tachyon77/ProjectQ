@@ -22,10 +22,18 @@ export class AnswerCardComponent {
         this._answerDetail = answerDetail;
         this.answerContent =
             this.sanitizer.bypassSecurityTrustHtml(answerDetail.answer.text);
+
+        if (answerDetail.rating == null) {
+            this.rating[0] = true;
+        }
+        else {
+            this.rating[answerDetail.rating.rating] = true;
+        }
+
     }
 
     rate(score: number) {
-        console.log("Rated: " + score+1);
+        console.log("Rated: " + score);
 
         for (var i = 0; i < 6; i++) {
             this.rating[i] = false;
@@ -33,8 +41,8 @@ export class AnswerCardComponent {
         this.rating[score] = true;
 
         var answerRating = new AnswerRating();
-        answerRating.AnswerId = this._answerDetail.answer.id;
-        answerRating.Rating = score;
+        answerRating.answerId = this._answerDetail.answer.id;
+        answerRating.rating = score;
         this.answerRatingService.postRating(answerRating)
             .subscribe((result) => { });
     }
@@ -49,7 +57,7 @@ export class AnswerCardComponent {
         private sanitizer: DomSanitizer
     ) {
         this.isUpdateAnswerVisible = false;
-        this.rating = [false, false, false, false, false, true];
+        this.rating = [false, false, false, false, false, false];
     }
 
     OnEditClick() {

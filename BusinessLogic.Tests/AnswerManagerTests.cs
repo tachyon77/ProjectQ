@@ -90,18 +90,18 @@ namespace ProjectQ.BusinessLogic.Tests
         [Test]
         public void ShouldReturnAnswersForAQuestion()
         {
-            var answers = new List<Answer>();
-            answers.Add(new Mock<Answer>().Object);
+            var answers = new List<AnswerDetail>();
+            answers.Add(new Mock<AnswerDetail>().Object);
 
             var expected = Task
-                .FromResult<IEnumerable<Answer>>
+                .FromResult<IEnumerable<AnswerDetail>>
                 (answers);
             _mockAnswerRepo
-                .Setup(x => x.GetForQuestionAsyc(1))
+                .Setup(x => x.GetForQuestionAndUserAsyc(1, ""))
                 .Returns(expected);
 
             
-            var actual = _sut.GetForQuestionAsync(1).Result;
+            var actual = _sut.GetForQuestionAndUserAsync(1, "").Result;
 
             Assert.That(expected.Result, Is.EqualTo(actual));
         }

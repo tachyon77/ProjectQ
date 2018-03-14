@@ -4,10 +4,10 @@ import 'rxjs/add/operator/map';
 
 export class AnswerRating {
     id: number;
-    AnswerId: number;
-    OriginData: Date;
-    LastUpdated: Date;
-    Rating: number;
+    answerId: number;
+    originData: Date;
+    lastUpdated: Date;
+    rating: number;
 }
 
 @Injectable()

@@ -6,6 +6,6 @@ namespace ProjectQ.Model
     {
         public AspNetUser Answerer { get; set; }
         public Answer Answer { get; set; }
-        public IList<AnswerRating> Ratings { get; set; }
+        public AnswerRating Rating { get; set; }
     }
 }

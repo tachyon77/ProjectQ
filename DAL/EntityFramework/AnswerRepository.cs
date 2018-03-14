@@ -42,15 +42,18 @@ namespace ProjectQ.DAL.EntityFramework
                 select new AnswerDetail()
                 {
                     Answerer = answer.AspNetUser.flatten(),
-                    Ratings = answer.AnswerRatings
-                    .Where(y => y.AspNetUserId == userId)
-                    .ToList(),
+                    Rating = answer.AnswerRatings
+                    .SingleOrDefault(y => y.AspNetUserId == userId),
                     Answer = answer.flatten()
                 }).ToListAsync();
         
             foreach (var answer in answers)
-                foreach (var rating in answer.Ratings)
-                    rating.flatten();
+            {
+                if (answer.Rating != null)
+                {
+                    answer.Rating.flatten();
+                }
+            }
 
             return answers;
         }
