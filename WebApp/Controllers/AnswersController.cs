@@ -40,7 +40,9 @@ namespace WebApp.Controllers
         public async Task<IEnumerable<AnswerDetail>> 
             GetForQuestion([FromRoute] int questionId)
         {
-            return await _AnswerManager.GetForQuestionAsync(questionId);
+            var userId = _userManager.GetUserId(User);
+            return await _AnswerManager.GetForQuestionAndUserAsync(
+                questionId, userId);
         }
 
 

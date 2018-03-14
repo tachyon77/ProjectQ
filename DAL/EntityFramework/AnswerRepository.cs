@@ -30,9 +30,11 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         async Task<IEnumerable<AnswerDetail>> 
-            IAnswerRepository.GetForQuestionAsyc(int questionId)
+            IAnswerRepository.GetForQuestionAndUserAsyc(
+            int questionId,
+            string userId)
         {
-            var answers =
+            var answers = await (
                 from answer in _context.Answers
                 .Where(
                     x => !x.IsDeleted && x.QuestionId == questionId
@@ -40,10 +42,17 @@ namespace ProjectQ.DAL.EntityFramework
                 select new AnswerDetail()
                 {
                     Answerer = answer.AspNetUser.flatten(),
+                    Ratings = answer.AnswerRatings
+                    .Where(y => y.AspNetUserId == userId)
+                    .ToList(),
                     Answer = answer.flatten()
-                };
-       
-            return await answers.ToListAsync();                          
+                }).ToListAsync();
+        
+            foreach (var answer in answers)
+                foreach (var rating in answer.Ratings)
+                    rating.flatten();
+
+            return answers;
         }
 
         async Task<Answer> IAnswerRepository.GetByIdAsync(int id)

@@ -61,6 +61,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
                 this.answerService.getForQuestion(questionId)
                     .subscribe(result => {
+                        console.log(result);
                         this.answerDetails = result as AnswerDetail[];
                     }, error => console.error(error));
             });

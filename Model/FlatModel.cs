@@ -39,4 +39,15 @@ namespace ProjectQ.Model
             return this;
         }
     }
+
+    public partial class AnswerRating
+    {
+        public AnswerRating flatten()
+        {
+            Answer = null;
+            AspNetUser = null;
+
+            return this;
+        }
+    }
 }

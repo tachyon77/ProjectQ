@@ -11,7 +11,9 @@ namespace ProjectQ.DAL
     {
         Task AddAsync(Answer answer);
         Task UpdateAsync(Answer answer);
-        Task<IEnumerable<AnswerDetail>> GetForQuestionAsyc(int questionId);
+        Task<IEnumerable<AnswerDetail>> GetForQuestionAndUserAsyc(
+            int questionId,
+            string userId);
         Task<Answer> GetByIdAsync(int id);
         bool AnswerExists(int id);
     }
