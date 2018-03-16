@@ -65,7 +65,7 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.SaveAsync();
 
-            await _notificationSender.SendAsync(
+            _notificationSender.EnqueueSendRequest(
                 new List<string>() { answer.AspNetUserId }, 
                 notification);
 

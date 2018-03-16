@@ -13,11 +13,50 @@ namespace ProjectQ.BusinessLogic.Services
 {
     public class NotificationSender : INotificationSender
     {
+        private class NotificationRequest
+        {
+            public IEnumerable<string> RecipientUserIds { get; set; }
+            public Notification Notification { get; set; }
+        }
+
         #region private fields
-        private ConcurrentDictionary<string, List<WebSocket>> _websockets
+        private static ConcurrentDictionary<string, List<WebSocket>> _websockets
             = new ConcurrentDictionary<string, List<WebSocket>>();
+        private static BlockingCollection<NotificationRequest> _notificationRequests
+            = new BlockingCollection<NotificationRequest>();
         #endregion
 
+        public NotificationSender()
+        {
+            new Thread(new ThreadStart(NotificationSenderThread)).Start();
+        }
+
+        async public static void NotificationSenderThread()
+        {
+            while (!_notificationRequests.IsCompleted)
+            {
+
+                NotificationRequest req = null;
+                // Blocks if number.Count == 0
+                // IOE means that Take() was called on a completed collection.
+                // Some other thread can call CompleteAdding after we pass the
+                // IsCompleted check but before we call Take. 
+                // In this example, we can simply catch the exception since the 
+                // loop will break on the next iteration.
+                try
+                {
+                    req = _notificationRequests.Take();
+                }
+                catch (InvalidOperationException) { }
+
+                if (req != null)
+                {
+                    await SendAsync(req);
+                }
+            }
+        }
+
+        #region Interface Implementation
         void INotificationSender.Subscribe(string userId, WebSocket webSocket)
         {
             if (!_websockets.ContainsKey(userId))
@@ -26,7 +65,25 @@ namespace ProjectQ.BusinessLogic.Services
             _websockets[userId].Add(webSocket);
         }
 
-        private string ToJson(Notification notification)
+        void INotificationSender.Unsubscribe(string userId, WebSocket webSocket)
+        {
+            Unsubscribe(userId, webSocket);
+        }
+
+        void INotificationSender.EnqueueSendRequest
+            (IEnumerable<string> recipientUserIds, Notification notification)
+        {
+            _notificationRequests.Add(
+                new NotificationRequest()
+                {
+                    Notification = notification,
+                    RecipientUserIds = recipientUserIds
+                }
+            );
+        }
+        #endregion
+
+        static string ToJson(Notification notification)
         {
             var settings = new JsonSerializerSettings();
             settings.PreserveReferencesHandling = PreserveReferencesHandling.None;
@@ -39,16 +96,15 @@ namespace ProjectQ.BusinessLogic.Services
             return json;
         }
 
-        async Task INotificationSender.SendAsync(
-            IEnumerable<string> userIds, 
-            Notification notification)
+        async static Task SendAsync(
+            NotificationRequest request)
         {
-            var data = ToJson(notification);
+            var data = ToJson(request.Notification);
             var encoded = Encoding.UTF8.GetBytes(data);
             var buffer = new ArraySegment<Byte>(
                 encoded, 0, encoded.Length);
 
-            foreach (var userId in userIds)
+            foreach (var userId in request.RecipientUserIds)
             {
                 if(_websockets.ContainsKey(userId))
                 {
@@ -64,14 +120,14 @@ namespace ProjectQ.BusinessLogic.Services
                         }
                         else
                         {
-                            ((INotificationSender)this).Unsubscribe(userId, ws);
+                            Unsubscribe(userId, ws);
                         }
                     }
                 }
             }
         }
 
-        void INotificationSender.Unsubscribe(string userId, WebSocket webSocket)
+        static void Unsubscribe(string userId, WebSocket webSocket)
         {
             if (_websockets.ContainsKey(userId))
             {
@@ -86,5 +142,7 @@ namespace ProjectQ.BusinessLogic.Services
                 }
             }
         }
+
+        
     }
 }
