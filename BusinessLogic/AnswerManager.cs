@@ -25,7 +25,7 @@ namespace ProjectQ.BusinessLogic
             _notificationSender = notificationSender;
         }
 
-        async Task<int> IAnswerManager.AddAsync(Answer answer, string userId)
+        async Task<int> IAnswerManager.AddAsync(Answer answer, ApplicationUser user)
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
@@ -35,7 +35,7 @@ namespace ProjectQ.BusinessLogic
                 _unitOfWork
                 .QuestionRepository.GetByIdAsync(answer.QuestionId);
 
-            answer.AspNetUserId = userId;
+            answer.AspNetUserId = user.Id;
             answer.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
@@ -49,7 +49,7 @@ namespace ProjectQ.BusinessLogic
                     AspNetUserId = question.AspNetUserId,
 
                     EventDescription =
-                        "New answer for \"" 
+                        user.UserName + " wrote an answer for \"" 
                         + question.Title.Substring(0, notificationLength) 
                         + " ...\"",
                     Link = "/question-detail/" + question.Id

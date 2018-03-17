@@ -8,7 +8,7 @@ namespace ProjectQ.BusinessLogic
 {
     public interface IAnswerManager
     {
-        Task<int> AddAsync(Answer answer, string userId);
+        Task<int> AddAsync(Answer answer, ApplicationUser user);
         Task UpdateAsync(Answer answer);
         Task<IEnumerable<AnswerDetail>> GetForQuestionAndUserAsync(
             int questionId, string userId);

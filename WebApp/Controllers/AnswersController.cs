@@ -74,7 +74,9 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _AnswerManager.AddAsync(Answer, _userManager.GetUserId(User));
+            await _AnswerManager.AddAsync(
+                Answer, 
+                await _userManager.GetUserAsync(User));
 
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }
