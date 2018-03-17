@@ -9,7 +9,7 @@ namespace ProjectQ.BusinessLogic
     public interface IAnswerRatingManager
     {
         // Client should not need to know if rating entry already exists or not.
-        Task<int> AddOrUpdateAsync(AnswerRating answerRating, string userId);
+        Task<int> AddOrUpdateAsync(AnswerRating answerRating, ApplicationUser user);
         Task<AnswerRating> GetByIdAsync(int id);
     }
 }

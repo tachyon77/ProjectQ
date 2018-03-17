@@ -59,8 +59,10 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var user = await _userManager.GetUserAsync(User);
+
             await _answerRatingManager
-                .AddOrUpdateAsync(answerRating, _userManager.GetUserId(User));
+                .AddOrUpdateAsync(answerRating, user);
 
             return CreatedAtAction(
                 "GetAnswerRating", new { id = answerRating.Id }, answerRating);

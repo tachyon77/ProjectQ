@@ -25,11 +25,11 @@ namespace ProjectQ.BusinessLogic
         }
 
         async Task<int> IAnswerRatingManager.AddOrUpdateAsync(
-            AnswerRating answerRating, string userId)
+            AnswerRating answerRating, ApplicationUser user)
         {
             var existingRating = await _unitOfWork
                 .AnswerRatingRepository
-                .GetByAnswerAndUser(answerRating.AnswerId, userId);
+                .GetByAnswerAndUser(answerRating.AnswerId, user.Id);
 
             if (existingRating != null)
             {
@@ -39,7 +39,7 @@ namespace ProjectQ.BusinessLogic
             }
             else
             {
-                answerRating.AspNetUserId = userId;
+                answerRating.AspNetUserId = user.Id;
                 answerRating.OriginDate = DateTime.UtcNow;
                 answerRating.LastUpdated = answerRating.OriginDate;
 
@@ -49,6 +49,7 @@ namespace ProjectQ.BusinessLogic
             var answer = await _unitOfWork
                     .AnswerRepository.GetByIdAsync(answerRating.AnswerId);
 
+
             var notification =
                 new Notification()
                 {
@@ -57,7 +58,7 @@ namespace ProjectQ.BusinessLogic
                     AspNetUserId = answer.AspNetUserId,
 
                     EventDescription =
-                        "Someone rated your answer",
+                        user.UserName + " rated your answer",
                     Link = "/question-detail/" + answer.QuestionId
                 };
 

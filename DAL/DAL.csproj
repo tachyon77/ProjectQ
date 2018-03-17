@@ -6,16 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EntityFramework\Postgresql\**" />
+    <Compile Remove="InMemory\**" />
+    <EmbeddedResource Remove="EntityFramework\Postgresql\**" />
+    <EmbeddedResource Remove="InMemory\**" />
+    <None Remove="EntityFramework\Postgresql\**" />
+    <None Remove="InMemory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EntityFramework\Postgresql\" />
-    <Folder Include="InMemory\" />
   </ItemGroup>
 
 </Project>
