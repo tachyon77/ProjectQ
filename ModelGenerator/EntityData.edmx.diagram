@@ -5,17 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="90cda34f365649e1a0898e0389e7e7b8" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="5.25" PointY="9.25" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="16.5" />
-        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="8.25" PointY="14.25" />
+        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="20.5" />
         <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Answers" />
         <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Answers_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" />
         <AssociationConnector Association="ProjectQModel.FK_Notifications_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Questions_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

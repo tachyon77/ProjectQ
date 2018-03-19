@@ -69,7 +69,9 @@ namespace WebApp.Controllers
             await _questionManager.
                 AddAsync(question, _userManager.GetUserId(User));
 
-            return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
+            return CreatedAtAction(
+                "GetQuestion", 
+                new { id = question.Id }, question);
         }
 
         [HttpPut("{id}")]

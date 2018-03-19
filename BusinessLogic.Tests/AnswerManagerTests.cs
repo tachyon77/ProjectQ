@@ -60,7 +60,9 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Returns(mockQuestionRepo.Object);
 
             Assert.ThrowsAsync<Exception>(
-                async () => await _sut.AddAsync(answer, "tachyon77@gmail.com"));
+                async () => await _sut.AddAsync(
+                    answer, 
+                    new ApplicationUser() { UserName= "tachyon77@gmail.com" }));
         }
 
         [Test]
@@ -80,7 +82,9 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Setup(x => x.GetByEmail("tachyon77@gmail.com"))
                 .Returns(new ApplicationUser());
 
-            var r = _sut.AddAsync(answer, "tachyon77@gmail.com")
+            var r = _sut.AddAsync(
+                answer,
+                new ApplicationUser() { UserName = "tachyon77@gmail.com" })
                 .Result;
 
             _mockAnswerRepo.Verify(x => x.AddAsync(answer), Times.Once);

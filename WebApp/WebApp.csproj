@@ -54,6 +54,7 @@
     <None Remove="ClientApp\app\services\answerrating.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
+    <None Remove="ClientApp\app\services\questionfollower.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +89,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\questionfollower.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answerrating.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\notification.service.ts" />

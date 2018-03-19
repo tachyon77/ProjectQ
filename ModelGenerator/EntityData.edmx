@@ -25,7 +25,7 @@
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="text" Type="varchar(max)" Nullable="false" />
-          <Property Name="OriginDate" Type="date" Nullable="false" />
+          <Property Name="OriginDate" Type="datetime" Nullable="false" />
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -60,6 +60,16 @@
           <Property Name="OriginDate" Type="datetime" Nullable="false" />
           <Property Name="EventDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Link" Type="nvarchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="QuestionFollowers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="IsFollowing" Type="bit" Nullable="false" />
+          <Property Name="OriginDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -143,6 +153,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionFollowers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="QuestionFollowers" Type="Self.QuestionFollowers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionFollowers">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionFollowers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="QuestionFollowers" Type="Self.QuestionFollowers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionFollowers">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Questions_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
@@ -160,6 +194,7 @@
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionFollowers" EntityType="Self.QuestionFollowers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AnswerRatings_Answers" Association="Self.FK_AnswerRatings_Answers">
             <End Role="Answers" EntitySet="Answers" />
@@ -181,6 +216,14 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_AspNetUsers" Association="Self.FK_QuestionFollowers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="QuestionFollowers" EntitySet="QuestionFollowers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_Questions" Association="Self.FK_QuestionFollowers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionFollowers" EntitySet="QuestionFollowers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Questions_AspNetUsers" Association="Self.FK_Questions_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Questions" EntitySet="Questions" />
@@ -195,6 +238,7 @@
           <EntitySet Name="Answers" EntityType="ProjectQModel.Answer" />
           <EntitySet Name="AspNetUsers" EntityType="ProjectQModel.AspNetUser" />
           <EntitySet Name="Notifications" EntityType="ProjectQModel.Notification" />
+          <EntitySet Name="QuestionFollowers" EntityType="ProjectQModel.QuestionFollower" />
           <EntitySet Name="Questions" EntityType="ProjectQModel.Question" />
           <AssociationSet Name="FK_AnswerRatings_Answers" Association="ProjectQModel.FK_AnswerRatings_Answers">
             <End Role="Answer" EntitySet="Answers" />
@@ -216,9 +260,17 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_AspNetUsers" Association="ProjectQModel.FK_QuestionFollowers_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="QuestionFollower" EntitySet="QuestionFollowers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Questions_AspNetUsers" Association="ProjectQModel.FK_Questions_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_Questions" Association="ProjectQModel.FK_QuestionFollowers_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="QuestionFollower" EntitySet="QuestionFollowers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerRating">
@@ -243,7 +295,7 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
@@ -273,6 +325,7 @@
           <NavigationProperty Name="AnswerRatings" Relationship="ProjectQModel.FK_AnswerRatings_AspNetUsers" FromRole="AspNetUser" ToRole="AnswerRating" />
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_AspNetUsers" FromRole="AspNetUser" ToRole="Answer" />
           <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_AspNetUsers" FromRole="AspNetUser" ToRole="Notification" />
+          <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_AspNetUsers" FromRole="AspNetUser" ToRole="QuestionFollower" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_AspNetUsers" FromRole="AspNetUser" ToRole="Question" />
         </EntityType>
         <EntityType Name="Notification">
@@ -286,6 +339,18 @@
           <Property Name="EventDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Link" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Notifications_AspNetUsers" FromRole="Notification" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="QuestionFollower">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="IsFollowing" Type="Boolean" Nullable="false" />
+          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_QuestionFollowers_AspNetUsers" FromRole="QuestionFollower" ToRole="AspNetUser" />
+          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_QuestionFollowers_Questions" FromRole="QuestionFollower" ToRole="Question" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -302,6 +367,7 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Question" ToRole="Answer" />
           <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Questions_AspNetUsers" FromRole="Question" ToRole="AspNetUser" />
+          <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Questions" FromRole="Question" ToRole="QuestionFollower" />
         </EntityType>
         <Association Name="FK_AnswerRatings_Answers">
           <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
@@ -371,6 +437,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionFollowers_AspNetUsers">
+          <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="ProjectQModel.QuestionFollower" Role="QuestionFollower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionFollower">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Questions_AspNetUsers">
           <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="ProjectQModel.Question" Role="Question" Multiplicity="*" />
@@ -380,6 +458,18 @@
             </Principal>
             <Dependent Role="Question">
               <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionFollowers_Questions">
+          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="ProjectQModel.QuestionFollower" Role="QuestionFollower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionFollower">
+              <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,6 +534,17 @@
                 <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
                 <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
                 <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionFollowers">
+            <EntityTypeMapping TypeName="ProjectQModel.QuestionFollower">
+              <MappingFragment StoreEntitySet="QuestionFollowers">
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="IsFollowing" ColumnName="IsFollowing" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

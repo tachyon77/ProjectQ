@@ -10,6 +10,7 @@ namespace ProjectQ.Model
         {
             Answers = null;
             AspNetUser = null;
+            QuestionFollowers = null;
 
             return this;
         }
@@ -35,6 +36,7 @@ namespace ProjectQ.Model
             AnswerRatings = null;
             Answers = null;
             Notifications = null;
+            QuestionFollowers = null; 
 
             return this;
         }

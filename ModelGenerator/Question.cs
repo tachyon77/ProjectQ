@@ -18,6 +18,7 @@ namespace ProjectQ.Model
         public Question()
         {
             this.Answers = new HashSet<Answer>();
+            this.QuestionFollowers = new HashSet<QuestionFollower>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace ProjectQ.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
     }
 }

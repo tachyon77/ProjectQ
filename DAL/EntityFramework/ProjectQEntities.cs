@@ -9,6 +9,7 @@ namespace ProjectQ.DAL.EntityFramework
 {
     public abstract class ProjectQEntities : DbContext
     {
+        public DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }

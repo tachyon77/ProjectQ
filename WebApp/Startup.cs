@@ -88,6 +88,7 @@ namespace ProjectQ.WebApp
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
+            services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();
             services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();
             services.AddScoped<
                 ProjectQ.DAL.EntityFramework.ProjectQEntities,

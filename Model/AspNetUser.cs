@@ -20,6 +20,7 @@ namespace ProjectQ.Model
             this.AnswerRatings = new HashSet<AnswerRating>();
             this.Answers = new HashSet<Answer>();
             this.Notifications = new HashSet<Notification>();
+            this.QuestionFollowers = new HashSet<QuestionFollower>();
             this.Questions = new HashSet<Question>();
         }
     
@@ -40,12 +41,14 @@ namespace ProjectQ.Model
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
+        public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-         public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-         public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-         public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

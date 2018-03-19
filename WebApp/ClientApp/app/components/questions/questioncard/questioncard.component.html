@@ -12,13 +12,22 @@
                     ${{questionPreview.question.offeredPrice}}
                 </span>
             </h3>
-            
+
             <h6 class="asked-by">
                 Asked by {{questionPreview.asker.email}}
                 {{questionPreview.question.originDate}}
             </h6>
             <p class="card-text">{{questionPreview.question.description}}</p>
+
+            <div>
+                <button (click)="onFollow()"
+                        class="btn btn-light"
+                        >Follow
+                </button>
+            </div>
+
             <em>{{questionPreview.answerCount}} answers</em>
+
             <div *ngIf="questionPreview.answerCount > 0"
                  [innerHTML]="previewAnswerContent">
             </div>
