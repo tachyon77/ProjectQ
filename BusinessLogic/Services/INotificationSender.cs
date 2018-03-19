@@ -11,8 +11,6 @@ namespace ProjectQ.BusinessLogic.Services
     {
         void Unsubscribe(string userId, WebSocket webSocket);
         void Subscribe(string userId, WebSocket webSocket);
-        void EnqueueSendRequest(
-            IEnumerable<string> recipientUserIds, 
-            Notification notification);
+        void EnqueueSendRequest(Notification notification);
     }
 }

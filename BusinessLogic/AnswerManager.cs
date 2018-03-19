@@ -40,28 +40,40 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
 
+            var followers =
+                _unitOfWork.QuestionFollowerRepository
+                .GetFollowersForQuestion(question.Id);
+
+            followers.Add(question.AspNetUserId);
+
             var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
-            var notification =
-                new Notification()
-                {
-                    IsSeen = false,
-                    OriginDate = answer.OriginDate,
-                    AspNetUserId = question.AspNetUserId,
 
-                    EventDescription =
-                        user.UserName + " wrote an answer for \"" 
-                        + question.Title.Substring(0, notificationLength) 
-                        + " ...\"",
-                    Link = "/question-detail/" + question.Id
-                };
+            var notifications = new List<Notification>();
 
-            await _unitOfWork.NotificationRepository.AddAsync(notification);
+            foreach(var follower in followers)
+            {
+                var notification =
+                    new Notification()
+                    {
+                        IsSeen = false,
+                        OriginDate = answer.OriginDate,
+                        AspNetUserId = follower,
+
+                        EventDescription =
+                            user.UserName + " wrote an answer for \""
+                            + question.Title.Substring(0, notificationLength)
+                            + " ...\"",
+                        Link = "/question-detail/" + question.Id
+                    };
+
+                notifications.Add(notification);
+
+                await _unitOfWork.NotificationRepository.AddAsync(notification);
+            }
 
             await _unitOfWork.SaveAsync();
 
-            _notificationSender.EnqueueSendRequest(
-                new List<string>() { question.AspNetUserId }, 
-                notification);
+            notifications.ForEach( x=>_notificationSender.EnqueueSendRequest(x));
 
             return answer.Id;
         }

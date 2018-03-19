@@ -13,17 +13,11 @@ namespace ProjectQ.BusinessLogic.Services
 {
     public class NotificationSender : INotificationSender
     {
-        private class NotificationRequest
-        {
-            public IEnumerable<string> RecipientUserIds { get; set; }
-            public Notification Notification { get; set; }
-        }
-
         #region private fields
         private static ConcurrentDictionary<string, List<WebSocket>> _websockets
             = new ConcurrentDictionary<string, List<WebSocket>>();
-        private static BlockingCollection<NotificationRequest> _notificationRequests
-            = new BlockingCollection<NotificationRequest>();
+        private static BlockingCollection<Notification> _notificationRequests
+            = new BlockingCollection<Notification>();
         #endregion
 
         public NotificationSender()
@@ -36,7 +30,7 @@ namespace ProjectQ.BusinessLogic.Services
             while (!_notificationRequests.IsCompleted)
             {
 
-                NotificationRequest req = null;
+                Notification req = null;
                 // Blocks if number.Count == 0
                 // IOE means that Take() was called on a completed collection.
                 // Some other thread can call CompleteAdding after we pass the
@@ -70,15 +64,10 @@ namespace ProjectQ.BusinessLogic.Services
             Unsubscribe(userId, webSocket);
         }
 
-        void INotificationSender.EnqueueSendRequest
-            (IEnumerable<string> recipientUserIds, Notification notification)
+        void INotificationSender.EnqueueSendRequest(Notification notification)
         {
             _notificationRequests.Add(
-                new NotificationRequest()
-                {
-                    Notification = notification,
-                    RecipientUserIds = recipientUserIds
-                }
+                notification
             );
         }
         #endregion
@@ -97,34 +86,34 @@ namespace ProjectQ.BusinessLogic.Services
         }
 
         async static Task SendAsync(
-            NotificationRequest request)
+            Notification request)
         {
-            var data = ToJson(request.Notification);
+            var data = ToJson(request);
             var encoded = Encoding.UTF8.GetBytes(data);
             var buffer = new ArraySegment<Byte>(
                 encoded, 0, encoded.Length);
 
-            foreach (var userId in request.RecipientUserIds)
-            {
-                if(_websockets.ContainsKey(userId))
-                {
-                    foreach(var ws in _websockets[userId])
-                    {
-                        if (ws.State.Equals(WebSocketState.Open))
-                        {
-                            await ws.SendAsync(
-                                buffer, WebSocketMessageType.Text,
-                                true,
-                                CancellationToken.None);
+            var userId = request.AspNetUserId;
 
-                        }
-                        else
-                        {
-                            Unsubscribe(userId, ws);
-                        }
+            if(_websockets.ContainsKey(userId))
+            {
+                foreach(var ws in _websockets[userId])
+                {
+                    if (ws.State.Equals(WebSocketState.Open))
+                    {
+                        await ws.SendAsync(
+                            buffer, WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None);
+
+                    }
+                    else
+                    {
+                        Unsubscribe(userId, ws);
                     }
                 }
             }
+            
         }
 
         static void Unsubscribe(string userId, WebSocket webSocket)

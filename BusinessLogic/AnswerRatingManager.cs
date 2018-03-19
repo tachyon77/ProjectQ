@@ -66,9 +66,7 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.SaveAsync();
 
-            _notificationSender.EnqueueSendRequest(
-                new List<string>() { answer.AspNetUserId }, 
-                notification);
+            _notificationSender.EnqueueSendRequest(notification);
 
             return answerRating.Id;
         }
