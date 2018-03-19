@@ -18,4 +18,13 @@ export class QuestionFollowerService {
             });
     }
 
+    unfollow(questionId: number) {
+        console.log('unfollowing question')
+        console.log(questionId);
+        return this.http.post('api/questionfollowers/unfollow', questionId)
+            .map(response => {
+                return response;
+            });
+    }
+
 }

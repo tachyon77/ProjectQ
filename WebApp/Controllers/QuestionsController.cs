@@ -35,7 +35,9 @@ namespace WebApp.Controllers
         [HttpGet]
         async public Task<IEnumerable<QuestionPreview>> GetQuestions()
         {
-            return  await _questionManager.GetAll();
+            return  await _questionManager.GetAllForUser(
+                await _userManager.GetUserAsync(User)
+                );
         }
 
         // GET: api/Questions/5

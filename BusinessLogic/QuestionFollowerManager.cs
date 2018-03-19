@@ -30,15 +30,17 @@ namespace ProjectQ.BusinessLogic
             };
 
             await _unitOfWork.QuestionFollowerRepository
-                .AddQuestionFollowerAsync(qf);
+                .AddFollowerAsync(qf);
             await _unitOfWork.SaveAsync();
         }
 
 
-        Task IQuestionFollowerManager.UnfollowAsync(
+        async Task IQuestionFollowerManager.UnfollowAsync(
             ApplicationUser user, int questionid)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.QuestionFollowerRepository
+                .RemoveFollowerAsync(questionid, user);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

@@ -19,10 +19,16 @@
             </h6>
             <p class="card-text">{{questionPreview.question.description}}</p>
 
-            <div>
+            <div *ngIf="!questionPreview.isFollowing">
                 <button (click)="onFollow()"
-                        class="btn btn-light"
-                        >Follow
+                        class="btn btn-light">
+                    Follow
+                </button>
+            </div>
+            <div *ngIf="questionPreview.isFollowing">
+                <button (click)="onUnfollow()"
+                        class="btn btn-light">
+                    Following
                 </button>
             </div>
 

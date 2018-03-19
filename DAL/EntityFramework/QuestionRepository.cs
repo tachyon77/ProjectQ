@@ -33,12 +33,16 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.IsDeleted = question.IsDeleted;
         }
 
-        async Task<IEnumerable<QuestionPreview>> IQuestionRepository.GetAll()
+        async Task<IEnumerable<QuestionPreview>> IQuestionRepository.GetAllForUser(
+            ApplicationUser user
+        )
         {
             var data = await (from question in _context.Questions
                    .Where(x => !x.IsDeleted)
                          select new QuestionPreview()
                          {
+                             IsFollowing = question.QuestionFollowers.Any(
+                                 x=>x.IsFollowing && x.AspNetUserId==user.Id),
                              Asker = question.AspNetUser.flatten(),
                              Question = question.flatten(),
                              AnswerCount = question.Answers != null? question.Answers.Where(a=>!a.IsDeleted).Count() : 0,

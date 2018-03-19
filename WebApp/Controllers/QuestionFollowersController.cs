@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         }
 
 
-        // POST: api/QuestionFollowers
+        // POST: api/QuestionFollowers/follow
         [HttpPost("follow")]
         public async Task<IActionResult> Follow([FromBody] int questionId)
         {
@@ -43,6 +43,24 @@ namespace WebApp.Controllers
             await _questionFollowerManager.
                 FollowAsync(
                     await _userManager.GetUserAsync(User), 
+                    questionId
+                );
+
+            return CreatedAtRoute("", null, null);
+        }
+
+        // POST: api/QuestionFollowers/unfollow
+        [HttpPost("unfollow")]
+        public async Task<IActionResult> Unfollow([FromBody] int questionId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _questionFollowerManager.
+                UnfollowAsync(
+                    await _userManager.GetUserAsync(User),
                     questionId
                 );
 

@@ -20,17 +20,36 @@ namespace ProjectQ.DAL.EntityFramework
             _context = context;
         }
 
-        async Task IQuestionFollowerRepository.AddQuestionFollowerAsync(
+        async Task IQuestionFollowerRepository.AddFollowerAsync(
             QuestionFollower questionFollower)
         {
-            questionFollower.OriginDate = DateTime.UtcNow;
-            await _context.QuestionFollowers.AddAsync(questionFollower);
+            var existingRecord = await _context.QuestionFollowers
+                .SingleOrDefaultAsync(
+                    x=>x.QuestionId== questionFollower.QuestionId
+                    && 
+                    x.AspNetUserId == questionFollower.AspNetUserId);
+
+            if (existingRecord == null)
+            {
+                questionFollower.OriginDate = DateTime.UtcNow;
+                await _context.QuestionFollowers.AddAsync(questionFollower);
+            }
+            else
+            {
+                existingRecord.IsFollowing = true;
+            }            
         }
 
-        Task IQuestionFollowerRepository.UpdateQuestionFollowerAsync(
-            QuestionFollower questionFollower)
+        async Task IQuestionFollowerRepository.RemoveFollowerAsync(
+            int questionId, ApplicationUser follower)
         {
-            throw new NotImplementedException();
+            var existingRecord = await _context.QuestionFollowers
+               .SingleAsync(
+                   x => x.QuestionId == questionId
+                   &&
+                   x.AspNetUserId == follower.Id);
+
+            existingRecord.IsFollowing = false;           
         }
     }
 }

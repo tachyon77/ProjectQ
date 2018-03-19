@@ -17,8 +17,19 @@ export class QuestionCardComponent {
     onFollow() {
         this.questionFollowerService.follow(
             this._questionPreview.question.id).subscribe(
-                () => { }
-            );
+            () => {
+                this._questionPreview.isFollowing = true;
+            }
+        );
+    }
+
+    onUnfollow() {
+        this.questionFollowerService.unfollow(
+            this._questionPreview.question.id).subscribe(
+            () => {
+                this._questionPreview.isFollowing = false;
+            }
+        );
     }
 
     @Input()

@@ -16,6 +16,7 @@ export interface Question {
 }
 
 export interface QuestionPreview {
+    isFollowing: boolean;
     question: Question;
     answerCount: number;
     previewAnswer: Answer;
