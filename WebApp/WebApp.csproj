@@ -50,6 +50,9 @@
     <None Remove="ClientApp\app\components\questions\questioneditor\questioneditor.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.component.ts" />
     <None Remove="ClientApp\app\components\questions\questions.service.ts" />
+    <None Remove="ClientApp\app\components\user-profile\user-profile.component.css" />
+    <None Remove="ClientApp\app\components\user-profile\user-profile.component.html" />
+    <None Remove="ClientApp\app\components\user-profile\user-profile.component.ts" />
     <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\answerrating.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
@@ -88,6 +91,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\questionfollower.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />

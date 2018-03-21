@@ -11,6 +11,7 @@ import { RegistrationFormComponent } from './components/registrationform/registr
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
 import { HomeComponent } from './components/home/home.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
@@ -46,6 +47,7 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         UpdateAnswerComponent,
         QuestionEditorComponent,
         HomeComponent,
+        UserProfileComponent,
     ],
     providers: [
         QuestionService,
@@ -64,9 +66,9 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'landing-page', component: LandingPageComponent },
+            { path: 'user-profile', component: UserProfileComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
-            { path: 'content-editor', component: ContentEditorComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
