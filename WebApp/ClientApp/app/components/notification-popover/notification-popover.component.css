@@ -27,10 +27,12 @@
 
 .arrow_box {
     position: relative;
-    background: white;
+    background: #fafafa;
     border: 1px solid lightgray;
-    width: 400px;
+    width: auto;
+    min-width:300px;
     height:auto;
+    left:20%;
 }
 
     .arrow_box:after, .arrow_box:before {
