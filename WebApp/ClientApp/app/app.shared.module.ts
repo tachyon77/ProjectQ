@@ -12,6 +12,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
@@ -49,6 +50,7 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         QuestionEditorComponent,
         HomeComponent,
         UserProfileComponent,
+        UserQuestionsComponent,
     ],
     providers: [
         QuestionService,

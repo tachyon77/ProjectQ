@@ -1,0 +1,9 @@
+﻿<p *ngIf="!questions"><em>Loading...</em></p>
+
+<div *ngIf="questions">
+    <div *ngFor="let question of questions">
+        <a [routerLink]="['/question-detail', question.id]">
+            {{question.title}}
+        </a>
+    </div>
+</div>

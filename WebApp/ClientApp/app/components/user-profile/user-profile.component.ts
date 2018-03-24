@@ -20,7 +20,7 @@ export class UserProfileComponent {
     constructor(
         private applicationUserService: ApplicationUserService
     ) {
-        this.applicationUserService.get().subscribe(
+        this.applicationUserService.getContact().subscribe(
             response => {
                 this._user = response as ApplicationUser;
             }

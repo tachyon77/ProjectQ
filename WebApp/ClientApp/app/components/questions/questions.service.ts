@@ -28,6 +28,14 @@ export class QuestionService {
     constructor(private http: HttpClient) {
     }
 
+    getAllAskedByMe() {
+        return this.http.get('api/questions/my')
+            .map(response => {
+                console.log(response);
+                return response;
+            });
+    }
+
     get() {
         return this.http.get('api/Questions')
             .map(response => {

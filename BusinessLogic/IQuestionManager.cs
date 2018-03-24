@@ -24,6 +24,7 @@ namespace ProjectQ.BusinessLogic
         Task AddAsync(Question question, string userId);
         Task UpdateAsync(Question question, string userId);
         Task<IEnumerable<QuestionPreview>> GetAllForUser(ApplicationUser user);
+        Task<IEnumerable<Question>> GetAllAskedBy(ApplicationUser user);
         Task<Question> GetByIdAsync(int id);
         bool QuestionExists(int id);
     }

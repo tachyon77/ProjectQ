@@ -44,6 +44,15 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async Task<IEnumerable<Question>> IQuestionManager.GetAllAskedBy(
+            ApplicationUser user)
+        {
+            return (await _unitOfWork
+                .QuestionRepository
+                .GetAllAskedBy(user))
+                .OrderByDescending(x => x.OriginDate);
+        }
+
         async Task<IEnumerable<QuestionPreview>> IQuestionManager.GetAllForUser(
             ApplicationUser user
             )

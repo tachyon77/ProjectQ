@@ -53,6 +53,9 @@
     <None Remove="ClientApp\app\components\user-profile\user-profile.component.css" />
     <None Remove="ClientApp\app\components\user-profile\user-profile.component.html" />
     <None Remove="ClientApp\app\components\user-profile\user-profile.component.ts" />
+    <None Remove="ClientApp\app\components\user-questions\user-questions.component.css" />
+    <None Remove="ClientApp\app\components\user-questions\user-questions.component.html" />
+    <None Remove="ClientApp\app\components\user-questions\user-questions.component.ts" />
     <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\answerrating.service.ts" />
     <None Remove="ClientApp\app\services\application-user.service.ts" />
@@ -92,6 +95,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\questions\questiondetail\questiondetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questioncard\questioncard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questions\questions.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-questions\user-questions.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-questions\user-questions.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\user-questions\user-questions.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.ts" />
@@ -104,7 +110,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\app\components\user-profile\qualifications\" />
     <Folder Include="Screenshots\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>

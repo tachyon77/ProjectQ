@@ -40,6 +40,15 @@ namespace WebApp.Controllers
                 );
         }
 
+        // GET: api/questions/my
+        [HttpGet("my")]
+        async public Task<IEnumerable<Question>> GetAllAskedByMe()
+        {
+            return await _questionManager.GetAllAskedBy(
+                await _userManager.GetUserAsync(User)
+            );
+        }
+
         // GET: api/Questions/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetQuestion([FromRoute] int id)

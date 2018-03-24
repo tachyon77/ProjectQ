@@ -68,5 +68,13 @@ namespace ProjectQ.DAL.EntityFramework
             return _context.Questions.Any(x => x.Id == id);
         }
 
+        async Task<IEnumerable<Question>> IQuestionRepository.GetAllAskedBy(
+            ApplicationUser user)
+        {
+            return await _context.Questions
+                .Where(x => x.AspNetUserId.Equals(user.Id) && !x.IsDeleted)
+                .OrderByDescending(x=>x.OriginDate)
+                .ToListAsync();
+        }
     }
 }
