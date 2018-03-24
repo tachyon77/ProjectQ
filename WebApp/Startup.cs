@@ -82,17 +82,17 @@ namespace ProjectQ.WebApp
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton(Configuration);
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
             services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();
-            services.AddScoped<IUnitOfWork, ProjectQ.DAL.EntityFramework.UnitOfWork>();
+            services.AddScoped<IUnitOfWork, DAL.EntityFramework.UnitOfWork>();
             services.AddScoped<
-                ProjectQ.DAL.EntityFramework.ProjectQEntities,
-                ProjectQ.DAL.EntityFramework.SqlServer.DbContext>();
+                DAL.EntityFramework.ProjectQEntities,
+                DAL.EntityFramework.SqlServer.DbContext>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();

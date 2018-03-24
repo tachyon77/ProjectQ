@@ -104,7 +104,10 @@ namespace ProjectQ.WebApp.Controllers
         public async Task<IActionResult> Register([FromBody] RegistrationForm data)
         {
      
-            var user = new ApplicationUser { UserName = data.Email, Email = data.Email };
+            var user = new ApplicationUser {
+                UserName = data.Email, Email = data.Email,
+                FirstName = "dummy"
+            };
             var result = await _signInManager
                 .UserManager
                 .CreateAsync(user, data.Password);

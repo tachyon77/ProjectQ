@@ -22,6 +22,7 @@ import { AnswerService } from './components/answers/answers.service';
 import { AnswerRatingService } from './services/answerrating.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
 import { IdentityService } from './services/identity.service';
+import { ApplicationUserService } from './services/application-user.service';
 import { NotificationService } from './services/notification.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
@@ -56,6 +57,7 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         NotificationService,
         AnswerRatingService,
         QuestionFollowerService,
+        ApplicationUserService,
     ],
     imports: [
         CommonModule,

@@ -55,6 +55,7 @@
     <None Remove="ClientApp\app\components\user-profile\user-profile.component.ts" />
     <None Remove="ClientApp\app\directives\focus.directive.ts" />
     <None Remove="ClientApp\app\services\answerrating.service.ts" />
+    <None Remove="ClientApp\app\services\application-user.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\questionfollower.service.ts" />
@@ -95,6 +96,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\user-profile\user-profile.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\application-user.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\questionfollower.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answerrating.service.ts" />
@@ -102,6 +104,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\app\components\user-profile\qualifications\" />
     <Folder Include="Screenshots\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>

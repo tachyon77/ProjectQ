@@ -25,6 +25,8 @@ namespace ProjectQ.Model
         }
     
         public string Id { get; set; }
+        public string FirstName { get; set; }
+
         public int AccessFailedCount { get; set; }
         public string ConcurrencyStamp { get; set; }
         public string Email { get; set; }

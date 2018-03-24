@@ -27,7 +27,6 @@ export class IdentityService {
     }
 
     register(regForm: RegistrationForm) {
-        console.log("posting registration request");
         console.log(regForm);
         return this.http.post('api/Account/Register', regForm)
             .map(response => {
@@ -45,7 +44,6 @@ export class IdentityService {
     }
 
     login(credential: LoginCredential) {
-        console.log("posting login request");
         console.log(credential);
         return this.http.post('api/Account', credential)
             .map(response => {
@@ -66,7 +64,6 @@ export class IdentityService {
     }
 
     refreshCSRFToken() {
-        console.log("refrshing CSRF token");
         return this.http.get('api/Account/refreshtoken')
             .map(response => { });
     }
