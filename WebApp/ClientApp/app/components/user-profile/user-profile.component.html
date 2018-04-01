@@ -1,13 +1,58 @@
-﻿<div class="offset-md-2 col-md-8">
-    <h1>{{user.firstName}}</h1>
-    <h3>Qualifications</h3>
-    <h3>Topics</h3>
-    
-    <h3>Questions</h3>
-    <user-questions [user]="user"></user-questions>
-    
-    <h3>Answers</h3>
-    <h3>Activities</h3>
-    <h3>Followers</h3>
-    <h3>Following</h3>
+﻿<div class="offset-md-1 col-md-9">
+    <br />
+
+    <div>
+        <h3>{{user.firstName}}</h3>
+        <hr />
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Credentials</h5>
+            <hr />
+            Not implemented.
+        </div>
+
+        <div class="col-md-6">
+            <h5>Topics</h5>
+            <hr />
+            Not implemented.
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Recent Questions</h5>
+            <hr />
+            <user-questions [user]="user"></user-questions>
+        </div>
+
+        <div class="col-md-6">
+            <h5>Recent answers</h5>
+            <hr />
+            Not implemented.
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Followers</h4>
+            <hr />
+            Not implemented.
+        </div>
+
+        <div class="col-md-6">
+            <h4>Following</h4>
+            <hr />
+            Not implemented.
+        </div>
+    </div>
+
 </div>
