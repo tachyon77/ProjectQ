@@ -36,7 +36,9 @@ namespace ProjectQ.Model
             AnswerRatings = null;
             Answers = null;
             Notifications = null;
-            QuestionFollowers = null; 
+            QuestionFollowers = null;
+            Educations = null;
+            Employments = null;
 
             return this;
         }
