@@ -22,6 +22,8 @@ namespace ProjectQ.Model
             this.Notifications = new HashSet<Notification>();
             this.QuestionFollowers = new HashSet<QuestionFollower>();
             this.Questions = new HashSet<Question>();
+            this.Educations = new HashSet<Education>();
+            this.Employments = new HashSet<Employment>();
         }
     
         public string Id { get; set; }
@@ -39,6 +41,7 @@ namespace ProjectQ.Model
         public string SecurityStamp { get; set; }
         public bool TwoFactorEnabled { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
@@ -50,5 +53,9 @@ namespace ProjectQ.Model
         public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Question> Questions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Education> Educations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employment> Employments { get; set; }
     }
 }

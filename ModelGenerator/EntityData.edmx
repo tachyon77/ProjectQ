@@ -49,6 +49,31 @@
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
           <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Educations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="School" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Concentration" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SecondaryConcentration" Type="nvarchar" MaxLength="200" />
+          <Property Name="DegreeType" Type="nvarchar" MaxLength="100" />
+          <Property Name="GraduationYear" Type="int" />
+        </EntityType>
+        <EntityType Name="Employments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="IsCurrent" Type="bit" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -139,6 +164,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Educations_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Educations" Type="Self.Educations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Educations">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employments_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Employments" Type="Self.Employments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Notifications_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -193,6 +242,8 @@
           <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRatings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employments" EntityType="Self.Employments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionFollowers" EntityType="Self.QuestionFollowers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
@@ -211,6 +262,14 @@
           <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
             <End Role="Questions" EntitySet="Questions" />
             <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Educations_AspNetUsers" Association="Self.FK_Educations_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Educations" EntitySet="Educations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employments_AspNetUsers" Association="Self.FK_Employments_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Employments" EntitySet="Employments" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -272,6 +331,16 @@
             <End Role="Question" EntitySet="Questions" />
             <End Role="QuestionFollower" EntitySet="QuestionFollowers" />
           </AssociationSet>
+          <EntitySet Name="Educations" EntityType="ProjectQModel.Education" />
+          <EntitySet Name="Employments" EntityType="ProjectQModel.Employment" />
+          <AssociationSet Name="FK_Educations_AspNetUsers" Association="ProjectQModel.FK_Educations_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Education" EntitySet="Educations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employments_AspNetUsers" Association="ProjectQModel.FK_Employments_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Employment" EntitySet="Employments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerRating">
           <Key>
@@ -327,6 +396,9 @@
           <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_AspNetUsers" FromRole="AspNetUser" ToRole="Notification" />
           <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_AspNetUsers" FromRole="AspNetUser" ToRole="QuestionFollower" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_AspNetUsers" FromRole="AspNetUser" ToRole="Question" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Educations" Relationship="ProjectQModel.FK_Educations_AspNetUsers" FromRole="AspNetUser" ToRole="Education" />
+          <NavigationProperty Name="Employments" Relationship="ProjectQModel.FK_Employments_AspNetUsers" FromRole="AspNetUser" ToRole="Employment" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -473,6 +545,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="School" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Concentration" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryConcentration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GraduationYear" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Educations_AspNetUsers" FromRole="Education" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="Employment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="IsCurrent" Type="Boolean" />
+          <NavigationProperty Name="AspNetUser" Relationship="ProjectQModel.FK_Employments_AspNetUsers" FromRole="Employment" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_Educations_AspNetUsers">
+          <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="ProjectQModel.Education" Role="Education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Education">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employments_AspNetUsers">
+          <End Type="ProjectQModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="ProjectQModel.Employment" Role="Employment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -509,6 +631,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="ProjectQModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
                 <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
@@ -561,6 +684,32 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educations">
+            <EntityTypeMapping TypeName="ProjectQModel.Education">
+              <MappingFragment StoreEntitySet="Educations">
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
+                <ScalarProperty Name="SecondaryConcentration" ColumnName="SecondaryConcentration" />
+                <ScalarProperty Name="Concentration" ColumnName="Concentration" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employments">
+            <EntityTypeMapping TypeName="ProjectQModel.Employment">
+              <MappingFragment StoreEntitySet="Employments">
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -19,6 +19,10 @@
         <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_Questions_AspNetUsers" />
         <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
+        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="14.875" />
+        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="3.5" />
+        <AssociationConnector Association="ProjectQModel.FK_Educations_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_Employments_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

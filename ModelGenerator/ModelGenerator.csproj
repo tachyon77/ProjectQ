@@ -58,6 +58,12 @@
     <Compile Include="AspNetUser.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Education.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employment.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
