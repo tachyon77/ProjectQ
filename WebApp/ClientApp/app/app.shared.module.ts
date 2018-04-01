@@ -29,6 +29,24 @@ import { AnswerCardComponent } from './components/answers/answercard/answercard.
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
 import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
+import {
+    AlertModule, 
+    //AccordionModule,
+    //ButtonsModule,
+    //CarouselModule,
+    //CollapseModule,
+    //BsDatepickerModule,
+    //BsDropdownModule,
+    ModalModule,
+    //PaginationModule,
+    //ProgressbarModule,
+    //SortableModule,
+    //TabsModule,
+    //TimepickerModule,
+    //TooltipModule,
+    //TypeaheadModule
+} from 'ngx-bootstrap';
+
 
 @NgModule({
     declarations: [
@@ -66,6 +84,16 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        // Bootstrap ----------------------------
+        AlertModule.forRoot(),
+        ModalModule.forRoot(),
+        //AccordionModule.forRoot(),
+        //ButtonsModule.forRoot(),
+        //...
+        //TooltipModule.forRoot()
+        //---------------------------------------
+
+        //...
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
