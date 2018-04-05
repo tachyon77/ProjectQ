@@ -125,8 +125,7 @@ namespace ProjectQ.BusinessLogic.Services
                     _websockets[userId].Remove(webSocket);
                     if (!_websockets[userId].Any())
                     {
-                        List<WebSocket> value;
-                        _websockets.TryRemove(userId, out value);
+                        _websockets.TryRemove(userId, out List<WebSocket> value);
                     }
                 }
             }

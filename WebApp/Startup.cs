@@ -86,6 +86,7 @@ namespace ProjectQ.WebApp
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
+            services.AddScoped<IUserProfileManager, UserProfileManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
             services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();

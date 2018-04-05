@@ -15,7 +15,6 @@ namespace ProjectQ.BusinessLogic.Tests
     {
         private Mock<IAnswerRepository> _mockAnswerRepo;
         private Mock<IQuestionRepository> _mockQuestionRepo;
-        private Mock<IUserRepository> _mockUserRepo;
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
         private Mock<INotificationSender> _mockNS;
@@ -25,7 +24,6 @@ namespace ProjectQ.BusinessLogic.Tests
         {
             _mockQuestionRepo = new Mock<IQuestionRepository>();
             _mockAnswerRepo = new Mock<IAnswerRepository>();
-            _mockUserRepo = new Mock<IUserRepository>();
             _mockNS = new Mock<INotificationSender>();
 
             _mockUoW = new Mock<IUnitOfWork>();
@@ -77,10 +75,6 @@ namespace ProjectQ.BusinessLogic.Tests
             _mockAnswerRepo
                 .Setup(x => x.AddAsync(answer))
                 .Returns(Task.CompletedTask);
-
-            _mockUserRepo
-                .Setup(x => x.GetByEmail("tachyon77@gmail.com"))
-                .Returns(new ApplicationUser());
 
             var r = _sut.AddAsync(
                 answer,

@@ -8,6 +8,10 @@ export class ApplicationUser {
 
 }
 
+export class UserProfile {
+    name: string;
+}
+
 
 @Injectable()
 export class ApplicationUserService {
@@ -17,6 +21,14 @@ export class ApplicationUserService {
 
     getContact() {
         return this.http.get('api/applicationuser/me')
+            .map(response => {
+                return response;
+            });
+    }
+
+    getUserInfo(id: string) {
+        console.log('api/profile/' + id);
+        return this.http.get('api/profile/' + id)
             .map(response => {
                 return response;
             });

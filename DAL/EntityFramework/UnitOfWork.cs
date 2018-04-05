@@ -18,10 +18,24 @@ namespace ProjectQ.DAL.EntityFramework
         private IAnswerRatingRepository _answerRatingRepository;
         private INotificationRepository _notificationRepository;
         private IQuestionFollowerRepository _questionFollowerRepository;
+        private IUserProfileRepository _userProfileRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
             _context = context;
+        }
+
+        IUserProfileRepository IUnitOfWork.UserProfileRepository
+        {
+            get
+            {
+                if (_userProfileRepository == null)
+                {
+                    _userProfileRepository =
+                        new UserProfileRepository(_context);
+                }
+                return _userProfileRepository;
+            }
         }
 
         IQuestionFollowerRepository IUnitOfWork.QuestionFollowerRepository

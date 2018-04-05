@@ -7,10 +7,8 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL
 {
-    public interface IUserRepository
+    public interface IUserProfileRepository
     {
-        Task AddAsync(ApplicationUser user);
-        bool UserExists(string email);
-        ApplicationUser GetByEmail(string email);
+        Task<UserProfile> GetByIdAsync(string id);
     }
 }

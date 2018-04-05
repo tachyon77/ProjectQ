@@ -98,7 +98,7 @@ import {
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'landing-page', component: LandingPageComponent },
-            { path: 'user-profile', component: UserProfileComponent },
+            { path: 'profile/:id', component: UserProfileComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: '**', redirectTo: 'home' }
