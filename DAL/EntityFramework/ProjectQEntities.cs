@@ -15,5 +15,7 @@ namespace ProjectQ.DAL.EntityFramework
         public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<AnswerRating> AnswerRatings { get; set; }
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<Employment> Employments { get; set; }
     }
 }

@@ -32,7 +32,8 @@ export class UserProfileComponent implements OnInit {
 
     openCredentials() {
         const initialState = {
-            list: [
+            name: this.profileOwner.name,
+            credentials: [
                 'Open a modal with component',
                 'Pass your data',
                 'Do something else',
