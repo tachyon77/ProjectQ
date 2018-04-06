@@ -23,15 +23,15 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        Credentials ICredentialsManager.GetForUser(ApplicationUser user)
+        Credentials ICredentialsManager.GetForUser(string id)
         {
             var credentials = new Credentials();
 
             credentials.Educations = 
-                _unitOfWork.EducationRepository.GetAllForUser(user);
+                _unitOfWork.EducationRepository.GetAllForUser(id);
 
             credentials.Employments =
-                _unitOfWork.EmploymentRepository.GetAllForUser(user);
+                _unitOfWork.EmploymentRepository.GetAllForUser(id);
 
             return credentials;
         }

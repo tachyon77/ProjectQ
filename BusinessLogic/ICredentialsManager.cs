@@ -8,6 +8,6 @@ namespace ProjectQ.BusinessLogic
 {
     public interface ICredentialsManager
     {
-        Credentials GetForUser(ApplicationUser user);
+        Credentials GetForUser(string id);
     }
 }

@@ -9,6 +9,6 @@ namespace ProjectQ.DAL
 {
     public interface IEmploymentRepository
     {
-        IEnumerable<Employment> GetAllForUser(ApplicationUser user);
+        IEnumerable<Employment> GetAllForUser(string id);
     }
 }

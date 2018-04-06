@@ -20,9 +20,9 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         IEnumerable<Employment> IEmploymentRepository.GetAllForUser(
-            ApplicationUser user)
+            string id)
         {
-            return _context.Employments.Where(x=>x.UserId.Equals(user.Id));
+            return _context.Employments.Where(x=>x.AspNetUserId.Equals(id));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ProjectQ.Model
     public partial class Education
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string AspNetUserId { get; set; }
         public string School { get; set; }
         public string Concentration { get; set; }
         public string SecondaryConcentration { get; set; }

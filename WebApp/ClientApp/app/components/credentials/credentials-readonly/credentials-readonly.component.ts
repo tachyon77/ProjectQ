@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Education, Employment } from '../../../services/application-user.service';
 
 @Component({
     selector: 'credential-readonly',
@@ -9,11 +10,12 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class CredentialsReadonlyComponent implements OnInit {
     name: string;
-    credentials: string[] = [];
+    educations: Education[] = [];
+    employments: Employment[] = [];
 
     constructor(public bsModalRef: BsModalRef) { }
 
     ngOnInit() {
-        this.credentials.push('sample');
+
     }
 }

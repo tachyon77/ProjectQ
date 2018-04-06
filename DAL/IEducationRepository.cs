@@ -9,6 +9,6 @@ namespace ProjectQ.DAL
 {
     public interface IEducationRepository
     {
-        IEnumerable<Education> GetAllForUser(ApplicationUser user);
+        IEnumerable<Education> GetAllForUser(string id);
     }
 }

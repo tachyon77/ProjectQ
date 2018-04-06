@@ -31,12 +31,10 @@ namespace WebApp.Controllers
             _credentialsManager = credentialsManager;
         }
 
-        [HttpGet("")]
-        async public Task<IActionResult> GetCredentials()
+        [HttpGet("{id}")]
+        public IActionResult GetCredentials(string id)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-
-            var credentials = _credentialsManager.GetForUser(appUser);
+            Credentials credentials = _credentialsManager.GetForUser(id);
 
             return Ok(credentials);
         }

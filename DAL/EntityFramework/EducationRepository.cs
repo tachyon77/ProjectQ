@@ -20,9 +20,9 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         IEnumerable<Education> IEducationRepository.GetAllForUser(
-            ApplicationUser user)
+            string id)
         {
-            return _context.Educations.Where(x=>x.UserId.Equals(user.Id));
+            return _context.Educations.Where(x=>x.AspNetUserId.Equals(id));
         }
     }
 }

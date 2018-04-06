@@ -12,6 +12,30 @@ export class UserProfile {
     name: string;
 }
 
+export class Education {
+    school: string;
+    concentration: string;
+
+    toString() {
+        alert("hi");
+        return this.concentration + ", " + this.school;
+    }
+}
+
+export class Employment {
+    position: string;
+    company: string;
+
+    toString() {
+        return this.position + ", " + this.company;
+    }
+}
+
+export class Credentials {
+    public educations: Education[] = [];
+    public employments: Employment[] = [];
+}
+
 
 @Injectable()
 export class ApplicationUserService {
@@ -27,8 +51,14 @@ export class ApplicationUserService {
     }
 
     getUserInfo(id: string) {
-        console.log('api/profile/' + id);
         return this.http.get('api/profile/' + id)
+            .map(response => {
+                return response;
+            });
+    }
+
+    getCredentials(id: string) {
+        return this.http.get('api/credentials/' + id)
             .map(response => {
                 return response;
             });
