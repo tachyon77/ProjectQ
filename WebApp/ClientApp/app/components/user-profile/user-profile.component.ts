@@ -1,7 +1,10 @@
 ﻿import { Component, OnInit, Output } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationUser, ApplicationUserService, UserProfile }
-    from '../../services/application-user.service'
+    from '../../services/application-user.service';
+import { CredentialsReadonlyComponent } from '../../components/credentials/credentials-readonly/credentials-readonly.component'
 
 @Component({
     selector: 'user-profile',
@@ -11,6 +14,7 @@ import { ApplicationUser, ApplicationUserService, UserProfile }
 
 export class UserProfileComponent implements OnInit {
 
+    bsModalRef: BsModalRef;
     private _loggedInUser: ApplicationUser;
     private _profileOwner: UserProfile;
 
@@ -24,6 +28,22 @@ export class UserProfileComponent implements OnInit {
     get loggedInUser() {
         return this._loggedInUser;
     }
+
+
+    openCredentials() {
+        const initialState = {
+            list: [
+                'Open a modal with component',
+                'Pass your data',
+                'Do something else',
+                '...'
+            ],
+            title: 'Modal with component'
+        };
+        this.bsModalRef = this.modalService.show(CredentialsReadonlyComponent, { initialState });
+        this.bsModalRef.content.closeBtnName = 'Close';
+    }
+
 
     ngOnInit() {
         this.paramsSubscription =
@@ -41,6 +61,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     constructor(
+        private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
         private applicationUserService: ApplicationUserService
     ) {

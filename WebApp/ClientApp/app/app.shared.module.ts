@@ -12,6 +12,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
@@ -49,6 +50,9 @@ import {
 
 
 @NgModule({
+    entryComponents: [
+        CredentialsReadonlyComponent
+    ],
     declarations: [
         AppComponent,
         LandingPageComponent,
@@ -68,6 +72,7 @@ import {
         QuestionEditorComponent,
         HomeComponent,
         UserProfileComponent,
+        CredentialsReadonlyComponent,
         UserQuestionsComponent,
     ],
     providers: [
