@@ -18,12 +18,14 @@
             <li class="nav-item active"
                 [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/home']">
+                    <i class="fas fa-home"></i>
                     Home
                 </a>
             </li>
             <li class="nav-item"
                 [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/add-question-form']">
+                    <i class="far fa-edit"></i>
                     Ask
                 </a>
             </li>
@@ -32,10 +34,10 @@
             <li class="nav-item dropdown"
                 [routerLinkActive]="['link-active']">
                 <div class="notification-parent">
-                    <a [ngClass]=
-                       "{'nav-link': true, 'notification-badge': notificationCount, 'pointer-cursor': true}"
+                    <a [ngClass]="{'nav-link': true, 'notification-badge': notificationCount, 'pointer-cursor': true}"
                        attr.data-badge={{notificationCount}}
                        (click)="toggleNotification()">
+                        <i class="far fa-bell"></i>
                         Notifications
                     </a>
                     <div class="notification-popover" 
@@ -49,6 +51,7 @@
             <li class="nav-item"
                 [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/profile']">
+                    <i class="far fa-user"></i>
                     {{userName}}
                 </a>
             </li>

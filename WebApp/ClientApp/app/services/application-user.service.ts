@@ -15,20 +15,12 @@ export class UserProfile {
 export class Education {
     school: string;
     concentration: string;
-
-    toString() {
-        alert("hi");
-        return this.concentration + ", " + this.school;
-    }
+    degreeType: string;
 }
 
 export class Employment {
     position: string;
     company: string;
-
-    toString() {
-        return this.position + ", " + this.company;
-    }
 }
 
 export class Credentials {
