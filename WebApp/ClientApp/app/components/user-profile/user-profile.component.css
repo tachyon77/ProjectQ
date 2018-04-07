@@ -1,1 +1,13 @@
-﻿
+﻿.upper-section {
+    padding-top: 1em;
+}
+
+.upper-left-section {
+    border-bottom: 2px solid #e8e8e8;
+    padding-bottom: 1em;
+}
+
+.upper-right-section {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 1em;
+}

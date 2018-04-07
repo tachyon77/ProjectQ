@@ -1,61 +1,17 @@
 ﻿<div class="offset-md-1 col-md-9">
-    <br />
-
-    <div *ngIf="profileOwner">
-        <h3>{{profileOwner.name}}</h3>
-        <hr />
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-6">
-            <h5>Credentials</h5>
-            <hr />
-            <button type="button" 
-                    class="btn btn-light" 
-                    (click)="openCredentials()">
-                More
-            </button>
+    <div class="row upper-section">
+        <div class="col-md-9 upper-left-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://qph.fs.quoracdn.net/main-thumb-254562851-200-gkjcpbysxnlvjjsfibjuswwtditddxpc.jpeg" alt="Mahbub Zaman" height="200" width="200">
+                </div>
+                <div class="col-md-8">
+                    <h2>{{profileOwner.name}}</h2>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-6 text-muted">
-            <h5>Topics</h5>
-            <hr />
-            Not implemented.
-        </div>
-
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-6">
-            <h5>Recent Questions</h5>
-            <hr />
-            <user-questions [user]="user"></user-questions>
-        </div>
-
-        <div class="col-md-6 text-muted">
-            <h5>Recent answers</h5>
-            <hr />
-            Not implemented.
-        </div>
-    </div>
-
-    <br />
-
-    <div class="row">
-        <div class="col-md-6 text-muted">
-            <h4>Followers</h4>
-            <hr />
-            Not implemented.
-        </div>
-
-        <div class="col-md-6 text-muted">
-            <h4>Following</h4>
-            <hr />
-            Not implemented.
+        <div class="offset-md-1 col-md-2 upper-right-section">
+            Credentials
         </div>
     </div>
 
