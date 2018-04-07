@@ -11,3 +11,21 @@
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 1em;
 }
+
+.profile-name {
+    font-family:Georgia;
+    font-size: x-large;
+    font-weight: 700;
+}
+.edit-link{
+    padding-left:0.5em;
+    color:lightgray;
+    visibility:hidden;
+}
+.profile-name:hover + .edit-link{
+    visibility:visible;
+}
+
+.edit-link:hover {
+    visibility: visible;
+}
