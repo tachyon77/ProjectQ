@@ -17,11 +17,16 @@ import { CredentialsReadonlyComponent } from '../../components/credentials/crede
 export class UserProfileComponent implements OnInit {
 
     bsModalRef: BsModalRef;
+    isNameEditorVisible = false;
     private _loggedInUser: ApplicationUser;
     private _profileOwner: UserProfile;
     private _credetials: Credentials;
 
     private paramsSubscription: any;
+
+    showNameEditor() {
+        this.isNameEditorVisible = true;
+    }
 
     get credentials() {
         return this._credetials;

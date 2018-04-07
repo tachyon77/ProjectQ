@@ -96,9 +96,6 @@ import {
         //ButtonsModule.forRoot(),
         //...
         //TooltipModule.forRoot()
-        //---------------------------------------
-
-        //...
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

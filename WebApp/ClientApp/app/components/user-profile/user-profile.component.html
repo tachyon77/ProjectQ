@@ -6,12 +6,20 @@
                     <img src="https://qph.fs.quoracdn.net/main-thumb-254562851-200-gkjcpbysxnlvjjsfibjuswwtditddxpc.jpeg" alt="Mahbub Zaman" height="200" width="200">
                 </div>
                 <div class="col-md-8">
-                    <span class="profile-name">
+                    <span class="profile-name"
+                          *ngIf="!isNameEditorVisible">
                         {{profileOwner.name}}
                     </span>
-                    <a href="" class="edit-link">
-                            Edit
-                        </a> 
+                    <button (click)="showNameEditor()"
+                            *ngIf="!isNameEditorVisible"
+                            class="edit-link btn btn-light">
+                        Edit
+                    </button> 
+                    <div class="name-editor"             
+                         contenteditable="true" spellcheck="false"
+                         *ngIf="isNameEditorVisible">
+                        {{profileOwner.name}}
+                    </div>
                 </div>
             </div>
         </div>

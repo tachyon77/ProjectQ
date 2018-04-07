@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, AnswerDetail } from '../answers.service'
+import { AnswerService, AnswerDetail, Answer } from '../answers.service'
 import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
@@ -72,9 +72,11 @@ export class AnswerCardComponent {
             });
     }
 
-    onAnswerUpdated(answerDetail: AnswerDetail) {
-        console.log("updating answer: " + answerDetail.answer.id);
-        this._answerDetail = answerDetail;
+    onAnswerUpdated(answer: Answer) {
+        console.log("updating answer: " + answer.id);
+        this._answerDetail.answer = answer;
+        this.answerContent =
+            this.sanitizer.bypassSecurityTrustHtml(answer.text);
         this.isUpdateAnswerVisible = false;
     }
 }
