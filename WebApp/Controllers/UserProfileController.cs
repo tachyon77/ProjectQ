@@ -50,9 +50,11 @@ namespace WebApp.Controllers
         }
 
         [HttpPut("name")]
-        public void UpdateName([FromBody] UserProfile profile)
+        async public Task<IActionResult> UpdateName([FromBody] UserProfile profile)
         {
-
+            var appUser = await _userManager.GetUserAsync(User);
+            await _userProfileManager.UpdateNameAsync(appUser.Id, profile.Name);
+            return new NoContentResult();
         }
 
 

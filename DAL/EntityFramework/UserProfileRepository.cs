@@ -30,5 +30,11 @@ namespace ProjectQ.DAL.EntityFramework
 
             return userProfile;
         }
+
+        async Task IUserProfileRepository.UpdateNameAsync(string id, string name)
+        {
+            var profile = await _context.AspNetUsers.FindAsync(id);
+            profile.FirstName = name;
+        }
     }
 }

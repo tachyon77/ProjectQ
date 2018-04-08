@@ -10,5 +10,6 @@ namespace ProjectQ.DAL
     public interface IUserProfileRepository
     {
         Task<UserProfile> GetByIdAsync(string id);
+        Task UpdateNameAsync(string id, string name);
     }
 }

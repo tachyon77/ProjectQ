@@ -6,5 +6,6 @@ namespace ProjectQ.BusinessLogic
     public interface IUserProfileManager
     {
         Task<UserProfile> GetById(string id);
+        Task UpdateNameAsync(string id, string name);
     }
 }
