@@ -19,7 +19,8 @@ export class UserProfileComponent implements OnInit {
     bsModalRef: BsModalRef;
     isNameEditorVisible = false;
     private _loggedInUser: ApplicationUser;
-    private _profileOwner: UserProfile;
+    private _currentProfile: UserProfile;
+    private _updatedProfile: UserProfile;
     private _credetials: Credentials;
 
     private paramsSubscription: any;
@@ -32,18 +33,36 @@ export class UserProfileComponent implements OnInit {
         return this._credetials;
     }
 
-    get profileOwner() {
-        return this._profileOwner;
+    get currentProfile() {
+        return this._currentProfile;
     }
 
     get loggedInUser() {
         return this._loggedInUser;
     }
 
+    onNameChange(newName: string) {
+        console.log("name changed to: " + newName);
+        this._updatedProfile.name = newName;
+    }
+
+    onCancelNameChange() {
+        this.isNameEditorVisible = false;
+        this._updatedProfile.name = this._currentProfile.name;
+    }
+
+    updateName() {
+        this.applicationUserService
+            .updateName(this._updatedProfile)
+            .subscribe(() => {
+                this._currentProfile.name = this._updatedProfile.name;
+                this.isNameEditorVisible = false;
+            });
+    }
 
     openCredentials() {
         const initialState = {
-            name: this.profileOwner.name,
+            name: this.currentProfile.name,
             educations: this._credetials.educations,
             employments: this._credetials.employments,
             title: 'Credentials'
@@ -61,7 +80,8 @@ export class UserProfileComponent implements OnInit {
 
                     this.applicationUserService.getUserInfo(userId).subscribe(
                         response => {
-                            this._profileOwner = response as UserProfile;
+                            this._currentProfile = response as UserProfile;
+                            this._updatedProfile = new UserProfile();
                         }
                     );
 

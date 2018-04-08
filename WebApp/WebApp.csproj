@@ -39,6 +39,9 @@
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.ts" />
+    <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.css" />
+    <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.html" />
+    <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.ts" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.css" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\questions\addquestion\addquestionform.component.ts" />
@@ -81,6 +84,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answercard\answercard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answers\answers.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\content-editor\contenteditor.component.ts" />

@@ -77,7 +77,7 @@ namespace WebApp.Controllers
                         true,
                         CancellationToken.None);
 
-                    Thread.Sleep(10000);
+                    Thread.Sleep(30000);
                 }
                 _notificationSender.Unsubscribe(
                     _userManager.GetUserId(User), webSocket);

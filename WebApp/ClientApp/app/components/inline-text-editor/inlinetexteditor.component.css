@@ -1,0 +1,10 @@
+﻿.content {
+    border: 1px solid #dfdfdf;
+    padding:1em;
+    overflow: auto;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+

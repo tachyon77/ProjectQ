@@ -15,6 +15,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
+import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
 import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
@@ -62,6 +63,7 @@ import {
         NotificationPopoverComponent,
         FocusDirective,
         ContentEditorComponent,
+        InlineTextEditorComponent,
         QuestionDetailComponent,
         QuestionCardComponent,
         DisplayQuestionsComponent,

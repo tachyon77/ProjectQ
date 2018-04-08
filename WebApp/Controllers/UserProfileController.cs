@@ -49,6 +49,12 @@ namespace WebApp.Controllers
             return Ok(user);
         }
 
+        [HttpPut("name")]
+        public void UpdateName([FromBody] UserProfile profile)
+        {
+
+        }
+
 
     }
 }

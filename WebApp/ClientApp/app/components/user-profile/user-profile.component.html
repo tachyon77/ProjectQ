@@ -7,19 +7,28 @@
                 </div>
                 <div class="col-md-8">
                     <span class="profile-name"
-                          *ngIf="!isNameEditorVisible">
-                        {{profileOwner.name}}
+                          *ngIf="!isNameEditorVisible && currentProfile">
+                        {{currentProfile.name}}
                     </span>
                     <button (click)="showNameEditor()"
                             *ngIf="!isNameEditorVisible"
                             class="edit-link btn btn-light">
                         Edit
-                    </button> 
-                    <div class="name-editor"             
-                         contenteditable="true" spellcheck="false"
-                         *ngIf="isNameEditorVisible">
-                        {{profileOwner.name}}
-                    </div>
+                    </button>
+                    <inline-text-editor *ngIf="isNameEditorVisible"
+                                        [content]="currentProfile.name"
+                                        (contentChanged)="onNameChange($event)">
+                    </inline-text-editor>
+                    <button *ngIf="isNameEditorVisible"
+                            (click)="updateName()"
+                            class="btn btn-sm btn-primary">
+                        Save
+                    </button>
+                    <button *ngIf="isNameEditorVisible"
+                            (click)="onCancelNameChange()"
+                            class="btn btn-sm btn-secondary">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>

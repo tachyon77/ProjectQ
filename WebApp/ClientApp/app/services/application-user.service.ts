@@ -55,4 +55,12 @@ export class ApplicationUserService {
                 return response;
             });
     }
+
+    updateName(profile: UserProfile) {
+        console.log("name change: " + profile.name);
+        return this.http.put('api/profile/name', profile)
+            .map(response => {
+                return response;
+            });
+    }
 }
