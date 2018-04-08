@@ -29,7 +29,8 @@
 .edit-link:hover {
     visibility: visible;
 }
-.name-editor{
-    
+
+.profile-introduction:hover + .edit-link {
+    visibility: visible;
 }
 

@@ -10,6 +10,7 @@ export class ApplicationUser {
 
 export class UserProfile {
     name: string;
+    introduction: string;
 }
 
 export class Education {
@@ -59,6 +60,14 @@ export class ApplicationUserService {
     updateName(profile: UserProfile) {
         console.log("name change: " + profile.name);
         return this.http.put('api/profile/name', profile)
+            .map(response => {
+                return response;
+            });
+    }
+
+    updateIntroduction(profile: UserProfile) {
+        console.log("introduction change: " + profile.introduction);
+        return this.http.put('api/profile/introduction', profile)
             .map(response => {
                 return response;
             });

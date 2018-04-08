@@ -7,5 +7,6 @@ namespace ProjectQ.BusinessLogic
     {
         Task<UserProfile> GetById(string id);
         Task UpdateNameAsync(string id, string name);
+        Task UpdateIntroductionAsync(string id, string introduction);
     }
 }

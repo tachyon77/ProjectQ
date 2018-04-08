@@ -1,7 +1,10 @@
 ﻿.content {
     border: 1px solid #dfdfdf;
-    padding:1em;
     overflow: auto;
+    padding: 0.25em;
+    font-family: Georgia;
+    font-size: x-large;
+    font-weight: 700;
 }
 
 [contenteditable]:focus {

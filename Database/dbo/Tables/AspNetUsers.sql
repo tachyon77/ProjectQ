@@ -15,6 +15,7 @@
     [TwoFactorEnabled]     BIT                NOT NULL,
     [UserName]             NVARCHAR (256)     NULL,
     [FirstName] NVARCHAR(200) NOT NULL, 
+    [Introduction] NVARCHAR(MAX) NULL, 
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

@@ -7,5 +7,6 @@ namespace ProjectQ.Model
     public class UserProfile
     {
         public string Name { get; set; }
+        public string Introduction { get; set; }
     }
 }

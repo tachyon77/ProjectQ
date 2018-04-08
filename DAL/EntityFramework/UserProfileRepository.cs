@@ -25,7 +25,8 @@ namespace ProjectQ.DAL.EntityFramework
 
             var userProfile = new UserProfile()
             {
-                Name = appUser.FirstName
+                Name = appUser.FirstName,
+                Introduction = appUser.Introduction,
             };
 
             return userProfile;
@@ -35,6 +36,13 @@ namespace ProjectQ.DAL.EntityFramework
         {
             var profile = await _context.AspNetUsers.FindAsync(id);
             profile.FirstName = name;
+        }
+
+        async Task IUserProfileRepository.UpdateIntroductionAsync(
+            string id, string introduction)
+        {
+            var profile = await _context.AspNetUsers.FindAsync(id);
+            profile.Introduction = introduction;
         }
     }
 }

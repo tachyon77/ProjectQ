@@ -21,6 +21,15 @@ namespace ProjectQ.BusinessLogic
             return await _unitOfWork.UserProfileRepository.GetByIdAsync(id);
         }
 
+        async Task IUserProfileManager.UpdateIntroductionAsync(
+            string id, 
+            string introduction)
+        {
+            await _unitOfWork.UserProfileRepository
+                .UpdateIntroductionAsync(id, introduction);
+            await _unitOfWork.SaveAsync();
+        }
+
         async Task IUserProfileManager.UpdateNameAsync(string id, string name)
         {
             await _unitOfWork.UserProfileRepository.UpdateNameAsync(id, name);

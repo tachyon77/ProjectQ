@@ -7,6 +7,7 @@ import {
     Education, Employment, Credentials
 } from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials/credentials-readonly/credentials-readonly.component'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
     selector: 'user-profile',
@@ -18,15 +19,21 @@ export class UserProfileComponent implements OnInit {
 
     bsModalRef: BsModalRef;
     isNameEditorVisible = false;
+    isIntroductionEditorVisible = false;
     private _loggedInUser: ApplicationUser;
     private _currentProfile: UserProfile;
     private _updatedProfile: UserProfile;
     private _credetials: Credentials;
+    introductionContent: SafeHtml;
 
     private paramsSubscription: any;
 
     showNameEditor() {
         this.isNameEditorVisible = true;
+    }
+
+    showIntroductionEditor() {
+        this.isIntroductionEditorVisible = true;
     }
 
     get credentials() {
@@ -46,9 +53,19 @@ export class UserProfileComponent implements OnInit {
         this._updatedProfile.name = newName;
     }
 
+    onIntroductionChanged(newIntro: string) {
+        console.log("introduction changed to: " + newIntro);
+        this._updatedProfile.introduction = newIntro;
+    }
+
     onCancelNameChange() {
         this.isNameEditorVisible = false;
         this._updatedProfile.name = this._currentProfile.name;
+    }
+
+    onCancelIntroductionChange() {
+        this.isIntroductionEditorVisible = false;
+        this._updatedProfile.introduction = this._currentProfile.introduction;
     }
 
     updateName() {
@@ -57,6 +74,15 @@ export class UserProfileComponent implements OnInit {
             .subscribe(() => {
                 this._currentProfile.name = this._updatedProfile.name;
                 this.isNameEditorVisible = false;
+            });
+    }
+
+    updateIntroduction() {
+        this.applicationUserService
+            .updateIntroduction(this._updatedProfile)
+            .subscribe(() => {
+                this._currentProfile.introduction = this._updatedProfile.introduction;
+                this.isIntroductionEditorVisible = false;
             });
     }
 
@@ -80,8 +106,10 @@ export class UserProfileComponent implements OnInit {
 
                     this.applicationUserService.getUserInfo(userId).subscribe(
                         response => {
-                            this._currentProfile = response as UserProfile;
+                            this._currentProfile = response as UserProfile;                        
                             this._updatedProfile = new UserProfile();
+                            this.introductionContent =
+                                this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
                         }
                     );
 
@@ -98,7 +126,8 @@ export class UserProfileComponent implements OnInit {
     constructor(
         private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
-        private applicationUserService: ApplicationUserService
+        private applicationUserService: ApplicationUserService,
+        private sanitizer: DomSanitizer,
     ) {
         /*
         this.applicationUserService.getContact().subscribe(

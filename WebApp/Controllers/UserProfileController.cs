@@ -57,6 +57,14 @@ namespace WebApp.Controllers
             return new NoContentResult();
         }
 
+        [HttpPut("introduction")]
+        async public Task<IActionResult> UpdateIntroduction([FromBody] UserProfile profile)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _userProfileManager.UpdateIntroductionAsync(appUser.Id, profile.Introduction);
+            return new NoContentResult();
+        }
+
 
     }
 }

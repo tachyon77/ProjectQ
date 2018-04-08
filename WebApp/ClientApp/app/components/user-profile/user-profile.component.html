@@ -15,7 +15,7 @@
                             class="edit-link btn btn-light">
                         Edit
                     </button>
-                    <inline-text-editor *ngIf="isNameEditorVisible"
+                    <inline-text-editor *ngIf="isNameEditorVisible && currentProfile"
                                         [content]="currentProfile.name"
                                         (contentChanged)="onNameChange($event)">
                     </inline-text-editor>
@@ -26,6 +26,31 @@
                     </button>
                     <button *ngIf="isNameEditorVisible"
                             (click)="onCancelNameChange()"
+                            class="btn btn-sm btn-secondary">
+                        Cancel
+                    </button>
+
+                    <div class="profile-introduction"
+                         [innerHTML]="introductionContent"
+                         *ngIf="!isIntroductionEditorVisible && currentProfile">
+                    </div>
+                    <button (click)="showIntroductionEditor()"
+                            *ngIf="!isIntroductionEditorVisible"
+                            class="edit-link btn btn-light">
+                        Edit
+                    </button>
+                    <content-editor *ngIf="isIntroductionEditorVisible && currentProfile"
+                                    [content]="currentProfile.introduction"
+                                    (contentChanged)="onIntroductionChanged($event)">
+                    </content-editor>
+
+                    <button *ngIf="isIntroductionEditorVisible"
+                            (click)="updateIntroduction()"
+                            class="btn btn-sm btn-primary">
+                        Save
+                    </button>
+                    <button *ngIf="isIntroductionEditorVisible"
+                            (click)="onCancelIntroductionChange()"
                             class="btn btn-sm btn-secondary">
                         Cancel
                     </button>
