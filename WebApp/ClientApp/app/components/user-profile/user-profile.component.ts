@@ -82,6 +82,9 @@ export class UserProfileComponent implements OnInit {
             .updateIntroduction(this._updatedProfile)
             .subscribe(() => {
                 this._currentProfile.introduction = this._updatedProfile.introduction;
+                this.introductionContent =
+                    this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
+
                 this.isIntroductionEditorVisible = false;
             });
     }
