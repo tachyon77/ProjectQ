@@ -35,6 +35,7 @@ import { QuestionEditorComponent } from './components/questions/questioneditor/q
 import {
     AlertModule, 
     ModalModule,
+    PopoverModule,
 } from 'ngx-bootstrap';
 
 
@@ -83,6 +84,7 @@ import {
         ReactiveFormsModule,
         AlertModule.forRoot(),
         ModalModule.forRoot(),
+        PopoverModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
