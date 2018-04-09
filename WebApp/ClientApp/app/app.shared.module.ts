@@ -13,6 +13,7 @@ import { NotificationPopoverComponent } from './components/notification-popover/
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
+import { CredentialsEditorComponent } from './components/credentials/credentials-editor/credentials-editor.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
@@ -33,26 +34,14 @@ import { UpdateAnswerComponent } from './components/answers/updateanswer/updatea
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
 import {
     AlertModule, 
-    //AccordionModule,
-    //ButtonsModule,
-    //CarouselModule,
-    //CollapseModule,
-    //BsDatepickerModule,
-    //BsDropdownModule,
     ModalModule,
-    //PaginationModule,
-    //ProgressbarModule,
-    //SortableModule,
-    //TabsModule,
-    //TimepickerModule,
-    //TooltipModule,
-    //TypeaheadModule
 } from 'ngx-bootstrap';
 
 
 @NgModule({
     entryComponents: [
-        CredentialsReadonlyComponent
+        CredentialsReadonlyComponent,
+        CredentialsEditorComponent,
     ],
     declarations: [
         AppComponent,
@@ -75,6 +64,7 @@ import {
         HomeComponent,
         UserProfileComponent,
         CredentialsReadonlyComponent,
+        CredentialsEditorComponent,
         UserQuestionsComponent,
     ],
     providers: [
@@ -91,13 +81,8 @@ import {
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        // Bootstrap ----------------------------
         AlertModule.forRoot(),
         ModalModule.forRoot(),
-        //AccordionModule.forRoot(),
-        //ButtonsModule.forRoot(),
-        //...
-        //TooltipModule.forRoot()
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

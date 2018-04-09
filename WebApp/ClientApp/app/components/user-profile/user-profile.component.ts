@@ -7,6 +7,7 @@ import {
     Education, Employment, Credentials
 } from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials/credentials-readonly/credentials-readonly.component'
+import { CredentialsEditorComponent } from '../../components/credentials/credentials-editor/credentials-editor.component'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
@@ -87,6 +88,17 @@ export class UserProfileComponent implements OnInit {
 
                 this.isIntroductionEditorVisible = false;
             });
+    }
+
+    onOpenCredentialsEditor() {
+        const initialState = {
+            name: this.currentProfile.name,
+            educations: this._credetials.educations,
+            employments: this._credetials.employments,
+            title: 'Credentials'
+        };
+        this.bsModalRef = this.modalService.show(CredentialsEditorComponent, { initialState });
+        this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     openCredentials() {
