@@ -1,0 +1,2 @@
+1. Run this to make sure node is building successfully. Otherwise deployment will fail even though it runs fine locally.
+node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod

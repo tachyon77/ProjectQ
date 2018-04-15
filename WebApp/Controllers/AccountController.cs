@@ -122,7 +122,7 @@ namespace ProjectQ.WebApp.Controllers
                     data.Email,
                     "Confirm registration",
                     "Click <a href=" + callbackUrl + ">here</a> to confirm your registration.");
-                return Ok();
+                return Ok("Account created. Need email confirmation to active account.");
             }
           
             
