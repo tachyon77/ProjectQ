@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
 using ProjectQ.WebApp.Services;
+using ProjectQ.DAL.EntityFramework;
 
 namespace ProjectQ.WebApp
 {//
@@ -37,6 +38,10 @@ namespace ProjectQ.WebApp
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
             services.AddDbContext<ApplicationDbContext>(
+                options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ProjectQEntities>(
                 options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -91,10 +96,9 @@ namespace ProjectQ.WebApp
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
             services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();
-            services.AddScoped<IUnitOfWork, DAL.EntityFramework.UnitOfWork>();
-            services.AddScoped<
-                DAL.EntityFramework.ProjectQEntities,
-                DAL.EntityFramework.SqlServer.DbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();

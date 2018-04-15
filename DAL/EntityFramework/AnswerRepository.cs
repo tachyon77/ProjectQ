@@ -12,7 +12,7 @@ namespace ProjectQ.DAL.EntityFramework
     public class AnswerRepository : IAnswerRepository
     {
         #region Private Members
-        private ProjectQEntities _context;
+        private readonly ProjectQEntities _context;
         #endregion
 
         public AnswerRepository(ProjectQEntities context)

@@ -7,8 +7,13 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework
 {
-    public abstract class ProjectQEntities : DbContext
+    public class ProjectQEntities : DbContext
     {
+        public ProjectQEntities(DbContextOptions<ProjectQEntities> options)
+           : base(options)
+        {
+        }
+
         public DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
