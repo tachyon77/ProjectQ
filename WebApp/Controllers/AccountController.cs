@@ -38,11 +38,20 @@ namespace ProjectQ.WebApp.Controllers
             _emailSender = emailSender;
         }
 
-        [HttpGet("username")]
-        public string
-           GetUserName()
+        [HttpGet("user")]
+        public object
+           GetUser()
         {
-            return _signInManager.UserManager.GetUserName(User);
+            if (User.Identity.IsAuthenticated)
+            {
+                return new
+                {
+                    name = _signInManager.UserManager.GetUserName(User),
+                    id = _signInManager.UserManager.GetUserId(User),
+                };
+            }
+
+            return null;
         }
 
 

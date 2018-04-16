@@ -7,6 +7,7 @@ import { Notification, NotificationService } from '../../services/notification.s
 })
 export class NavMenuComponent implements AfterViewInit{
     private _userName: string;
+    private _userId: string;
     private _isNotificationsVisible: boolean;
     private _notificationCount: number;
     private _notifications: Notification[];
@@ -68,8 +69,17 @@ export class NavMenuComponent implements AfterViewInit{
         this._userName = name;
     }
 
+    @Input()
+    set userId(id: string) {
+        this._userId = id;
+    }
+
     get userName() {
         return this._userName;
+    }
+
+    get userId() {
+        return this._userId;
     }
 
     get notificationCount() {

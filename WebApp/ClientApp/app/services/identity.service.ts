@@ -56,8 +56,8 @@ export class IdentityService {
             .map(response => { });
     }
 
-    get() {
-        return this.http.get('api/account/username')
+    getLoggedInUser() {
+        return this.http.get('api/account/user')
             .map(response => {
                 return response;
             });

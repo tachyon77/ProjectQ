@@ -119,7 +119,7 @@ export class UserProfileComponent implements OnInit {
                 .subscribe(params => {
                     let userId = params['id'];
 
-                    this.applicationUserService.getUserInfo(userId).subscribe(
+                    this.applicationUserService.getProfile(userId).subscribe(
                         response => {
                             this._currentProfile = response as UserProfile;                        
                             this._updatedProfile = new UserProfile();

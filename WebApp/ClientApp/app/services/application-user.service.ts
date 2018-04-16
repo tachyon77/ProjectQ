@@ -43,7 +43,7 @@ export class ApplicationUserService {
             });
     }
 
-    getUserInfo(id: string) {
+    getProfile(id: string) {
         return this.http.get('api/profile/' + id)
             .map(response => {
                 return response;

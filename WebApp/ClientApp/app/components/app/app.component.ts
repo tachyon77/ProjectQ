@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { IdentityService } from '../../services/identity.service';
 import { Router } from '@angular/router';
 
+export interface User {
+    name: string;
+    id: string;
+}
+
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
@@ -9,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     userName: string;
+    userId: string;
     isLoggedIn: boolean = true;
 
     constructor(
@@ -34,10 +40,18 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        this.identityService.get()
+        this.identityService.getLoggedInUser()
             .subscribe(result => {
-                this.userName = result as string;
-                this.isLoggedIn = (result != null);
+                if (result != null) {
+                    const user = result as User;
+                    this.userName = user.name;
+                    this.userId = user.id;
+                    this.isLoggedIn = true;
+                }
+                else {
+                    this.isLoggedIn = false;
+                }
+                         
             });
     }
 }
