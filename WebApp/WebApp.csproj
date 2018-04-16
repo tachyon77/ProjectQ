@@ -65,6 +65,8 @@
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\questionfollower.service.ts" />
+    <None Remove="Properties\PublishProfiles\Project-Q - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\testmoauna - Web Deploy.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -116,6 +118,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Screenshots\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
