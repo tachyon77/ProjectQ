@@ -1,81 +1,88 @@
-import { NgModule  } from '@angular/core';
+// Angular modules
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+
+// Custom Directives
 import { FocusDirective } from './directives/focus.directive'
+
+// ProjectQ components
 import { AppComponent } from './components/app/app.component';
-import { LandingPageComponent } from './components/landingpage/landingpage.component';
-import { LoginFormComponent } from './components/loginform/loginform.component';
-import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
-import { HomeComponent } from './components/home/home.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
-import { CredentialsEditorComponent } from './components/credentials/credentials-editor/credentials-editor.component';
-import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
-import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
-import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
-import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
-import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
-import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
-import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
-import { QuestionService } from './components/questions/questions.service';
+import { ApplicationUserService } from './services/application-user.service';
 import { AnswerService } from './components/answers/answers.service';
 import { AnswerRatingService } from './services/answerrating.service';
-import { QuestionFollowerService } from './services/questionfollower.service';
-import { IdentityService } from './services/identity.service';
-import { ApplicationUserService } from './services/application-user.service';
-import { NotificationService } from './services/notification.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
-import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
+import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
+import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
+import { CredentialsEditorComponent } from './components/credentials/credentials-editor/credentials-editor.component';
+import { EducationEditorComponent } from './components/credentials/education-editor/education-editor.component';
+import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
+import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
+import { HomeComponent } from './components/home/home.component';
+import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
+import { IdentityService } from './services/identity.service';
+import { LandingPageComponent } from './components/landingpage/landingpage.component';
+import { LoginFormComponent } from './components/loginform/loginform.component';
+import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
+import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
+import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
+import { QuestionService } from './components/questions/questions.service';
+import { QuestionFollowerService } from './services/questionfollower.service';
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
-import {
-    AlertModule, 
-    ModalModule,
-    PopoverModule,
-} from 'ngx-bootstrap';
+import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
+import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
+
+// third-party modules
+import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 
 
 @NgModule({
     entryComponents: [
         CredentialsReadonlyComponent,
         CredentialsEditorComponent,
+        EducationEditorComponent,
     ],
     declarations: [
         AppComponent,
-        LandingPageComponent,
-        LoginFormComponent,
-        RegistrationFormComponent,
-        NavMenuComponent,
-        NotificationPopoverComponent,
-        FocusDirective,
-        ContentEditorComponent,
-        InlineTextEditorComponent,
-        QuestionDetailComponent,
-        QuestionCardComponent,
-        DisplayQuestionsComponent,
         AddQuestionFormComponent,
         AnswerCardComponent,
         AddAnswerComponent,
-        UpdateAnswerComponent,
-        QuestionEditorComponent,
-        HomeComponent,
-        UserProfileComponent,
         CredentialsReadonlyComponent,
         CredentialsEditorComponent,
+        ContentEditorComponent,
+        DisplayQuestionsComponent,
+        EducationEditorComponent,
+        FocusDirective,
+        HomeComponent,
+        InlineTextEditorComponent,
+        LandingPageComponent,
+        LoginFormComponent,
+        NavMenuComponent,
+        NotificationPopoverComponent,
+        RegistrationFormComponent,
+        QuestionDetailComponent,
+        QuestionCardComponent,
+        QuestionEditorComponent,
+        UpdateAnswerComponent,
+        UserProfileComponent,
         UserQuestionsComponent,
     ],
     providers: [
-        QuestionService,
+        ApplicationUserService,
         AnswerService,
+        AnswerRatingService,
         IdentityService,
         NotificationService,
-        AnswerRatingService,
+        QuestionService,
         QuestionFollowerService,
-        ApplicationUserService,
+        
     ],
     imports: [
         CommonModule,

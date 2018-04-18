@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Education, Employment } from '../../../services/application-user.service';
+import { EducationEditorComponent } from '../../credentials/education-editor/education-editor.component';
 
 @Component({
     selector: 'credential-editor',
@@ -13,7 +15,16 @@ export class CredentialsEditorComponent implements OnInit {
     educations: Education[] = [];
     employments: Employment[] = [];
 
-    constructor(public bsModalRef: BsModalRef) { }
+    constructor(
+        private modalService: BsModalService,
+        public bsModalRef: BsModalRef) { }
+
+    onOpenEducationEditor() {
+        const initialState = {
+            name: this.name
+        };
+        this.bsModalRef = this.modalService.show(EducationEditorComponent, { initialState });
+    }
 
     ngOnInit() {
 
