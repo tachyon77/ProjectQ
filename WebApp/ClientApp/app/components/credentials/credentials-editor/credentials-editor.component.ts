@@ -17,13 +17,13 @@ export class CredentialsEditorComponent implements OnInit {
 
     constructor(
         private modalService: BsModalService,
-        public bsModalRef: BsModalRef) { }
+        public selfModalRef: BsModalRef) { }
 
     onOpenEducationEditor() {
         const initialState = {
             name: this.name
         };
-        this.bsModalRef = this.modalService.show(EducationEditorComponent, { initialState });
+        this.modalService.show(EducationEditorComponent, { initialState });
     }
 
     ngOnInit() {
