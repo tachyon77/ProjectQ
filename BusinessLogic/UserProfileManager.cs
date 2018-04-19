@@ -16,6 +16,13 @@ namespace ProjectQ.BusinessLogic
         {
             _unitOfWork = unitOfWork;
         }
+
+        async Task IUserProfileManager.AddEducationAsync(string id, Education education)
+        {
+            await _unitOfWork.UserProfileRepository.AddEducationAsync(id, education);
+            await _unitOfWork.SaveAsync();
+        }
+
         async Task<UserProfile> IUserProfileManager.GetById(string id)
         {
             return await _unitOfWork.UserProfileRepository.GetByIdAsync(id);

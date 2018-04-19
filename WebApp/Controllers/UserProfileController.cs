@@ -65,6 +65,14 @@ namespace WebApp.Controllers
             return new NoContentResult();
         }
 
+        [HttpPost("educations")]
+        async public Task<IActionResult> AddEducation([FromBody] Education education)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _userProfileManager.AddEducationAsync(appUser.Id, education);
+            return new NoContentResult();
+        }
+
 
     }
 }

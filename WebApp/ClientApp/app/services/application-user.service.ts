@@ -65,6 +65,14 @@ export class ApplicationUserService {
             });
     }
 
+    addEducaion(education: Education) {
+        console.log("adding education: " + education.school);
+        return this.http.post('api/profile/educations', education)
+            .map(response => {
+                return response;
+            });
+    }
+
     updateIntroduction(profile: UserProfile) {
         console.log("introduction change: " + profile.introduction);
         return this.http.put('api/profile/introduction', profile)
