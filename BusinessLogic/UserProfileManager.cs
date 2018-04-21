@@ -23,6 +23,12 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async Task IUserProfileManager.AddEmploymentAsync(string id, Employment employment)
+        {
+            await _unitOfWork.UserProfileRepository.AddEmploymentAsync(id, employment);
+            await _unitOfWork.SaveAsync();
+        }
+
         async Task<UserProfile> IUserProfileManager.GetById(string id)
         {
             return await _unitOfWork.UserProfileRepository.GetByIdAsync(id);

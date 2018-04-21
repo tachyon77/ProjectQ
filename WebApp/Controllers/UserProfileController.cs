@@ -73,6 +73,12 @@ namespace WebApp.Controllers
             return new NoContentResult();
         }
 
-
+        [HttpPost("employments")]
+        async public Task<IActionResult> AddEmployment([FromBody] Employment employment)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _userProfileManager.AddEmploymentAsync(appUser.Id, employment);
+            return new NoContentResult();
+        }
     }
 }

@@ -50,5 +50,11 @@ namespace ProjectQ.DAL.EntityFramework
             educaiton.AspNetUserId = id;
             await _context.Educations.AddAsync(educaiton);
         }
+
+        async Task IUserProfileRepository.AddEmploymentAsync(string id, Employment employment)
+        {
+            employment.AspNetUserId = id;
+            await _context.Employments.AddAsync(employment);
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace ProjectQ.DAL
         Task UpdateNameAsync(string id, string name);
         Task UpdateIntroductionAsync(string id, string introduction);
         Task AddEducationAsync(string id, Education educaiton);
+        Task AddEmploymentAsync(string id, Employment employment);
     }
 }

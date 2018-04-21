@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Education, Employment, ApplicationUserService, Credentials } from '../../../services/application-user.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { Education, Employment, ApplicationUserService, Credentials } from '../.
     templateUrl: './credentials-editor.component.html',
     styleUrls: ['./credentials-editor.component.css']
 })
-export class CredentialsEditorComponent implements OnInit {
+export class CredentialsEditorComponent implements AfterViewInit {
     name: string;
     userId: string;
     educations: Education[] = [];
@@ -20,6 +20,7 @@ export class CredentialsEditorComponent implements OnInit {
     employmentModal: BsModalRef;
 
     form: FormGroup;
+    employmentForm: FormGroup;
 
     constructor(
         private profileService: ApplicationUserService,
@@ -46,7 +47,7 @@ export class CredentialsEditorComponent implements OnInit {
         );
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
 
         this.profileService.getCredentials(this.userId).subscribe(
             response => {
@@ -67,6 +68,11 @@ export class CredentialsEditorComponent implements OnInit {
             degreeType: this.formBuilder.control(''),
             graduationYear: this.formBuilder.control(''),
         });
+
+        this.employmentForm = this.formBuilder.group({
+            company: this.formBuilder.control('', Validators.compose([Validators.required])),
+            position: this.formBuilder.control('', Validators.compose([Validators.required])),
+        });
     }
 
     onSubmit(education: Education) {
@@ -74,6 +80,14 @@ export class CredentialsEditorComponent implements OnInit {
             .subscribe(() => {
                 this.educationModal.hide();
                 this.educations.push(education);
+            });
+    }
+
+    onEmploymentSubmit(employment: Employment) {
+        this.profileService.addEmployment(employment)
+            .subscribe(() => {
+                this.employmentModal.hide();
+                this.employments.push(employment);
             });
     }
 }

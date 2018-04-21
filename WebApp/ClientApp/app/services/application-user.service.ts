@@ -73,6 +73,14 @@ export class ApplicationUserService {
             });
     }
 
+    addEmployment(employment: Employment) {
+        console.log("adding employment: " + employment.company);
+        return this.http.post('api/profile/employments', employment)
+            .map(response => {
+                return response;
+            });
+    }
+
     updateIntroduction(profile: UserProfile) {
         console.log("introduction change: " + profile.introduction);
         return this.http.put('api/profile/introduction', profile)

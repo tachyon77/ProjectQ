@@ -21,6 +21,7 @@ export class UserProfileComponent implements OnInit {
     bsModalRef: BsModalRef;
     isNameEditorVisible = false;
     isIntroductionEditorVisible = false;
+    profileUserId: string;
     private _loggedInUser: ApplicationUser;
     private _currentProfile: UserProfile;
     private _updatedProfile: UserProfile;
@@ -93,12 +94,9 @@ export class UserProfileComponent implements OnInit {
     onOpenCredentialsEditor() {
         const initialState = {
             name: this.currentProfile.name,
-            educations: this._credetials.educations,
-            employments: this._credetials.employments,
-            title: 'Credentials'
+            userId: this.profileUserId
         };
         this.bsModalRef = this.modalService.show(CredentialsEditorComponent, { initialState });
-        this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     openCredentials() {
@@ -113,26 +111,25 @@ export class UserProfileComponent implements OnInit {
     ngOnInit() {
         this.paramsSubscription =
             this.activatedRoute.params
-                .subscribe(params => {
-                    let userId = params['id'];
+            .subscribe(params => {
+                this.profileUserId = params['id'];
 
-                    this.applicationUserService.getProfile(userId).subscribe(
-                        response => {
-                            this._currentProfile = response as UserProfile;                        
-                            this._updatedProfile = new UserProfile();
-                            this.introductionContent =
-                                this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
-                        }
-                    );
+                this.applicationUserService.getProfile(this.profileUserId).subscribe(
+                    response => {
+                        this._currentProfile = response as UserProfile;                        
+                        this._updatedProfile = new UserProfile();
+                        this.introductionContent =
+                            this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
+                    }
+                );
 
-                    this.applicationUserService.getCredentials(userId).subscribe(
-                        response => {                            
-                            this._credetials = response as Credentials;
-                            console.log(this._credetials);
-                        }
-                    );
-                });
-
+                this.applicationUserService.getCredentials(this.profileUserId).subscribe(
+                    response => {                            
+                        this._credetials = response as Credentials;
+                        console.log(this._credetials);
+                    }
+                );
+            });
     }
 
     constructor(
