@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Education, Employment, ApplicationUserService, Credentials } from '../../../services/application-user.service';
 
 @Component({
@@ -10,16 +10,18 @@ import { Education, Employment, ApplicationUserService, Credentials } from '../.
     templateUrl: './credentials-editor.component.html',
     styleUrls: ['./credentials-editor.component.css']
 })
-export class CredentialsEditorComponent implements AfterViewInit {
+export class CredentialsEditorComponent implements OnInit {
     name: string;
     userId: string;
     educations: Education[] = [];
     employments: Employment[] = [];
 
     educationModal: BsModalRef;
+    educationEditModal: BsModalRef;
     employmentModal: BsModalRef;
 
     form: FormGroup;
+    educationEditForm: FormGroup;
     employmentForm: FormGroup;
 
     constructor(
@@ -38,6 +40,28 @@ export class CredentialsEditorComponent implements AfterViewInit {
         );
     }
 
+    onOpenEditEducation(template: TemplateRef<any>, education: Education) {
+        const initialState = {
+            name: this.name
+        };
+
+        this.educationEditForm = this.formBuilder.group({
+            school: this.formBuilder.control(education.school, Validators.compose([
+                Validators.required,
+            ])),
+            concentration: this.formBuilder.control('', Validators.compose([
+                Validators.required,
+            ])),
+            secondaryConcentration: this.formBuilder.control(''),
+            degreeType: this.formBuilder.control(''),
+            graduationYear: this.formBuilder.control(''),
+        });
+
+        this.educationEditModal = this.modalService.show(
+            template, { initialState }
+        );
+    }
+
     onOpenEmployment(template: TemplateRef<any>) {
         const initialState = {
             name: this.name
@@ -47,7 +71,7 @@ export class CredentialsEditorComponent implements AfterViewInit {
         );
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
 
         this.profileService.getCredentials(this.userId).subscribe(
             response => {
@@ -69,6 +93,8 @@ export class CredentialsEditorComponent implements AfterViewInit {
             graduationYear: this.formBuilder.control(''),
         });
 
+        
+
         this.employmentForm = this.formBuilder.group({
             company: this.formBuilder.control('', Validators.compose([Validators.required])),
             position: this.formBuilder.control('', Validators.compose([Validators.required])),
@@ -80,6 +106,19 @@ export class CredentialsEditorComponent implements AfterViewInit {
             .subscribe(() => {
                 this.educationModal.hide();
                 this.educations.push(education);
+            });
+    }
+
+    onEditEducationSubmit(education: Education) {
+        this.profileService.updateEducaion(education)
+            .subscribe(() => {
+                this.educationModal.hide();
+                this.profileService.getCredentials(this.userId).subscribe(
+                    response => {
+                        let credetials = response as Credentials;
+                        credetials.educations.forEach((e) => { this.educations.push(e); });
+                    }
+                );
             });
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ProjectQ.DAL;
 using ProjectQ.Model;
 
@@ -32,6 +33,18 @@ namespace ProjectQ.BusinessLogic
         async Task<UserProfile> IUserProfileManager.GetById(string id)
         {
             return await _unitOfWork.UserProfileRepository.GetByIdAsync(id);
+        }
+
+        async Task IUserProfileManager.UpdateEducationAsync(string userId, Education education)
+        {
+            var existingRecord = 
+                await _unitOfWork.UserProfileRepository.FindEducationAsync(education.Id);
+
+            if (!existingRecord.AspNetUserId.Equals(existingRecord.AspNetUserId))
+            {
+                throw new Exception("Unauthorized");
+            }
+            await _unitOfWork.UserProfileRepository.UpdateEducationAsync(education);
         }
 
         async Task IUserProfileManager.UpdateIntroductionAsync(

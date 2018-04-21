@@ -56,5 +56,22 @@ namespace ProjectQ.DAL.EntityFramework
             employment.AspNetUserId = id;
             await _context.Employments.AddAsync(employment);
         }
+
+        async Task IUserProfileRepository.UpdateEducationAsync(Education education)
+        {
+            var existingEducation = await _context.Educations.FindAsync(education.Id);
+
+            existingEducation.School = education.School;
+            existingEducation.Concentration = education.Concentration;
+            existingEducation.SecondaryConcentration = education.SecondaryConcentration;
+            existingEducation.DegreeType = education.DegreeType;
+            existingEducation.GraduationYear = education.GraduationYear;
+
+        }
+
+        async Task<Education> IUserProfileRepository.FindEducationAsync(int educationId)
+        {
+            return await _context.Educations.FindAsync(educationId);
+        }
     }
 }

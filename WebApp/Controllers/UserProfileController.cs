@@ -73,6 +73,14 @@ namespace WebApp.Controllers
             return new NoContentResult();
         }
 
+        [HttpPut("educations")]
+        async public Task<IActionResult> UpdateEducation([FromBody] Education education)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _userProfileManager.UpdateEducationAsync(appUser.Id, education);
+            return new NoContentResult();
+        }
+
         [HttpPost("employments")]
         async public Task<IActionResult> AddEmployment([FromBody] Employment employment)
         {

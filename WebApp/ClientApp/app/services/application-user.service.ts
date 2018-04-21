@@ -14,14 +14,21 @@ export class UserProfile {
 }
 
 export class Education {
+    id: number;
     school: string;
     concentration: string;
+    secondaryConcentration: string
     degreeType: string;
+    graduationYear: number;
 }
 
 export class Employment {
+    id: number;
     position: string;
     company: string;
+    start: Date;
+    end: Date;
+    isCurrent: boolean;
 }
 
 export class Credentials {
@@ -66,8 +73,14 @@ export class ApplicationUserService {
     }
 
     addEducaion(education: Education) {
-        console.log("adding education: " + education.school);
         return this.http.post('api/profile/educations', education)
+            .map(response => {
+                return response;
+            });
+    }
+
+    updateEducaion(education: Education) {
+        return this.http.put('api/profile/educations', education)
             .map(response => {
                 return response;
             });

@@ -9,6 +9,7 @@ namespace ProjectQ.BusinessLogic
         Task UpdateNameAsync(string id, string name);
         Task UpdateIntroductionAsync(string id, string introduction);
         Task AddEducationAsync(string id, Education education);
+        Task UpdateEducationAsync(string userId, Education education);
         Task AddEmploymentAsync(string id, Employment employment);
     }
 }
