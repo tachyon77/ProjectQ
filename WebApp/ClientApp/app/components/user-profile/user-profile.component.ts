@@ -104,12 +104,9 @@ export class UserProfileComponent implements OnInit {
     openCredentials() {
         const initialState = {
             name: this.currentProfile.name,
-            educations: this._credetials.educations,
-            employments: this._credetials.employments,
-            title: 'Credentials'
+            userId: this._loggedInUser.id,
         };
         this.bsModalRef = this.modalService.show(CredentialsReadonlyComponent, { initialState });
-        this.bsModalRef.content.closeBtnName = 'Close';
     }
 
 

@@ -18,7 +18,6 @@ import { AddAnswerComponent } from './components/answers/addanswer/addanswer.com
 import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
 import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
 import { CredentialsEditorComponent } from './components/credentials/credentials-editor/credentials-editor.component';
-import { EducationEditorComponent } from './components/credentials/education-editor/education-editor.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
@@ -47,7 +46,6 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
     entryComponents: [
         CredentialsReadonlyComponent,
         CredentialsEditorComponent,
-        EducationEditorComponent,
     ],
     declarations: [
         AppComponent,
@@ -58,7 +56,6 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         CredentialsEditorComponent,
         ContentEditorComponent,
         DisplayQuestionsComponent,
-        EducationEditorComponent,
         FocusDirective,
         HomeComponent,
         InlineTextEditorComponent,
