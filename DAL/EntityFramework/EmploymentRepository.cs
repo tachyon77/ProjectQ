@@ -24,5 +24,11 @@ namespace ProjectQ.DAL.EntityFramework
         {
             return _context.Employments.Where(x=>x.AspNetUserId.Equals(id));
         }
+
+        async Task IEmploymentRepository.AddEmploymentAsync(string id, Employment employment)
+        {
+            employment.AspNetUserId = id;
+            await _context.Employments.AddAsync(employment);
+        }
     }
 }

@@ -12,9 +12,5 @@ namespace ProjectQ.DAL
         Task<UserProfile> GetByIdAsync(string id);
         Task UpdateNameAsync(string id, string name);
         Task UpdateIntroductionAsync(string id, string introduction);
-        Task<Education> FindEducationAsync(int educationId);
-        Task AddEducationAsync(string id, Education educaiton);
-        Task UpdateEducationAsync(Education educaiton);
-        Task AddEmploymentAsync(string id, Employment employment);
     }
 }

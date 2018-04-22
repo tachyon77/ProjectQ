@@ -73,14 +73,14 @@ export class ApplicationUserService {
     }
 
     addEducaion(education: Education) {
-        return this.http.post('api/profile/educations', education)
+        return this.http.post('api/credentials/educations', education)
             .map(response => {
                 return response;
             });
     }
 
     updateEducaion(education: Education) {
-        return this.http.put('api/profile/educations', education)
+        return this.http.put('api/credentials/educations', education)
             .map(response => {
                 return response;
             });

@@ -64,29 +64,5 @@ namespace WebApp.Controllers
             await _userProfileManager.UpdateIntroductionAsync(appUser.Id, profile.Introduction);
             return new NoContentResult();
         }
-
-        [HttpPost("educations")]
-        async public Task<IActionResult> AddEducation([FromBody] Education education)
-        {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _userProfileManager.AddEducationAsync(appUser.Id, education);
-            return new NoContentResult();
-        }
-
-        [HttpPut("educations")]
-        async public Task<IActionResult> UpdateEducation([FromBody] Education education)
-        {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _userProfileManager.UpdateEducationAsync(appUser.Id, education);
-            return new NoContentResult();
-        }
-
-        [HttpPost("employments")]
-        async public Task<IActionResult> AddEmployment([FromBody] Employment employment)
-        {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _userProfileManager.AddEmploymentAsync(appUser.Id, employment);
-            return new NoContentResult();
-        }
     }
 }

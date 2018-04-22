@@ -16,11 +16,11 @@ export class CredentialsEditorComponent implements OnInit {
     educations: Education[] = [];
     employments: Employment[] = [];
 
-    educationModal: BsModalRef;
+    educationAddModal: BsModalRef;
     educationEditModal: BsModalRef;
     employmentModal: BsModalRef;
 
-    form: FormGroup;
+    educationAddForm: FormGroup;
     educationEditForm: FormGroup;
     employmentForm: FormGroup;
 
@@ -35,7 +35,7 @@ export class CredentialsEditorComponent implements OnInit {
         const initialState = {
             name: this.name
         };
-        this.educationModal = this.modalService.show(
+        this.educationAddModal = this.modalService.show(
             template, { initialState }
         );
     }
@@ -46,15 +46,16 @@ export class CredentialsEditorComponent implements OnInit {
         };
 
         this.educationEditForm = this.formBuilder.group({
+            id: this.formBuilder.control(education.id),
             school: this.formBuilder.control(education.school, Validators.compose([
                 Validators.required,
             ])),
-            concentration: this.formBuilder.control('', Validators.compose([
+            concentration: this.formBuilder.control(education.concentration, Validators.compose([
                 Validators.required,
             ])),
-            secondaryConcentration: this.formBuilder.control(''),
-            degreeType: this.formBuilder.control(''),
-            graduationYear: this.formBuilder.control(''),
+            secondaryConcentration: this.formBuilder.control(education.secondaryConcentration),
+            degreeType: this.formBuilder.control(education.degreeType),
+            graduationYear: this.formBuilder.control(education.graduationYear),
         });
 
         this.educationEditModal = this.modalService.show(
@@ -76,12 +77,14 @@ export class CredentialsEditorComponent implements OnInit {
         this.profileService.getCredentials(this.userId).subscribe(
             response => {
                 let credetials = response as Credentials;
+                this.educations = [];
+                this.employments = [];
                 credetials.educations.forEach((e) => { this.educations.push(e); });
                 credetials.employments.forEach((e) => { this.employments.push(e); });
             }
         );
 
-        this.form = this.formBuilder.group({
+        this.educationAddForm = this.formBuilder.group({
             school: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
@@ -101,20 +104,27 @@ export class CredentialsEditorComponent implements OnInit {
         });
     }
 
-    onSubmit(education: Education) {
+    onAddEducationSubmit(education: Education) {
         this.profileService.addEducaion(education)
             .subscribe(() => {
-                this.educationModal.hide();
-                this.educations.push(education);
+                this.educationAddModal.hide();
+                this.profileService.getCredentials(this.userId).subscribe(
+                    response => {
+                        this.educations = [];
+                        let credetials = response as Credentials;
+                        credetials.educations.forEach((e) => { this.educations.push(e); });
+                    }
+                );
             });
     }
 
     onEditEducationSubmit(education: Education) {
         this.profileService.updateEducaion(education)
             .subscribe(() => {
-                this.educationModal.hide();
+                this.educationEditModal.hide();
                 this.profileService.getCredentials(this.userId).subscribe(
                     response => {
+                        this.educations = [];
                         let credetials = response as Credentials;
                         credetials.educations.forEach((e) => { this.educations.push(e); });
                     }

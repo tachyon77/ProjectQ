@@ -39,5 +39,28 @@ namespace WebApp.Controllers
             return Ok(credentials);
         }
 
+        [HttpPost("educations")]
+        async public Task<IActionResult> AddEducation([FromBody] Education education)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _credentialsManager.AddEducationAsync(appUser.Id, education);
+            return new NoContentResult();
+        }
+
+        [HttpPut("educations")]
+        async public Task<IActionResult> UpdateEducation([FromBody] Education education)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _credentialsManager.UpdateEducationAsync(appUser.Id, education);
+            return new NoContentResult();
+        }
+
+        [HttpPost("employments")]
+        async public Task<IActionResult> AddEmployment([FromBody] Employment employment)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _credentialsManager.AddEmploymentAsync(appUser.Id, employment);
+            return new NoContentResult();
+        }
     }
 }
