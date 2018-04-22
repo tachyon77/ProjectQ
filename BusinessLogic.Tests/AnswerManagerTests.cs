@@ -88,14 +88,14 @@ namespace ProjectQ.BusinessLogic.Tests
         [Test]
         public void ShouldReturnAnswersForAQuestion()
         {
-            var answers = new List<AnswerDetail>();
-            answers.Add(new Mock<AnswerDetail>().Object);
+            var answers = new List<UserSpecificAnswerView>();
+            answers.Add(new Mock<UserSpecificAnswerView>().Object);
 
             var expected = Task
-                .FromResult<IEnumerable<AnswerDetail>>
+                .FromResult<IEnumerable<UserSpecificAnswerView>>
                 (answers);
             _mockAnswerRepo
-                .Setup(x => x.GetForQuestionAndUserAsyc(1, ""))
+                .Setup(x => x.GetForQuestionAndUserAsync(1, ""))
                 .Returns(expected);
 
             

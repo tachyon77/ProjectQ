@@ -1,8 +1,8 @@
-﻿<p *ngIf="!questions"><em>Loading...</em></p>
+﻿<p *ngIf="!questionViews"><em>Loading...</em></p>
 
-<div *ngIf="questions" class="question-list">
-    <div *ngFor="let question of questions">
-        <question-card [questionPreview]="question">
+<div *ngIf="questionViews" class="question-list">
+    <div *ngFor="let questionView of questionViews">
+        <question-card [questionView]="questionView">
         </question-card>
     </div>
 </div>

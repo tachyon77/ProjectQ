@@ -44,7 +44,6 @@ export class UpdateAnswerComponent {
     onSubmit() {
         this.answerService.update(this.answer)
             .subscribe(() => {
-                console.log("emitting updated answer " + this.answer.id);
                 this.answerUpdated.emit(this.answer);
             });
     }

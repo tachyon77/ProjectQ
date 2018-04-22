@@ -44,7 +44,6 @@ export class NavMenuComponent implements AfterViewInit{
             console.log("websocket errror.");
         };
         socket.onmessage = (event) => {
-            console.log(event);
             var data = event.data;
             if (data != "ping")
             {

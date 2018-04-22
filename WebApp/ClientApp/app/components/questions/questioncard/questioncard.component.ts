@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { QuestionPreview } from '../questions.service'
+import { UserSpecificQuestionView } from '../questions.service'
 import { QuestionFollowerService } from '../../../services/questionfollower.service'
 import { AnswerService, Answer } from '../../answers/answers.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
@@ -12,39 +12,38 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 })
 export class QuestionCardComponent {
     previewAnswerContent: SafeHtml;
-    private _questionPreview: QuestionPreview;
+    private _questionView: UserSpecificQuestionView;
 
     onFollow() {
         this.questionFollowerService.follow(
-            this._questionPreview.question.id).subscribe(
+            this._questionView.question.id).subscribe(
             () => {
-                this._questionPreview.isFollowing = true;
+                this._questionView.isFollowing = true;
             }
         );
     }
 
     onUnfollow() {
         this.questionFollowerService.unfollow(
-            this._questionPreview.question.id).subscribe(
+            this._questionView.question.id).subscribe(
             () => {
-                this._questionPreview.isFollowing = false;
+                this._questionView.isFollowing = false;
             }
         );
     }
 
     @Input()
-    set questionPreview(question: QuestionPreview) {
-        this._questionPreview = question;
-        console.log(question.question);
-        if (this._questionPreview.answerCount > 0) {
+    set questionView(questionView: UserSpecificQuestionView) {
+        this._questionView = questionView;
+        if (questionView.question.answers.length > 0) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(
-                    this._questionPreview.previewAnswer.text.substring(0, 200));
+                    questionView.question.answers[0].text.substring(0, 200));
         }
     }
 
-    get questionPreview() {
-        return this._questionPreview;
+    get questionView() {
+        return this._questionView;
     }
 
     constructor(

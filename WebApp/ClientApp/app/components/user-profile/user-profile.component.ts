@@ -51,12 +51,10 @@ export class UserProfileComponent implements OnInit {
     }
 
     onNameChange(newName: string) {
-        console.log("name changed to: " + newName);
         this._updatedProfile.name = newName;
     }
 
     onIntroductionChanged(newIntro: string) {
-        console.log("introduction changed to: " + newIntro);
         this._updatedProfile.introduction = newIntro;
     }
 
@@ -126,7 +124,6 @@ export class UserProfileComponent implements OnInit {
                 this.applicationUserService.getCredentials(this.profileUserId).subscribe(
                     response => {                            
                         this._credetials = response as Credentials;
-                        console.log(this._credetials);
                     }
                 );
             });

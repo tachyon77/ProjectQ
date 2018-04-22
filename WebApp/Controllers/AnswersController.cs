@@ -37,7 +37,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet("ForQuestion/{questionId}")]
-        public async Task<IEnumerable<AnswerDetail>> 
+        public async Task<IEnumerable<UserSpecificAnswerView>> 
             GetForQuestion([FromRoute] int questionId)
         {
             var userId = _userManager.GetUserId(User);

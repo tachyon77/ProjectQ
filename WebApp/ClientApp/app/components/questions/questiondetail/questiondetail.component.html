@@ -47,16 +47,16 @@
         </div>
         <hr />
         <div>
-            <div *ngIf="!answerDetails">
+            <div *ngIf="!answerViews">
                 Loading...
             </div>
-            <div *ngIf="answerDetails">
+            <div *ngIf="answerViews">
                 <h4>
-                    {{answerDetails.length}} Answer
+                    {{answerViews.length}} Answer
                 </h4>
-                <div *ngFor="let answerDetail of answerDetails">
+                <div *ngFor="let answerView of answerViews">
                     <hr />
-                    <answer-card [answerDetail]="answerDetail"
+                    <answer-card [answerView]="answerView"
                                  (answerDeleted)="onAnswerDeleted($event)">
                     </answer-card>
                 </div>

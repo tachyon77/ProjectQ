@@ -85,13 +85,13 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
-        async Task<IEnumerable<AnswerDetail>> 
+        async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerManager.GetForQuestionAndUserAsync(
             int questionId, string userId)
         {
             return await _unitOfWork
                 .AnswerRepository
-                .GetForQuestionAndUserAsyc(questionId, userId);
+                .GetForQuestionAndUserAsync(questionId, userId);
         }
 
         Task<Answer> IAnswerManager.GetById(int id)

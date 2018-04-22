@@ -10,8 +10,6 @@ export class QuestionFollowerService {
     }
 
     follow(questionId: number) {
-        console.log('following question')
-        console.log(questionId);
         return this.http.post('api/questionfollowers/follow', questionId)
             .map(response => {
                 return response;
@@ -19,8 +17,6 @@ export class QuestionFollowerService {
     }
 
     unfollow(questionId: number) {
-        console.log('unfollowing question')
-        console.log(questionId);
         return this.http.post('api/questionfollowers/unfollow', questionId)
             .map(response => {
                 return response;

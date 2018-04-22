@@ -45,7 +45,6 @@ export class QuestionEditorComponent implements OnInit {
         question.id = this.question.id;
         this.questionService.update(question)
             .subscribe(() => {
-                console.log("emitting question " + question.description);
                 this.questionEdited.emit(question);
             });
     }

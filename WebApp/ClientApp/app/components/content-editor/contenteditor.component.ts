@@ -44,14 +44,12 @@ export class ContentEditorComponent implements AfterViewInit{
             var sel = window.getSelection();
             if (sel.getRangeAt && sel.rangeCount) {
                 this.editPosition = sel.getRangeAt(0);
-                console.log("saving");
             }
         } 
     }
 
     restoreSelection() {
         if (this.editPosition) {
-             console.log("restoring");
             if (window.getSelection) {
                 var sel = window.getSelection();
                 sel.removeAllRanges();
@@ -81,7 +79,6 @@ export class ContentEditorComponent implements AfterViewInit{
     onRedact() {
         let range = document.createRange();
         range = window.getSelection().getRangeAt(0);
-        console.log(range);
 
         document.execCommand("removeFormat", false, null);
         document.execCommand("foreColor", false, "lightgrey");

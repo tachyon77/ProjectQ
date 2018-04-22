@@ -1,41 +1,41 @@
-﻿<p *ngIf="!questionPreview"><em>Loading...</em></p>
+﻿<p *ngIf="!questionView"><em>Loading...</em></p>
 
-<div *ngIf="questionPreview">
+<div *ngIf="questionView">
     <div class="card">        
         <div class="card-body">
             <h3 class="card-title">
-                <a [routerLink]="['/question-detail', questionPreview.question.id]"
+                <a [routerLink]="['/question-detail', questionView.question.id]"
                    class="card-link">
-                    {{questionPreview.question.title}}
+                    {{questionView.question.title}}
                 </a>
                 <span class="badge badge-light">
-                    ${{questionPreview.question.offeredPrice}}
+                    ${{questionView.question.offeredPrice}}
                 </span>
             </h3>
 
             <h6 class="asked-by">
-                Asked by {{questionPreview.asker.email}}
-                {{questionPreview.question.originDate}}
+                Asked by {{questionView.question.aspNetUser.email}}
+                {{questionView.question.originDate}}
             </h6>
-            <p class="card-text">{{questionPreview.question.description}}</p>
+            <p class="card-text">{{questionView.question.description}}</p>
 
-            <div *ngIf="!questionPreview.isFollowing">
+            <div *ngIf="!questionView.isFollowing">
                 <button (click)="onFollow()"
                         class="btn btn-light">
                     <i class="fas fa-rss"></i>
                     Follow
                 </button>
             </div>
-            <div *ngIf="questionPreview.isFollowing">
+            <div *ngIf="questionView.isFollowing">
                 <button (click)="onUnfollow()"
                         class="btn btn-light">
                     Following
                 </button>
             </div>
 
-            <em>{{questionPreview.answerCount}} answers</em>
+            <em>{{questionView.question.answers.length}} answers</em>
 
-            <div *ngIf="questionPreview.answerCount > 0"
+            <div *ngIf="questionView.question.answers.length > 0"
                  [innerHTML]="previewAnswerContent">
             </div>
         </div>

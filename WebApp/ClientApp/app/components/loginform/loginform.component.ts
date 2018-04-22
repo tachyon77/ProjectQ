@@ -32,8 +32,6 @@ export class LoginFormComponent {
 
     onSubmit(loginForm: LoginCredential) {
         this.identityService.login(loginForm).subscribe(result => {
-            console.log("login result: ");
-            console.log(result);
             if (result != null && result.length > 0) {
                 this.loggedIn.emit(result);
             }

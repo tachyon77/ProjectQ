@@ -53,7 +53,7 @@ namespace ProjectQ.BusinessLogic
                 .OrderByDescending(x => x.OriginDate);
         }
 
-        async Task<IEnumerable<QuestionPreview>> IQuestionManager.GetAllForUser(
+        async Task<IEnumerable<UserSpecificQuestionView>> IQuestionManager.GetAllForUser(
             ApplicationUser user
             )
         {
@@ -75,11 +75,10 @@ namespace ProjectQ.BusinessLogic
                 .QuestionExists(id);
         }
 
-        async Task IQuestionManager.UpdateAsync(Question question, string email)
+        async Task IQuestionManager.UpdateAsync(string userId, Question question)
         {
-            var currentUserId = "";
-
-            if (question.IsDeleted && question.AspNetUserId != currentUserId)
+            var dbRecord = await _unitOfWork.QuestionRepository.GetByIdAsync(question.Id);
+            if (dbRecord.AspNetUserId != userId)
             {
                 throw new Exception("Unauthorized");
             }

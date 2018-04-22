@@ -38,12 +38,11 @@ export class AddAnswerComponent {
 
     onSubmit() {
         let answer: Answer = new Answer();
-        answer.QuestionId = this._questionId;
+        answer.questionId = this._questionId;
         answer.text = this.answerText;
 
         this.answerService.add(answer)
             .subscribe(() => {
-                console.log("emitting answer " + this.answerText);
                 this.answerAdded.emit(answer);
             });
     }

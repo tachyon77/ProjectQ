@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, AnswerDetail, Answer } from '../answers.service'
+import { AnswerService, Answer, UserSpecificAnswerView } from '../answers.service'
 import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
@@ -11,29 +11,30 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 export class AnswerCardComponent {
     answerContent: SafeHtml;
-    private _answerDetail: AnswerDetail;
+    private _answerView: UserSpecificAnswerView;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
     public rating: boolean[];
 
+    get answerView() {
+        return this._answerView;
+    }
 
     @Input()
-    set answerDetail(answerDetail: AnswerDetail) {
-        this._answerDetail = answerDetail;
+    set answerView(answerView: UserSpecificAnswerView) {
+        this._answerView = answerView;
         this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answerDetail.answer.text);
+            this.sanitizer.bypassSecurityTrustHtml(answerView.answer.text);
 
-        if (answerDetail.rating == null) {
+        if (answerView.rating == null) {
             this.rating[0] = true;
         }
         else {
-            this.rating[answerDetail.rating.rating] = true;
+            this.rating[answerView.rating.rating] = true;
         }
-
     }
 
     rate(score: number) {
-        console.log("Rated: " + score);
 
         for (var i = 0; i < 6; i++) {
             this.rating[i] = false;
@@ -41,14 +42,10 @@ export class AnswerCardComponent {
         this.rating[score] = true;
 
         var answerRating = new AnswerRating();
-        answerRating.answerId = this._answerDetail.answer.id;
+        answerRating.answerId = this.answerView.answer.id;
         answerRating.rating = score;
         this.answerRatingService.postRating(answerRating)
             .subscribe((result) => { });
-    }
-
-    get answerDetail() {
-        return this._answerDetail; 
     }
 
     constructor(
@@ -65,16 +62,15 @@ export class AnswerCardComponent {
     }
 
     OnDeleteClick() {
-        this._answerDetail.answer.isDeleted = !this._answerDetail.answer.isDeleted;
-        this.answerService.update(this._answerDetail.answer)
+        this.answerView.answer.isDeleted = !this.answerView.answer.isDeleted;
+        this.answerService.update(this.answerView.answer)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
             });
     }
 
     onAnswerUpdated(answer: Answer) {
-        console.log("updating answer: " + answer.id);
-        this._answerDetail.answer = answer;
+        this.answerView.answer = answer;
         this.answerContent =
             this.sanitizer.bypassSecurityTrustHtml(answer.text);
         this.isUpdateAnswerVisible = false;

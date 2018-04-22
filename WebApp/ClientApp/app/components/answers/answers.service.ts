@@ -8,15 +8,14 @@ import 'rxjs/add/operator/map';
 export class Answer {
     id: number;
     isDeleted: boolean;
-    QuestionId: number;
-    OriginDate: Date;
+    questionId: number;
+    originDate: Date;
     text: string;
     aspNetUser: AspNetUser;
 }
 
-export class AnswerDetail {
+export interface UserSpecificAnswerView {
     answer: Answer;
-    answerer: AspNetUser;
     rating: AnswerRating;
 }
 

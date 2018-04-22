@@ -2,7 +2,7 @@
     from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AnswerService, Answer, AnswerDetail } from '../../answers/answers.service'
+import { AnswerService, Answer, UserSpecificAnswerView } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
 import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
@@ -13,11 +13,12 @@ import { IdentityService, AspNetUser } from '../../../services/identity.service'
 })
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
-    public answerDetails: AnswerDetail[];
+    public answerViews: UserSpecificAnswerView[];
     public question: Question;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
+    isAsker: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -41,12 +42,18 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.question.isDeleted = !this.question.isDeleted;
         this.questionService.update(this.question)
             .subscribe(result => {
-                console.log("Deleting question " + this.question.id);
             }, error => console.error(error));
     }
 
     ngOnDestroy() {
         this.paramsSubscription.unsubscribe();
+    }
+
+    loadAnswers(questionId: number) {
+        this.answerService.getForQuestion(questionId)
+            .subscribe(result => {
+                this.answerViews = result as UserSpecificAnswerView[];
+            }, error => console.error(error));
     }
 
     ngOnInit() {
@@ -59,33 +66,21 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
                         this.question = result as Question;
                     }, error => console.error(error));
 
-                this.answerService.getForQuestion(questionId)
-                    .subscribe(result => {
-                        console.log(result);
-                        this.answerDetails = result as AnswerDetail[];
-                    }, error => console.error(error));
+                this.loadAnswers(questionId);
             });
         
     }
 
     onAnswerAdded(answer: Answer) {
-        console.log("pushing answer: " + answer.text);
-        var answerDetail = new AnswerDetail();
-        answerDetail.answer = answer;
-        this.answerDetails.push(answerDetail);
+        this.loadAnswers(this.question.id);
         this.isAddAnswerVisible = false;
     }
 
-    onAnswerDeleted(answerDetail: AnswerDetail) {
-        console.log("deleting answer: " + answerDetail.answer.id);
-        let index = this.answerDetails.indexOf(answerDetail);
-        if (index >= 0) {
-            this.answerDetails.splice(index, 1);
-        }
+    onAnswerDeleted(answer: Answer) {
+        this.loadAnswers(this.question.id);
     }
 
     onQuestionEdited(question: Question) {
-        console.log("updating question: " + question.description);
         this.question = question;
         this.isQuestionEditorVisible = false;
     }

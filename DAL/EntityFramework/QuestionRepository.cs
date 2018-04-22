@@ -33,34 +33,35 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.IsDeleted = question.IsDeleted;
         }
 
-        async Task<IEnumerable<QuestionPreview>> IQuestionRepository.GetAllForUser(
-            ApplicationUser user
-        )
+        async Task<IEnumerable<UserSpecificQuestionView>> 
+            IQuestionRepository.GetAllForUser(ApplicationUser user)
         {
-            var data = await (from question in _context.Questions
-                   .Where(x => !x.IsDeleted)
-                         select new QuestionPreview()
-                         {
-                             IsFollowing = question.QuestionFollowers.Any(
-                                 x=>x.IsFollowing && x.AspNetUserId==user.Id),
-                             Asker = question.AspNetUser.flatten(),
-                             Question = question.flatten(),
-                             AnswerCount = question.Answers != null? question.Answers.Where(a=>!a.IsDeleted).Count() : 0,
-                             PreviewAnswer = 
-                                question.Answers != null && question.Answers.Any()?
-                                    question.Answers.Where(a => !a.IsDeleted)
-                                    .OrderByDescending(y=>y.OriginDate)
-                                    .FirstOrDefault().flatten() 
-                                    : 
-                                    null
-                         }).ToListAsync();
-            return data;
+            var questions = await _context.Questions
+                .Include(x => x.Answers)
+                .Include(x => x.AspNetUser)
+                .Include(x => x.QuestionFollowers)
+                .Where(x => !x.IsDeleted).ToListAsync();
+
+            var questionViews = questions.ConvertAll
+                (
+                    q =>
+                    new UserSpecificQuestionView()
+                    {
+                        IsFollowing = q.QuestionFollowers.Any(
+                                x => x.IsFollowing && x.AspNetUserId == user.Id),
+                        Question = q,
+                    }                    
+                );
+            return questionViews;
         }
 
         async Task<Question> IQuestionRepository.GetByIdAsync(int id)
         {
-            return (await _context.Questions
-                .SingleAsync(x=>x.Id == id)).flatten();
+            return await _context.Questions
+                .Include(x => x.Answers)
+                .Include(x=>x.AspNetUser)
+                .Include(x=>x.QuestionFollowers)
+                .SingleAsync(x => x.Id.Equals(id));
         }
 
         bool IQuestionRepository.QuestionExists(int id)

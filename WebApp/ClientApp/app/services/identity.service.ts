@@ -27,7 +27,6 @@ export class IdentityService {
     }
 
     register(regForm: RegistrationForm) {
-        console.log(regForm);
         return this.http.post('api/Account/Register', regForm)
             .map(response => {
                 return response as string;
@@ -35,16 +34,13 @@ export class IdentityService {
     }
 
     confirmRegistration(regForm: RegistrationForm) {
-        console.log("posting registration confirmation");
-        console.log(regForm);
         return this.http.post('api/Account/Confirm', regForm)
             .map(response => {
                 return response as string;
             });
     }
 
-    login(credential: LoginCredential) {
-        console.log(credential);
+    login(credential: LoginCredential) {;
         return this.http.post('api/Account', credential)
             .map(response => {
                 return response as string;

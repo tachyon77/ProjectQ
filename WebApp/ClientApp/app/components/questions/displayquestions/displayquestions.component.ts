@@ -1,5 +1,5 @@
 ﻿import { Component, Inject } from '@angular/core';
-import { QuestionService, QuestionPreview } from '../questions.service'
+import { QuestionService, UserSpecificQuestionView } from '../questions.service'
 
 @Component({
     selector: 'display-questions',
@@ -7,13 +7,12 @@ import { QuestionService, QuestionPreview } from '../questions.service'
     styleUrls: ['./displayquestions.component.css'],
 })
 export class DisplayQuestionsComponent {
-    public questions: QuestionPreview[];
+    public questionViews: UserSpecificQuestionView[];
 
     constructor(
         private questionService: QuestionService) {
         this.questionService.get().subscribe(result => {
-            console.log(result);
-            this.questions = result as QuestionPreview[];
+            this.questionViews = result as UserSpecificQuestionView[];
         }, error => console.error(error));
     }
 }

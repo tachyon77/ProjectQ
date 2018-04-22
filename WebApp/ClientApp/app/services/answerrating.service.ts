@@ -17,8 +17,6 @@ export class AnswerRatingService {
     }
 
     postRating(answerRating: AnswerRating) {
-        console.log('posting answer rating:')
-        console.log(answerRating);
         return this.http.post('api/answerratings', answerRating)
             .map(response => {
                 return response;

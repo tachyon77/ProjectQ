@@ -29,33 +29,29 @@ namespace ProjectQ.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        async Task<IEnumerable<AnswerDetail>> 
-            IAnswerRepository.GetForQuestionAndUserAsyc(
+        async Task<IEnumerable<UserSpecificAnswerView>> 
+            IAnswerRepository.GetForQuestionAndUserAsync(
             int questionId,
             string userId)
         {
-            var answers = await (
-                from answer in _context.Answers
+            var answers = await
+                _context.Answers
+                .Include(a=>a.AspNetUser)
+                .Include(a=>a.AnswerRatings)
                 .Where(
-                    x => !x.IsDeleted && x.QuestionId == questionId
-                )
-                select new AnswerDetail()
-                {
-                    Answerer = answer.AspNetUser.flatten(),
-                    Rating = answer.AnswerRatings
-                    .SingleOrDefault(y => y.AspNetUserId == userId),
-                    Answer = answer.flatten()
-                }).ToListAsync();
-        
-            foreach (var answer in answers)
-            {
-                if (answer.Rating != null)
-                {
-                    answer.Rating.flatten();
-                }
-            }
+                    a => !a.IsDeleted && a.QuestionId.Equals(questionId))
+                    .ToListAsync();
 
-            return answers;
+            var userSpecificAnswerViews = answers
+                .ToList()
+                .ConvertAll(
+                    a=> new UserSpecificAnswerView()
+                    {
+                        Answer = a,
+                        Rating = a.AnswerRatings.SingleOrDefault(x=>x.AspNetUserId.Equals(a.AspNetUserId))
+                    }
+                );
+            return userSpecificAnswerViews;
         }
 
         async Task<Answer> IAnswerRepository.GetByIdAsync(int id)

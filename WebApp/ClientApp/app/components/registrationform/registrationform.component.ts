@@ -35,8 +35,6 @@ export class RegistrationFormComponent {
 
     confirmRegistration(regForm: RegistrationForm) {
         this.identityService.confirmRegistration(regForm).subscribe(result => {
-            console.log("registration result: ");
-            console.log(result);
             if (result != null && result.length > 0) {
                 this.registrationCompleted.emit();
             }
@@ -45,8 +43,6 @@ export class RegistrationFormComponent {
 
     submitRegistration(regForm: RegistrationForm) {
         this.identityService.register(regForm).subscribe(result => {
-            console.log("registration result: ");
-            console.log(result);
             if (result != null && result.length > 0) {
                 this.isEmailSent = true;
             }

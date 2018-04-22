@@ -12,14 +12,13 @@ export interface Question {
     isDeleted: boolean;
     offeredPrice: number;
     originDate: Date;
-    asker: AspNetUser;
+    aspNetUser: AspNetUser;
+    answers: Answer[];
 }
 
-export interface QuestionPreview {
+export interface UserSpecificQuestionView {
     isFollowing: boolean;
     question: Question;
-    answerCount: number;
-    previewAnswer: Answer;
 }
 
 @Injectable()
@@ -31,7 +30,6 @@ export class QuestionService {
     getAllAskedByMe() {
         return this.http.get('api/questions/my')
             .map(response => {
-                console.log(response);
                 return response;
             });
     }

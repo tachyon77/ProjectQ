@@ -33,7 +33,7 @@ namespace WebApp.Controllers
         }
         // GET: api/Questions
         [HttpGet]
-        async public Task<IEnumerable<QuestionPreview>> GetQuestions()
+        async public Task<IEnumerable<UserSpecificQuestionView>> GetQuestions()
         {
             return  await _questionManager.GetAllForUser(
                 await _userManager.GetUserAsync(User)
@@ -93,10 +93,9 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
-            var email = User.Claims.Where(c => c.Type == ClaimTypes.Email)
-                   .Select(c => c.Value).SingleOrDefault();
+            var userId = _userManager.GetUserId(User);
 
-            await _questionManager.UpdateAsync(updated, email);
+            await _questionManager.UpdateAsync(userId, updated);
 
             return new NoContentResult();
         }
