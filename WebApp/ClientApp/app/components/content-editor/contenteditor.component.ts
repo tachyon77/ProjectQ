@@ -78,6 +78,21 @@ export class ContentEditorComponent implements AfterViewInit{
         this.formatText('italic');
     }
 
+    onRedact() {
+        let range = document.createRange();
+        range = window.getSelection().getRangeAt(0);
+        console.log(range);
+
+        document.execCommand("removeFormat", false, null);
+        document.execCommand("foreColor", false, "lightgrey");
+        document.execCommand("hiliteColor", false, "lightgrey");
+    }
+
+    onUnRedact() {
+        document.execCommand("hiliteColor", false, "white");
+        document.execCommand("foreColor", false, "black");
+    }
+
     onUnderline() {
         this.formatText('underline');
     }

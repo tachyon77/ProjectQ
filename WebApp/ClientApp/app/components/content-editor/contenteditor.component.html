@@ -3,6 +3,16 @@
          role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button"
+                    (click)="onRedact()"
+                    class="btn btn-secondary">
+                <s>Redact</s>
+            </button>
+            <button type="button"
+                    (click)="onUnRedact()"
+                    class="btn btn-secondary">
+                <em>Reveal</em>
+            </button>
+            <button type="button"
                     (click)="onBold()"
                     class="btn btn-secondary">
                 <b>B</b>

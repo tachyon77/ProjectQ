@@ -68,7 +68,8 @@
 
     <div *ngIf="isUpdateAnswerVisible">
         <update-answer [answer]="answerDetail.answer"
-                       (answerUpdated)="onAnswerUpdated($event)">
+                       (answerUpdated)="onAnswerUpdated($event)"
+                       (updateCancelled)="onUpdateCancelled()">
         </update-answer>
     </div>
 </div>

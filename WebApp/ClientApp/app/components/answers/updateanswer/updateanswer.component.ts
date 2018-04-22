@@ -14,6 +14,7 @@ export class UpdateAnswerComponent {
     private _curContent: string;
 
     @Output() answerUpdated = new EventEmitter();
+    @Output() updateCancelled = new EventEmitter();
 
     @Input()
     set answer(answer: Answer) {
@@ -46,5 +47,10 @@ export class UpdateAnswerComponent {
                 console.log("emitting updated answer " + this.answer.id);
                 this.answerUpdated.emit(this.answer);
             });
+    }
+
+    onCancel() {
+        this.answer.text = this._curContent;
+        this.updateCancelled.emit();
     }
 }

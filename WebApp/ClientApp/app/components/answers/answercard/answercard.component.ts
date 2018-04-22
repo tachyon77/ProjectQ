@@ -79,6 +79,10 @@ export class AnswerCardComponent {
             this.sanitizer.bypassSecurityTrustHtml(answer.text);
         this.isUpdateAnswerVisible = false;
     }
+
+    onUpdateCancelled() {
+        this.isUpdateAnswerVisible = false;
+    }
 }
 
 
