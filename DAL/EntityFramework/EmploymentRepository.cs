@@ -30,5 +30,21 @@ namespace ProjectQ.DAL.EntityFramework
             employment.AspNetUserId = id;
             await _context.Employments.AddAsync(employment);
         }
+
+        async Task<Employment> IEmploymentRepository.FindEmploymentAsync(int employmentId)
+        {
+            return await _context.Employments.FindAsync(employmentId);
+        }
+
+        async Task IEmploymentRepository.UpdateEmploymentAsync(Employment employment)
+        {
+            var existingEmployment = await _context.Employments.FindAsync(employment.Id);
+
+            existingEmployment.Company = employment.Company;
+            existingEmployment.Position = employment.Position;
+            existingEmployment.Start = employment.Start;
+            existingEmployment.End = employment.End;
+            existingEmployment.IsCurrent = employment.IsCurrent;
+        }
     }
 }

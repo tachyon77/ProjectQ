@@ -61,6 +61,18 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async Task ICredentialsManager.UpdateEmploymentAsync(string userId, Employment employment)
+        {
+            var existingRecord =
+                await _unitOfWork.EmploymentRepository.FindEmploymentAsync(employment.Id);
+
+            if (!existingRecord.AspNetUserId.Equals(existingRecord.AspNetUserId))
+            {
+                throw new Exception("Unauthorized");
+            }
+            await _unitOfWork.EmploymentRepository.UpdateEmploymentAsync(employment);
+            await _unitOfWork.SaveAsync();
+        }
         #endregion
     }
 }

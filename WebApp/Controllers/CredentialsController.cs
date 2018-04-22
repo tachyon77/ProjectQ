@@ -62,5 +62,13 @@ namespace WebApp.Controllers
             await _credentialsManager.AddEmploymentAsync(appUser.Id, employment);
             return new NoContentResult();
         }
+
+        [HttpPut("employments")]
+        async public Task<IActionResult> UpdateEmployment([FromBody] Employment employment)
+        {
+            var appUser = await _userManager.GetUserAsync(User);
+            await _credentialsManager.UpdateEmploymentAsync(appUser.Id, employment);
+            return new NoContentResult();
+        }
     }
 }

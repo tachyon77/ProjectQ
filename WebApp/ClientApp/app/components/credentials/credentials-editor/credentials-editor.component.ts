@@ -93,6 +93,23 @@ export class CredentialsEditorComponent implements OnInit {
         );
     }
 
+    onOpenEditEmployment(template: TemplateRef<any>, employment: Employment) {
+        const initialState = {
+            name: this.name
+        };
+
+        this.employmentEditForm = this.formBuilder.group({
+            id: this.formBuilder.control(employment.id),
+            company: this.formBuilder.control(employment.company, Validators.compose([Validators.required])),
+            position: this.formBuilder.control(employment.position, Validators.compose([Validators.required])),
+            isCurrent: this.formBuilder.control(employment.isCurrent),            
+        });
+
+        this.employmentEditModal = this.modalService.show(
+            template, { initialState }
+        );
+    }
+
     ngOnInit() {
         this.loadCredentials();
     }
@@ -119,6 +136,15 @@ export class CredentialsEditorComponent implements OnInit {
         this.profileService.addEmployment(employment)
             .subscribe(() => {
                 this.employmentAddModal.hide();
+                this.loadCredentials();
+            }
+        );
+    }
+
+    onEditEmploymentSubmit(employment: Employment) {
+        this.profileService.updateEmployment(employment)
+            .subscribe(() => {
+                this.employmentEditModal.hide();
                 this.loadCredentials();
             }
         );
