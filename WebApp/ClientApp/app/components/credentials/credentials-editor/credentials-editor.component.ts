@@ -18,11 +18,13 @@ export class CredentialsEditorComponent implements OnInit {
 
     educationAddModal: BsModalRef;
     educationEditModal: BsModalRef;
-    employmentModal: BsModalRef;
+    employmentAddModal: BsModalRef;
+    employmentEditModal: BsModalRef;
 
     educationAddForm: FormGroup;
     educationEditForm: FormGroup;
-    employmentForm: FormGroup;
+    employmentAddForm: FormGroup;
+    employmentEditForm: FormGroup;
 
     constructor(
         private profileService: ApplicationUserService,
@@ -31,7 +33,20 @@ export class CredentialsEditorComponent implements OnInit {
         public selfModalRef: BsModalRef) {
     }
 
-    onOpenEducation(template: TemplateRef<any>) {
+    onOpenAddEducation(template: TemplateRef<any>) {
+
+        this.educationAddForm = this.formBuilder.group({
+            school: this.formBuilder.control('', Validators.compose([
+                Validators.required,
+            ])),
+            concentration: this.formBuilder.control('', Validators.compose([
+                Validators.required,
+            ])),
+            secondaryConcentration: this.formBuilder.control(''),
+            degreeType: this.formBuilder.control(''),
+            graduationYear: this.formBuilder.control(''),
+        });
+
         const initialState = {
             name: this.name
         };
@@ -63,17 +78,53 @@ export class CredentialsEditorComponent implements OnInit {
         );
     }
 
-    onOpenEmployment(template: TemplateRef<any>) {
+    onOpenAddEmployment(template: TemplateRef<any>) {
+        this.employmentAddForm = this.formBuilder.group({
+            company: this.formBuilder.control('', Validators.compose([Validators.required])),
+            position: this.formBuilder.control('', Validators.compose([Validators.required])),
+            isCurrent: this.formBuilder.control(''),
+        });
+
         const initialState = {
             name: this.name
         };
-        this.employmentModal = this.modalService.show(
+        this.employmentAddModal = this.modalService.show(
             template, { initialState }
         );
     }
 
     ngOnInit() {
+        this.loadCredentials();
+    }
 
+    onAddEducationSubmit(education: Education) {
+        this.profileService.addEducaion(education)
+            .subscribe(() => {
+                this.educationAddModal.hide();
+                this.loadCredentials();
+            }
+        );
+    }
+
+    onEditEducationSubmit(education: Education) {
+        this.profileService.updateEducaion(education)
+            .subscribe(() => {
+                this.educationEditModal.hide();
+                this.loadCredentials();
+            }
+        );
+    }
+
+    onAddEmploymentSubmit(employment: Employment) {
+        this.profileService.addEmployment(employment)
+            .subscribe(() => {
+                this.employmentAddModal.hide();
+                this.loadCredentials();
+            }
+        );
+    }
+
+    loadCredentials() {
         this.profileService.getCredentials(this.userId).subscribe(
             response => {
                 let credetials = response as Credentials;
@@ -83,60 +134,5 @@ export class CredentialsEditorComponent implements OnInit {
                 credetials.employments.forEach((e) => { this.employments.push(e); });
             }
         );
-
-        this.educationAddForm = this.formBuilder.group({
-            school: this.formBuilder.control('', Validators.compose([
-                Validators.required,
-            ])),
-            concentration: this.formBuilder.control('', Validators.compose([
-                Validators.required,
-            ])),
-            secondaryConcentration: this.formBuilder.control(''),
-            degreeType: this.formBuilder.control(''),
-            graduationYear: this.formBuilder.control(''),
-        });
-
-        
-
-        this.employmentForm = this.formBuilder.group({
-            company: this.formBuilder.control('', Validators.compose([Validators.required])),
-            position: this.formBuilder.control('', Validators.compose([Validators.required])),
-        });
-    }
-
-    onAddEducationSubmit(education: Education) {
-        this.profileService.addEducaion(education)
-            .subscribe(() => {
-                this.educationAddModal.hide();
-                this.profileService.getCredentials(this.userId).subscribe(
-                    response => {
-                        this.educations = [];
-                        let credetials = response as Credentials;
-                        credetials.educations.forEach((e) => { this.educations.push(e); });
-                    }
-                );
-            });
-    }
-
-    onEditEducationSubmit(education: Education) {
-        this.profileService.updateEducaion(education)
-            .subscribe(() => {
-                this.educationEditModal.hide();
-                this.profileService.getCredentials(this.userId).subscribe(
-                    response => {
-                        this.educations = [];
-                        let credetials = response as Credentials;
-                        credetials.educations.forEach((e) => { this.educations.push(e); });
-                    }
-                );
-            });
-    }
-
-    onEmploymentSubmit(employment: Employment) {
-        this.profileService.addEmployment(employment)
-            .subscribe(() => {
-                this.employmentModal.hide();
-                this.employments.push(employment);
-            });
     }
 }

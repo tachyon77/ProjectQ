@@ -88,7 +88,7 @@ export class ApplicationUserService {
 
     addEmployment(employment: Employment) {
         console.log("adding employment: " + employment.company);
-        return this.http.post('api/profile/employments', employment)
+        return this.http.post('api/credentials/employments', employment)
             .map(response => {
                 return response;
             });
