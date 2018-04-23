@@ -18,7 +18,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
-    isAsker: boolean;
+    loggedInUser: AspNetUser;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -28,6 +28,10 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
         this.isAddAnswerVisible = false;
         this.isQuestionEditorVisible = false;
+    }
+
+    get isAsker() {
+        return this.loggedInUser && this.question.aspNetUser.id === this.loggedInUser.id;
     }
 
     OnAnswerClick() {
@@ -67,6 +71,14 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
                     }, error => console.error(error));
 
                 this.loadAnswers(questionId);
+                });
+
+
+        this.identityService.getLoggedInUser()
+            .subscribe(result => {
+                if (result != null) {
+                    this.loggedInUser = result as AspNetUser;
+                }
             });
         
     }

@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { IdentityService } from '../../services/identity.service';
+import { IdentityService, AspNetUser } from '../../services/identity.service';
 import { Router } from '@angular/router';
-
-export interface User {
-    name: string;
-    id: string;
-}
 
 @Component({
     selector: 'app',
@@ -43,7 +38,7 @@ export class AppComponent {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    const user = result as User;
+                    const user = result as AspNetUser;
                     this.userName = user.name;
                     this.userId = user.id;
                     this.isLoggedIn = true;

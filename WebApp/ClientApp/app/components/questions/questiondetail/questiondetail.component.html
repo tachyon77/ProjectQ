@@ -18,7 +18,8 @@
             <div class="question-description">
                 {{question.description}}
             </div>
-            <button class="btn btn-default"
+            <button *ngIf="isAsker"
+                    class="btn btn-default"
                     (click)="OnEditQuestionClick()">
                 Edit Question
             </button>
@@ -26,7 +27,7 @@
                     (click)="OnAnswerClick()">
                 Answer
             </button>
-            <button
+            <button *ngIf="isAsker"
                     class="btn btn-danger delete-question"
                     (click)="OnDeleteQuestionClick()">
                 <span *ngIf="question.isDeleted">Undelete</span>
@@ -57,6 +58,7 @@
                 <div *ngFor="let answerView of answerViews">
                     <hr />
                     <answer-card [answerView]="answerView"
+                                 [loggedInUser]="loggedInUser"
                                  (answerDeleted)="onAnswerDeleted($event)">
                     </answer-card>
                 </div>

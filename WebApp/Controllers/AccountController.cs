@@ -44,10 +44,11 @@ namespace ProjectQ.WebApp.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return new
+                return new // We don't want to send the complete AspNetUser as it has secrets.
                 {
                     name = _signInManager.UserManager.GetUserName(User),
                     id = _signInManager.UserManager.GetUserId(User),
+                    
                 };
             }
 

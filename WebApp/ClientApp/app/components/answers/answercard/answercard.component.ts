@@ -2,6 +2,7 @@
 import { AnswerService, Answer, UserSpecificAnswerView } from '../answers.service'
 import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
 @Component({
     selector: 'answer-card',
@@ -15,6 +16,21 @@ export class AnswerCardComponent {
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
     public rating: boolean[];
+    private _loggedInUser: AspNetUser;
+
+    get isAsker() {
+        return this.loggedInUser && this.answerView &&
+            this.answerView.answer.aspNetUser.id === this.loggedInUser.id;
+    }
+
+    @Input()
+    set loggedInUser(user: AspNetUser) {
+        this._loggedInUser = user;
+    }
+
+    get loggedInUser() {
+        return this._loggedInUser;
+    }
 
     get answerView() {
         return this._answerView;

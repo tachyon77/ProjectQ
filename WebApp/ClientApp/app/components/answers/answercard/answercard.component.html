@@ -55,11 +55,13 @@
              'answer-content': true,
              'deleted-answer': answerView.answer.isDeleted}">
         </div>
-        <button class="btn btn-default"
+        <button *ngIf="isAsker"
+                class="btn btn-default"
                 (click)="OnEditClick()">
             Edit
         </button>
-        <button class="btn btn-default"
+        <button *ngIf="isAsker"
+                class="btn btn-default"
                 (click)="OnDeleteClick()">
             <span *ngIf="answerView.answer.isDeleted">Undelete</span>
             <span *ngIf="!answerView.answer.isDeleted">Delete</span>

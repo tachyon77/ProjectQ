@@ -2,9 +2,9 @@
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-export class AspNetUser {
-    id: number;
-    email: string;
+export interface AspNetUser {
+    name: string;
+    id: string;
 }
 
 export class LoginCredential {
