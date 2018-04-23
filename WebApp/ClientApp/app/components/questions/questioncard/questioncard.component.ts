@@ -12,6 +12,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 })
 export class QuestionCardComponent {
     previewAnswerContent: SafeHtml;
+    questionDescription: SafeHtml;
     private _questionView: UserSpecificQuestionView;
 
     onFollow() {
@@ -35,6 +36,8 @@ export class QuestionCardComponent {
     @Input()
     set questionView(questionView: UserSpecificQuestionView) {
         this._questionView = questionView;
+        this.questionDescription =
+            this.sanitizer.bypassSecurityTrustHtml(questionView.question.description);
         if (questionView.question.answers.length > 0) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(

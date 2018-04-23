@@ -16,8 +16,10 @@
             <h6 class="asked-by">
                 Asked by {{questionView.question.aspNetUser.email}}
                 {{questionView.question.originDate}}
-            </h6>
-            <p class="card-text">{{questionView.question.description}}</p>
+            </h6>                      
+            <div [innerHTML]="questionDescription"
+                 class="card-text">
+            </div>
 
             <div *ngIf="!questionView.isFollowing">
                 <button (click)="onFollow()"
