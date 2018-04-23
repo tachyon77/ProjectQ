@@ -15,9 +15,10 @@
                 </span>
             </div>
 
-            <div class="question-description">
-                {{question.description}}
+            <div [innerHTML]="questionDescription"
+                 class="question-description">
             </div>
+         
             <button *ngIf="isAsker"
                     class="btn btn-default"
                     (click)="OnEditQuestionClick()">

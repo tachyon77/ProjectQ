@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AnswerService, Answer, UserSpecificAnswerView } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
 import { IdentityService, AspNetUser } from '../../../services/identity.service'
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'question-detail',
@@ -14,6 +15,7 @@ import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answerViews: UserSpecificAnswerView[];
+    questionDescription: SafeHtml;
     public question: Question;
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
@@ -21,6 +23,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     loggedInUser: AspNetUser;
 
     constructor(
+        private sanitizer: DomSanitizer,
         private activatedRoute: ActivatedRoute,
         private identityService: IdentityService,
         private answerService: AnswerService,
@@ -59,6 +62,8 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.questionService.getById(questionId)
             .subscribe(result => {
                 this.question = result as Question;
+                this.questionDescription =
+                    this.sanitizer.bypassSecurityTrustHtml(this.question.description);
             }, error => console.error(error));
     }
 
