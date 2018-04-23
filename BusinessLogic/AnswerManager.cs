@@ -78,8 +78,14 @@ namespace ProjectQ.BusinessLogic
             return answer.Id;
         }
 
-        async Task IAnswerManager.UpdateAsync(Answer answer)
+        async Task IAnswerManager.UpdateAsync(string userId, Answer answer)
         {
+            var dbRecord = await _unitOfWork.AnswerRepository.GetByIdAsync(answer.Id);
+            if (dbRecord.AspNetUserId != userId)
+            {
+                throw new Exception("Unauthorized");
+            }
+
             await _unitOfWork.AnswerRepository
                 .UpdateAsync(answer);
             await _unitOfWork.SaveAsync();

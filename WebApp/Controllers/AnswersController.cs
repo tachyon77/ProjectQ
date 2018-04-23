@@ -89,7 +89,7 @@ namespace WebApp.Controllers
             {
                 return BadRequest();
             }
-            await _AnswerManager.UpdateAsync(updated);
+            await _AnswerManager.UpdateAsync(_userManager.GetUserId(User), updated);
 
             return new NoContentResult();
         }
