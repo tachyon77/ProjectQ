@@ -1,29 +1,30 @@
 ﻿<form [formGroup]="form"
-            (ngSubmit)="onSubmit(form.value)">
-        <div>
-            <h4>Title</h4>
-            <textarea rows="2"
-                        class="form-control"
-                        name="Title" id="Title"
-                        formControlName="title"></textarea>
-            <h4>Details</h4>
-            <textarea rows="7"
-                        class="form-control"
-                        name="Description" id="Description"
-                        formControlName="description"></textarea>
-            <h4>$ Reward:</h4>
-            <input type="text"
-                    class="form-control"
-                    name="OfferedPrice" id="OfferedPrice"
-                    formControlName="offeredPrice" />
+      (ngSubmit)="onSubmit(form.value)">
+    <div>
+        <h4>Title</h4>
+        <textarea rows="2"
+                  class="form-control"
+                  name="Title" id="Title"
+                  formControlName="title">
+        </textarea>
 
-        </div>
-        <br />
-        <button class="btn btn-primary"
-                type="submit" [disabled]="!form.valid">
-            Save
-        </button>
+        <h4>Details</h4>
+        <content-editor [content]="question.description"
+                        (contentChanged)="onDescriptionChanged($event)">
+        </content-editor>
 
-    </form>
+        <h4>$ Reward:</h4>
+        <input type="number"
+               class="form-control"
+               name="OfferedPrice" id="OfferedPrice"
+               formControlName="offeredPrice" />
+
+    </div>
+    <br />
+    <button class="btn btn-primary"
+            type="submit" [disabled]="!form.valid">
+        Save
+    </button>
+</form>
 
 

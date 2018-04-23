@@ -12,15 +12,22 @@ import { QuestionService, Question } from '../questions.service'
 export class QuestionEditorComponent implements OnInit {
     form: FormGroup;
     private _question: Question;
+    updatedDescription: string;
+
     @Output() questionEdited = new EventEmitter();
 
     @Input()
     set question(question: Question) {
         this._question = question;
+        this.updatedDescription = question.description;
     }
 
     get question() {
         return this._question;
+    }
+
+    onDescriptionChanged(newDesc: string) {
+        this.updatedDescription = newDesc;
     }
 
     constructor(
@@ -36,13 +43,14 @@ export class QuestionEditorComponent implements OnInit {
             offeredPrice: this.formBuilder.control(this.question.offeredPrice,
                 Validators.compose([
                 Validators.pattern('[0-9]+'),
-                ])),
-            description: this.formBuilder.control(this.question.description),
+                ]))
         });
     }
 
     onSubmit(question: Question) {
         question.id = this.question.id;
+        question.description = this.updatedDescription;
+        console.log(question);
         this.questionService.update(question)
             .subscribe(() => {
                 this.questionEdited.emit(question);
