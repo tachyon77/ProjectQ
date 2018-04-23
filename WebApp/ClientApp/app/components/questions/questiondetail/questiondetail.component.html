@@ -37,6 +37,7 @@
 
         <div *ngIf="isQuestionEditorVisible">
             <question-editor [question]="question"
+                             (questionEditCancelled)="onQuestionEditCancelled()"
                              (questionEdited)="onQuestionEdited($event)">
             </question-editor>
         </div>

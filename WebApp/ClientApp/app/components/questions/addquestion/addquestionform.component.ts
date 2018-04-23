@@ -11,6 +11,8 @@ import { QuestionService, Question } from '../questions.service'
 })
 export class AddQuestionFormComponent {
     form: FormGroup;
+    description: string = "";
+    updatedDescription: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -19,21 +21,24 @@ export class AddQuestionFormComponent {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            Title: this.formBuilder.control('', Validators.compose([
+            title: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
-            OfferedPrice: this.formBuilder.control('', Validators.compose([
+            offeredPrice: this.formBuilder.control('', Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),
-            Description: this.formBuilder.control(''),
         });
     }
 
+    onDescriptionChanged(newDesc: string) {
+        this.updatedDescription = newDesc;
+    }
 
     onSubmit(question: Question) {
+        question.description = this.updatedDescription;
         this.questionService.add(question)
             .subscribe(() => {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/home']); // TODO: go to the question instead
             });
     }
 }

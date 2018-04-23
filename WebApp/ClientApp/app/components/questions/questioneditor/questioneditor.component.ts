@@ -15,6 +15,7 @@ export class QuestionEditorComponent implements OnInit {
     updatedDescription: string;
 
     @Output() questionEdited = new EventEmitter();
+    @Output() questionEditCancelled = new EventEmitter();
 
     @Input()
     set question(question: Question) {
@@ -50,10 +51,13 @@ export class QuestionEditorComponent implements OnInit {
     onSubmit(question: Question) {
         question.id = this.question.id;
         question.description = this.updatedDescription;
-        console.log(question);
         this.questionService.update(question)
             .subscribe(() => {
                 this.questionEdited.emit(question);
             });
+    }
+
+    onCancel() {
+        this.questionEditCancelled.emit();
     }
 }

@@ -105,6 +105,11 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.isQuestionEditorVisible = false;
         this.loadQuestion(this.question.id);
     }
+
+    onQuestionEditCancelled() {
+        this.isQuestionEditorVisible = false;
+    }
+
     //May be put the answer updater view inside answer card.
 
 }
