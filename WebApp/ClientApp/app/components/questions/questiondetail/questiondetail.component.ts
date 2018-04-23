@@ -31,7 +31,9 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     }
 
     get isAsker() {
-        return this.loggedInUser && this.question.aspNetUser.id === this.loggedInUser.id;
+        return this.loggedInUser && this.question &&
+            this.question.aspNetUser &&
+            this.question.aspNetUser.id === this.loggedInUser.id;
     }
 
     OnAnswerClick() {
@@ -53,6 +55,13 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.paramsSubscription.unsubscribe();
     }
 
+    loadQuestion(questionId: number) {
+        this.questionService.getById(questionId)
+            .subscribe(result => {
+                this.question = result as Question;
+            }, error => console.error(error));
+    }
+
     loadAnswers(questionId: number) {
         this.answerService.getForQuestion(questionId)
             .subscribe(result => {
@@ -60,27 +69,27 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
             }, error => console.error(error));
     }
 
-    ngOnInit() {
-        this.paramsSubscription = 
-        this.activatedRoute.params
-            .subscribe(params => {
-                let questionId = Number(params['id']);                
-                this.questionService.getById(questionId)
-                    .subscribe(result => {
-                        this.question = result as Question;
-                    }, error => console.error(error));
-
-                this.loadAnswers(questionId);
-                });
-
-
+    loadLoggedInUser() {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
                     this.loggedInUser = result as AspNetUser;
                 }
-            });
-        
+            }
+        );
+    }
+
+    ngOnInit() {
+        this.loadLoggedInUser();
+
+        this.paramsSubscription = 
+        this.activatedRoute.params
+            .subscribe(params => {
+                let questionId = Number(params['id']);
+                this.loadQuestion(questionId);
+                this.loadAnswers(questionId);
+            }
+        );
     }
 
     onAnswerAdded(answer: Answer) {
@@ -93,8 +102,8 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     }
 
     onQuestionEdited(question: Question) {
-        this.question = question;
         this.isQuestionEditorVisible = false;
+        this.loadQuestion(this.question.id);
     }
     //May be put the answer updater view inside answer card.
 
