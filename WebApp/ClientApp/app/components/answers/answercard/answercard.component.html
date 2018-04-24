@@ -3,8 +3,8 @@
 
     <div *ngIf="!isUpdateAnswerVisible">
         <div class="answer-user" *ngIf="answerView.answer.aspNetUser">
-            {{answerView.answer.aspNetUser.email}}
-            <div class="answer-date">Answered on {{answerView.answer.originDate}}</div>
+            {{answerView.answer.aspNetUser.firstName}}
+            <div class="answer-date">Answered {{answerView.answer.originDate | readableDate}}</div>
         </div>
 
         <div class="rating" *ngIf="rating[0]">

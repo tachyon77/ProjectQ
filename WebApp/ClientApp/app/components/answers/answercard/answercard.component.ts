@@ -4,6 +4,7 @@ import { AnswerRating, AnswerRatingService } from '../../../services/answerratin
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { IdentityService, AspNetUser } from '../../../services/identity.service'
 
+
 @Component({
     selector: 'answer-card',
     templateUrl: './answercard.component.html',

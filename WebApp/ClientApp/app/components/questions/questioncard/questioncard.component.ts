@@ -35,6 +35,7 @@ export class QuestionCardComponent {
 
     @Input()
     set questionView(questionView: UserSpecificQuestionView) {
+        console.log(questionView);
         this._questionView = questionView;
         this.questionDescription =
             this.sanitizer.bypassSecurityTrustHtml(questionView.question.description);

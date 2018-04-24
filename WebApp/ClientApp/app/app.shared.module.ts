@@ -33,6 +33,7 @@ import { QuestionCardComponent } from './components/questions/questioncard/quest
 import { QuestionService } from './components/questions/questions.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
 import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
+import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
@@ -67,6 +68,7 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         QuestionDetailComponent,
         QuestionCardComponent,
         QuestionEditorComponent,
+        ReadableDatePipe,
         UpdateAnswerComponent,
         UserProfileComponent,
         UserQuestionsComponent,
