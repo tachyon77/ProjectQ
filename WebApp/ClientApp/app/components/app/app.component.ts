@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    user: User;
+    userName: string;
+    userId: string;
     isLoggedIn: boolean = true;
 
     constructor(
@@ -18,15 +19,15 @@ export class AppComponent {
         this.router.onSameUrlNavigation = 'reload';
     }
 
-    onLogin(u: User) {
-        this.user = u;
+    onLogin(uname: string) {
+        this.userName = uname;
         this.isLoggedIn = true;
     }
 
     onLogout() {
         this.identityService.logout()
             .subscribe(result => {
-                // TODO: this.user = undefined;
+                this.userName = '';
                 this.isLoggedIn = false;
                 this.identityService.refreshCSRFToken()
                     .subscribe();
@@ -37,7 +38,9 @@ export class AppComponent {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    this.user = result as User;
+                    const user = result as AspNetUser;
+                    this.userName = user.name;
+                    this.userId = user.id;
                     this.isLoggedIn = true;
                 }
                 else {

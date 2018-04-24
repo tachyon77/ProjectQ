@@ -146,11 +146,6 @@ namespace ProjectQ.WebApp.Controllers
                     "Click <a href=" + callbackUrl + ">here</a> to confirm your registration.");
                 return Ok("Account created. Need email confirmation to active account.");
             }
-            else
-            {
-                // TODO: delete?
-
-            }
           
             
             return Ok(false);

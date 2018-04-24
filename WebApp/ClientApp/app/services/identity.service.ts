@@ -15,7 +15,6 @@ export class LoginCredential {
 }
 
 export class RegistrationForm {
-    Name: string;
     Email: string;
     Password: string;
     ConfirmEmailCode: string;
