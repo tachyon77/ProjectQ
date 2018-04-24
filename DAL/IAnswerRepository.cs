@@ -13,8 +13,8 @@ namespace ProjectQ.DAL
         Task UpdateAsync(Answer answer);
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
             int questionId,
-            string userId);
-        Task<Answer> GetByIdAsync(int id);
+            int userId);
+        Task<Answer> FindAsync(int id);
         bool AnswerExists(int id);
     }
 }

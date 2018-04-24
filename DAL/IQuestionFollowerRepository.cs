@@ -7,8 +7,8 @@ namespace ProjectQ.DAL
     public interface IQuestionFollowerRepository
     {
         Task AddFollowerAsync(QuestionFollower questionFollower);
-        Task RemoveFollowerAsync(int questionId, ApplicationUser follower);
-        HashSet<string> GetFollowersForQuestion(int questionId);
+        Task RemoveFollowerAsync(int questionId, int userId);
+        HashSet<int> GetFollowersForQuestion(int questionId);
 
     }
 }

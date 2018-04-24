@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ProjectQ.Model;
 
-namespace ProjectQ.DAL
+namespace ProjectQ.BusinessLogic
 {
-    public interface IUserRepository
+    public interface IUserManager
     {
         Task<User> FindAsync(int id);
         Task UpdateNameAsync(int id, string name);

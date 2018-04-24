@@ -40,7 +40,7 @@ namespace WebApp.Controllers
         public async Task<IEnumerable<UserSpecificAnswerView>> 
             GetForQuestion([FromRoute] int questionId)
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = (await _userManager.GetUserAsync(User)).UserId;
             return await _AnswerManager.GetForQuestionAndUserAsync(
                 questionId, userId);
         }
@@ -75,8 +75,8 @@ namespace WebApp.Controllers
             }
 
             await _AnswerManager.AddAsync(
-                Answer, 
-                await _userManager.GetUserAsync(User));
+                Answer,
+                (await _userManager.GetUserAsync(User)).UserId);
 
             return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
         }
@@ -89,7 +89,8 @@ namespace WebApp.Controllers
             {
                 return BadRequest();
             }
-            await _AnswerManager.UpdateAsync(_userManager.GetUserId(User), updated);
+            await _AnswerManager.UpdateAsync(
+                (await _userManager.GetUserAsync(User)).UserId, updated);
 
             return new NoContentResult();
         }

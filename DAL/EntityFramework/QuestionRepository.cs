@@ -34,11 +34,11 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         async Task<IEnumerable<UserSpecificQuestionView>> 
-            IQuestionRepository.GetAllForUser(ApplicationUser user)
+            IQuestionRepository.GetAllForUserAsync(int userId)
         {
             var questions = await _context.Questions
                 .Include(x => x.Answers)
-                .Include(x => x.AspNetUser)
+                .Include(x => x.User)
                 .Include(x => x.QuestionFollowers)
                 .Where(x => !x.IsDeleted).ToListAsync();
 
@@ -48,18 +48,18 @@ namespace ProjectQ.DAL.EntityFramework
                     new UserSpecificQuestionView()
                     {
                         IsFollowing = q.QuestionFollowers.Any(
-                                x => x.IsFollowing && x.AspNetUserId == user.Id),
+                                x => x.IsFollowing && x.UserId == userId),
                         Question = q,
                     }                    
                 );
             return questionViews;
         }
 
-        async Task<Question> IQuestionRepository.GetByIdAsync(int id)
+        async Task<Question> IQuestionRepository.FindAsync(int id)
         {
             return await _context.Questions
                 .Include(x => x.Answers)
-                .Include(x=>x.AspNetUser)
+                .Include(x=>x.User)
                 .Include(x=>x.QuestionFollowers)
                 .SingleAsync(x => x.Id.Equals(id));
         }
@@ -69,11 +69,11 @@ namespace ProjectQ.DAL.EntityFramework
             return _context.Questions.Any(x => x.Id == id);
         }
 
-        async Task<IEnumerable<Question>> IQuestionRepository.GetAllAskedBy(
-            ApplicationUser user)
+        async Task<IEnumerable<Question>> IQuestionRepository.GetAllAskedByAsync(
+            int userId)
         {
             return await _context.Questions
-                .Where(x => x.AspNetUserId.Equals(user.Id) && !x.IsDeleted)
+                .Where(x => x.UserId.Equals(userId) && !x.IsDeleted)
                 .OrderByDescending(x=>x.OriginDate)
                 .ToListAsync();
         }

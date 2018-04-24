@@ -27,7 +27,7 @@ namespace ProjectQ.DAL.EntityFramework
                 .SingleOrDefaultAsync(
                     x=>x.QuestionId== questionFollower.QuestionId
                     && 
-                    x.AspNetUserId == questionFollower.AspNetUserId);
+                    x.UserId == questionFollower.UserId);
 
             if (existingRecord == null)
             {
@@ -40,25 +40,25 @@ namespace ProjectQ.DAL.EntityFramework
             }            
         }
 
-        HashSet<string> IQuestionFollowerRepository
+        HashSet<int> IQuestionFollowerRepository
             .GetFollowersForQuestion(int questionId)
         {
 
             var followers = _context.QuestionFollowers
                 .Where(x => x.IsFollowing && x.QuestionId.Equals(questionId))
-                .Select(x => x.AspNetUserId);
+                .Select(x => x.UserId);
 
             return followers.ToHashSet();
         }
 
         async Task IQuestionFollowerRepository.RemoveFollowerAsync(
-            int questionId, ApplicationUser follower)
+            int questionId, int userId)
         {
             var existingRecord = await _context.QuestionFollowers
                .SingleAsync(
                    x => x.QuestionId == questionId
                    &&
-                   x.AspNetUserId == follower.Id);
+                   x.UserId == userId);
 
             existingRecord.IsFollowing = false;           
         }

@@ -15,13 +15,13 @@ namespace ProjectQ.Model
     public partial class Employment
     {
         public int Id { get; set; }
-        public string AspNetUserId { get; set; }
+        public int UserId { get; set; }
         public string Position { get; set; }
         public string Company { get; set; }
         public Nullable<System.DateTime> Start { get; set; }
         public Nullable<System.DateTime> End { get; set; }
         public Nullable<bool> IsCurrent { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual User User { get; set; }
     }
 }

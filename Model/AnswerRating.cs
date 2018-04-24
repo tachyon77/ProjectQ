@@ -15,14 +15,14 @@ namespace ProjectQ.Model
     public partial class AnswerRating
     {
         public int Id { get; set; }
-        public string AspNetUserId { get; set; }
+        public int UserId { get; set; }
         public int AnswerId { get; set; }
         public System.DateTime OriginDate { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public bool IsDeleted { get; set; }
         public int Rating { get; set; }
     
-         public virtual Answer Answer { get; set; }
-         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Answer Answer { get; set; }
+        public virtual User User { get; set; }
     }
 }

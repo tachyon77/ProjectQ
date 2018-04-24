@@ -1,6 +1,5 @@
 <div *ngIf="isLoggedIn">
-    <nav-menu [userName]="userName"
-              [userId]="userId"
+    <nav-menu [user]="user"
               (loggedOut)="onLogout($event)">
     </nav-menu>
     <div class="body-content">

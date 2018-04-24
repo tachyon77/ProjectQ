@@ -25,17 +25,17 @@ namespace ProjectQ.DAL.EntityFramework
             await _context.Notifications.AddAsync(notification);
         }
 
-        async Task<Notification> INotificationRepository.GetByIdAsync(int id)
+        async Task<Notification> INotificationRepository.FindAsync(int id)
         {
             return await _context.Notifications.FindAsync(id);
         }
 
         async Task<IEnumerable<Notification>> INotificationRepository.GetUnseenForUserAsyc(
-            string userId)
+            int userId)
         {
             return await _context
                 .Notifications
-                .Where(x => !x.IsSeen && x.AspNetUserId.Equals(userId))
+                .Where(x => !x.IsSeen && x.UserId.Equals(userId))
                 .ToListAsync();
         }
 

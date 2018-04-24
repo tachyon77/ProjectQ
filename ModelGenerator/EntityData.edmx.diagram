@@ -5,24 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="90cda34f365649e1a0898e0389e7e7b8" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="3" PointY="10.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="8.25" PointY="14.25" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="6.875" />
-        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="5.25" PointY="14.625" />
-        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="20.5" />
+        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="8.25" PointY="16.75" />
+        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="28.25" />
+        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="25.125" />
+        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="5.25" PointY="17.125" />
+        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="21" />
+        <EntityTypeShape EntityType="ProjectQModel.User" Width="1.5" PointX="0.75" PointY="12.25" />
         <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_AspNetUsers" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Users" />
         <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_Notifications_AspNetUsers" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_AspNetUsers" />
-        <AssociationConnector Association="ProjectQModel.FK_Questions_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_Answers_Users" />
+        <AssociationConnector Association="ProjectQModel.FK_Educations_Users" />
+        <AssociationConnector Association="ProjectQModel.FK_Employments_Users" />
+        <AssociationConnector Association="ProjectQModel.FK_Notifications_Users" />
         <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
-        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="14.875" />
-        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="3.5" />
-        <AssociationConnector Association="ProjectQModel.FK_Educations_AspNetUsers" />
-        <AssociationConnector Association="ProjectQModel.FK_Employments_AspNetUsers" />
+        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Users" />
+        <AssociationConnector Association="ProjectQModel.FK_Questions_Users" />
+        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectQ.DAL.EntityFramework
 {
-    public class UserProfileRepository : IUserProfileRepository
+    public class UserProfileRepository : IUserRepository
     {
         #region Private Members
         private ProjectQEntities _context;
@@ -19,30 +19,23 @@ namespace ProjectQ.DAL.EntityFramework
             _context = context;
         }
 
-        async Task<UserProfile> IUserProfileRepository.GetByIdAsync(string id)
+        async Task<User> IUserRepository.FindAsync(int userId)
         {
-            var appUser = await _context.AspNetUsers.FindAsync(id);
-
-            var userProfile = new UserProfile()
-            {
-                Name = appUser.FirstName,
-                Introduction = appUser.Introduction,
-            };
-
-            return userProfile;
+            var user = await _context.Users.FindAsync(userId);
+            return user;
         }
 
-        async Task IUserProfileRepository.UpdateNameAsync(string id, string name)
+        async Task IUserRepository.UpdateNameAsync(int id, string name)
         {
-            var profile = await _context.AspNetUsers.FindAsync(id);
-            profile.FirstName = name;
+            var user = await _context.Users.FindAsync(id);
+            user.Name = name;
         }
 
-        async Task IUserProfileRepository.UpdateIntroductionAsync(
-            string id, string introduction)
+        async Task IUserRepository.UpdateIntroductionAsync(
+            int id, string introduction)
         {
-            var profile = await _context.AspNetUsers.FindAsync(id);
-            profile.Introduction = introduction;
+            var user = await _context.Users.FindAsync(id);
+            user.Introduction = introduction;
         }        
     }
 }

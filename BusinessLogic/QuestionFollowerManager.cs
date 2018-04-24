@@ -19,11 +19,11 @@ namespace ProjectQ.BusinessLogic
         }
 
         async Task IQuestionFollowerManager.FollowAsync(
-            ApplicationUser user, int questionId)
+            int userId, int questionId)
         {
             var qf = new QuestionFollower()
             {
-                AspNetUserId = user.Id,
+                UserId = userId,
                 IsFollowing = true,
                 OriginDate = DateTime.UtcNow,
                 QuestionId = questionId, 
@@ -36,10 +36,10 @@ namespace ProjectQ.BusinessLogic
 
 
         async Task IQuestionFollowerManager.UnfollowAsync(
-            ApplicationUser user, int questionid)
+            int userId, int questionid)
         {
             await _unitOfWork.QuestionFollowerRepository
-                .RemoveFollowerAsync(questionid, user);
+                .RemoveFollowerAsync(questionid, userId);
             await _unitOfWork.SaveAsync();
         }
     }

@@ -25,7 +25,7 @@ namespace ProjectQ.BusinessLogic
             _notificationSender = notificationSender;
         }
 
-        async Task<int> IAnswerManager.AddAsync(Answer answer, ApplicationUser user)
+        async Task<int> IAnswerManager.AddAsync(Answer answer, int userId)
         {
             if (!_unitOfWork.QuestionRepository
                 .QuestionExists(answer.QuestionId))
@@ -33,9 +33,11 @@ namespace ProjectQ.BusinessLogic
 
             var question = await 
                 _unitOfWork
-                .QuestionRepository.GetByIdAsync(answer.QuestionId);
+                .QuestionRepository.FindAsync(answer.QuestionId);
 
-            answer.AspNetUserId = user.Id;
+            var user = await _unitOfWork.UserRepository.FindAsync(userId);
+
+            answer.UserId = userId;
             answer.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
@@ -44,7 +46,7 @@ namespace ProjectQ.BusinessLogic
                 _unitOfWork.QuestionFollowerRepository
                 .GetFollowersForQuestion(question.Id);
 
-            followers.Add(question.AspNetUserId);
+            followers.Add(question.UserId);
 
             var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
 
@@ -57,10 +59,10 @@ namespace ProjectQ.BusinessLogic
                     {
                         IsSeen = false,
                         OriginDate = answer.OriginDate,
-                        AspNetUserId = follower,
+                        UserId = follower,
 
                         EventDescription =
-                            user.UserName + " wrote an answer for \""
+                            user.Name + " wrote an answer for \""
                             + question.Title.Substring(0, notificationLength)
                             + " ...\"",
                         Link = "/question-detail/" + question.Id
@@ -78,10 +80,10 @@ namespace ProjectQ.BusinessLogic
             return answer.Id;
         }
 
-        async Task IAnswerManager.UpdateAsync(string userId, Answer answer)
+        async Task IAnswerManager.UpdateAsync(int userId, Answer answer)
         {
-            var dbRecord = await _unitOfWork.AnswerRepository.GetByIdAsync(answer.Id);
-            if (dbRecord.AspNetUserId != userId)
+            var dbRecord = await _unitOfWork.AnswerRepository.FindAsync(answer.Id);
+            if (dbRecord.UserId != userId)
             {
                 throw new Exception("Unauthorized");
             }
@@ -93,7 +95,7 @@ namespace ProjectQ.BusinessLogic
 
         async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerManager.GetForQuestionAndUserAsync(
-            int questionId, string userId)
+            int questionId, int userId)
         {
             return await _unitOfWork
                 .AnswerRepository
@@ -102,7 +104,7 @@ namespace ProjectQ.BusinessLogic
 
         Task<Answer> IAnswerManager.GetById(int id)
         {
-            return _unitOfWork.AnswerRepository.GetByIdAsync(id);
+            return _unitOfWork.AnswerRepository.FindAsync(id);
         }
 
         bool IAnswerManager.AnswerExists(int id)

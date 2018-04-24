@@ -25,11 +25,11 @@ namespace ProjectQ.BusinessLogic
         }
 
         async Task<int> IAnswerRatingManager.AddOrUpdateAsync(
-            AnswerRating answerRating, ApplicationUser user)
+            AnswerRating answerRating, int userId)
         {
             var existingRating = await _unitOfWork
                 .AnswerRatingRepository
-                .GetByAnswerAndUser(answerRating.AnswerId, user.Id);
+                .GetByAnswerAndUserAsync(answerRating.AnswerId, userId);
 
             if (existingRating != null)
             {
@@ -39,7 +39,7 @@ namespace ProjectQ.BusinessLogic
             }
             else
             {
-                answerRating.AspNetUserId = user.Id;
+                answerRating.UserId = userId;
                 answerRating.OriginDate = DateTime.UtcNow;
                 answerRating.LastUpdated = answerRating.OriginDate;
 
@@ -47,18 +47,19 @@ namespace ProjectQ.BusinessLogic
             }
 
             var answer = await _unitOfWork
-                    .AnswerRepository.GetByIdAsync(answerRating.AnswerId);
+                    .AnswerRepository.FindAsync(answerRating.AnswerId);
 
+            var user = await _unitOfWork.UserRepository.FindAsync(userId);
 
             var notification =
                 new Notification()
                 {
                     IsSeen = false,
                     OriginDate = answerRating.OriginDate,
-                    AspNetUserId = answer.AspNetUserId,
+                    UserId = answer.UserId,
 
                     EventDescription =
-                        user.UserName + " rated your answer",
+                        user.Name + " rated your answer",
                     Link = "/question-detail/" + answer.QuestionId
                 };
 
@@ -71,9 +72,9 @@ namespace ProjectQ.BusinessLogic
             return answerRating.Id;
         }
 
-        async Task<AnswerRating> IAnswerRatingManager.GetByIdAsync(int id)
+        async Task<AnswerRating> IAnswerRatingManager.FindAsync(int id)
         {
-            return await _unitOfWork.AnswerRatingRepository.GetByIdAsync(id);
+            return await _unitOfWork.AnswerRatingRepository.FindAsync(id);
         }
 
         #endregion

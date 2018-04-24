@@ -11,7 +11,7 @@ namespace ProjectQ.DAL
     {
         Task AddAsync(AnswerRating answerRating);
         Task UpdateAsync(AnswerRating answerRating);
-        Task<AnswerRating> GetByAnswerAndUser(int answerId, string userId);
-        Task<AnswerRating> GetByIdAsync(int id);
+        Task<AnswerRating> GetByAnswerAndUserAsync(int answerId, int userId);
+        Task<AnswerRating> FindAsync(int id);
     }
 }

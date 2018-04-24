@@ -35,38 +35,38 @@ namespace ProjectQ.BusinessLogic
         }
         
 
-        async Task IQuestionManager.AddAsync(Question question, string userId)
+        async Task IQuestionManager.AddAsync(Question question, int userId)
         {
-            question.AspNetUserId = userId;
+            question.UserId = userId;
             question.OriginDate = DateTime.UtcNow;
 
             await _unitOfWork.QuestionRepository.AddAsync(question);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task<IEnumerable<Question>> IQuestionManager.GetAllAskedBy(
-            ApplicationUser user)
+        async Task<IEnumerable<Question>> IQuestionManager.GetAllAskedByAsync(
+            int userId)
         {
             return (await _unitOfWork
                 .QuestionRepository
-                .GetAllAskedBy(user))
+                .GetAllAskedByAsync(userId))
                 .OrderByDescending(x => x.OriginDate);
         }
 
-        async Task<IEnumerable<UserSpecificQuestionView>> IQuestionManager.GetAllForUser(
-            ApplicationUser user
+        async Task<IEnumerable<UserSpecificQuestionView>> IQuestionManager.GetAllForUserAsync(
+            int userId
             )
         {
             return (await _unitOfWork
                 .QuestionRepository
-                .GetAllForUser(user))
+                .GetAllForUserAsync(userId))
                 .OrderByDescending(x=>x.Question.OriginDate);
         }
 
-        async Task<Question> IQuestionManager.GetByIdAsync(int id)
+        async Task<Question> IQuestionManager.FindAsync(int id)
         {
             return await _unitOfWork
-                .QuestionRepository.GetByIdAsync(id);
+                .QuestionRepository.FindAsync(id);
         }
 
         bool IQuestionManager.QuestionExists(int id)
@@ -75,10 +75,10 @@ namespace ProjectQ.BusinessLogic
                 .QuestionExists(id);
         }
 
-        async Task IQuestionManager.UpdateAsync(string userId, Question question)
+        async Task IQuestionManager.UpdateAsync(int userId, Question question)
         {
-            var dbRecord = await _unitOfWork.QuestionRepository.GetByIdAsync(question.Id);
-            if (dbRecord.AspNetUserId != userId)
+            var dbRecord = await _unitOfWork.QuestionRepository.FindAsync(question.Id);
+            if (dbRecord.UserId != userId)
             {
                 throw new Exception("Unauthorized");
             }

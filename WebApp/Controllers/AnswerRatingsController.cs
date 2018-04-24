@@ -39,7 +39,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var answerRating = await _answerRatingManager.GetByIdAsync(id);
+            var answerRating = await _answerRatingManager.FindAsync(id);
 
             if (answerRating == null)
             {
@@ -62,7 +62,7 @@ namespace WebApp.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             await _answerRatingManager
-                .AddOrUpdateAsync(answerRating, user);
+                .AddOrUpdateAsync(answerRating, (await _userManager.GetUserAsync(User)).UserId);
 
             return CreatedAtAction(
                 "GetAnswerRating", new { id = answerRating.Id }, answerRating);

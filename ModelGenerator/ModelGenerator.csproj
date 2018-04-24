@@ -89,6 +89,9 @@
     <Compile Include="QuestionFollower.cs">
       <DependentUpon>EntityData.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>EntityData.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

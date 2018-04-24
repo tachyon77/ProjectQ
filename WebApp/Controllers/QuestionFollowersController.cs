@@ -42,7 +42,7 @@ namespace WebApp.Controllers
 
             await _questionFollowerManager.
                 FollowAsync(
-                    await _userManager.GetUserAsync(User), 
+                    (await _userManager.GetUserAsync(User)).UserId, 
                     questionId
                 );
 
@@ -60,7 +60,7 @@ namespace WebApp.Controllers
 
             await _questionFollowerManager.
                 UnfollowAsync(
-                    await _userManager.GetUserAsync(User),
+                    (await _userManager.GetUserAsync(User)).UserId,
                     questionId
                 );
 

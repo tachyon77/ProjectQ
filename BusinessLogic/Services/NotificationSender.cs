@@ -14,8 +14,8 @@ namespace ProjectQ.BusinessLogic.Services
     public class NotificationSender : INotificationSender
     {
         #region private fields
-        private static ConcurrentDictionary<string, List<WebSocket>> _websockets
-            = new ConcurrentDictionary<string, List<WebSocket>>();
+        private static ConcurrentDictionary<int, List<WebSocket>> _websockets
+            = new ConcurrentDictionary<int, List<WebSocket>>();
         private static BlockingCollection<Notification> _notificationRequests
             = new BlockingCollection<Notification>();
         #endregion
@@ -51,7 +51,7 @@ namespace ProjectQ.BusinessLogic.Services
         }
 
         #region Interface Implementation
-        void INotificationSender.Subscribe(string userId, WebSocket webSocket)
+        void INotificationSender.Subscribe(int userId, WebSocket webSocket)
         {
             if (!_websockets.ContainsKey(userId))
                 _websockets[userId] = new List<WebSocket>();
@@ -59,7 +59,7 @@ namespace ProjectQ.BusinessLogic.Services
             _websockets[userId].Add(webSocket);
         }
 
-        void INotificationSender.Unsubscribe(string userId, WebSocket webSocket)
+        void INotificationSender.Unsubscribe(int userId, WebSocket webSocket)
         {
             Unsubscribe(userId, webSocket);
         }
@@ -93,7 +93,7 @@ namespace ProjectQ.BusinessLogic.Services
             var buffer = new ArraySegment<Byte>(
                 encoded, 0, encoded.Length);
 
-            var userId = request.AspNetUserId;
+            var userId = request.UserId;
 
             if(_websockets.ContainsKey(userId))
             {
@@ -116,7 +116,7 @@ namespace ProjectQ.BusinessLogic.Services
             
         }
 
-        static void Unsubscribe(string userId, WebSocket webSocket)
+        static void Unsubscribe(int userId, WebSocket webSocket)
         {
             if (_websockets.ContainsKey(userId))
             {

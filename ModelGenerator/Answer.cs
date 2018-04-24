@@ -22,8 +22,8 @@ namespace ProjectQ.Model
     
         public int Id { get; set; }
         public int QuestionId { get; set; }
-        public string AspNetUserId { get; set; }
-        public string text { get; set; }
+        public int UserId { get; set; }
+        public string Text { get; set; }
         public System.DateTime OriginDate { get; set; }
         public bool IsPrivate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
@@ -31,7 +31,7 @@ namespace ProjectQ.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Question Question { get; set; }
+        public virtual User User { get; set; }
     }
 }

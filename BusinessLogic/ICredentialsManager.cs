@@ -8,10 +8,10 @@ namespace ProjectQ.BusinessLogic
 {
     public interface ICredentialsManager
     {
-        Credentials GetForUser(string id);
-        Task AddEducationAsync(string id, Education education);
-        Task UpdateEducationAsync(string userId, Education education);
-        Task AddEmploymentAsync(string id, Employment employment);
-        Task UpdateEmploymentAsync(string userId, Employment employment);
+        Credentials GetForUser(int userId);
+        Task AddEducationAsync(int userId, Education education);
+        Task UpdateEducationAsync(int userId, Education education);
+        Task AddEmploymentAsync(int userIf, Employment employment);
+        Task UpdateEmploymentAsync(int userId, Employment employment);
     }
 }

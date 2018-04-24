@@ -23,7 +23,7 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        Credentials ICredentialsManager.GetForUser(string id)
+        Credentials ICredentialsManager.GetForUser(int id)
         {
             var credentials = new Credentials();
 
@@ -36,41 +36,41 @@ namespace ProjectQ.BusinessLogic
             return credentials;
         }
 
-        async Task ICredentialsManager.AddEducationAsync(string id, Education education)
+        async Task ICredentialsManager.AddEducationAsync(int userId, Education education)
         {
-            await _unitOfWork.EducationRepository.AddEducationAsync(id, education);
+            await _unitOfWork.EducationRepository.AddAsync(userId, education);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task ICredentialsManager.AddEmploymentAsync(string id, Employment employment)
+        async Task ICredentialsManager.AddEmploymentAsync(int userId, Employment employment)
         {
-            await _unitOfWork.EmploymentRepository.AddEmploymentAsync(id, employment);
+            await _unitOfWork.EmploymentRepository.AddAsync(userId, employment);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task ICredentialsManager.UpdateEducationAsync(string userId, Education education)
+        async Task ICredentialsManager.UpdateEducationAsync(int userId, Education education)
         {
             var existingRecord =
-                await _unitOfWork.EducationRepository.FindEducationAsync(education.Id);
+                await _unitOfWork.EducationRepository.FindAsync(education.Id);
 
-            if (!existingRecord.AspNetUserId.Equals(existingRecord.AspNetUserId))
+            if (!existingRecord.UserId.Equals(existingRecord.UserId))
             {
                 throw new Exception("Unauthorized");
             }
-            await _unitOfWork.EducationRepository.UpdateEducationAsync(education);
+            await _unitOfWork.EducationRepository.UpdateAsync(education);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task ICredentialsManager.UpdateEmploymentAsync(string userId, Employment employment)
+        async Task ICredentialsManager.UpdateEmploymentAsync(int userId, Employment employment)
         {
             var existingRecord =
-                await _unitOfWork.EmploymentRepository.FindEmploymentAsync(employment.Id);
+                await _unitOfWork.EmploymentRepository.FindAsync(employment.Id);
 
-            if (!existingRecord.AspNetUserId.Equals(existingRecord.AspNetUserId))
+            if (!existingRecord.UserId.Equals(existingRecord.UserId))
             {
                 throw new Exception("Unauthorized");
             }
-            await _unitOfWork.EmploymentRepository.UpdateEmploymentAsync(employment);
+            await _unitOfWork.EmploymentRepository.UpdateAsync(employment);
             await _unitOfWork.SaveAsync();
         }
         #endregion

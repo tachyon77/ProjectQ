@@ -5,36 +5,36 @@ using ProjectQ.Model;
 
 namespace ProjectQ.BusinessLogic
 {
-    public class UserProfileManager : IUserProfileManager
+    public class UserManager : IUserManager
     {
         #region Private Members
         private IUnitOfWork _unitOfWork;
         #endregion
 
         #region Public Members
-        public UserProfileManager(
+        public UserManager(
             IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        async Task IUserProfileManager.UpdateIntroductionAsync(
-            string id, 
+        async Task IUserManager.UpdateIntroductionAsync(
+            int id, 
             string introduction)
         {
-            await _unitOfWork.UserProfileRepository
+            await _unitOfWork.UserRepository
                 .UpdateIntroductionAsync(id, introduction);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task<UserProfile> IUserProfileManager.GetById(string id)
+        async Task<User> IUserManager.FindAsync(int id)
         {
-            return await _unitOfWork.UserProfileRepository.GetByIdAsync(id);
+            return await _unitOfWork.UserRepository.FindAsync(id);
         }
 
-        async Task IUserProfileManager.UpdateNameAsync(string id, string name)
+        async Task IUserManager.UpdateNameAsync(int id, string name)
         {
-            await _unitOfWork.UserProfileRepository.UpdateNameAsync(id, name);
+            await _unitOfWork.UserRepository.UpdateNameAsync(id, name);
             await _unitOfWork.SaveAsync();
         }
 

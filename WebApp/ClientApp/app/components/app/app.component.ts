@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    userName: string;
-    userId: string;
+    user: AspNetUser;
     isLoggedIn: boolean = true;
 
     constructor(
@@ -38,9 +37,7 @@ export class AppComponent {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    const user = result as AspNetUser;
-                    this.userName = user.name;
-                    this.userId = user.id;
+                    this.user = result as AspNetUser;
                     this.isLoggedIn = true;
                 }
                 else {

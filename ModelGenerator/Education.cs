@@ -15,13 +15,13 @@ namespace ProjectQ.Model
     public partial class Education
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public string School { get; set; }
         public string Concentration { get; set; }
         public string SecondaryConcentration { get; set; }
         public string DegreeType { get; set; }
         public Nullable<int> GraduationYear { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual User User { get; set; }
     }
 }

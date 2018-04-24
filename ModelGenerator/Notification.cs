@@ -15,12 +15,12 @@ namespace ProjectQ.Model
     public partial class Notification
     {
         public int Id { get; set; }
-        public string AspNetUserId { get; set; }
+        public int UserId { get; set; }
         public bool IsSeen { get; set; }
         public System.DateTime OriginDate { get; set; }
         public string EventDescription { get; set; }
         public string Link { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual User User { get; set; }
     }
 }

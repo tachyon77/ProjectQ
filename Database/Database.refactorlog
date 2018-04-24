@@ -161,4 +161,60 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AspNetUserId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1adbb1e7-26bb-403e-aecf-314feed56b74" ChangeDateTime="04/24/2018 02:17:24">
+    <Property Name="ElementName" Value="[dbo].[AspNetUsers].[FirstName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AspNetUsers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UniqueName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="39a91c8c-03d8-4fc1-ada8-1ce1efa82370" ChangeDateTime="04/24/2018 02:19:19">
+    <Property Name="ElementName" Value="[dbo].[AnswerRatings].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerRatings]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="44f2daa8-a094-46f9-b3b7-13a60c745bbe" ChangeDateTime="04/24/2018 02:20:23">
+    <Property Name="ElementName" Value="[dbo].[Answers].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Answers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ee8c5010-942c-470a-a0c3-34824af25f06" ChangeDateTime="04/24/2018 02:21:02">
+    <Property Name="ElementName" Value="[dbo].[Educations].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Educations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ba10a71-916a-4365-829c-ce176f250c96" ChangeDateTime="04/24/2018 02:21:25">
+    <Property Name="ElementName" Value="[dbo].[Employments].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Employments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="48380b36-6c2b-43a7-bb95-26ed40eb2473" ChangeDateTime="04/24/2018 02:21:55">
+    <Property Name="ElementName" Value="[dbo].[Notifications].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Notifications]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c8715d40-5a58-4b2c-8be5-5ee09a122311" ChangeDateTime="04/24/2018 02:22:19">
+    <Property Name="ElementName" Value="[dbo].[QuestionFollowers].[AspNetUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionFollowers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="886a43a4-12d9-458a-a0bc-85b3bd4a14da" ChangeDateTime="04/24/2018 03:45:20">
+    <Property Name="ElementName" Value="[dbo].[AspNetUsers].[UniqueName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AspNetUsers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
 </Operations>

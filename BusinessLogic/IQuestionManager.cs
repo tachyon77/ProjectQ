@@ -21,11 +21,11 @@ namespace ProjectQ.BusinessLogic
     /// </summary>
     public interface IQuestionManager
     {
-        Task AddAsync(Question question, string userId);
-        Task UpdateAsync(string userId, Question question);
-        Task<IEnumerable<UserSpecificQuestionView>> GetAllForUser(ApplicationUser user);
-        Task<IEnumerable<Question>> GetAllAskedBy(ApplicationUser user);
-        Task<Question> GetByIdAsync(int id);
+        Task AddAsync(Question question, int userId);
+        Task UpdateAsync(int userId, Question question);
+        Task<IEnumerable<UserSpecificQuestionView>> GetAllForUserAsync(int userId);
+        Task<IEnumerable<Question>> GetAllAskedByAsync(int userId);
+        Task<Question> FindAsync(int id);
         bool QuestionExists(int id);
     }
 }

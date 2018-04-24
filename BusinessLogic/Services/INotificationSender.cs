@@ -9,8 +9,8 @@ namespace ProjectQ.BusinessLogic.Services
 {
     public interface INotificationSender
     {
-        void Unsubscribe(string userId, WebSocket webSocket);
-        void Subscribe(string userId, WebSocket webSocket);
+        void Unsubscribe(int userId, WebSocket webSocket);
+        void Subscribe(int userId, WebSocket webSocket);
         void EnqueueSendRequest(Notification notification);
     }
 }
