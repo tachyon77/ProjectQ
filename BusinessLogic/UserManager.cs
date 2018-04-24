@@ -38,6 +38,38 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async Task<User> IUserManager.AddAsync(string name)
+        {
+            var dashedName = name.Replace(' ', '-').ToLower();
+            var uniqueName = dashedName;
+
+            var isAlreadyUsed = _unitOfWork.UserRepository.FindByUniqueName(dashedName) != null;
+
+            int i = 2;
+            while (isAlreadyUsed)
+            {
+                uniqueName = dashedName + i.ToString();
+                isAlreadyUsed = _unitOfWork.UserRepository.FindByUniqueName(uniqueName) != null;
+            };
+
+            var newUser = new User()
+            {
+                Name = name,
+                UniqueName = uniqueName,
+                Introduction = "",
+            };
+
+            await _unitOfWork.UserRepository.AddAsync(newUser);
+            await _unitOfWork.SaveAsync();
+
+            return newUser;
+        }
+
+        User IUserManager.FindByUniqueName(string uniqueName)
+        {
+            return _unitOfWork.UserRepository.FindByUniqueName(uniqueName);
+        }
+
         #endregion
     }
 }

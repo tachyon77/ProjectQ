@@ -38,7 +38,7 @@ export class AppComponent {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    const user = result as AspNetUser;
+                    const user = result as User;
                     this.userName = user.name;
                     this.userId = user.id;
                     this.isLoggedIn = true;

@@ -1,8 +1,8 @@
 ﻿import { Component, Input } from '@angular/core';
-import { ApplicationUser, ApplicationUserService } from
-    '../../services/application-user.service'
+import { ApplicationUserService } from '../../services/application-user.service'
 import { Question, QuestionService } from
     '../../components/questions/questions.service';
+import { User } from '../../services/identity.service';
 
 @Component({
     selector: 'user-questions',
@@ -12,12 +12,12 @@ import { Question, QuestionService } from
 
 export class UserQuestionsComponent {
 
-    private _user: ApplicationUser;
+    private _user: User;
     private _questions: Question[];
 
     @Input()
-    set user(user: ApplicationUser) {
-        this._user = user;
+    set user(u: User) {
+        this._user = u;
     }
 
     get user() {
