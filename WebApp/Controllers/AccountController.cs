@@ -45,20 +45,17 @@ namespace ProjectQ.WebApp.Controllers
         }
 
         [HttpGet("user")]
-        public object
+        async public Task<IActionResult>
            GetUser()
         {
             if (User.Identity.IsAuthenticated)
             {
-                return new // We don't want to send the complete AspNetUser as it has secrets.
-                {
-                    name = _signInManager.UserManager.GetUserName(User),
-                    id = _signInManager.UserManager.GetUserId(User),
-                    
-                };
+                var aspUser = await _signInManager.UserManager.GetUserAsync(User);
+                var user = await _userManager.FindAsync(aspUser.UserId);
+                return Ok(user);
             }
 
-            return null;
+            return Unauthorized();
         }
 
 
@@ -73,17 +70,17 @@ namespace ProjectQ.WebApp.Controllers
                     .PasswordSignInAsync(data.Email, data.Password, true, false);
                 if (result.Succeeded)
                 {
-                    return Ok(
-                        await _userManager.FindAsync(
-                        (await _signInManager.UserManager.GetUserAsync(User)).UserId)
-                    );
+                    var appUser = _signInManager.UserManager.Users.Single(x=>x.Email.Equals(data.Email));
+
+                    var user = await _userManager.FindAsync(appUser.UserId);
+                    return Ok(user);
                 }
                 else
                 {
-                    return Ok(false);
+                    return NotFound();
                 }
             }
-            return Ok(false);
+            return BadRequest();
         }
 
         [HttpGet("refreshtoken")]

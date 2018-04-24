@@ -31,12 +31,13 @@ export class LoginFormComponent {
 
 
     onSubmit(loginForm: LoginCredential) {
-        this.identityService.login(loginForm).subscribe(result => {
-            if (result != null && result.length > 0) {
-                this.loggedIn.emit(result);
+        this.identityService.login(loginForm).subscribe(
+            data => {
+                this.loggedIn.emit(data);
+            },
+            error => {
+                alert("Login failed: " + error);
             }
-        }, error => console.error(error));
+        );
     }
-
-
 }

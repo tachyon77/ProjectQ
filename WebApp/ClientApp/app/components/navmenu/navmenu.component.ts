@@ -52,11 +52,15 @@ export class NavMenuComponent implements AfterViewInit{
             }
         };
 
-        this.notificationService.getUnseen()
-            .subscribe(result => {
-                this._notifications = result as Notification[];
+        this.notificationService.getUnseen().subscribe(
+            data => {
+                this._notifications = data as Notification[];
                 this._notificationCount = this._notifications.length;
-            }, error => console.error(error));
+            },
+            error => {
+                console.error(error);
+            }
+        );
     }
 
     get isNotificationsVisible() {
