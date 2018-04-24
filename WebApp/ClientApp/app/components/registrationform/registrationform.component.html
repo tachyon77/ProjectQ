@@ -6,6 +6,15 @@
                    autofocus
                    autocomplete="on"
                    class="login-control"
+                   placeholder="Name"
+                   name="name" id="name"
+                   formControlName="name" />
+        </div>
+        <div>
+            <input type="text"
+                   autofocus
+                   autocomplete="on"
+                   class="login-control"
                    placeholder="Email"
                    name="email" id="email"
                    formControlName="Email" />
@@ -28,14 +37,14 @@
         </div>
         <div>
             <input type="text"
-                   *ngIf = "isEmailSent"
+                   *ngIf="isEmailSent"
                    autocomplete="off"
                    class="login-control"
                    placeholder="Email Confirmation Code"
                    name="confirmEmailCode" id="confirmEmailCode"
                    formControlName="ConfirmEmailCode" />
         </div>
-        
+
         <div>
             <button type="submit"
                     class="login-control btn btn-light">

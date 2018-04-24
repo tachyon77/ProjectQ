@@ -9,9 +9,9 @@ namespace ProjectQ.DAL
 {
     public interface IEducationRepository
     {
-        IEnumerable<Education> GetAllForUser(string id);
-        Task<Education> FindEducationAsync(int educationId);
-        Task AddEducationAsync(string id, Education educaiton);
-        Task UpdateEducationAsync(Education educaiton);
+        IEnumerable<Education> GetAllForUser(int userId);
+        Task<Education> FindAsync(int educationId);
+        Task AddAsync(int userId, Education educaiton);
+        Task UpdateAsync(Education educaiton);
     }
 }

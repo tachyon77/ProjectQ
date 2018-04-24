@@ -44,7 +44,7 @@ namespace WebApp.Controllers
         {
             return  await _notificationManager
                 .GetForUserAsync(
-                _userManager.GetUserId(User));
+                (await _userManager.GetUserAsync(User)).UserId);
         }
 
         // POST: api/Notifications
@@ -63,7 +63,7 @@ namespace WebApp.Controllers
             {
                 var webSocket = await context.WebSockets.AcceptWebSocketAsync();
                 _notificationSender.Subscribe(
-                    _userManager.GetUserId(User), webSocket);
+                    (await _userManager.GetUserAsync(User)).UserId, webSocket);
 
                 var data = "ping";
                 var encoded = Encoding.UTF8.GetBytes(data);
@@ -80,7 +80,7 @@ namespace WebApp.Controllers
                     Thread.Sleep(30000);
                 }
                 _notificationSender.Unsubscribe(
-                    _userManager.GetUserId(User), webSocket);
+                    (await _userManager.GetUserAsync(User)).UserId, webSocket);
             }
             else
             {

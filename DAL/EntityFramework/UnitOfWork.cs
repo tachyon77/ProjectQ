@@ -18,7 +18,7 @@ namespace ProjectQ.DAL.EntityFramework
         private IAnswerRatingRepository _answerRatingRepository;
         private INotificationRepository _notificationRepository;
         private IQuestionFollowerRepository _questionFollowerRepository;
-        private IUserProfileRepository _userProfileRepository;
+        private IUserRepository _userRepository;
         private IEmploymentRepository _employmentRepository;
         private IEducationRepository _educationRepository;
 
@@ -27,16 +27,16 @@ namespace ProjectQ.DAL.EntityFramework
             _context = context;
         }
 
-        IUserProfileRepository IUnitOfWork.UserProfileRepository
+        IUserRepository IUnitOfWork.UserRepository
         {
             get
             {
-                if (_userProfileRepository == null)
+                if (_userRepository == null)
                 {
-                    _userProfileRepository =
-                        new UserProfileRepository(_context);
+                    _userRepository =
+                        new UserRepository(_context);
                 }
-                return _userProfileRepository;
+                return _userRepository;
             }
         }
 

@@ -21,6 +21,9 @@ export class RegistrationFormComponent {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
+            Name: this.formBuilder.control('', Validators.compose([
+                Validators.required,
+            ])),
             Email: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),

@@ -1,13 +1,13 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Notification, NotificationService } from '../../services/notification.service'
+import { User } from '../../services/identity.service';
 @Component({
     selector: 'nav-menu',
     templateUrl: './navmenu.component.html',
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent implements AfterViewInit{
-    private _userName: string;
-    private _userId: string;
+    private _user: User;
     private _isNotificationsVisible: boolean;
     private _notificationCount: number;
     private _notifications: Notification[];
@@ -64,21 +64,12 @@ export class NavMenuComponent implements AfterViewInit{
     }
 
     @Input()
-    set userName(name: string) {
-        this._userName = name;
+    set user(u: User) {
+        this._user = u;
     }
 
-    @Input()
-    set userId(id: string) {
-        this._userId = id;
-    }
-
-    get userName() {
-        return this._userName;
-    }
-
-    get userId() {
-        return this._userId;
+    get user() {
+        return this._user;
     }
 
     get notificationCount() {

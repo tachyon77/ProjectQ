@@ -22,7 +22,7 @@ namespace ProjectQ.Model
         }
     
         public int Id { get; set; }
-        public string AspNetUserId { get; set; }
+        public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> OriginDate { get; set; }
@@ -33,8 +33,8 @@ namespace ProjectQ.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
+        public virtual User User { get; set; }
     }
 }

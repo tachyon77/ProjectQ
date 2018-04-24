@@ -9,9 +9,9 @@ namespace ProjectQ.DAL
 {
     public interface IEmploymentRepository
     {
-        IEnumerable<Employment> GetAllForUser(string id);
-        Task<Employment> FindEmploymentAsync(int employmentId);
-        Task AddEmploymentAsync(string id, Employment employment);
-        Task UpdateEmploymentAsync(Employment employment);
+        IEnumerable<Employment> GetAllForUser(int id);
+        Task<Employment> FindAsync(int employmentId);
+        Task AddAsync(int userId, Employment employment);
+        Task UpdateAsync(Employment employment);
     }
 }

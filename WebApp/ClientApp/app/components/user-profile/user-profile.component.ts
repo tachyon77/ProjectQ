@@ -2,13 +2,11 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
-import {
-    ApplicationUser, ApplicationUserService, UserProfile,
-    Education, Employment, Credentials
-} from '../../services/application-user.service';
+import { ApplicationUserService, Education, Employment, Credentials} from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials/credentials-readonly/credentials-readonly.component'
 import { CredentialsEditorComponent } from '../../components/credentials/credentials-editor/credentials-editor.component'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { User } from '../../services/identity.service';
 
 @Component({
     selector: 'user-profile',
@@ -22,9 +20,9 @@ export class UserProfileComponent implements OnInit {
     isNameEditorVisible = false;
     isIntroductionEditorVisible = false;
     profileUserId: string;
-    private _loggedInUser: ApplicationUser;
-    private _currentProfile: UserProfile;
-    private _updatedProfile: UserProfile;
+    private _loggedInUser: User;
+    private _currentProfile: User;
+    private _updatedProfile: User;
     private _credetials: Credentials;
     introductionContent: SafeHtml;
 
@@ -70,7 +68,7 @@ export class UserProfileComponent implements OnInit {
 
     updateName() {
         this.applicationUserService
-            .updateName(this._updatedProfile)
+            .updateName(this._updatedProfile.name)
             .subscribe(() => {
                 this._currentProfile.name = this._updatedProfile.name;
                 this.isNameEditorVisible = false;
@@ -79,7 +77,7 @@ export class UserProfileComponent implements OnInit {
 
     updateIntroduction() {
         this.applicationUserService
-            .updateIntroduction(this._updatedProfile)
+            .updateIntroduction(this._updatedProfile.introduction)
             .subscribe(() => {
                 this._currentProfile.introduction = this._updatedProfile.introduction;
                 this.introductionContent =
@@ -114,8 +112,8 @@ export class UserProfileComponent implements OnInit {
 
                 this.applicationUserService.getProfile(this.profileUserId).subscribe(
                     response => {
-                        this._currentProfile = response as UserProfile;                        
-                        this._updatedProfile = new UserProfile();
+                        this._currentProfile = response as User;                        
+                        this._updatedProfile = new User();
                         this.introductionContent =
                             this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
                     }

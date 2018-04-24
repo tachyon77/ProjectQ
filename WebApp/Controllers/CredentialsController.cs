@@ -32,34 +32,33 @@ namespace WebApp.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCredentials(string id)
+        public IActionResult GetCredentials(int userId)
         {
-            Credentials credentials = _credentialsManager.GetForUser(id);
-
+            Credentials credentials = _credentialsManager.GetForUser(userId);
             return Ok(credentials);
         }
 
         [HttpPost("educations")]
         async public Task<IActionResult> AddEducation([FromBody] Education education)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _credentialsManager.AddEducationAsync(appUser.Id, education);
+            await _credentialsManager.AddEducationAsync(
+               (await _userManager.GetUserAsync(User)).UserId, education);
             return new NoContentResult();
         }
 
         [HttpPut("educations")]
         async public Task<IActionResult> UpdateEducation([FromBody] Education education)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _credentialsManager.UpdateEducationAsync(appUser.Id, education);
+            await _credentialsManager.UpdateEducationAsync(
+                (await _userManager.GetUserAsync(User)).UserId, education);
             return new NoContentResult();
         }
 
         [HttpPost("employments")]
         async public Task<IActionResult> AddEmployment([FromBody] Employment employment)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _credentialsManager.AddEmploymentAsync(appUser.Id, employment);
+            await _credentialsManager.AddEmploymentAsync(
+                (await _userManager.GetUserAsync(User)).UserId, employment);
             return new NoContentResult();
         }
 
@@ -67,7 +66,8 @@ namespace WebApp.Controllers
         async public Task<IActionResult> UpdateEmployment([FromBody] Employment employment)
         {
             var appUser = await _userManager.GetUserAsync(User);
-            await _credentialsManager.UpdateEmploymentAsync(appUser.Id, employment);
+            await _credentialsManager.UpdateEmploymentAsync(
+                (await _userManager.GetUserAsync(User)).UserId, employment);
             return new NoContentResult();
         }
     }

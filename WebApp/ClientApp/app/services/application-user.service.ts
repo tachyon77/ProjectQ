@@ -2,17 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-export class ApplicationUser {
-    id: string;
-    firstName: string;
-
-}
-
-export class UserProfile {
-    name: string;
-    introduction: string;
-}
-
 export class Education {
     id: number;
     school: string;
@@ -64,8 +53,8 @@ export class ApplicationUserService {
             });
     }
 
-    updateName(profile: UserProfile) {
-        return this.http.put('api/profile/name', profile)
+    updateName(name: string) {
+        return this.http.put('api/profile/name', name)
             .map(response => {
                 return response;
             });
@@ -99,8 +88,8 @@ export class ApplicationUserService {
             });
     }
 
-    updateIntroduction(profile: UserProfile) {
-        return this.http.put('api/profile/introduction', profile)
+    updateIntroduction(introduction: string) {
+        return this.http.put('api/profile/introduction', introduction)
             .map(response => {
                 return response;
             });

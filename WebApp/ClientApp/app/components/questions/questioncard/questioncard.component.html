@@ -14,7 +14,7 @@
             </h3>
 
             <h6 class="asked-by">
-                Asked by {{questionView.question.aspNetUser.firstName}}
+                Asked by {{questionView.question.user.name}}
                 {{questionView.question.originDate | readableDate}}
             </h6>                      
             <div [innerHTML]="questionDescription"

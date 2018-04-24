@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AnswerService, Answer, UserSpecificAnswerView } from '../../answers/answers.service'
 import { QuestionService, Question } from '../questions.service'
-import { IdentityService, AspNetUser } from '../../../services/identity.service'
+import { IdentityService, User } from '../../../services/identity.service'
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +20,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     public isQuestionEditorVisible: boolean;
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
-    loggedInUser: AspNetUser;
+    loggedInUser: User;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -35,8 +35,8 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
     get isAsker() {
         return this.loggedInUser && this.question &&
-            this.question.aspNetUser &&
-            this.question.aspNetUser.id === this.loggedInUser.id;
+            this.question.user &&
+            this.question.user.id === this.loggedInUser.id;
     }
 
     OnAnswerClick() {
@@ -78,7 +78,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    this.loggedInUser = result as AspNetUser;
+                    this.loggedInUser = result as User;
                 }
             }
         );

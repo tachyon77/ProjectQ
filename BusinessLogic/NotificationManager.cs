@@ -23,7 +23,7 @@ namespace ProjectQ.BusinessLogic
         }
 
         async Task<IEnumerable<Notification>> INotificationManager.GetForUserAsync(
-            string userId)
+            int userId)
         {
             return await _unitOfWork.NotificationRepository
                 .GetUnseenForUserAsyc(userId);
@@ -32,7 +32,7 @@ namespace ProjectQ.BusinessLogic
         async Task INotificationManager.MarkSeenAsync(int id)
         {
             var notification = await _unitOfWork
-                .NotificationRepository.GetByIdAsync(id);
+                .NotificationRepository.FindAsync(id);
             notification.IsSeen = true;
 
             await _unitOfWork.SaveAsync();

@@ -13,7 +13,7 @@ namespace ProjectQ.DAL
         IAnswerRepository AnswerRepository { get; }
         INotificationRepository NotificationRepository { get; }
         IAnswerRatingRepository AnswerRatingRepository { get; }
-        IUserProfileRepository UserProfileRepository { get; }
+        IUserRepository UserRepository { get; }
         IEducationRepository EducationRepository { get; }
         IEmploymentRepository EmploymentRepository { get; }
         Task SaveAsync();

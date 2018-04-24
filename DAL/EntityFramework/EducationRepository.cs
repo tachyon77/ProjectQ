@@ -20,18 +20,18 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         IEnumerable<Education> IEducationRepository.GetAllForUser(
-            string id)
+            int id)
         {
-            return _context.Educations.Where(x=>x.AspNetUserId.Equals(id));
+            return _context.Educations.Where(x=>x.UserId.Equals(id));
         }
 
-        async Task IEducationRepository.AddEducationAsync(string id, Education educaiton)
+        async Task IEducationRepository.AddAsync(int id, Education educaiton)
         {
-            educaiton.AspNetUserId = id;
+            educaiton.UserId = id;
             await _context.Educations.AddAsync(educaiton);
         }
 
-        async Task IEducationRepository.UpdateEducationAsync(Education education)
+        async Task IEducationRepository.UpdateAsync(Education education)
         {
             var existingEducation = await _context.Educations.FindAsync(education.Id);
 
@@ -43,7 +43,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         }
 
-        async Task<Education> IEducationRepository.FindEducationAsync(int educationId)
+        async Task<Education> IEducationRepository.FindAsync(int educationId)
         {
             return await _context.Educations.FindAsync(educationId);
         }

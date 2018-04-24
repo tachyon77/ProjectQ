@@ -32,11 +32,11 @@ namespace ProjectQ.DAL.EntityFramework
         async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerRepository.GetForQuestionAndUserAsync(
             int questionId,
-            string userId)
+            int userId)
         {
             var answers = await
                 _context.Answers
-                .Include(a=>a.AspNetUser)
+                .Include(a=>a.User)
                 .Include(a=>a.AnswerRatings)
                 .Where(
                     a => !a.IsDeleted && a.QuestionId.Equals(questionId))
@@ -48,13 +48,13 @@ namespace ProjectQ.DAL.EntityFramework
                     a=> new UserSpecificAnswerView()
                     {
                         Answer = a,
-                        Rating = a.AnswerRatings.SingleOrDefault(x=>x.AspNetUserId.Equals(a.AspNetUserId))
+                        Rating = a.AnswerRatings.SingleOrDefault(x=>x.UserId.Equals(a.UserId))
                     }
                 );
             return userSpecificAnswerViews;
         }
 
-        async Task<Answer> IAnswerRepository.GetByIdAsync(int id)
+        async Task<Answer> IAnswerRepository.FindAsync(int id)
         {
             return await _context.Answers.FindAsync(id);
         }
@@ -63,7 +63,7 @@ namespace ProjectQ.DAL.EntityFramework
         {
             var dbRecord = await _context.Answers.FindAsync(answer.Id);
 
-            dbRecord.text = answer.text;
+            dbRecord.Text = answer.Text;
             dbRecord.IsDeleted = answer.IsDeleted;
         }
     }

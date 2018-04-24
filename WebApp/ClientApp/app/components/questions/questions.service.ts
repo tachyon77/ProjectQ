@@ -1,6 +1,6 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AspNetUser } from '../../services/identity.service'
+import { User } from '../../services/identity.service'
 import { Answer } from '../answers/answers.service'
 import 'rxjs/add/operator/map';
 
@@ -12,7 +12,7 @@ export interface Question {
     isDeleted: boolean;
     offeredPrice: number;
     originDate: Date;
-    aspNetUser: AspNetUser;
+    user: User;
     answers: Answer[];
 }
 

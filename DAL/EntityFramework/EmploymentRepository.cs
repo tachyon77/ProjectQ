@@ -20,23 +20,23 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         IEnumerable<Employment> IEmploymentRepository.GetAllForUser(
-            string id)
+            int id)
         {
-            return _context.Employments.Where(x=>x.AspNetUserId.Equals(id));
+            return _context.Employments.Where(x=>x.UserId.Equals(id));
         }
 
-        async Task IEmploymentRepository.AddEmploymentAsync(string id, Employment employment)
+        async Task IEmploymentRepository.AddAsync(int id, Employment employment)
         {
-            employment.AspNetUserId = id;
+            employment.UserId = id;
             await _context.Employments.AddAsync(employment);
         }
 
-        async Task<Employment> IEmploymentRepository.FindEmploymentAsync(int employmentId)
+        async Task<Employment> IEmploymentRepository.FindAsync(int employmentId)
         {
             return await _context.Employments.FindAsync(employmentId);
         }
 
-        async Task IEmploymentRepository.UpdateEmploymentAsync(Employment employment)
+        async Task IEmploymentRepository.UpdateAsync(Employment employment)
         {
             var existingEmployment = await _context.Employments.FindAsync(employment.Id);
 

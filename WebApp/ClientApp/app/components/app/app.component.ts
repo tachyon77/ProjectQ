@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdentityService, AspNetUser } from '../../services/identity.service';
+import { IdentityService, User } from '../../services/identity.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    userName: string;
-    userId: string;
+    user: User;
     isLoggedIn: boolean = true;
 
     constructor(
@@ -19,15 +18,15 @@ export class AppComponent {
         this.router.onSameUrlNavigation = 'reload';
     }
 
-    onLogin(uname: string) {
-        this.userName = uname;
+    onLogin(u: User) {
+        this.user = u;
         this.isLoggedIn = true;
     }
 
     onLogout() {
         this.identityService.logout()
             .subscribe(result => {
-                this.userName = '';
+                // TODO: this.user = undefined;
                 this.isLoggedIn = false;
                 this.identityService.refreshCSRFToken()
                     .subscribe();
@@ -38,9 +37,7 @@ export class AppComponent {
         this.identityService.getLoggedInUser()
             .subscribe(result => {
                 if (result != null) {
-                    const user = result as AspNetUser;
-                    this.userName = user.name;
-                    this.userId = user.id;
+                    this.user = result as User;
                     this.isLoggedIn = true;
                 }
                 else {

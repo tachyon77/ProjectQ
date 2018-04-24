@@ -15,7 +15,7 @@ namespace WebApp.Controllers
     [Route("api/Questions")]
     public class QuestionsController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _aspUserManager;
         private readonly IQuestionManager _questionManager;
 
         /// <summary>
@@ -25,27 +25,26 @@ namespace WebApp.Controllers
         /// <param name="questionManager"></param>
         public QuestionsController(
             IQuestionManager questionManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> aspUserManager
             )
         {
             _questionManager = questionManager;
-            _userManager = userManager;
+            _aspUserManager = aspUserManager;
         }
         // GET: api/Questions
         [HttpGet]
         async public Task<IEnumerable<UserSpecificQuestionView>> GetQuestions()
         {
-            return  await _questionManager.GetAllForUser(
-                await _userManager.GetUserAsync(User)
-                );
+            return  await _questionManager.GetAllForUserAsync(
+                (await _aspUserManager.GetUserAsync(User)).UserId );
         }
 
         // GET: api/questions/my
         [HttpGet("my")]
         async public Task<IEnumerable<Question>> GetAllAskedByMe()
         {
-            return await _questionManager.GetAllAskedBy(
-                await _userManager.GetUserAsync(User)
+            return await _questionManager.GetAllAskedByAsync(
+                (await _aspUserManager.GetUserAsync(User)).UserId
             );
         }
 
@@ -58,7 +57,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var question = await _questionManager.GetByIdAsync(id);
+            var question = await _questionManager.FindAsync(id);
 
             if (question == null)
             {
@@ -78,7 +77,7 @@ namespace WebApp.Controllers
             }
 
             await _questionManager.
-                AddAsync(question, _userManager.GetUserId(User));
+                AddAsync(question, (await _aspUserManager.GetUserAsync(User)).UserId);
 
             return CreatedAtAction(
                 "GetQuestion", 
@@ -93,7 +92,7 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
-            var userId = _userManager.GetUserId(User);
+            var userId = (await _aspUserManager.GetUserAsync(User)).UserId;
 
             await _questionManager.UpdateAsync(userId, updated);
 

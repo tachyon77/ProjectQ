@@ -24,15 +24,15 @@ namespace ProjectQ.DAL.EntityFramework
             await _context.AnswerRatings.AddAsync(answerRating);
         }
 
-        async Task<AnswerRating> IAnswerRatingRepository.GetByAnswerAndUser(
-            int answerId, string userId)
+        async Task<AnswerRating> IAnswerRatingRepository.GetByAnswerAndUserAsync(
+            int answerId, int userId)
         {
             return await _context.AnswerRatings.SingleOrDefaultAsync(
-                x=>x.AspNetUserId.Equals(userId) &&
+                x=>x.UserId.Equals(userId) &&
                 x.AnswerId.Equals(answerId));
         }
 
-        async Task<AnswerRating> IAnswerRatingRepository.GetByIdAsync(int id)
+        async Task<AnswerRating> IAnswerRatingRepository.FindAsync(int id)
         {
             return await _context.AnswerRatings.FindAsync(id);
         }

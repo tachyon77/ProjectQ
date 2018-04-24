@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.WebApp.Services;
+using ProjectQ.BusinessLogic;
+
 
 namespace ProjectQ.WebApp.Controllers
 {
@@ -17,6 +19,7 @@ namespace ProjectQ.WebApp.Controllers
 
     public class RegistrationForm
     {
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmEmailCode { get; set; }
@@ -27,14 +30,17 @@ namespace ProjectQ.WebApp.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserManager _userManager;
         private readonly IEmailSender _emailSender;
 
         public AccountController(
             SignInManager<ApplicationUser> signInManager,
+            IUserManager userManager,
             IEmailSender emailSender
             )
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _emailSender = emailSender;
         }
 
@@ -57,7 +63,7 @@ namespace ProjectQ.WebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> PostAccount([FromBody] LoginCredential data)
+        public async Task<IActionResult> Login([FromBody] LoginCredential data)
         {
             if (ModelState.IsValid)
             {
@@ -67,11 +73,14 @@ namespace ProjectQ.WebApp.Controllers
                     .PasswordSignInAsync(data.Email, data.Password, true, false);
                 if (result.Succeeded)
                 {
-                    return Ok(data.Email);
+                    return Ok(
+                        await _userManager.FindAsync(
+                        (await _signInManager.UserManager.GetUserAsync(User)).UserId)
+                    );
                 }
                 else
                 {
-                    return Ok("");
+                    return Ok(false);
                 }
             }
             return Ok(false);
@@ -113,10 +122,13 @@ namespace ProjectQ.WebApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationForm data)
         {
-     
+
+            var newUser = await _userManager.AddAsync(data.Name);
+
             var user = new ApplicationUser {
-                UserName = data.Email, Email = data.Email,
-                FirstName = "dummy"
+                UserName = data.Email,
+                Email = data.Email,
+                UserId = newUser.Id
             };
             var result = await _signInManager
                 .UserManager
@@ -133,6 +145,11 @@ namespace ProjectQ.WebApp.Controllers
                     "Confirm registration",
                     "Click <a href=" + callbackUrl + ">here</a> to confirm your registration.");
                 return Ok("Account created. Need email confirmation to active account.");
+            }
+            else
+            {
+                // TODO: delete?
+
             }
           
             

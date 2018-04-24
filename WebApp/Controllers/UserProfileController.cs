@@ -11,57 +11,53 @@ namespace WebApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/profile")]
-    public class UserProfileController : Controller
+    public class UserController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUserProfileManager _userProfileManager;
+        private readonly UserManager<ApplicationUser> _aspUserManager;
+        private readonly IUserManager _userManager;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="userManager"></param>
-        public UserProfileController(
-            UserManager<ApplicationUser> userManager,
-            IUserProfileManager userProfileManager
+        public UserController(
+            UserManager<ApplicationUser> aspUserManager,
+            IUserManager userManager
             )
         {
+            _aspUserManager = aspUserManager;
             _userManager = userManager;
-            _userProfileManager = userProfileManager;
         }
 
         [HttpGet("me")]
         async public Task<IActionResult> GetMe()
         {
-            var appUser = await _userManager.GetUserAsync(User);
-
-            var userProfile = new UserProfile()
-            {
-                Name = appUser.FirstName
-            };
-
-            return Ok(userProfile);
+            var aspUser = await _aspUserManager.GetUserAsync(User);
+            var user = await _userManager.FindByUniqueNameAsync(aspUser.UniqueName);
+            return Ok(user);
         }
 
         [HttpGet("{id}")]
-        async public Task<IActionResult> GetUserInfo(string id)
+        async public Task<IActionResult> GetUserInfo(int userId)
         {
-            var user = await _userProfileManager.GetById(id);
-
+            var user = await _userManager.FindAsync(userId);
             return Ok(user);
         }
 
         [HttpPut("name")]
-        async public Task<IActionResult> UpdateName([FromBody] UserProfile profile)
+        async public Task<IActionResult> UpdateName([FromBody] string name)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _userProfileManager.UpdateNameAsync(appUser.Id, profile.Name);
+            var aspUser = await _aspUserManager.GetUserAsync(User);
+            var user = await _userManager.FindByUniqueNameAsync(aspUser.UniqueName);
+            await _userManager.UpdateNameAsync(user.Id, name);
             return new NoContentResult();
         }
 
         [HttpPut("introduction")]
-        async public Task<IActionResult> UpdateIntroduction([FromBody] UserProfile profile)
+        async public Task<IActionResult> UpdateIntroduction([FromBody] string introduction)
         {
-            var appUser = await _userManager.GetUserAsync(User);
-            await _userProfileManager.UpdateIntroductionAsync(appUser.Id, profile.Introduction);
+            var aspUser = await _aspUserManager.GetUserAsync(User);
+            var user = await _userManager.FindByUniqueNameAsync(aspUser.UniqueName);
+            await _userManager.UpdateIntroductionAsync(user.Id, introduction);
             return new NoContentResult();
         }
     }

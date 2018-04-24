@@ -1,6 +1,6 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AspNetUser } from '../../services/identity.service'
+import { User } from '../../services/identity.service'
 import { AnswerRating } from '../../services/answerrating.service'
 
 import 'rxjs/add/operator/map';
@@ -11,7 +11,7 @@ export class Answer {
     questionId: number;
     originDate: Date;
     text: string;
-    aspNetUser: AspNetUser;
+    user: User;
 }
 
 export interface UserSpecificAnswerView {
