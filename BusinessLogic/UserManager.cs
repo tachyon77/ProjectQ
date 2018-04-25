@@ -18,27 +18,23 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
         }
 
-        async Task IUserManager.UpdateIntroductionAsync(
-            int id, 
-            string introduction)
-        {
-            await _unitOfWork.UserRepository
-                .UpdateIntroductionAsync(id, introduction);
-            await _unitOfWork.SaveAsync();
-        }
-
         async Task<User> IUserManager.FindAsync(int id)
         {
             return await _unitOfWork.UserRepository.FindAsync(id);
         }
 
-        async Task IUserManager.UpdateNameAsync(int id, string name)
+        async Task IUserManager.UpdateAsync(int id, User updated)
         {
-            await _unitOfWork.UserRepository.UpdateNameAsync(id, name);
+            var current = await _unitOfWork.UserRepository.FindAsync(id);
+            if (!current.Name.Equals(updated.Name))
+            {
+                updated.UniqueName = computeUniqueName(updated.Name);
+            }
+            await _unitOfWork.UserRepository.UpdateAsync(id, updated);
             await _unitOfWork.SaveAsync();
         }
 
-        async Task<User> IUserManager.AddAsync(string name)
+        string computeUniqueName(string name)
         {
             var dashedName = name.Replace(' ', '-').ToLower();
             var uniqueName = dashedName;
@@ -52,10 +48,15 @@ namespace ProjectQ.BusinessLogic
                 isAlreadyUsed = _unitOfWork.UserRepository.FindByUniqueName(uniqueName) != null;
             };
 
+            return uniqueName;
+        }
+
+        async Task<User> IUserManager.AddAsync(string name)
+        {
             var newUser = new User()
             {
                 Name = name,
-                UniqueName = uniqueName,
+                UniqueName = computeUniqueName(name),
                 Introduction = "",
             };
 

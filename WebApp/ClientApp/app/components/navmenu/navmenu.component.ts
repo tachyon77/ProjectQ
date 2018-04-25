@@ -72,6 +72,10 @@ export class NavMenuComponent implements AfterViewInit{
         this._user = u;
     }
 
+    getUserId() {
+        return this.user.id;
+    }
+
     get user() {
         return this._user;
     }

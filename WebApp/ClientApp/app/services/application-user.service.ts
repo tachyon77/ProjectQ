@@ -1,6 +1,7 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+import { User } from './identity.service';
 
 export class Education {
     id: number;
@@ -32,14 +33,10 @@ export class ApplicationUserService {
     constructor(private http: HttpClient) {
     }
 
-    getContact() {
-        return this.http.get('api/applicationuser/me')
-            .map(response => {
-                return response;
-            });
-    }
-
     getProfile(id: string) {
+        if (!id) {
+            id = "";
+        }
         return this.http.get('api/profile/' + id)
             .map(response => {
                 return response;
@@ -47,14 +44,17 @@ export class ApplicationUserService {
     }
 
     getCredentials(id: string) {
+        if (!id) {
+            id = "";
+        }
         return this.http.get('api/credentials/' + id)
             .map(response => {
                 return response;
             });
     }
 
-    updateName(name: string) {
-        return this.http.put('api/profile/name', name)
+    updateUser(user: User) {
+        return this.http.put('api/profile', user)
             .map(response => {
                 return response;
             });
@@ -83,13 +83,6 @@ export class ApplicationUserService {
 
     updateEmployment(employment: Employment) {
         return this.http.put('api/credentials/employments', employment)
-            .map(response => {
-                return response;
-            });
-    }
-
-    updateIntroduction(introduction: string) {
-        return this.http.put('api/profile/introduction', introduction)
             .map(response => {
                 return response;
             });

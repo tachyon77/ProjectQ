@@ -25,17 +25,12 @@ namespace ProjectQ.DAL.EntityFramework
             return user;
         }
 
-        async Task IUserRepository.UpdateNameAsync(int id, string name)
+        async Task IUserRepository.UpdateAsync(int id, User updated)
         {
             var user = await _context.Users.FindAsync(id);
-            user.Name = name;
-        }
-
-        async Task IUserRepository.UpdateIntroductionAsync(
-            int id, string introduction)
-        {
-            var user = await _context.Users.FindAsync(id);
-            user.Introduction = introduction;
+            user.Name = updated.Name;
+            user.UniqueName = updated.UniqueName;
+            user.Introduction = updated.Introduction;
         }
 
         async Task IUserRepository.AddAsync(User user)

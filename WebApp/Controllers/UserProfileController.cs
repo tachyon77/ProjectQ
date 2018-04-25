@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Controllers
 {
+    public class StringBox
+    {
+        public string data { get; set; }
+    }
+
+
     [Produces("application/json")]
     [Route("api/profile")]
     public class UserController : Controller
@@ -28,8 +34,8 @@ namespace WebApp.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("me")]
-        async public Task<IActionResult> GetMe()
+        [HttpGet("")]
+        async public Task<IActionResult> GetUserInfo()
         {
             var aspUser = await _aspUserManager.GetUserAsync(User);
             var user = await _userManager.FindAsync(aspUser.UserId);
@@ -43,21 +49,12 @@ namespace WebApp.Controllers
             return Ok(user);
         }
 
-        [HttpPut("name")]
-        async public Task<IActionResult> UpdateName([FromBody] string name)
+        [HttpPut("")]
+        async public Task<IActionResult> Update([FromBody] User updated)
         {
             var aspUser = await _aspUserManager.GetUserAsync(User);
             var user = await _userManager.FindAsync(aspUser.UserId);
-            await _userManager.UpdateNameAsync(user.Id, name);
-            return new NoContentResult();
-        }
-
-        [HttpPut("introduction")]
-        async public Task<IActionResult> UpdateIntroduction([FromBody] string introduction)
-        {
-            var aspUser = await _aspUserManager.GetUserAsync(User);
-            var user = await _userManager.FindAsync(aspUser.UserId);
-            await _userManager.UpdateIntroductionAsync(user.Id, introduction);
+            await _userManager.UpdateAsync(user.Id, updated);
             return new NoContentResult();
         }
     }

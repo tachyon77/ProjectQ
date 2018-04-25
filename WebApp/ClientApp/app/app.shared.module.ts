@@ -96,6 +96,7 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
             { path: 'home', component: HomeComponent },
             { path: 'landing-page', component: LandingPageComponent },
             { path: 'profile/:id', component: UserProfileComponent },
+            { path: 'profile', component: UserProfileComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: '**', redirectTo: 'home' }

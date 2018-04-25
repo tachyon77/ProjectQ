@@ -31,6 +31,14 @@ namespace WebApp.Controllers
             _credentialsManager = credentialsManager;
         }
 
+        [HttpGet("")]
+        async public Task<IActionResult> GetCredentials()
+        {
+            var aspUser = await _userManager.GetUserAsync(User);
+            Credentials credentials = _credentialsManager.GetForUser(aspUser.UserId);
+            return Ok(credentials);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetCredentials(int userId)
         {

@@ -68,7 +68,7 @@ export class UserProfileComponent implements OnInit {
 
     updateName() {
         this.applicationUserService
-            .updateName(this._updatedProfile.name)
+            .updateUser(this._updatedProfile)
             .subscribe(() => {
                 this._currentProfile.name = this._updatedProfile.name;
                 this.isNameEditorVisible = false;
@@ -77,7 +77,7 @@ export class UserProfileComponent implements OnInit {
 
     updateIntroduction() {
         this.applicationUserService
-            .updateIntroduction(this._updatedProfile.introduction)
+            .updateUser(this._updatedProfile)
             .subscribe(() => {
                 this._currentProfile.introduction = this._updatedProfile.introduction;
                 this.introductionContent =
@@ -112,20 +112,21 @@ export class UserProfileComponent implements OnInit {
 
                 this.applicationUserService.getProfile(this.profileUserId).subscribe(
                     response => {
-                        this._currentProfile = response as User;                        
-                        this._updatedProfile = new User();
+                        this._currentProfile = response as User;
+                        this._updatedProfile = { ...this._currentProfile };
                         this.introductionContent =
                             this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
                     }
                 );
-
                 this.applicationUserService.getCredentials(this.profileUserId).subscribe(
-                    response => {                            
+                    response => {
                         this._credetials = response as Credentials;
                     }
                 );
+                
             });
     }
+
 
     constructor(
         private modalService: BsModalService,
@@ -133,11 +134,6 @@ export class UserProfileComponent implements OnInit {
         private applicationUserService: ApplicationUserService,
         private sanitizer: DomSanitizer,
     ) {
-        /*
-        this.applicationUserService.getContact().subscribe(
-            response => {
-                this._loggedInUser = response as ApplicationUser;
-            }
-        );*/
+        
     }
 }
