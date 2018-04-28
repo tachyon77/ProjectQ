@@ -66,6 +66,7 @@
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\questionfollower.service.ts" />
+    <None Remove="ClientApp\app\services\redactor.service.ts" />
     <None Remove="Properties\PublishProfiles\Project-Q - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\testmoauna - Web Deploy.pubxml" />
   </ItemGroup>
@@ -113,6 +114,7 @@
     <TypeScriptCompile Include="ClientApp\app\directives\focus.directive.ts" />
     <TypeScriptCompile Include="ClientApp\app\pipes\readable-date.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\application-user.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\redactor.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\questionfollower.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\identity.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answerrating.service.ts" />

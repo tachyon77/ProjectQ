@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AnswerService, Answer } from '../answers.service'
+import { RedactorService } from '../../../services/redactor.service'
 
 @Component({
     selector: 'add-answer',
@@ -12,7 +13,7 @@ import { AnswerService, Answer } from '../answers.service'
 export class AddAnswerComponent {
     form: FormGroup;
     private _questionId: number;
-    private answerText: string;
+    private answerHtml: string;
     @Output() answerAdded = new EventEmitter();
 
     @Input()
@@ -21,12 +22,13 @@ export class AddAnswerComponent {
     }
 
     onContentChange(content: string) {
-        this.answerText = content;
+        this.answerHtml = content;
     }
 
     constructor(
         private formBuilder: FormBuilder,
         private answerService: AnswerService,
+        private redactorService: RedactorService,
         private router: Router) { }
 
     ngOnInit() {
@@ -39,7 +41,8 @@ export class AddAnswerComponent {
     onSubmit() {
         let answer: Answer = new Answer();
         answer.questionId = this._questionId;
-        answer.text = this.answerText;
+        answer.htmlContent = this.answerHtml;
+        answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this.answerHtml);
 
         this.answerService.add(answer)
             .subscribe(() => {

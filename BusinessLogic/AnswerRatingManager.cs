@@ -2,19 +2,18 @@
 using ProjectQ.DAL;
 using ProjectQ.Model;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProjectQ.BusinessLogic
 {
     public class AnswerRatingManager : IAnswerRatingManager
     {
-        #region Private Members
+        #region Fields
         private IUnitOfWork _unitOfWork;
         private INotificationSender _notificationSender;
         #endregion
 
-        #region Public Members
+        #region Constructors
 
         public AnswerRatingManager(
             IUnitOfWork unitOfWork,
@@ -23,6 +22,10 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
             _notificationSender = notificationSender;
         }
+
+        #endregion
+
+        #region Interface Implementation
 
         async Task<int> IAnswerRatingManager.AddOrUpdateAsync(
             AnswerRating answerRating, int userId)

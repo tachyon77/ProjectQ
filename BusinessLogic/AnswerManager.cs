@@ -102,7 +102,7 @@ namespace ProjectQ.BusinessLogic
                 .GetForQuestionAndUserAsync(questionId, userId);
         }
 
-        Task<Answer> IAnswerManager.GetById(int id)
+        Task<Answer> IAnswerManager.FindAsync(int id)
         {
             return _unitOfWork.AnswerRepository.FindAsync(id);
         }

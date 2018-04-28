@@ -23,7 +23,8 @@ namespace ProjectQ.Model
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public int UserId { get; set; }
-        public string Text { get; set; }
+        public string RedactedHtmlContent { get; set; }
+        public string HtmlContent { get; set; }
         public System.DateTime OriginDate { get; set; }
         public bool IsPrivate { get; set; }
         public System.DateTime ExpiryDate { get; set; }

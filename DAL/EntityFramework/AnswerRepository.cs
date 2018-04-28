@@ -63,7 +63,8 @@ namespace ProjectQ.DAL.EntityFramework
         {
             var dbRecord = await _context.Answers.FindAsync(answer.Id);
 
-            dbRecord.Text = answer.Text;
+            dbRecord.HtmlContent = answer.HtmlContent;
+            dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
             dbRecord.IsDeleted = answer.IsDeleted;
         }
     }

@@ -41,7 +41,7 @@ export class AnswerCardComponent {
     set answerView(answerView: UserSpecificAnswerView) {
         this._answerView = answerView;
         this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answerView.answer.text);
+            this.sanitizer.bypassSecurityTrustHtml(answerView.answer.redactedHtmlContent);
 
         if (answerView.rating == null) {
             this.rating[0] = true;
@@ -89,7 +89,7 @@ export class AnswerCardComponent {
     onAnswerUpdated(answer: Answer) {
         this.answerView.answer = answer;
         this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answer.text);
+            this.sanitizer.bypassSecurityTrustHtml(answer.redactedHtmlContent);
         this.isUpdateAnswerVisible = false;
     }
 

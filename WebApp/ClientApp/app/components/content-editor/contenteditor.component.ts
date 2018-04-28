@@ -37,13 +37,6 @@ export class ContentEditorComponent implements AfterViewInit{
 
     onContentChange(event: any) {
         this.contentChanged.emit(this.newContent); 
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(this.newContent, "text/html") as DocumentFragment;
-        console.log(doc.childElementCount);
-        var root = doc.children.item(0) as HTMLElement;
-        this.removeRedacted(root);
-        //console.log(root.innerHTML);
-        //console.log(root.innerText);
     }
 
     saveSelection() {
@@ -100,27 +93,4 @@ export class ContentEditorComponent implements AfterViewInit{
     formatText(command: string) {
         document.execCommand(command, false, null);
     }
-
-
-    removeRedacted(root: HTMLElement) {
-        var done = false;
-        while (!done) {
-            done = true;
-            for (var i = 0; i < root.children.length; i++) {
-                var child = root.children.item(i) as HTMLElement;
-                let color = child.style.backgroundColor;
-                if (color == 'rgb(211, 211, 211)') {
-                    child.remove();
-                    done = false;
-                    break;
-                } 
-            }
-        }
-
-        for (var i = 0; i < root.children.length; i++) {
-            var child = root.children.item(i) as HTMLElement;
-            this.removeRedacted(child);
-        }
-    }
-
 }

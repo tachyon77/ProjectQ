@@ -55,7 +55,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var Answer = await _AnswerManager.GetById(id);
+            var Answer = await _AnswerManager.FindAsync(id);
 
             if (Answer == null)
             {

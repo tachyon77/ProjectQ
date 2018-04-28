@@ -12,7 +12,7 @@ namespace ProjectQ.BusinessLogic
         Task UpdateAsync(int userId, Answer answer);
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
             int questionId, int userId);
-        Task<Answer> GetById(int id);
+        Task<Answer> FindAsync(int id);
         bool AnswerExists(int id);
     }
 }

@@ -10,7 +10,8 @@ export class Answer {
     isDeleted: boolean;
     questionId: number;
     originDate: Date;
-    text: string;
+    htmlContent: string;
+    redactedHtmlContent: string;
     user: User;
 }
 

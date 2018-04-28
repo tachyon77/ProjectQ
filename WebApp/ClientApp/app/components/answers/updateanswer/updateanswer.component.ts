@@ -19,7 +19,7 @@ export class UpdateAnswerComponent {
     @Input()
     set answer(answer: Answer) {
         this._answer = answer;
-        this._curContent = answer.text;
+        this._curContent = answer.htmlContent;
     }
 
     get curContent() {
@@ -31,7 +31,7 @@ export class UpdateAnswerComponent {
     }
 
     onContentChange(content: string) {
-        this.answer.text = content;
+        this.answer.htmlContent = content;
     }
 
     constructor(
@@ -49,7 +49,7 @@ export class UpdateAnswerComponent {
     }
 
     onCancel() {
-        this.answer.text = this._curContent;
+        this.answer.htmlContent = this._curContent;
         this.updateCancelled.emit();
     }
 }
