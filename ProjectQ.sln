@@ -22,9 +22,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2D7103F-D71D-4B29-B0FC-DC934D180F4D}"
 	ProjectSection(SolutionItems) = preProject
 		ImportantNotes.txt = ImportantNotes.txt
+		SampleAnswer.txt = SampleAnswer.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiments.Encryption.AES", "Experiments.Encryption.AES\Experiments.Encryption.AES.csproj", "{81F3524D-6240-4996-B74E-70617033CE4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Experiments.Encryption.AES", "Experiments.Encryption.AES\Experiments.Encryption.AES.csproj", "{81F3524D-6240-4996-B74E-70617033CE4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

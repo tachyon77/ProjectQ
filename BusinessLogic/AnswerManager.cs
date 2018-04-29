@@ -132,8 +132,7 @@ namespace ProjectQ.BusinessLogic
         {
             if (await IsUserAuthorizedToView(userId, answerId))
             {
-                return (await _unitOfWork.AnswerRepository.FindProtectedAsync(answerId))
-                .ProtectedAnswerContent;
+                return await _unitOfWork.AnswerRepository.FindProtectedAsync(answerId);
             }
 
             throw new Exception("Unauthorized");

@@ -10,13 +10,14 @@ export class RedactorService {
 
     public getRedactedHtml(html: string): string {
         var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html") as DocumentFragment;
-        var root = doc.children.item(0) as HTMLElement;
+        var doc = parser.parseFromString(html, "text/html") as Document;
+        var root = doc.body as HTMLElement;
         this.removeRedacted(root);
         return root.innerHTML;
     }
 
     private removeRedacted(root: HTMLElement): void {
+
         var done = false;
         while (!done) {
             done = true;
@@ -24,7 +25,9 @@ export class RedactorService {
                 var child = root.children.item(i) as HTMLElement;
                 let color = child.style.backgroundColor;
                 if (color == this.redactedColor) {
-                    child.remove();
+                    var e = document.createElement("span");
+                    e.innerHTML = "&nbsp;&nbsp;_____&nbsp;&nbsp;";
+                    root.replaceChild(e, child);
                     done = false;
                     break;
                 }

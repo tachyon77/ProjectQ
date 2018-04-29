@@ -15,7 +15,7 @@ namespace ProjectQ.DAL
             int questionId,
             int userId);
         Task<Answer> FindAsync(int id);
-        Task<Answer> FindProtectedAsync(int id);
+        Task<ProtectedAnswerContent> FindProtectedAsync(int id);
         bool AnswerExists(int id);
     }
 }

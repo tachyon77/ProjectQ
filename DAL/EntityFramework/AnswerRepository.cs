@@ -67,7 +67,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task IAnswerRepository.UpdateAsync(Answer answer)
         {
-            var dbRecord = await (this as IAnswerRepository).FindProtectedAsync(answer.Id);
+            var dbRecord = await FindAnswerIncludeProtectedAsync(answer.Id);
 
             dbRecord.ProtectedAnswerContent.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
             dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
@@ -76,13 +76,21 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.ExpiryDate = answer.ExpiryDate;
         }
 
-        async Task<Answer> IAnswerRepository.FindProtectedAsync(int id)
+        async Task<ProtectedAnswerContent> IAnswerRepository.FindProtectedAsync(int id)
+        {
+            return (await FindAnswerIncludeProtectedAsync(id))
+                .ProtectedAnswerContent;
+        }
+
+        #endregion
+
+        #region Private methods
+        async Task<Answer> FindAnswerIncludeProtectedAsync(int id)
         {
             return await _context.Answers
                 .Include(x => x.ProtectedAnswerContent)
                 .SingleAsync(x => x.Id.Equals(id));
         }
-
         #endregion
     }
 }

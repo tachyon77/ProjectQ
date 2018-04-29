@@ -29,7 +29,7 @@
           <Property Name="IsProtected" Type="bit" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="ProtectedAnswerContentId" Type="int" />
+          <Property Name="ProtectedAnswerContentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -154,7 +154,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_ProtectedAnswerContents">
-          <End Role="ProtectedAnswerContents" Type="Self.ProtectedAnswerContents" Multiplicity="0..1" />
+          <End Role="ProtectedAnswerContents" Type="Self.ProtectedAnswerContents" Multiplicity="1" />
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProtectedAnswerContents">
@@ -409,7 +409,7 @@
           <Property Name="IsProtected" Type="Boolean" Nullable="false" />
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="ProtectedAnswerContentId" Type="Int32" />
+          <Property Name="ProtectedAnswerContentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AnswerRatings" Relationship="ProjectQModel.FK_AnswerRatings_Answers" FromRole="Answer" ToRole="AnswerRating" />
           <NavigationProperty Name="ProtectedAnswerContent" Relationship="ProjectQModel.FK_Answers_ProtectedAnswerContents" FromRole="Answer" ToRole="ProtectedAnswerContent" />
           <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
@@ -554,7 +554,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_ProtectedAnswerContents">
-          <End Type="ProjectQModel.ProtectedAnswerContent" Role="ProtectedAnswerContent" Multiplicity="0..1" />
+          <End Type="ProjectQModel.ProtectedAnswerContent" Role="ProtectedAnswerContent" Multiplicity="1" />
           <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProtectedAnswerContent">

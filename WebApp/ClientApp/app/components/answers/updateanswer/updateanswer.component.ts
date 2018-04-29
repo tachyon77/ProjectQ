@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 
 import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
+import { RedactorService } from '../../../services/redactor.service'
 
 @Component({
     selector: 'update-answer',
@@ -19,11 +20,11 @@ export class UpdateAnswerComponent {
     @Input()
     set answer(answer: Answer) {
         this._answer = answer;
-
-        //Get the protected content from backend at this stage.
+        //Fill in the protected content from backend at this stage.
         this.answerService.getProtectedContent(answer.id)
             .subscribe(result => {
-                this._curProtectedContent = (result as ProtectedAnswerContent).htmlContent;
+                this._answer.protectedAnswerContent = result as ProtectedAnswerContent;
+                this._curProtectedContent = this._answer.protectedAnswerContent.htmlContent;
             }, error => console.error(error));
     }
 
@@ -40,13 +41,17 @@ export class UpdateAnswerComponent {
     }
 
     constructor(
-        private answerService: AnswerService) { }
+        private answerService: AnswerService,
+        private redactorService: RedactorService,
+    ) { }
 
     ngOnInit() {
 
     }
 
     onSubmit() {
+        this.answer.redactedHtmlContent =
+            this.redactorService.getRedactedHtml(this.answer.protectedAnswerContent.htmlContent);
         this.answerService.update(this.answer)
             .subscribe(() => {
                 this.answerUpdated.emit(this.answer);
