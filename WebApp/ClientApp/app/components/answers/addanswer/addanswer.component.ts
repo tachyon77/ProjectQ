@@ -2,7 +2,7 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AnswerService, Answer } from '../answers.service'
+import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
 import { RedactorService } from '../../../services/redactor.service'
 
 @Component({
@@ -40,8 +40,9 @@ export class AddAnswerComponent {
 
     onSubmit() {
         let answer: Answer = new Answer();
+        answer.protectedAnswerContent = new ProtectedAnswerContent();
         answer.questionId = this._questionId;
-        answer.htmlContent = this.answerHtml;
+        answer.protectedAnswerContent.htmlContent = this.answerHtml;
         answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this.answerHtml);
 
         this.answerService.add(answer)

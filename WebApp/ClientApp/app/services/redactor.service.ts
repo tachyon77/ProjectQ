@@ -11,7 +11,6 @@ export class RedactorService {
     public getRedactedHtml(html: string): string {
         var parser = new DOMParser();
         var doc = parser.parseFromString(html, "text/html") as DocumentFragment;
-        console.log(doc.childElementCount);
         var root = doc.children.item(0) as HTMLElement;
         this.removeRedacted(root);
         return root.innerHTML;

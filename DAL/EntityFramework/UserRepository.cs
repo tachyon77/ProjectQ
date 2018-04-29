@@ -21,8 +21,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task<User> IUserRepository.FindAsync(int userId)
         {
-            var user = await _context.Users.FindAsync(userId);
-            return user;
+            return await _context.Users.FindAsync(userId);
         }
 
         async Task IUserRepository.UpdateAsync(int id, User updated)

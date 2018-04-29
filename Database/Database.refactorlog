@@ -231,4 +231,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RedactedHtmlContent" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="af2404fc-9165-4f2b-84d1-98661eec6fed" ChangeDateTime="04/29/2018 02:21:41">
+    <Property Name="ElementName" Value="[dbo].[Answers].[IsPrivate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Answers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsProtected" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e38a626a-0168-474b-9fda-7c28502eb4da" ChangeDateTime="04/29/2018 07:45:02">
+    <Property Name="ElementName" Value="[dbo].[ProtectedAnswerContents].[AnswerId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProtectedAnswerContents]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
 </Operations>

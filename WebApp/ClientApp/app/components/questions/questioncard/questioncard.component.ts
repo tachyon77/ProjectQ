@@ -42,7 +42,7 @@ export class QuestionCardComponent {
         if (questionView.question.answers.length > 0) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(
-                    questionView.question.answers[0].text.substring(0, 200));
+                    questionView.question.answers[0].redactedHtmlContent.substring(0, 200));
         }
     }
 

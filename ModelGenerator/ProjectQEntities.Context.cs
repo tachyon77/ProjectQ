@@ -31,6 +31,7 @@ namespace ProjectQ.Model
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<Employment> Employments { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<ProtectedAnswerContent> ProtectedAnswerContents { get; set; }
         public virtual DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<User> Users { get; set; }

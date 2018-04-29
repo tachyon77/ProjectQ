@@ -11,14 +11,19 @@ namespace ProjectQ.DAL.EntityFramework
 {
     public class AnswerRepository : IAnswerRepository
     {
-        #region Private Members
+        #region Fields
         private readonly ProjectQEntities _context;
         #endregion
+
+        #region Constructors
 
         public AnswerRepository(ProjectQEntities context)
         {
             _context = context;
         }
+        #endregion
+
+        #region Interface Implementations
         async Task IAnswerRepository.AddAsync(Answer answer)
         {
             await _context.Answers.AddAsync(answer);
@@ -38,9 +43,10 @@ namespace ProjectQ.DAL.EntityFramework
                 _context.Answers
                 .Include(a=>a.User)
                 .Include(a=>a.AnswerRatings)
-                .Where(
-                    a => !a.IsDeleted && a.QuestionId.Equals(questionId))
-                    .ToListAsync();
+                .Where
+                (
+                    a => !a.IsDeleted && a.QuestionId.Equals(questionId)
+                ).ToListAsync();
 
             var userSpecificAnswerViews = answers
                 .ToList()
@@ -61,11 +67,22 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task IAnswerRepository.UpdateAsync(Answer answer)
         {
-            var dbRecord = await _context.Answers.FindAsync(answer.Id);
+            var dbRecord = await (this as IAnswerRepository).FindProtectedAsync(answer.Id);
 
-            dbRecord.HtmlContent = answer.HtmlContent;
+            dbRecord.ProtectedAnswerContent.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
             dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
             dbRecord.IsDeleted = answer.IsDeleted;
+            dbRecord.IsProtected = answer.IsProtected;
+            dbRecord.ExpiryDate = answer.ExpiryDate;
         }
+
+        async Task<Answer> IAnswerRepository.FindProtectedAsync(int id)
+        {
+            return await _context.Answers
+                .Include(x => x.ProtectedAnswerContent)
+                .SingleAsync(x => x.Id.Equals(id));
+        }
+
+        #endregion
     }
 }

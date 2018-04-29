@@ -24,14 +24,15 @@ namespace ProjectQ.Model
         public int QuestionId { get; set; }
         public int UserId { get; set; }
         public string RedactedHtmlContent { get; set; }
-        public string HtmlContent { get; set; }
         public System.DateTime OriginDate { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool IsProtected { get; set; }
         public System.DateTime ExpiryDate { get; set; }
         public bool IsDeleted { get; set; }
+        public Nullable<int> ProtectedAnswerContentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
+        public virtual ProtectedAnswerContent ProtectedAnswerContent { get; set; }
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }
     }

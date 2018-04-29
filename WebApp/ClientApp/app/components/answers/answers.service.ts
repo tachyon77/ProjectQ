@@ -10,9 +10,15 @@ export class Answer {
     isDeleted: boolean;
     questionId: number;
     originDate: Date;
-    htmlContent: string;
-    redactedHtmlContent: string;
+    redactedHtmlContent: string; // To be used in general
     user: User;
+    protectedAnswerContent: ProtectedAnswerContent;
+    // To be used by author for ediring or for users with permission.
+}
+
+export class ProtectedAnswerContent {
+    id: number;
+    htmlContent: string;
 }
 
 export interface UserSpecificAnswerView {
@@ -37,6 +43,14 @@ export class AnswerService {
     getById(answerId: number) {
         return this.http.get(
             'api/Answers/' + answerId
+        ).map(response => {
+            return response;
+        });
+    }
+
+    getProtectedContent(answerId: number) {
+        return this.http.get(
+            'api/Answers/Protected/' + answerId
         ).map(response => {
             return response;
         });

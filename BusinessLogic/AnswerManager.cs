@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using ProjectQ.DAL;
 using ProjectQ.Model;
@@ -10,12 +11,12 @@ namespace ProjectQ.BusinessLogic
 {
     public class AnswerManager : IAnswerManager
     {
-        #region Private Members
+        #region Fields
         private IUnitOfWork _unitOfWork;
         private INotificationSender _notificationSender;
         #endregion
 
-        #region Public Members
+        #region Cosntructors
 
         public AnswerManager(
             IUnitOfWork unitOfWork,
@@ -24,6 +25,20 @@ namespace ProjectQ.BusinessLogic
             _unitOfWork = unitOfWork;
             _notificationSender = notificationSender;
         }
+
+        #endregion
+
+        #region Private Methods
+        async Task<bool> IsUserAuthorizedToView(int userId, int answerId)
+        {
+            var answer = await FindAsync(answerId);
+            return userId == answer.UserId;
+            //TODO: Of course there will be other users who can be authorized
+            // Need to implement table for managing view permissions.
+        }
+        #endregion
+
+        #region Interface Implementations
 
         async Task<int> IAnswerManager.AddAsync(Answer answer, int userId)
         {
@@ -97,19 +112,32 @@ namespace ProjectQ.BusinessLogic
             IAnswerManager.GetForQuestionAndUserAsync(
             int questionId, int userId)
         {
-            return await _unitOfWork
+            return await
+                _unitOfWork
                 .AnswerRepository
                 .GetForQuestionAndUserAsync(questionId, userId);
         }
 
-        Task<Answer> IAnswerManager.FindAsync(int id)
+        async public Task<Answer> FindAsync(int id)
         {
-            return _unitOfWork.AnswerRepository.FindAsync(id);
+            return await _unitOfWork.AnswerRepository.FindAsync(id);
         }
 
         bool IAnswerManager.AnswerExists(int id)
         {
             return _unitOfWork.AnswerRepository.AnswerExists(id);
+        }
+
+        async Task<ProtectedAnswerContent> IAnswerManager.FindProtectedAsync(int userId, int answerId)
+        {
+            if (await IsUserAuthorizedToView(userId, answerId))
+            {
+                return (await _unitOfWork.AnswerRepository.FindProtectedAsync(answerId))
+                .ProtectedAnswerContent;
+            }
+
+            throw new Exception("Unauthorized");
+            
         }
 
         #endregion

@@ -1,7 +1,7 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AnswerService, Answer } from '../answers.service'
+import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
 
 @Component({
     selector: 'update-answer',
@@ -11,7 +11,7 @@ import { AnswerService, Answer } from '../answers.service'
 export class UpdateAnswerComponent {
 
     private _answer: Answer;
-    private _curContent: string;
+    private _curProtectedContent: string;
 
     @Output() answerUpdated = new EventEmitter();
     @Output() updateCancelled = new EventEmitter();
@@ -19,11 +19,16 @@ export class UpdateAnswerComponent {
     @Input()
     set answer(answer: Answer) {
         this._answer = answer;
-        this._curContent = answer.htmlContent;
+
+        //Get the protected content from backend at this stage.
+        this.answerService.getProtectedContent(answer.id)
+            .subscribe(result => {
+                this._curProtectedContent = (result as ProtectedAnswerContent).htmlContent;
+            }, error => console.error(error));
     }
 
-    get curContent() {
-        return this._curContent;
+    get curProtectedContent() {
+        return this._curProtectedContent;
     }
 
     get answer() {
@@ -31,7 +36,7 @@ export class UpdateAnswerComponent {
     }
 
     onContentChange(content: string) {
-        this.answer.htmlContent = content;
+        this.answer.protectedAnswerContent.htmlContent = content;
     }
 
     constructor(
@@ -49,7 +54,7 @@ export class UpdateAnswerComponent {
     }
 
     onCancel() {
-        this.answer.htmlContent = this._curContent;
+        this.answer.protectedAnswerContent.htmlContent = this._curProtectedContent;
         this.updateCancelled.emit();
     }
 }

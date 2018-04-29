@@ -36,11 +36,12 @@ namespace ProjectQ.DAL.EntityFramework
         async Task<IEnumerable<UserSpecificQuestionView>> 
             IQuestionRepository.GetAllForUserAsync(int userId)
         {
+
             var questions = await _context.Questions
-                .Include(x => x.Answers)
-                .Include(x => x.User)
-                .Include(x => x.QuestionFollowers)
-                .Where(x => !x.IsDeleted).ToListAsync();
+               .Include(x => x.Answers)
+               .Include(x => x.User)
+               .Include(x => x.QuestionFollowers)
+               .Where(x => !x.IsDeleted).ToListAsync();
 
             var questionViews = questions.ConvertAll
                 (
@@ -50,9 +51,11 @@ namespace ProjectQ.DAL.EntityFramework
                         IsFollowing = q.QuestionFollowers.Any(
                                 x => x.IsFollowing && x.UserId == userId),
                         Question = q,
-                    }                    
+                    }
                 );
+
             return questionViews;
+           
         }
 
         async Task<Question> IQuestionRepository.FindAsync(int id)
