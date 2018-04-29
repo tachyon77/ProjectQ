@@ -69,4 +69,14 @@ export class AnswerService {
             answer
         ).map(response => { });
     }
+
+    // Delete is needed separate from udpate because,
+    // when deleting answer, protected content is not loaded
+    // as it was not in edit mode yet.
+    delete(answerId: number) {
+        return this.http.put(
+            'api/Answers/delete/' + answerId,
+            null
+        ).map(response => { });
+    }
 }

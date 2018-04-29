@@ -53,7 +53,7 @@ namespace ProjectQ.BusinessLogic
                 .OrderByDescending(x => x.OriginDate);
         }
 
-        async Task<IEnumerable<UserSpecificQuestionView>> IQuestionManager.GetAllForUserAsync(
+        async Task<IEnumerable<UserSpecificQuestionPreview>> IQuestionManager.GetAllForUserAsync(
             int userId
             )
         {

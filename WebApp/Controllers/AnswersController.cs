@@ -115,6 +115,15 @@ namespace WebApp.Controllers
             return new NoContentResult();
         }
 
+        [HttpPut("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _AnswerManager.DeleteAsync(
+                (await _userManager.GetUserAsync(User)).UserId, id);
+
+            return new NoContentResult();
+        }
+
         private bool AnswerExists(int id)
         {
             return _AnswerManager.AnswerExists(id);

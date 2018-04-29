@@ -16,9 +16,10 @@ export interface Question {
     answers: Answer[];
 }
 
-export interface UserSpecificQuestionView {
+export interface UserSpecificQuestionPreview {
     isFollowing: boolean;
     question: Question;
+    previewAnswer: Answer;
 }
 
 @Injectable()

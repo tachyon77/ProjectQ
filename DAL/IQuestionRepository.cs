@@ -11,7 +11,7 @@ namespace ProjectQ.DAL
     {
         Task AddAsync(Question question);
         Task UpdateAsync(Question question);
-        Task<IEnumerable<UserSpecificQuestionView>> GetAllForUserAsync(int userId);
+        Task<IEnumerable<UserSpecificQuestionPreview>> GetAllForUserAsync(int userId);
         Task<IEnumerable<Question>> GetAllAskedByAsync(int userId);
         Task<Question> FindAsync(int id);
         bool QuestionExists(int id);

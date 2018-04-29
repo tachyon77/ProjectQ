@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { UserSpecificQuestionView } from '../questions.service'
+import { UserSpecificQuestionPreview } from '../questions.service'
 import { QuestionFollowerService } from '../../../services/questionfollower.service'
 import { AnswerService, Answer } from '../../answers/answers.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
@@ -13,7 +13,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 export class QuestionCardComponent {
     previewAnswerContent: SafeHtml;
     questionDescription: SafeHtml;
-    private _questionView: UserSpecificQuestionView;
+    private _questionView: UserSpecificQuestionPreview;
 
     onFollow() {
         this.questionFollowerService.follow(
@@ -34,15 +34,15 @@ export class QuestionCardComponent {
     }
 
     @Input()
-    set questionView(questionView: UserSpecificQuestionView) {
+    set questionView(questionView: UserSpecificQuestionPreview) {
         console.log(questionView);
         this._questionView = questionView;
         this.questionDescription =
             this.sanitizer.bypassSecurityTrustHtml(questionView.question.description);
-        if (questionView.question.answers.length > 0) {
+        if (questionView.previewAnswer) {
             this.previewAnswerContent =
                 this.sanitizer.bypassSecurityTrustHtml(
-                    questionView.question.answers[0].redactedHtmlContent.substring(0, 200));
+                questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ");
         }
     }
 

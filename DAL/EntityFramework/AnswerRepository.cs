@@ -60,7 +60,7 @@ namespace ProjectQ.DAL.EntityFramework
             return userSpecificAnswerViews;
         }
 
-        async Task<Answer> IAnswerRepository.FindAsync(int id)
+        async public Task<Answer> FindAsync(int id)
         {
             return await _context.Answers.FindAsync(id);
         }
@@ -71,9 +71,15 @@ namespace ProjectQ.DAL.EntityFramework
 
             dbRecord.ProtectedAnswerContent.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
             dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
-            dbRecord.IsDeleted = answer.IsDeleted;
             dbRecord.IsProtected = answer.IsProtected;
             dbRecord.ExpiryDate = answer.ExpiryDate;
+        }
+
+
+        async public Task DeleteAsync(int answerId)
+        {
+            var dbRecord = await FindAsync(answerId);
+            dbRecord.IsDeleted = true;
         }
 
         async Task<ProtectedAnswerContent> IAnswerRepository.FindProtectedAsync(int id)
@@ -91,6 +97,7 @@ namespace ProjectQ.DAL.EntityFramework
                 .Include(x => x.ProtectedAnswerContent)
                 .SingleAsync(x => x.Id.Equals(id));
         }
+
         #endregion
     }
 }

@@ -16,7 +16,7 @@
             <h6 class="asked-by">
                 Asked by {{questionView.question.user.name}}
                 {{questionView.question.originDate | readableDate}}
-            </h6>                      
+            </h6>
             <div [innerHTML]="questionDescription"
                  class="card-text">
             </div>
@@ -35,9 +35,10 @@
                 </button>
             </div>
 
-            <em>{{questionView.question.answers.length}} answers</em>
-
-            <div *ngIf="questionView.question.answers.length > 0"
+            <div *ngIf="!previewAnswerContent">
+                <em>No answers yet</em>
+            </div>
+            <div *ngIf="previewAnswerContent"
                  [innerHTML]="previewAnswerContent">
             </div>
         </div>

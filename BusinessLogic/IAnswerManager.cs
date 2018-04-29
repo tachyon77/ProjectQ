@@ -10,6 +10,7 @@ namespace ProjectQ.BusinessLogic
     {
         Task<int> AddAsync(Answer answer, int userId);
         Task UpdateAsync(int userId, Answer answer);
+        Task DeleteAsync(int userId, int answerId);
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
             int questionId, int userId);
         Task<Answer> FindAsync(int id);

@@ -108,6 +108,19 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async public Task DeleteAsync(int userId, int answerId)
+        {
+            var dbRecord = await _unitOfWork.AnswerRepository.FindAsync(answerId);
+            if (dbRecord.UserId != userId)
+            {
+                throw new Exception("Unauthorized");
+            }
+
+            await _unitOfWork.AnswerRepository
+                .DeleteAsync(answerId);
+            await _unitOfWork.SaveAsync();
+        }
+
         async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerManager.GetForQuestionAndUserAsync(
             int questionId, int userId)
@@ -138,6 +151,8 @@ namespace ProjectQ.BusinessLogic
             throw new Exception("Unauthorized");
             
         }
+
+        
 
         #endregion
     }

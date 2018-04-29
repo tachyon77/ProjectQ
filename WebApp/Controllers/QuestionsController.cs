@@ -33,7 +33,7 @@ namespace WebApp.Controllers
         }
         // GET: api/Questions
         [HttpGet]
-        async public Task<IEnumerable<UserSpecificQuestionView>> GetQuestions()
+        async public Task<IEnumerable<UserSpecificQuestionPreview>> GetQuestions()
         {
             return  await _questionManager.GetAllForUserAsync(
                 (await _aspUserManager.GetUserAsync(User)).UserId );

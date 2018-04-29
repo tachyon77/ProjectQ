@@ -4,9 +4,10 @@ using System.Text;
 
 namespace ProjectQ.Model
 {
-    public class UserSpecificQuestionView
+    public class UserSpecificQuestionPreview
     {
         public Question Question { get; set; }
         public bool IsFollowing { get; set; }
+        public Answer PreviewAnswer { get; set; }
     }
 }

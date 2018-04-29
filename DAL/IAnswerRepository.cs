@@ -11,6 +11,7 @@ namespace ProjectQ.DAL
     {
         Task AddAsync(Answer answer);
         Task UpdateAsync(Answer answer);
+        Task DeleteAsync(int answerId);
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
             int questionId,
             int userId);
