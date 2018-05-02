@@ -5,7 +5,7 @@
             <button type="button"
                     (click)="onRedact()"
                     class="btn btn-secondary">
-                <s>Redact</s>
+                <s>Hide</s>
             </button>
             <button type="button"
                     (click)="onUnRedact()"
@@ -26,6 +26,21 @@
                     (click)="onUnderline()"
                     class="btn btn-secondary">
                 <u>U</u>
+            </button>
+            <button type="button"
+                    (click)="onUnorderedList()"
+                    class="btn btn-secondary">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            <button type="button"
+                    (click)="onOrderedList()"
+                    class="btn btn-secondary">
+                <i class="fas fa-list-ol"></i>
+            </button>
+            <button type="button"
+                    (click)="onCreateLink()"
+                    class="btn btn-secondary">
+                <i class="fas fa-link"></i>
             </button>
         </div>
         <div class="input-group">

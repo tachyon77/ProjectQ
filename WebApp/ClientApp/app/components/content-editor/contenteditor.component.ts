@@ -90,6 +90,18 @@ export class ContentEditorComponent implements AfterViewInit{
         this.formatText('underline');
     }
 
+    onUnorderedList() {
+        this.formatText('insertUnorderedList');
+    }
+
+    onOrderedList() {
+        this.formatText('insertOrderedList');
+    }
+
+    onCreateLink() {
+        document.execCommand('createLink', false, 'https://www.google.com');
+    }
+
     formatText(command: string) {
         document.execCommand(command, false, null);
     }
