@@ -1,5 +1,5 @@
 ﻿<div class="content-editor">
-    <div class="btn-toolbar content-toolbar justify-content-between" 
+    <div class="btn-toolbar content-toolbar justify-content-between"
          role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button"
@@ -38,7 +38,7 @@
                 <i class="fas fa-list-ol"></i>
             </button>
             <button type="button"
-                    (click)="onCreateLink()"
+                    (click)="onShowInsertLink(insertLinkTemplate)"
                     class="btn btn-secondary">
                 <i class="fas fa-link"></i>
             </button>
@@ -55,9 +55,10 @@
                     Insert
                 </button>
             </div>
-            
+
         </div>
     </div>
+
     <div #el contenteditable="true"
          [focus]="emitFocusEvent"
          (blur)="onBlur()"
@@ -67,5 +68,38 @@
         {{curContent}}
     </div>
 </div>
+
+<!--Modal Template: Insert Link-->
+<ng-template #insertLinkTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Insert a link</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="insertLinkModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="linkForm"
+              (ngSubmit)="onInsertLink(linkForm.value)">
+            <div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Link</label>
+                    <div class="col-sm-8">
+                        <input name="link"
+                               id="link"
+                               formControlName="link"
+                               type="text"
+                               class="form-control"
+                               placeholder="https://wwww.wikipedia.org">
+                    </div>
+                </div>
+            </div>
+            <button type="submit"
+                    [disabled]="!linkForm.valid"
+                    class="btn btn-primary">
+                Save
+            </button>
+        </form>
+    </div>
+</ng-template>
 
 

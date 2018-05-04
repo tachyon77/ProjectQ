@@ -1,6 +1,11 @@
-﻿import { Component, Inject, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+﻿import { Component, Inject, Input, Output, EventEmitter, AfterViewInit, TemplateRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
+interface LinkFormData {
+    link: string;
+}
 
 @Component({
     selector: 'content-editor',
@@ -12,6 +17,9 @@ export class ContentEditorComponent implements AfterViewInit{
     editPosition: Range;
     curContent: SafeHtml;
     public newContent: string;
+    insertLinkModal: BsModalRef;
+    linkForm: FormGroup;
+
     @Output() contentChanged = new EventEmitter();
     public emitFocusEvent = new EventEmitter<boolean>();
 
@@ -31,7 +39,26 @@ export class ContentEditorComponent implements AfterViewInit{
         this.saveSelection();
     }
 
-    constructor(private sanitizer: DomSanitizer) {
+    constructor(
+        private sanitizer: DomSanitizer,
+        private formBuilder: FormBuilder,
+        private modalService: BsModalService,
+    ) {
+    }
+
+    onShowInsertLink(template: TemplateRef<any>) {
+
+        this.linkForm = this.formBuilder.group({
+            link: this.formBuilder.control('', Validators.compose([
+                Validators.required,
+            ])),
+        });
+
+        const initialState = {
+        };
+        this.insertLinkModal = this.modalService.show(
+            template, { initialState }
+        );
     }
 
 
@@ -98,9 +125,12 @@ export class ContentEditorComponent implements AfterViewInit{
         this.formatText('insertOrderedList');
     }
 
-    onCreateLink() {
-        document.execCommand('createLink', false, 'https://www.google.com');
+    onInsertLink(formData: LinkFormData) {
+        this.restoreSelection();
+        document.execCommand('createLink', false, "https://" + formData.link);
+        this.insertLinkModal.hide();
     }
+
 
     formatText(command: string) {
         document.execCommand(command, false, null);

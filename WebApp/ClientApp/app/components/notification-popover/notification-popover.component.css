@@ -1,17 +1,3 @@
-.notification-popover {
-    background-color: white;
-    padding: 1em;
-    border: 1px solid lightgrey;
-}
-
-.arrow-up {
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 10px solid lightgrey;
-}
-
 .pointer-cursor {
     cursor: pointer;
 }
@@ -29,11 +15,12 @@
     border: 1px solid lightgray;
     width: 400px;
     height: auto;
+    border-radius:5px;
 }
 
     .arrow_box:after, .arrow_box:before {
         bottom: 100%;
-        left: 50%;
+        left: 20%;
         border: solid transparent;
         content: " ";
         height: 0;
@@ -52,8 +39,8 @@
     .arrow_box:before {
         border-color: rgba(194, 225, 245, 0);
         border-bottom-color: lightgray;
-        border-width: 8px;
-        margin-left: -8px;
+        border-width: 7px;
+        margin-left: -7px;
     }
 
 

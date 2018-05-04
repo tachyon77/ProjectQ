@@ -39,7 +39,7 @@
 
 .notification-popover{
     position:absolute;
-    left:-140px;
+    left:0px;
     top:2.5em;
 }
 
