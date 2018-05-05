@@ -52,6 +52,9 @@
     <Compile Include="Answer.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="AnswerDraft.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="AnswerRating.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>

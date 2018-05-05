@@ -12,6 +12,7 @@ import { FocusDirective } from './directives/focus.directive'
 import { AppComponent } from './components/app/app.component';
 import { ApplicationUserService } from './services/application-user.service';
 import { AnswerService } from './components/answers/answers.service';
+import { AnswerDraftService } from './services/answer-drafts.service';
 import { AnswerRatingService } from './services/answerrating.service';
 import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
 import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
@@ -77,6 +78,7 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
     providers: [
         ApplicationUserService,
         AnswerService,
+        AnswerDraftService,
         AnswerRatingService,
         IdentityService,
         NotificationService,

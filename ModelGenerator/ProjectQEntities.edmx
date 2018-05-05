@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProjectQModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerDrafts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RedactedHtmlContent" Type="varchar(max)" />
+          <Property Name="OriginDate" Type="datetime" Nullable="false" />
+          <Property Name="IsProtected" Type="bit" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ProtectedAnswerContentId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="AnswerRatings">
           <Key>
             <PropertyRef Name="Id" />
@@ -127,6 +141,46 @@
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Introduction" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AnswerDrafts_ProtectedAnswerContents">
+          <End Role="ProtectedAnswerContents" Type="Self.ProtectedAnswerContents" Multiplicity="1" />
+          <End Role="AnswerDrafts" Type="Self.AnswerDrafts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProtectedAnswerContents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDrafts">
+              <PropertyRef Name="ProtectedAnswerContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerDrafts_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnswerDrafts" Type="Self.AnswerDrafts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDrafts">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerDrafts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnswerDrafts" Type="Self.AnswerDrafts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDrafts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AnswerRatings_Answers">
           <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
           <End Role="AnswerRatings" Type="Self.AnswerRatings" Multiplicity="*" />
@@ -268,6 +322,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProjectQModelStoreContainer">
+          <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDrafts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRatings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -278,6 +333,18 @@
           <EntitySet Name="QuestionFollowers" EntityType="Self.QuestionFollowers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnswerDrafts_ProtectedAnswerContents" Association="Self.FK_AnswerDrafts_ProtectedAnswerContents">
+            <End Role="ProtectedAnswerContents" EntitySet="ProtectedAnswerContents" />
+            <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerDrafts_Questions" Association="Self.FK_AnswerDrafts_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerDrafts_Users" Association="Self.FK_AnswerDrafts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
           <AssociationSet Name="FK_AnswerRatings_Answers" Association="Self.FK_AnswerRatings_Answers">
             <End Role="Answers" EntitySet="Answers" />
             <End Role="AnswerRatings" EntitySet="AnswerRatings" />
@@ -382,6 +449,19 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
+          <EntitySet Name="AnswerDrafts" EntityType="ProjectQModel.AnswerDraft" />
+          <AssociationSet Name="FK_AnswerDrafts_ProtectedAnswerContents" Association="ProjectQModel.FK_AnswerDrafts_ProtectedAnswerContents">
+            <End Role="ProtectedAnswerContent" EntitySet="ProtectedAnswerContents" />
+            <End Role="AnswerDraft" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerDrafts_Questions" Association="ProjectQModel.FK_AnswerDrafts_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="AnswerDraft" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerDrafts_Users" Association="ProjectQModel.FK_AnswerDrafts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AnswerDraft" EntitySet="AnswerDrafts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerRating">
           <Key>
@@ -481,6 +561,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HtmlContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_ProtectedAnswerContents" FromRole="ProtectedAnswerContent" ToRole="Answer" />
+          <NavigationProperty Name="AnswerDrafts" Relationship="ProjectQModel.FK_AnswerDrafts_ProtectedAnswerContents" FromRole="ProtectedAnswerContent" ToRole="AnswerDraft" />
         </EntityType>
         <EntityType Name="QuestionFollower">
           <Key>
@@ -510,6 +591,7 @@
           <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Question" ToRole="Answer" />
           <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Questions" FromRole="Question" ToRole="QuestionFollower" />
           <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Questions_Users" FromRole="Question" ToRole="User" />
+          <NavigationProperty Name="AnswerDrafts" Relationship="ProjectQModel.FK_AnswerDrafts_Questions" FromRole="Question" ToRole="AnswerDraft" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -526,6 +608,7 @@
           <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Users" FromRole="User" ToRole="QuestionFollower" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_Users" FromRole="User" ToRole="Question" />
+          <NavigationProperty Name="AnswerDrafts" Relationship="ProjectQModel.FK_AnswerDrafts_Users" FromRole="User" ToRole="AnswerDraft" />
         </EntityType>
         <Association Name="FK_AnswerRatings_Answers">
           <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
@@ -667,6 +750,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AnswerDraft">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RedactedHtmlContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsProtected" Type="Boolean" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ProtectedAnswerContentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProtectedAnswerContent" Relationship="ProjectQModel.FK_AnswerDrafts_ProtectedAnswerContents" FromRole="AnswerDraft" ToRole="ProtectedAnswerContent" />
+          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_AnswerDrafts_Questions" FromRole="AnswerDraft" ToRole="Question" />
+          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerDrafts_Users" FromRole="AnswerDraft" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AnswerDrafts_ProtectedAnswerContents">
+          <End Type="ProjectQModel.ProtectedAnswerContent" Role="ProtectedAnswerContent" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerDraft" Role="AnswerDraft" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProtectedAnswerContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDraft">
+              <PropertyRef Name="ProtectedAnswerContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerDrafts_Questions">
+          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectQModel.AnswerDraft" Role="AnswerDraft" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDraft">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerDrafts_Users">
+          <End Type="ProjectQModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectQModel.AnswerDraft" Role="AnswerDraft" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerDraft">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -801,6 +941,21 @@
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UniqueName" ColumnName="UniqueName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerDrafts">
+            <EntityTypeMapping TypeName="ProjectQModel.AnswerDraft">
+              <MappingFragment StoreEntitySet="AnswerDrafts">
+                <ScalarProperty Name="ProtectedAnswerContentId" ColumnName="ProtectedAnswerContentId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="IsProtected" ColumnName="IsProtected" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="RedactedHtmlContent" ColumnName="RedactedHtmlContent" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

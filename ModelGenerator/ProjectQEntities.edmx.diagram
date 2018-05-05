@@ -26,6 +26,10 @@
         <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
         <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Users" />
         <AssociationConnector Association="ProjectQModel.FK_Questions_Users" />
+        <EntityTypeShape EntityType="ProjectQModel.AnswerDraft" Width="1.5" PointX="8.25" PointY="16.375" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_ProtectedAnswerContents" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Questions" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

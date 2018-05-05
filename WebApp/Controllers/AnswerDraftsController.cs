@@ -10,63 +10,63 @@ using Microsoft.AspNetCore.Identity;
 namespace WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Answers")]
-    public class AnswersController : Controller
+    [Route("api/AnswerDrafts")]
+    public class AnswerDraftsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IAnswerManager _answerManager;
+        private readonly IAnswerDraftManager _draftManager;
 
         /// <summary>
         /// Dependency Injector Constructor.
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="AnswerManager"></param>
-        public AnswersController(
-            IAnswerManager AnswerManager,
+        public AnswerDraftsController(
+            IAnswerDraftManager answerDraftManager,
             UserManager<ApplicationUser> userManager
             )
         {
-            _answerManager = AnswerManager;
+            _draftManager = answerDraftManager;
             _userManager = userManager;
         }
-        // GET: api/Answers
+        // GET: api/AnswerDrafts
         [HttpGet]
-        public IEnumerable<Answer> GetAnswers()
+        public IEnumerable<Answer> GetAnswerDrafts()
         {
             throw new NotImplementedException();
         }
 
         [HttpGet("ForQuestion/{questionId}")]
-        public async Task<IEnumerable<UserSpecificAnswerView>> 
+        public async Task<AnswerDraft> 
             GetForQuestion([FromRoute] int questionId)
         {
             var userId = (await _userManager.GetUserAsync(User)).UserId;
-            return await _answerManager.GetForQuestionAndUserAsync(
+            return await _draftManager.GetForQuestionAndUserAsync(
                 questionId, userId);
         }
 
 
-        // GET: api/Answers/5
+        // GET: api/AnswerDrafts/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAnswer([FromRoute] int id)
+        public async Task<IActionResult> GetAnswerDraft([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var Answer = await _answerManager.FindAsync(id);
+            var draft = await _draftManager.FindAsync(id);
 
-            if (Answer == null)
+            if (draft == null)
             {
                 return NotFound();
             }
 
-            return Ok(Answer);
+            return Ok(draft);
         }
 
-        // GET: api/Answers/Protected/5
-        [HttpGet("Protected/{id}")]
+        // GET: api/AnswerDrafts/5/Protected
+        [HttpGet("{id}/Protected")]
         public async Task<IActionResult> GetProtectedAnswer([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -75,7 +75,7 @@ namespace WebApp.Controllers
             }
 
             var userId = (await _userManager.GetUserAsync(User)).UserId;
-            var protectedAnswer = await _answerManager.FindProtectedAsync(userId, id);
+            var protectedAnswer = await _draftManager.FindProtectedAsync(userId, id);
 
             if (protectedAnswer == null)
             {
@@ -85,31 +85,31 @@ namespace WebApp.Controllers
             return Ok(protectedAnswer);
         }
 
-        // POST: api/Answers
+        // POST: api/AnswerDrafts
         [HttpPost]
-        public async Task<IActionResult> PostAnswer([FromBody] Answer Answer)
+        public async Task<IActionResult> PostAnswerDraft([FromBody] AnswerDraft draft)
         {           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _answerManager.AddAsync(
-                Answer,
+            await _draftManager.AddAsync(
+                draft,
                 (await _userManager.GetUserAsync(User)).UserId);
 
-            return CreatedAtAction("GetAnswer", new { id = Answer.Id }, Answer);
+            return CreatedAtAction("GetAnswer", new { id = draft.Id }, draft);
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, [FromBody] Answer updated)
+        public async Task<IActionResult> Update(long id, [FromBody] AnswerDraft updated)
         {
             if (updated == null || updated.Id != id)
             {
                 return BadRequest();
             }
-            await _answerManager.UpdateAsync(
+            await _draftManager.UpdateAsync(
                 (await _userManager.GetUserAsync(User)).UserId, updated);
 
             return new NoContentResult();
@@ -118,15 +118,15 @@ namespace WebApp.Controllers
         [HttpPut("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _answerManager.DeleteAsync(
+            await _draftManager.DeleteAsync(
                 (await _userManager.GetUserAsync(User)).UserId, id);
 
             return new NoContentResult();
         }
 
-        private bool AnswerExists(int id)
+        private bool DraftExists(int id)
         {
-            return _answerManager.AnswerExists(id);
+            return _draftManager.AnswerDraftExists(id);
         }
     }
 }

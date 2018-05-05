@@ -35,5 +35,6 @@ namespace ProjectQ.Model
         public virtual DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AnswerDraft> AnswerDrafts { get; set; }
     }
 }

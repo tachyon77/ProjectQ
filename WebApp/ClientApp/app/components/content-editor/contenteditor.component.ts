@@ -127,7 +127,14 @@ export class ContentEditorComponent implements AfterViewInit{
 
     onInsertLink(formData: LinkFormData) {
         this.restoreSelection();
-        document.execCommand('createLink', false, "https://" + formData.link);
+        var link = formData.link;
+        if (link.startsWith("http")) {
+
+        } else {
+            link = "https://" + link;
+        }
+
+        document.execCommand('createLink', false, link);
         this.insertLinkModal.hide();
     }
 

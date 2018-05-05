@@ -91,14 +91,13 @@ namespace ProjectQ.WebApp
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
+            services.AddScoped<IAnswerDraftManager, AnswerDraftManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<ICredentialsManager, CredentialsManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
             services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();
