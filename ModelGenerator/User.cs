@@ -17,6 +17,7 @@ namespace ProjectQ.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.AnswerDrafts = new HashSet<AnswerDraft>();
             this.AnswerRatings = new HashSet<AnswerRating>();
             this.Answers = new HashSet<Answer>();
             this.Educations = new HashSet<Education>();
@@ -24,7 +25,6 @@ namespace ProjectQ.Model
             this.Notifications = new HashSet<Notification>();
             this.QuestionFollowers = new HashSet<QuestionFollower>();
             this.Questions = new HashSet<Question>();
-            this.AnswerDrafts = new HashSet<AnswerDraft>();
         }
     
         public int Id { get; set; }
@@ -32,6 +32,8 @@ namespace ProjectQ.Model
         public string Name { get; set; }
         public string Introduction { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnswerDraft> AnswerDrafts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,7 +48,5 @@ namespace ProjectQ.Model
         public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Question> Questions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerDraft> AnswerDrafts { get; set; }
     }
 }

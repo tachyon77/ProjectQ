@@ -38,7 +38,7 @@ namespace ProjectQ.DAL.EntityFramework
         {
 
             var questionPreviews = 
-                from question in _context.Questions.Where(q => !q.IsDeleted)
+                from question in _context.Questions.Include(q=>q.User).Where(q => !q.IsDeleted)
                 select new UserSpecificQuestionPreview()
                 {
                     IsFollowing = question.QuestionFollowers.Any(

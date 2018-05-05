@@ -59,40 +59,49 @@ namespace ProjectQ.BusinessLogic
             return draft.Id;
         }
 
-        async Task IAnswerDraftManager.UpdateAsync(int userId, AnswerDraft draft)
+        // This method should not rely on draft.Id as the Id wouldn't always be valid.
+        async Task IAnswerDraftManager.AddOrUpdateAsync(int userId, AnswerDraft draft)
         {
-            var dbRecord = await _unitOfWork.AnswerDraftRepository.FindAsync(draft.Id);
-            if (dbRecord.UserId != userId)
+            try
             {
-                throw new Exception("Unauthorized");
-            }
+                var dbRecord = _unitOfWork.AnswerDraftRepository.GetForQuestionAndUser(draft.QuestionId, userId);
 
-            await _unitOfWork.AnswerDraftRepository
-                .UpdateAsync(draft);
-            await _unitOfWork.SaveAsync();
+                if (dbRecord == default(AnswerDraft))
+                {
+                    await (this as IAnswerDraftManager).AddAsync(draft, userId);
+                }
+                else
+                {
+                    if (dbRecord.UserId != userId)
+                    {
+                        throw new Exception("Unauthorized");
+                    }
+
+                    draft.Id = dbRecord.Id;
+
+                    await _unitOfWork.AnswerDraftRepository
+                        .UpdateAsync(draft);
+                    await _unitOfWork.SaveAsync();
+                }
+            }catch (Exception _e)
+            {
+                Console.WriteLine(_e.StackTrace);
+            }
         }
 
-        async public Task DeleteAsync(int userId, int answerId)
+        public Task DeleteAsync(int userId, int whatId)
         {
-            var dbRecord = await _unitOfWork.AnswerDraftRepository.FindAsync(answerId);
-            if (dbRecord.UserId != userId)
-            {
-                throw new Exception("Unauthorized");
-            }
-
-            await _unitOfWork.AnswerDraftRepository
-                .DeleteAsync(answerId);
-            await _unitOfWork.SaveAsync();
+            throw new NotImplementedException();
         }
 
-        async Task<AnswerDraft> 
-            IAnswerDraftManager.GetForQuestionAndUserAsync(
+        AnswerDraft
+            IAnswerDraftManager.GetForQuestionAndUser(
             int questionId, int userId)
         {
-            return await
+            return
                 _unitOfWork
                 .AnswerDraftRepository
-                .GetForQuestionAndUserAsync(questionId, userId);
+                .GetForQuestionAndUser(questionId, userId);
         }
 
         async public Task<AnswerDraft> FindAsync(int id)
@@ -104,19 +113,6 @@ namespace ProjectQ.BusinessLogic
         {
             return _unitOfWork.AnswerDraftRepository.AnswerDraftExists(id);
         }
-
-        async Task<ProtectedAnswerContent> IAnswerDraftManager.FindProtectedAsync(int userId, int answerId)
-        {
-            if (await IsUserAuthorizedToView(userId, answerId))
-            {
-                return await _unitOfWork.AnswerDraftRepository.FindProtectedAsync(answerId);
-            }
-
-            throw new Exception("Unauthorized");
-            
-        }
-
-        
 
         #endregion
     }

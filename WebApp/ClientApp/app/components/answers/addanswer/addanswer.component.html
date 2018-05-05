@@ -1,10 +1,15 @@
 ﻿<div class="content-editor-container">
-    <content-editor (contentChanged)="onContentChange($event)">
+    <content-editor [content]="initialContent"
+                    (contentChanged)="onContentChange($event)">
     </content-editor>   
 </div>
 <button type="submit"
         (click)="onSubmit()"
         class="btn btn-primary">
     Submit
+</button>
+<button (click)="onSaveDraft()"
+        class="btn btn-light">
+    Save Draft
 </button>
  

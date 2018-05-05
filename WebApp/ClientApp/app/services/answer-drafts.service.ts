@@ -9,15 +9,8 @@ export class AnswerDraft {
     isDeleted: boolean;
     questionId: number;
     originDate: Date;
-    redactedHtmlContent: string; // To be used in general
-    user: User;
-    protectedAnswerContent: ProtectedAnswerContent;
-    // To be used by author for editing or for users with permission.
-}
-
-export class ProtectedAnswerContent {
-    id: number;
     htmlContent: string;
+    user: User;
 }
 
 
@@ -43,21 +36,6 @@ export class AnswerDraftService {
         });
     }
 
-    getProtectedContent(draftId: number) {
-        return this.http.get(
-            'api/AnswerDrafts/' + + draftId + '/Protected/' 
-        ).map(response => {
-            return response;
-        });
-    }
-
-    add(draft: AnswerDraft) {
-        return this.http.post(
-            'api/AnswerDrafts',
-            draft          
-        ).map(response => { });
-    }
-
     update(draft: AnswerDraft) {
         return this.http.put(
             'api/AnswerDrafts/' + draft.id,
@@ -65,9 +43,6 @@ export class AnswerDraftService {
         ).map(response => { });
     }
 
-    // Delete requires a separate method from udpate because,
-    // when deleting answer, protected content is not loaded
-    // as it was not in edit mode yet.
     delete(draftId: number) {
         return this.http.put(
             'api/AnswerDrafts/delete/' + draftId,

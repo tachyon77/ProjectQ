@@ -14,6 +14,7 @@ namespace ProjectQ.BusinessLogic.Tests
     public class AnswerManagerTests
     {
         private Mock<IAnswerRepository> _mockAnswerRepo;
+        private Mock<IAnswerDraftManager> _mockAnswerDraftManager;
         private Mock<IQuestionRepository> _mockQuestionRepo;
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
@@ -24,6 +25,7 @@ namespace ProjectQ.BusinessLogic.Tests
         {
             _mockQuestionRepo = new Mock<IQuestionRepository>();
             _mockAnswerRepo = new Mock<IAnswerRepository>();
+            _mockAnswerDraftManager = new Mock<IAnswerDraftManager>();
             _mockNS = new Mock<INotificationSender>();
 
             _mockUoW = new Mock<IUnitOfWork>();
@@ -40,7 +42,7 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Setup(x => x.SaveAsync())
                 .Returns(Task.CompletedTask);
 
-            _sut = new AnswerManager(_mockUoW.Object, _mockNS.Object);
+            _sut = new AnswerManager(_mockUoW.Object, _mockNS.Object, _mockAnswerDraftManager.Object);
         }
         
         [Test]

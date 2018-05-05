@@ -18,7 +18,6 @@ namespace ProjectQ.Model
         public ProtectedAnswerContent()
         {
             this.Answers = new HashSet<Answer>();
-            this.AnswerDrafts = new HashSet<AnswerDraft>();
         }
     
         public int Id { get; set; }
@@ -26,7 +25,5 @@ namespace ProjectQ.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerDraft> AnswerDrafts { get; set; }
     }
 }

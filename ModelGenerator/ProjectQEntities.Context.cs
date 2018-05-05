@@ -25,6 +25,7 @@ namespace ProjectQ.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AnswerDraft> AnswerDrafts { get; set; }
         public virtual DbSet<AnswerRating> AnswerRatings { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
@@ -35,6 +36,5 @@ namespace ProjectQ.Model
         public virtual DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<AnswerDraft> AnswerDrafts { get; set; }
     }
 }

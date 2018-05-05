@@ -12,9 +12,8 @@ namespace ProjectQ.DAL
         Task AddAsync(AnswerDraft draft);
         Task UpdateAsync(AnswerDraft draft);
         Task DeleteAsync(int answerId);
-        Task<AnswerDraft> GetForQuestionAndUserAsync(int questionId, int userId);
+        AnswerDraft GetForQuestionAndUser(int questionId, int userId);
         Task<AnswerDraft> FindAsync(int id);
-        Task<ProtectedAnswerContent> FindProtectedAsync(int id);
         bool AnswerDraftExists(int id);
     }
 }

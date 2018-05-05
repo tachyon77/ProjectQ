@@ -29,20 +29,14 @@ namespace WebApp.Controllers
             _draftManager = answerDraftManager;
             _userManager = userManager;
         }
-        // GET: api/AnswerDrafts
-        [HttpGet]
-        public IEnumerable<Answer> GetAnswerDrafts()
-        {
-            throw new NotImplementedException();
-        }
 
         [HttpGet("ForQuestion/{questionId}")]
-        public async Task<AnswerDraft> 
+        public async Task<IActionResult>
             GetForQuestion([FromRoute] int questionId)
         {
             var userId = (await _userManager.GetUserAsync(User)).UserId;
-            return await _draftManager.GetForQuestionAndUserAsync(
-                questionId, userId);
+            return Ok(_draftManager.GetForQuestionAndUser(
+                questionId, userId));
         }
 
 
@@ -63,26 +57,6 @@ namespace WebApp.Controllers
             }
 
             return Ok(draft);
-        }
-
-        // GET: api/AnswerDrafts/5/Protected
-        [HttpGet("{id}/Protected")]
-        public async Task<IActionResult> GetProtectedAnswer([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var userId = (await _userManager.GetUserAsync(User)).UserId;
-            var protectedAnswer = await _draftManager.FindProtectedAsync(userId, id);
-
-            if (protectedAnswer == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(protectedAnswer);
         }
 
         // POST: api/AnswerDrafts
@@ -109,7 +83,7 @@ namespace WebApp.Controllers
             {
                 return BadRequest();
             }
-            await _draftManager.UpdateAsync(
+            await _draftManager.AddOrUpdateAsync(
                 (await _userManager.GetUserAsync(User)).UserId, updated);
 
             return new NoContentResult();

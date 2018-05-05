@@ -34,12 +34,18 @@ namespace ProjectQ.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        async Task<AnswerDraft> 
-            IAnswerDraftRepository.GetForQuestionAndUserAsync(
+        AnswerDraft
+            IAnswerDraftRepository.GetForQuestionAndUser(
             int questionId,
             int userId)
         {
-            throw new NotImplementedException();
+            return _context.AnswerDrafts.SingleOrDefault
+                (
+                    x =>
+                        !x.IsDeleted 
+                    &&  x.QuestionId.Equals(questionId)
+                    &&  x.UserId.Equals(userId)
+                );
         }
 
         async public Task<AnswerDraft> FindAsync(int id)
@@ -49,10 +55,9 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task IAnswerDraftRepository.UpdateAsync(AnswerDraft draft)
         {
-            var dbRecord = await FindAnswerIncludeProtectedAsync(draft.Id);
+            var dbRecord = await FindAsync(draft.Id);
 
-            dbRecord.ProtectedAnswerContent.HtmlContent = draft.ProtectedAnswerContent.HtmlContent;
-            dbRecord.RedactedHtmlContent = draft.RedactedHtmlContent;
+            dbRecord.HtmlContent = draft.HtmlContent;
             dbRecord.IsProtected = draft.IsProtected;
             dbRecord.ExpiryDate = draft.ExpiryDate;
         }
@@ -64,22 +69,7 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.IsDeleted = true;
         }
 
-        async Task<ProtectedAnswerContent> IAnswerDraftRepository.FindProtectedAsync(int id)
-        {
-            return (await FindAnswerIncludeProtectedAsync(id))
-                .ProtectedAnswerContent;
-        }
-
         #endregion
 
-        #region Private methods
-        async Task<AnswerDraft> FindAnswerIncludeProtectedAsync(int id)
-        {
-            return await _context.AnswerDrafts
-                .Include(x => x.ProtectedAnswerContent)
-                .SingleAsync(x => x.Id.Equals(id));
-        }
-
-        #endregion
     }
 }

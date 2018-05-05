@@ -2,47 +2,65 @@
     <div class="btn-toolbar content-toolbar justify-content-between"
          role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
+
+            <!--Hide/Redact content-->
             <button type="button"
                     (click)="onRedact()"
                     class="btn btn-secondary">
                 <s>Hide</s>
             </button>
+
+            <!--Unhide content-->
             <button type="button"
                     (click)="onUnRedact()"
                     class="btn btn-secondary">
                 <em>Reveal</em>
             </button>
+
+            <!--Format Bold-->
             <button type="button"
                     (click)="onBold()"
                     class="btn btn-secondary">
                 <b>B</b>
             </button>
+
+            <!--Format Italic-->
             <button type="button"
                     (click)="onItalic()"
                     class="btn btn-secondary">
                 <i>I</i>
             </button>
+
+            <!--Format Underline-->
             <button type="button"
                     (click)="onUnderline()"
                     class="btn btn-secondary">
                 <u>U</u>
             </button>
+
+            <!--Create Bullet list/ Unordered list-->
             <button type="button"
                     (click)="onUnorderedList()"
                     class="btn btn-secondary">
                 <i class="fas fa-list-ul"></i>
             </button>
+
+            <!--Create numbered list-->
             <button type="button"
                     (click)="onOrderedList()"
                     class="btn btn-secondary">
                 <i class="fas fa-list-ol"></i>
             </button>
+
+            <!--Insert Link-->
             <button type="button"
                     (click)="onShowInsertLink(insertLinkTemplate)"
                     class="btn btn-secondary">
                 <i class="fas fa-link"></i>
             </button>
         </div>
+
+        <!--Insert Image-->
         <div class="input-group">
             <input #x type="text" class="form-control url-input"
                    placeholder="Image URL..."

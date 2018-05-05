@@ -14,16 +14,19 @@ namespace ProjectQ.BusinessLogic
         #region Fields
         private IUnitOfWork _unitOfWork;
         private INotificationSender _notificationSender;
+        private IAnswerDraftManager _draftManager;
         #endregion
 
         #region Cosntructors
 
         public AnswerManager(
             IUnitOfWork unitOfWork,
-            INotificationSender notificationSender)
+            INotificationSender notificationSender,
+            IAnswerDraftManager answerDraftManager)
         {
             _unitOfWork = unitOfWork;
             _notificationSender = notificationSender;
+            _draftManager = answerDraftManager;
         }
 
         #endregion
@@ -52,10 +55,24 @@ namespace ProjectQ.BusinessLogic
 
             var user = await _unitOfWork.UserRepository.FindAsync(userId);
 
+            var now = DateTime.UtcNow;
             answer.UserId = userId;
-            answer.OriginDate = DateTime.UtcNow;
+            answer.OriginDate = now;
 
             await _unitOfWork.AnswerRepository.AddAsync(answer);
+
+            await _draftManager.AddOrUpdateAsync
+                (
+                    userId,
+                    new AnswerDraft()
+                    {
+                        HtmlContent = answer.ProtectedAnswerContent.HtmlContent,
+                        OriginDate = now,
+                        QuestionId = question.Id,
+                        UserId = user.Id,
+                        ExpiryDate = now,
+                    }
+                );
 
             var followers =
                 _unitOfWork.QuestionFollowerRepository
@@ -105,6 +122,15 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.AnswerRepository
                 .UpdateAsync(answer);
+
+            var draft = _unitOfWork.AnswerDraftRepository
+                .GetForQuestionAndUser(answer.QuestionId, userId);
+
+            draft.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
+
+            await _unitOfWork.AnswerDraftRepository
+                .UpdateAsync(draft);
+
             await _unitOfWork.SaveAsync();
         }
 

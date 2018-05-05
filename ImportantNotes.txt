@@ -5,3 +5,21 @@ node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env
 Without doing so, I will have to recreate all query results by converting each object in a 
 collection to the new type. It will make all queries slower for the benefit of only few 
 queries where the extra layer of new types add value.
+
+3. I don't need to store public and protected content separately like in Answers table
+for Drafts. For drafts I can directly save only the protected content. Hidden or redacted version
+will be only be required when the answer is published.
+
+4. I think I should rather move deleted answers/questions/<..entities.> to a different table 
+to avoid having to query as ".IsDeleted == false".
+
+5. Should I ever delete data? I think I should. I own the copy of the data and
+hold no obligation to store it for them. So legally I am not liable to keep their data 
+available. 
+
+6. The deal with Drafts:
+	a. If there is an answer, there is a draft. 
+	b. When editing an answer, we are really editing just the draft, not the answer.
+	c. When answer is saved, draft is made equal to answer.
+	d. Users with permission can see the protected content but only author can see the draft. 
+	   So, I can't put draft in the ProtectedAnswerContents table.

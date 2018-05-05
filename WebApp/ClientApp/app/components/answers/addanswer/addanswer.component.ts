@@ -1,8 +1,8 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
+import { AnswerDraftService, AnswerDraft } from '../../../services/answer-drafts.service'
 import { RedactorService } from '../../../services/redactor.service'
 
 @Component({
@@ -12,42 +12,67 @@ import { RedactorService } from '../../../services/redactor.service'
 })
 export class AddAnswerComponent {
     form: FormGroup;
-    private _questionId: number;
-    private answerHtml: string;
+    private _draft: AnswerDraft = new AnswerDraft();
+    private _answer: Answer = new Answer();
+    initialContent: string;
+
     @Output() answerAdded = new EventEmitter();
-
-    @Input()
-    set questionId(questionId: number) {
-        this._questionId = questionId;
-    }
-
-    onContentChange(content: string) {
-        this.answerHtml = content;
-    }
 
     constructor(
         private formBuilder: FormBuilder,
         private answerService: AnswerService,
-        private redactorService: RedactorService,
-        private router: Router) { }
+        private answerDraftService: AnswerDraftService,
+        private redactorService: RedactorService) { }
+
+    get draft() {
+        return this._draft;
+    }
+
+    @Input()
+    set questionId(questionId: number) {
+        this._draft.questionId = questionId;
+        this._answer.questionId = questionId;
+
+        this.answerDraftService.getForQuestion(questionId).subscribe(
+            json => {
+                if (json) {
+                    console.log("json is not null, " + json);
+                    let draft = json as AnswerDraft;
+                    this._draft = draft;
+                    this.initialContent = draft.htmlContent;
+                } else {
+                    this.initialContent = "";
+                }
+
+            },
+            error => console.error(error)
+        ); 
+    }
+
+    onContentChange(content: string) {
+        this.draft.htmlContent = content;
+    }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
             text: this.formBuilder.control('', Validators.compose([Validators.required])),            
-        });
+        });   
     }
 
-
     onSubmit() {
-        let answer: Answer = new Answer();
-        answer.protectedAnswerContent = new ProtectedAnswerContent();
-        answer.questionId = this._questionId;
-        answer.protectedAnswerContent.htmlContent = this.answerHtml;
-        answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this.answerHtml);
+        this._answer.protectedAnswerContent = new ProtectedAnswerContent();
 
-        this.answerService.add(answer)
+        this._answer.protectedAnswerContent.htmlContent = this._draft.htmlContent;
+        this._answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this._draft.htmlContent);
+
+        this.answerService.add(this._answer)
             .subscribe(() => {
-                this.answerAdded.emit(answer);
+                this.answerAdded.emit(this._answer);
             });
+    }
+
+    onSaveDraft() {
+        this.answerDraftService.update(this._draft)
+            .subscribe(() => { });
     }
 }
