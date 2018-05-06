@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
 import { AnswerDraftService, AnswerDraft } from '../../../services/answer-drafts.service'
 import { RedactorService } from '../../../services/redactor.service'
+import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
 
 @Component({
     selector: 'add-answer',
@@ -15,6 +16,9 @@ export class AddAnswerComponent {
     private _draft: AnswerDraft = new AnswerDraft();
     private _answer: Answer = new Answer();
     initialContent: string;
+    lastSaved: Date;
+    draftUpdate: string;
+    dateFilter = new ReadableDatePipe();
 
     @Output() answerAdded = new EventEmitter();
 
@@ -57,6 +61,18 @@ export class AddAnswerComponent {
         this.form = this.formBuilder.group({
             text: this.formBuilder.control('', Validators.compose([Validators.required])),            
         });   
+
+        setInterval(
+            () => {
+                if (this.lastSaved) {
+                    this.draftUpdate =
+                        "Draft saved "
+                        + this.dateFilter.transform(this.lastSaved);
+                }
+                
+            },
+            15000
+        );
     }
 
     onSubmit() {
@@ -72,7 +88,11 @@ export class AddAnswerComponent {
     }
 
     onSaveDraft() {
+        
         this.answerDraftService.update(this._draft)
-            .subscribe(() => { });
+            .subscribe(() => {
+                this.lastSaved = new Date();
+                this.draftUpdate = "Draft saved " + this.dateFilter.transform(this.lastSaved);
+            });
     }
 }

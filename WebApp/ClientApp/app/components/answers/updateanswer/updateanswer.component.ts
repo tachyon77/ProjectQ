@@ -1,17 +1,21 @@
-﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Inject, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
 import { AnswerDraftService, AnswerDraft } from '../../../services/answer-drafts.service'
 import { RedactorService } from '../../../services/redactor.service'
+import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
 
 @Component({
     selector: 'update-answer',
     templateUrl: './updateanswer.component.html',
     styleUrls:['./updateanswer.component.css'],
 })
-export class UpdateAnswerComponent {
+export class UpdateAnswerComponent implements OnInit{
 
     private _answer: Answer;
     private _draft: AnswerDraft;
+    lastSaved: Date;
+    draftUpdate: string;
+    dateFilter = new ReadableDatePipe();
 
     // We need this to save the original content in case we want to cancel update and revert back
     private _curProtectedContent: string;
@@ -35,6 +39,20 @@ export class UpdateAnswerComponent {
 
     get draft() {
         return this._draft;
+    }
+
+    ngOnInit() {
+        setInterval(
+            () => {
+                if (this.lastSaved) {
+                    this.draftUpdate =
+                        "Draft saved "
+                        + this.dateFilter.transform(this.lastSaved);
+                }
+
+            },
+            15000
+        );
     }
 
     @Input()
@@ -70,7 +88,10 @@ export class UpdateAnswerComponent {
 
     onSaveDraft() {
         this.answerDraftService.update(this._draft)
-            .subscribe(() => {});
+            .subscribe(() => {
+                this.lastSaved = new Date();
+                this.draftUpdate = "Draft saved " + this.dateFilter.transform(this.lastSaved);
+            });
     }
 
     onCancel() {

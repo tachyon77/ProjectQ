@@ -18,10 +18,10 @@ export class ReadableDatePipe implements PipeTransform {
         if (hh < 24) {
             if (hh < 1) {
                 if (mm < 1) {
-                    if (ss < 30) {
+                    if (ss < 5) {
                         return "just now";
                     }
-                    return "a few seconds ago";
+                    return ss + " seconds ago";
                 } else if (mm < 2) {
                     return "about a minute ago"
                 } else {
