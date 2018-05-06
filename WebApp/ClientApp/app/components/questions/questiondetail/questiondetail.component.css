@@ -19,3 +19,15 @@
 .delete-question{
     float:right;
 }
+
+.edit-answer-banner{
+    padding-left:1em;
+    font-size:larger;
+    padding-top:1em;
+}
+
+.edit-answer-button {
+    padding-left: 1em;
+    font-size: larger;
+    padding-bottom: 1em;
+}

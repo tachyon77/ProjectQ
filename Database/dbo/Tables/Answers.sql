@@ -12,6 +12,7 @@
     CONSTRAINT [FK_Answers_Questions] FOREIGN KEY ([QuestionId]) REFERENCES [dbo].[Questions] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_Answers_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE, 
     CONSTRAINT [FK_Answers_ProtectedAnswerContents] FOREIGN KEY ([ProtectedAnswerContentId]) REFERENCES [ProtectedAnswerContents]([Id]), 
-    CONSTRAINT [AK_Answers_UniqueProtectedAnswerContent] UNIQUE ([ProtectedAnswerContentId])
+    CONSTRAINT [AK_Answers_UniqueProtectedAnswerContent] UNIQUE ([ProtectedAnswerContentId]), 
+    CONSTRAINT [AK_Answers_UniquePerQuestionAndUser] UNIQUE ([QuestionId], [UserId])
 );
 

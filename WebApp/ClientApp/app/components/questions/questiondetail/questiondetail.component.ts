@@ -21,6 +21,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     private paramsSubscription: any;
     public isAddAnswerVisible: boolean;
     loggedInUser: User;
+    isAnswerWritten: boolean;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -31,6 +32,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
         this.isAddAnswerVisible = false;
         this.isQuestionEditorVisible = false;
+        this.isAnswerWritten = false;
     }
 
     get isAsker() {
@@ -71,6 +73,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.answerService.getForQuestion(questionId)
             .subscribe(result => {
                 this.answerViews = result as UserSpecificAnswerView[];
+                this.findIfAnswerWritten();
             }, error => console.error(error));
     }
 
@@ -79,22 +82,34 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
             .subscribe(result => {
                 if (result != null) {
                     this.loggedInUser = result as User;
+                    this.findIfAnswerWritten();
                 }
             }
         );
     }
 
+    findIfAnswerWritten() {
+        if (!this.isAnswerWritten && this.answerViews && this.loggedInUser) {
+            this.answerViews.forEach(
+                (av) => {
+                    if (av.answer.user.id == this.loggedInUser.id) {
+                        this.isAnswerWritten = true;
+                    }
+                }
+            );
+        }
+    }
+
     ngOnInit() {
         this.loadLoggedInUser();
-
         this.paramsSubscription = 
-        this.activatedRoute.params
-            .subscribe(params => {
-                let questionId = Number(params['id']);
-                this.loadQuestion(questionId);
-                this.loadAnswers(questionId);
-            }
-        );
+            this.activatedRoute.params
+                .subscribe(params => {
+                    let questionId = Number(params['id']);
+                    this.loadQuestion(questionId);
+                    this.loadAnswers(questionId);
+                }
+            );
     }
 
     onAnswerAdded(answer: Answer) {

@@ -18,13 +18,14 @@
             <div [innerHTML]="questionDescription"
                  class="question-description">
             </div>
-         
+
             <button *ngIf="isAsker"
                     class="btn btn-default"
                     (click)="OnEditQuestionClick()">
                 Edit Question
             </button>
-            <button class="btn btn-default"
+            <button *ngIf="!isAnswerWritten"
+                    class="btn btn-default"
                     (click)="OnAnswerClick()">
                 Answer
             </button>
@@ -35,6 +36,7 @@
                 <span *ngIf="!question.isDeleted">Delete</span>
             </button>
         </div>
+
 
         <div *ngIf="isQuestionEditorVisible">
             <question-editor [question]="question"
@@ -49,6 +51,22 @@
             </add-answer>
         </div>
         <hr />
+        
+        <div *ngIf="isAnswerWritten">
+            <p class="edit-answer-banner">
+                You have written an Answer
+            </p>
+            <p class="edit-answer-button">
+                <button class="btn btn-secondary btn-light"
+                        (click)="alert(hi);">
+                    Edit your answer
+                </button>
+            </p>
+            
+            <hr />
+        </div>
+
+
         <div>
             <div *ngIf="!answerViews">
                 Loading...
