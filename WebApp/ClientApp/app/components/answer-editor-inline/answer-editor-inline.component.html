@@ -4,6 +4,7 @@
     </content-editor>
 </div>
 <button type="submit"
+        [disabled]="!answer"
         (click)="onSubmit()"
         class="btn btn-primary">
     Save

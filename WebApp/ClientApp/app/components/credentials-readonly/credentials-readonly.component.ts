@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Education, Employment } from '../../../services/application-user.service';
+import { Education, Employment } from '../../services/application-user.service';
 
 @Component({
     selector: 'credential-readonly',

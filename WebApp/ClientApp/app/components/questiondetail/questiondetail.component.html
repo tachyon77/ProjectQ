@@ -58,7 +58,8 @@
             </p>
             <p class="edit-answer-button">
                 <button class="btn btn-secondary btn-light"
-                        (click)="alert(hi);">
+                        [routerLink]="['/answer-page', myAnswerId]">
+                    
                     Edit your answer
                 </button>
             </p>

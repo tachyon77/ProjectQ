@@ -1,10 +1,10 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
-import { AnswerDraftService, AnswerDraft } from '../../../services/answer-drafts.service'
-import { RedactorService } from '../../../services/redactor.service'
-import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
+import { AnswerService, Answer, ProtectedAnswerContent } from '../../services/answers.service'
+import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
+import { RedactorService } from '../../services/redactor.service'
+import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 
 @Component({
     selector: 'add-answer',

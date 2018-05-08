@@ -1,0 +1,32 @@
+﻿<p *ngIf="!answer"><em>Loading...</em></p>
+<div *ngIf="answer" class="answer-card">
+
+    <div *ngIf="!isUpdateAnswerVisible">
+        <div class="answer-user" *ngIf="answer && answer.user">
+            {{answer.user.name}}
+            <div class="answer-date">Answered {{answer.originDate | readableDate}}</div>
+        </div>
+
+        <div [innerHTML]="answerContent"
+             [ngClass]="{
+             'answer-content': true,
+             'deleted-answer': answer.isDeleted}">
+        </div>
+        <button class="btn btn-default"
+                (click)="OnEditClick()">
+            Edit
+        </button>
+        <button class="btn btn-default"
+                (click)="OnDeleteClick()">
+            <span *ngIf="answer.isDeleted">Undelete</span>
+            <span *ngIf="!answer.isDeleted">Delete</span>
+        </button>
+    </div>
+
+    <div *ngIf="isUpdateAnswerVisible">
+        <answer-editor-inline [answerId]="answer.id"
+                       (answerUpdated)="onAnswerUpdated($event)"
+                       (updateCancelled)="onUpdateCancelled()">
+        </answer-editor-inline>
+    </div>
+</div>

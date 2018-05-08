@@ -11,16 +11,18 @@ import { FocusDirective } from './directives/focus.directive'
 // ProjectQ components
 import { AppComponent } from './components/app/app.component';
 import { ApplicationUserService } from './services/application-user.service';
-import { AnswerService } from './components/answers/answers.service';
+import { AnswerService } from './services/answers.service';
 import { AnswerDraftService } from './services/answer-drafts.service';
+import { AnswerEditorInlineComponent } from './components/answer-editor-inline/answer-editor-inline.component';
+import { AnswerPageComponent } from './components/answer-page/answer-page.component';
 import { AnswerRatingService } from './services/answerrating.service';
-import { AnswerCardComponent } from './components/answers/answercard/answercard.component';
-import { AddAnswerComponent } from './components/answers/addanswer/addanswer.component';
-import { AddQuestionFormComponent } from './components/questions/addquestion/addquestionform.component';
-import { CredentialsReadonlyComponent } from './components/credentials/credentials-readonly/credentials-readonly.component';
-import { CredentialsEditorComponent } from './components/credentials/credentials-editor/credentials-editor.component';
+import { AnswerCardComponent } from './components/answercard/answercard.component';
+import { AddAnswerComponent } from './components/addanswer/addanswer.component';
+import { AddQuestionFormComponent } from './components/addquestion/addquestionform.component';
+import { CredentialsReadonlyComponent } from './components/credentials-readonly/credentials-readonly.component';
+import { CredentialsEditorComponent } from './components/credentials-editor/credentials-editor.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
-import { DisplayQuestionsComponent } from './components/questions/displayquestions/displayquestions.component';
+import { DisplayQuestionsComponent } from './components/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
 import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
 import { IdentityService } from './services/identity.service';
@@ -29,17 +31,16 @@ import { LoginFormComponent } from './components/loginform/loginform.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
-import { QuestionDetailComponent } from './components/questions/questiondetail/questiondetail.component';
-import { QuestionCardComponent } from './components/questions/questioncard/questioncard.component';
-import { QuestionService } from './components/questions/questions.service';
+import { QuestionDetailComponent } from './components/questiondetail/questiondetail.component';
+import { QuestionCardComponent } from './components/questioncard/questioncard.component';
+import { QuestionService } from './services/questions.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
-import { QuestionEditorComponent } from './components/questions/questioneditor/questioneditor.component';
+import { QuestionEditorComponent } from './components/questioneditor/questioneditor.component';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
-import { UpdateAnswerComponent } from './components/answers/updateanswer/updateanswer.component';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
@@ -54,6 +55,8 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         AppComponent,
         AddQuestionFormComponent,
         AnswerCardComponent,
+        AnswerEditorInlineComponent,
+        AnswerPageComponent,
         AddAnswerComponent,
         CredentialsReadonlyComponent,
         CredentialsEditorComponent,
@@ -71,7 +74,6 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         QuestionCardComponent,
         QuestionEditorComponent,
         ReadableDatePipe,
-        UpdateAnswerComponent,
         UserProfileComponent,
         UserQuestionsComponent,
     ],
@@ -102,6 +104,7 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
             { path: 'profile', component: UserProfileComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
+            { path: 'answer-page/:id', component: AnswerPageComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

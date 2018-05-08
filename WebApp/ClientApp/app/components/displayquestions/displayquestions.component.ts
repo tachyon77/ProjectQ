@@ -1,5 +1,5 @@
 ﻿import { Component, Inject } from '@angular/core';
-import { QuestionService, UserSpecificQuestionPreview } from '../questions.service'
+import { QuestionService, UserSpecificQuestionPreview } from '../../services/questions.service'
 
 @Component({
     selector: 'display-questions',

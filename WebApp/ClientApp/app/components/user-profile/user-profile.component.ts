@@ -3,8 +3,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationUserService, Education, Employment, Credentials} from '../../services/application-user.service';
-import { CredentialsReadonlyComponent } from '../../components/credentials/credentials-readonly/credentials-readonly.component'
-import { CredentialsEditorComponent } from '../../components/credentials/credentials-editor/credentials-editor.component'
+import { CredentialsReadonlyComponent } from '../../components/credentials-readonly/credentials-readonly.component'
+import { CredentialsEditorComponent } from '../../components/credentials-editor/credentials-editor.component'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { User } from '../../services/identity.service';
 

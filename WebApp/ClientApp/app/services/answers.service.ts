@@ -1,7 +1,7 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../../services/identity.service'
-import { AnswerRating } from '../../services/answerrating.service'
+import { User } from './identity.service'
+import { AnswerRating } from './answerrating.service'
 
 import 'rxjs/add/operator/map';
 

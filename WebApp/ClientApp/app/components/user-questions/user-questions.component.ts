@@ -1,7 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { ApplicationUserService } from '../../services/application-user.service'
-import { Question, QuestionService } from
-    '../../components/questions/questions.service';
+import { Question, QuestionService } from '../../services/questions.service';
 import { User } from '../../services/identity.service';
 
 @Component({

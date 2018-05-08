@@ -62,7 +62,8 @@ namespace ProjectQ.DAL.EntityFramework
 
         async public Task<Answer> FindAsync(int id)
         {
-            return await _context.Answers.FindAsync(id);
+            return await _context.Answers.Include(x=>x.User)
+                .SingleOrDefaultAsync(x=>x.Id.Equals(id));
         }
 
         async Task IAnswerRepository.UpdateAsync(Answer answer)

@@ -2,7 +2,7 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { QuestionService, Question } from '../questions.service'
+import { QuestionService, Question } from '../../services/questions.service'
 
 @Component({
     selector: 'question-editor',

@@ -1,27 +1,51 @@
-﻿import { Component, Inject, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { AnswerService, Answer, ProtectedAnswerContent } from '../answers.service'
-import { AnswerDraftService, AnswerDraft } from '../../../services/answer-drafts.service'
-import { RedactorService } from '../../../services/redactor.service'
-import { ReadableDatePipe } from '../../../pipes/readable-date.pipe';
+﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { AnswerService, Answer, ProtectedAnswerContent } from '../../services/answers.service'
+import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
+import { RedactorService } from '../../services/redactor.service'
+import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
+
+// Input: answer id
+// Output: Answer updated event, Update canelled event.
 
 @Component({
-    selector: 'update-answer',
-    templateUrl: './updateanswer.component.html',
-    styleUrls:['./updateanswer.component.css'],
+    selector: 'answer-editor-inline',
+    templateUrl: './answer-editor-inline.component.html',
+    styleUrls: ['./answer-editor-inline.component.css'],
 })
-export class UpdateAnswerComponent implements OnInit{
+export class AnswerEditorInlineComponent{
+
+    @Output() answerUpdated = new EventEmitter();
+    @Output() updateCancelled = new EventEmitter();
+
+    @Input()
+    set answerId(id: number) {
+        this.answerService.getById(id).subscribe(
+            json => {
+                this._answer = json as Answer;
+
+                // There will always be a draft if there is an answer.
+                this.answerDraftService.getForQuestion(this.answer.questionId).subscribe(
+                    json => {
+                        this._draft = json as AnswerDraft;
+                        this._curProtectedContent = this._draft.htmlContent;
+
+                        this.scheduleDraftStatusUpdater();
+                    },
+                    error => console.error(error)
+                );
+            },
+            error => console.error(error)
+        );
+    }
 
     private _answer: Answer;
+    private _answerId: number;
     private _draft: AnswerDraft;
     lastSaved: Date;
     draftUpdate: string;
     dateFilter = new ReadableDatePipe();
-
     // We need this to save the original content in case we want to cancel update and revert back
     private _curProtectedContent: string;
-
-    @Output() answerUpdated = new EventEmitter();
-    @Output() updateCancelled = new EventEmitter();
 
     constructor(
         private answerService: AnswerService,
@@ -41,7 +65,7 @@ export class UpdateAnswerComponent implements OnInit{
         return this._draft;
     }
 
-    ngOnInit() {
+    scheduleDraftStatusUpdater() {
         setInterval(
             () => {
                 if (this.lastSaved) {
@@ -49,24 +73,9 @@ export class UpdateAnswerComponent implements OnInit{
                         "Draft saved "
                         + this.dateFilter.transform(this.lastSaved);
                 }
-
             },
             15000
         );
-    }
-
-    @Input()
-    set answer(answer: Answer) {
-        this._answer = answer;
-        
-        // There will always be a draft if there is an answer.
-        this.answerDraftService.getForQuestion(answer.questionId).subscribe(
-            json => {
-                this._draft = json as AnswerDraft;
-                this._curProtectedContent = this._draft.htmlContent;
-            },
-            error => console.error(error)
-        );    
     }
 
     onContentChange(content: string) {
@@ -95,7 +104,7 @@ export class UpdateAnswerComponent implements OnInit{
     }
 
     onCancel() {
-        this.answer.protectedAnswerContent.htmlContent = this._curProtectedContent;
+        //this.answer.protectedAnswerContent.htmlContent = this._curProtectedContent;
         this.updateCancelled.emit();
     }
 }

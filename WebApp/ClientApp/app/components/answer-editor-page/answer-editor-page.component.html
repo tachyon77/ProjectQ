@@ -1,0 +1,26 @@
+﻿<div class="offset-md-2 col-md-8">
+    <h3>This is the question placeholder</h3>
+
+    <div class="content-editor-container">
+        <content-editor [content]="curProtectedContent"
+                        (contentChanged)="onContentChange($event)">
+        </content-editor>
+    </div>
+    <button type="submit"
+            [disabled]="!answer"
+            (click)="onSubmit()"
+            class="btn btn-primary">
+        Save
+    </button>
+    <button (click)="onSaveDraft()"
+            class="btn btn-light">
+        Save Draft
+    </button>
+    <span class="draft-status">{{draftUpdate}}</span>
+
+    <button type="submit"
+            (click)="onCancel()"
+            class="btn btn-secondary float-right">
+        Cancel
+    </button>
+</div>

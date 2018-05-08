@@ -1,8 +1,8 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, Answer, UserSpecificAnswerView } from '../answers.service'
-import { AnswerRating, AnswerRatingService } from '../../../services/answerrating.service'
+import { AnswerService, Answer, UserSpecificAnswerView } from '../../services/answers.service'
+import { AnswerRating, AnswerRatingService } from '../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { IdentityService, User } from '../../../services/identity.service'
+import { IdentityService, User } from '../../services/identity.service'
 
 
 @Component({

@@ -2,9 +2,9 @@
     from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AnswerService, Answer, UserSpecificAnswerView } from '../../answers/answers.service'
-import { QuestionService, Question } from '../questions.service'
-import { IdentityService, User } from '../../../services/identity.service'
+import { AnswerService, Answer, UserSpecificAnswerView } from '../../services/answers.service'
+import { QuestionService, Question } from '../../services/questions.service'
+import { IdentityService, User } from '../../services/identity.service'
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -22,6 +22,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     public isAddAnswerVisible: boolean;
     loggedInUser: User;
     isAnswerWritten: boolean;
+    myAnswerId: number;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -73,7 +74,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.answerService.getForQuestion(questionId)
             .subscribe(result => {
                 this.answerViews = result as UserSpecificAnswerView[];
-                this.findIfAnswerWritten();
+                this.findIfWrittenAnswer();
             }, error => console.error(error));
     }
 
@@ -82,18 +83,19 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
             .subscribe(result => {
                 if (result != null) {
                     this.loggedInUser = result as User;
-                    this.findIfAnswerWritten();
+                    this.findIfWrittenAnswer();
                 }
             }
         );
     }
 
-    findIfAnswerWritten() {
+    findIfWrittenAnswer() {
         if (!this.isAnswerWritten && this.answerViews && this.loggedInUser) {
             this.answerViews.forEach(
                 (av) => {
                     if (av.answer.user.id == this.loggedInUser.id) {
                         this.isAnswerWritten = true;
+                        this.myAnswerId = av.answer.id;
                     }
                 }
             );

@@ -1,8 +1,8 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { UserSpecificQuestionPreview } from '../questions.service'
-import { QuestionFollowerService } from '../../../services/questionfollower.service'
-import { AnswerService, Answer } from '../../answers/answers.service'
+import { UserSpecificQuestionPreview } from '../../services/questions.service'
+import { QuestionFollowerService } from '../../services/questionfollower.service'
+import { AnswerService, Answer } from '../../services/answers.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
