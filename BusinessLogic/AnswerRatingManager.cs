@@ -30,6 +30,13 @@ namespace ProjectQ.BusinessLogic
         async Task<int> IAnswerRatingManager.AddOrUpdateAsync(
             AnswerRating answerRating, int userId)
         {
+            var answer = await _unitOfWork
+                    .AnswerRepository.FindAsync(answerRating.AnswerId);
+
+            // Can't rate own answer
+            if (answer.UserId.Equals(userId))
+                throw new Exception("Unauthorized");
+
             var existingRating = await _unitOfWork
                 .AnswerRatingRepository
                 .GetByAnswerAndUserAsync(answerRating.AnswerId, userId);
@@ -48,9 +55,6 @@ namespace ProjectQ.BusinessLogic
 
                 await _unitOfWork.AnswerRatingRepository.AddAsync(answerRating);  
             }
-
-            var answer = await _unitOfWork
-                    .AnswerRepository.FindAsync(answerRating.AnswerId);
 
             var user = await _unitOfWork.UserRepository.FindAsync(userId);
 

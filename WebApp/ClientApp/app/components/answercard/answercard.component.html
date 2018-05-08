@@ -7,60 +7,69 @@
             <div class="answer-date">Answered {{answerView.answer.originDate | readableDate}}</div>
         </div>
 
-        <div class="rating" *ngIf="rating[0]">
-            <span (click)="rate(5)">☆</span>
-            <span (click)="rate(4)">☆</span>
-            <span (click)="rate(3)">☆</span>
-            <span (click)="rate(2)">☆</span>
-            <span (click)="rate(1)">☆</span>
+        <!--Rating-->
+        <div *ngIf="!isAuthor">
+            <div class="rating" *ngIf="rating[0]">
+                <span (click)="rate(5)">☆</span>
+                <span (click)="rate(4)">☆</span>
+                <span (click)="rate(3)">☆</span>
+                <span (click)="rate(2)">☆</span>
+                <span (click)="rate(1)">☆</span>
+            </div>
+            <div class="rating" *ngIf="rating[1]">
+                <span (click)="rate(5)">☆</span>
+                <span (click)="rate(4)">☆</span>
+                <span (click)="rate(3)">☆</span>
+                <span (click)="rate(2)">☆</span>
+                <span (click)="rate(1)">★</span>
+            </div>
+            <div class="rating" *ngIf="rating[2]">
+                <span (click)="rate(5)">☆</span>
+                <span (click)="rate(4)">☆</span>
+                <span (click)="rate(3)">☆</span>
+                <span (click)="rate(2)">★</span>
+                <span (click)="rate(1)">★</span>
+            </div>           
+            <div class="rating" *ngIf="rating[3]">
+                <span (click)="rate(5)">☆</span>
+                <span (click)="rate(4)">☆</span>
+                <span (click)="rate(3)">★</span>
+                <span (click)="rate(2)">★</span>
+                <span (click)="rate(1)">★</span>
+            </div>
+            <div class="rating" *ngIf="rating[4]">
+                <span (click)="rate(5)">☆</span>
+                <span (click)="rate(4)">★</span>
+                <span (click)="rate(3)">★</span>
+                <span (click)="rate(2)">★</span>
+                <span (click)="rate(1)">★</span>
+            </div>
+            <div class="rating" *ngIf="rating[5]">
+                <span (click)="rate(5)">★</span>
+                <span (click)="rate(4)">★</span>
+                <span (click)="rate(3)">★</span>
+                <span (click)="rate(2)">★</span>
+                <span (click)="rate(1)">★</span>
+            </div>
         </div>
-        <div class="rating" *ngIf="rating[1]">
-            <span (click)="rate(5)">☆</span>
-            <span (click)="rate(4)">☆</span>
-            <span (click)="rate(3)">☆</span>
-            <span (click)="rate(2)">☆</span>
-            <span (click)="rate(1)">★</span>
-        </div>
-        <div class="rating" *ngIf="rating[2]">
-            <span (click)="rate(5)">☆</span>
-            <span (click)="rate(4)">☆</span>
-            <span (click)="rate(3)">☆</span>
-            <span (click)="rate(2)">★</span>
-            <span (click)="rate(1)">★</span>
-        </div>
-        <div class="rating" *ngIf="rating[3]">
-            <span (click)="rate(5)">☆</span>
-            <span (click)="rate(4)">☆</span>
-            <span (click)="rate(3)">★</span>
-            <span (click)="rate(2)">★</span>
-            <span (click)="rate(1)">★</span>
-        </div>
-        <div class="rating" *ngIf="rating[4]">
-            <span (click)="rate(5)">☆</span>
-            <span (click)="rate(4)">★</span>
-            <span (click)="rate(3)">★</span>
-            <span (click)="rate(2)">★</span>
-            <span (click)="rate(1)">★</span>
-        </div>
-        <div class="rating" *ngIf="rating[5]">
-            <span (click)="rate(5)">★</span>
-            <span (click)="rate(4)">★</span>
-            <span (click)="rate(3)">★</span>
-            <span (click)="rate(2)">★</span>
-            <span (click)="rate(1)">★</span>
-        </div>
+        
 
+        <!--Answer Content-->
         <div [innerHTML]="answerContent"
              [ngClass]="{
              'answer-content': true,
              'deleted-answer': answerView.answer.isDeleted}">
         </div>
-        <button *ngIf="isAsker"
+
+        <!--Edit-->
+        <button *ngIf="isAuthor"
                 class="btn btn-default"
                 (click)="OnEditClick()">
             Edit
         </button>
-        <button *ngIf="isAsker"
+
+        <!--Delete-->
+        <button *ngIf="isAuthor"
                 class="btn btn-default"
                 (click)="OnDeleteClick()">
             <span *ngIf="answerView.answer.isDeleted">Undelete</span>
@@ -68,6 +77,7 @@
         </button>
     </div>
 
+    <!--Answer editor-->
     <div *ngIf="isUpdateAnswerVisible">
         <answer-editor-inline [answerId]="answerView.answer.id"
                        (answerUpdated)="onAnswerUpdated($event)"

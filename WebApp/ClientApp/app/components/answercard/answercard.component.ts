@@ -19,7 +19,7 @@ export class AnswerCardComponent {
     public rating: boolean[];
     private _loggedInUser: User;
 
-    get isAsker() {
+    get isAuthor() {
         return this.loggedInUser && this.answerView &&
             this.answerView.answer.user.id === this.loggedInUser.id;
     }
