@@ -4,6 +4,14 @@
     <div *ngIf="!isUpdateAnswerVisible">
         <div class="answer-user" *ngIf="answerView.answer.user">
             {{answerView.answer.user.name}}
+            <span *ngIf="!answerView.averageRating" 
+                  class="no-rating">
+                No ratings yet
+            </span>
+            <span *ngIf="answerView.averageRating" 
+                  class="average-rating">
+                {{answerView.averageRating}} / 5
+            </span>
             <div class="answer-date">Answered {{answerView.answer.originDate | readableDate}}</div>
         </div>
 

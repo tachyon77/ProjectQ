@@ -41,3 +41,13 @@
             content: "\2605";
             position: absolute;
         }
+
+.average-rating{
+    float:right;
+}
+
+.no-rating {
+    float: right;
+    color:lightgray;
+    font-style:italic;
+}

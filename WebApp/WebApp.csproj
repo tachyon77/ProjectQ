@@ -32,9 +32,6 @@
     <None Remove="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.css" />
     <None Remove="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.html" />
     <None Remove="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.ts" />
-    <None Remove="ClientApp\app\components\answer-editor-page\answer-editor-page.component.css" />
-    <None Remove="ClientApp\app\components\answer-editor-page\answer-editor-page.component.html" />
-    <None Remove="ClientApp\app\components\answer-editor-page\answer-editor-page.component.ts" />
     <None Remove="ClientApp\app\components\answer-page\answer-page.component.css" />
     <None Remove="ClientApp\app\components\answer-page\answer-page.component.html" />
     <None Remove="ClientApp\app\components\answer-page\answer-page.component.ts" />
@@ -85,9 +82,6 @@
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\answer-editor-page\answer-editor-page.component.css" />
-    <TypeScriptCompile Include="ClientApp\app\components\answer-editor-page\answer-editor-page.component.html" />
-    <TypeScriptCompile Include="ClientApp\app\components\answer-editor-page\answer-editor-page.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.ts" />

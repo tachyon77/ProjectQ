@@ -24,6 +24,7 @@ export class ProtectedAnswerContent {
 export interface UserSpecificAnswerView {
     answer: Answer;
     rating: AnswerRating;
+    averageRating: number;
 }
 
 @Injectable()
