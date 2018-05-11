@@ -1,5 +1,6 @@
 ﻿<div class="content-editor-container">
     <content-editor [content]="curProtectedContent"
+                    [enableRedaction]="true"
                     (contentChanged)="onContentChange($event)">
     </content-editor>
 </div>

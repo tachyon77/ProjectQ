@@ -4,18 +4,20 @@
         <div class="btn-group mr-2" role="group" aria-label="First group">
 
             <!--Hide/Redact content-->
-            <button type="button"
+            <button *ngIf="enableRedaction"
+                    type="button"
                     (click)="onRedact()"
                     class="btn btn-secondary">
                 <s>Hide</s>
             </button>
 
             <!--Unhide content-->
-            <button type="button"
+            <button *ngIf="enableRedaction"
+                    type="button"
                     (click)="onUnRedact()"
                     class="btn btn-secondary">
                 <em>Reveal</em>
-            </button>
+            </button>            
 
             <!--Format Bold-->
             <button type="button"

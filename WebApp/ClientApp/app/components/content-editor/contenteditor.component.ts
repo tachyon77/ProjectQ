@@ -19,6 +19,7 @@ export class ContentEditorComponent implements AfterViewInit{
     public newContent: string;
     insertLinkModal: BsModalRef;
     linkForm: FormGroup;
+    private _enableRedaction: boolean;
 
     @Output() contentChanged = new EventEmitter();
     public emitFocusEvent = new EventEmitter<boolean>();
@@ -29,8 +30,17 @@ export class ContentEditorComponent implements AfterViewInit{
         this.newContent = c;
     }
 
+    @Input()
+    set enableRedaction(e: boolean) {
+        this._enableRedaction = e;
+    }
+
     get content() {
         return this.newContent;
+    }
+
+    get enableRedaction() {
+        return this._enableRedaction;
     }
 
 
@@ -44,6 +54,7 @@ export class ContentEditorComponent implements AfterViewInit{
         private formBuilder: FormBuilder,
         private modalService: BsModalService,
     ) {
+        this.enableRedaction = false;
     }
 
     onShowInsertLink(template: TemplateRef<any>) {
