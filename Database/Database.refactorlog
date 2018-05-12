@@ -252,4 +252,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="HtmlContent" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4559eaf3-597c-4ef3-93e7-98881fd22a00" ChangeDateTime="05/12/2018 01:21:23">
+    <Property Name="ElementName" Value="[dbo].[QuestionPledges].[Title]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionPledges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3303d417-3091-4561-bd75-37f430c7f6c2" ChangeDateTime="05/12/2018 01:21:47">
+    <Property Name="ElementName" Value="[dbo].[QuestionPledges].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionPledges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="961acc3c-905d-489e-aa25-2a152a546cae" ChangeDateTime="05/12/2018 01:21:57">
+    <Property Name="ElementName" Value="[dbo].[QuestionPledges].[OriginDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionPledges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Amount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="595d9aec-58f1-44ca-b736-1967c6dde93b" ChangeDateTime="05/12/2018 01:27:01">
+    <Property Name="ElementName" Value="[dbo].[QuestionPledges].[ExpiryDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionPledges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DaysValid" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="868d22de-5643-4020-b76d-94bd3ef46e57" ChangeDateTime="05/12/2018 14:32:16">
+    <Property Name="ElementName" Value="[dbo].[AnswerViewRights].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerViewRights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ViewerId" />
+  </Operation>
 </Operations>

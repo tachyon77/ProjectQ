@@ -58,6 +58,9 @@
     <Compile Include="AnswerRating.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="AnswerViewRight.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUser.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>

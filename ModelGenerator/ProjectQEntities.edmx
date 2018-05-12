@@ -44,6 +44,16 @@
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="ProtectedAnswerContentId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="AnswerViewRights">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerId" Type="int" Nullable="false" />
+          <Property Name="ViewerId" Type="int" Nullable="false" />
+          <Property Name="GrantDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -234,6 +244,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AnswerViewRights_Answers">
+          <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
+          <End Role="AnswerViewRights" Type="Self.AnswerViewRights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerViewRights">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerViewRights_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnswerViewRights" Type="Self.AnswerViewRights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerViewRights">
+              <PropertyRef Name="ViewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Educations_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Educations" Type="Self.Educations" Multiplicity="*" />
@@ -312,6 +346,7 @@
           <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDrafts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRatings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerViewRights" EntityType="Self.AnswerViewRights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employments" EntityType="Self.Employments" Schema="dbo" store:Type="Tables" />
@@ -347,6 +382,14 @@
           <AssociationSet Name="FK_Answers_Users" Association="Self.FK_Answers_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerViewRights_Answers" Association="Self.FK_AnswerViewRights_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="AnswerViewRights" EntitySet="AnswerViewRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerViewRights_Users" Association="Self.FK_AnswerViewRights_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerViewRights" EntitySet="AnswerViewRights" />
           </AssociationSet>
           <AssociationSet Name="FK_Educations_Users" Association="Self.FK_Educations_Users">
             <End Role="Users" EntitySet="Users" />
@@ -441,6 +484,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
+          <EntitySet Name="AnswerViewRights" EntityType="ProjectQModel.AnswerViewRight" />
+          <AssociationSet Name="FK_AnswerViewRights_Answers" Association="ProjectQModel.FK_AnswerViewRights_Answers">
+            <End Role="Answer" EntitySet="Answers" />
+            <End Role="AnswerViewRight" EntitySet="AnswerViewRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerViewRights_Users" Association="ProjectQModel.FK_AnswerViewRights_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AnswerViewRight" EntitySet="AnswerViewRights" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerDraft">
           <Key>
@@ -488,6 +540,7 @@
           <NavigationProperty Name="ProtectedAnswerContent" Relationship="ProjectQModel.FK_Answers_ProtectedAnswerContents" FromRole="Answer" ToRole="ProtectedAnswerContent" />
           <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
           <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Answers_Users" FromRole="Answer" ToRole="User" />
+          <NavigationProperty Name="AnswerViewRights" Relationship="ProjectQModel.FK_AnswerViewRights_Answers" FromRole="Answer" ToRole="AnswerViewRight" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -602,6 +655,7 @@
           <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Users" FromRole="User" ToRole="QuestionFollower" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_Users" FromRole="User" ToRole="Question" />
+          <NavigationProperty Name="AnswerViewRights" Relationship="ProjectQModel.FK_AnswerViewRights_Users" FromRole="User" ToRole="AnswerViewRight" />
         </EntityType>
         <Association Name="FK_AnswerDrafts_Questions">
           <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1">
@@ -771,6 +825,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AnswerViewRight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerId" Type="Int32" Nullable="false" />
+          <Property Name="ViewerId" Type="Int32" Nullable="false" />
+          <Property Name="GrantDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerViewRights_Answers" FromRole="AnswerViewRight" ToRole="Answer" />
+          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerViewRights_Users" FromRole="AnswerViewRight" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AnswerViewRights_Answers">
+          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerViewRight" Role="AnswerViewRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerViewRight">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerViewRights_Users">
+          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerViewRight" Role="AnswerViewRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerViewRight">
+              <PropertyRef Name="ViewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -919,6 +1009,17 @@
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UniqueName" ColumnName="UniqueName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerViewRights">
+            <EntityTypeMapping TypeName="ProjectQModel.AnswerViewRight">
+              <MappingFragment StoreEntitySet="AnswerViewRights">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="GrantDate" ColumnName="GrantDate" />
+                <ScalarProperty Name="ViewerId" ColumnName="ViewerId" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
