@@ -10,6 +10,7 @@ export class Answer {
     isDeleted: boolean;
     questionId: number;
     originDate: Date;
+    isProtected: boolean;
     redactedHtmlContent: string; // To be used in general
     user: User;
     protectedAnswerContent: ProtectedAnswerContent;
@@ -49,6 +50,7 @@ export class AnswerService {
         });
     }
 
+    /*
     getProtectedContent(answerId: number) {
         return this.http.get(
             'api/Answers/Protected/' + answerId
@@ -56,6 +58,7 @@ export class AnswerService {
             return response;
         });
     }
+    */
 
     add(answer: Answer) {
         return this.http.post(

@@ -1,18 +1,40 @@
 ﻿<p *ngIf="!answerView"><em>Loading...</em></p>
 <div *ngIf="answerView" class="answer-card">
 
+   
+
     <div *ngIf="!isUpdateAnswerVisible">
         <div class="answer-user" *ngIf="answerView.answer.user">
             {{answerView.answer.user.name}}
-            <span *ngIf="!answerView.averageRating" 
+            <span *ngIf="!answerView.averageRating"
                   class="no-rating">
                 No ratings yet
             </span>
-            <span *ngIf="answerView.averageRating" 
+            <span *ngIf="answerView.averageRating"
                   class="average-rating">
                 {{answerView.averageRating}} / 5
             </span>
-            <div class="answer-date">Answered {{answerView.answer.originDate | readableDate}}</div>
+
+            <div class="answer-date">
+                Answered {{answerView.answer.originDate | readableDate}}
+                <span class="buy-offer"
+                      *ngIf="answerView.answer.isProtected && !isAuthor">
+                    <!--Buy-->
+                    <button 
+                            class="btn btn-success"
+                            (click)="OnPurchaseClick()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Buy
+                    </button>
+
+                    <!--counter offer-->
+                    <button class="btn btn-secondary"
+                            (click)="OnCounterOfferClick()">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        Counter offer
+                    </button>
+                </span>
+            </div>          
         </div>
 
         <!--Rating-->
@@ -37,7 +59,7 @@
                 <span (click)="rate(3)">☆</span>
                 <span (click)="rate(2)">★</span>
                 <span (click)="rate(1)">★</span>
-            </div>           
+            </div>
             <div class="rating" *ngIf="rating[3]">
                 <span (click)="rate(5)">☆</span>
                 <span (click)="rate(4)">☆</span>
@@ -60,7 +82,6 @@
                 <span (click)="rate(1)">★</span>
             </div>
         </div>
-        
 
         <!--Answer Content-->
         <div [innerHTML]="answerContent"
@@ -88,8 +109,8 @@
     <!--Answer editor-->
     <div *ngIf="isUpdateAnswerVisible">
         <answer-editor-inline [answerId]="answerView.answer.id"
-                       (answerUpdated)="onAnswerUpdated($event)"
-                       (updateCancelled)="onUpdateCancelled()">
+                              (answerUpdated)="onAnswerUpdated($event)"
+                              (updateCancelled)="onUpdateCancelled()">
         </answer-editor-inline>
     </div>
 </div>

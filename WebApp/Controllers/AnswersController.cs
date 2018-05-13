@@ -65,6 +65,7 @@ namespace WebApp.Controllers
             return Ok(Answer);
         }
 
+        /*
         // GET: api/Answers/Protected/5
         [HttpGet("Protected/{id}")]
         public async Task<IActionResult> GetProtectedAnswer([FromRoute] int id)
@@ -84,6 +85,7 @@ namespace WebApp.Controllers
 
             return Ok(protectedAnswer);
         }
+        */
 
         // POST: api/Answers
         [HttpPost]

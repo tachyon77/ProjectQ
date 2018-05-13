@@ -18,7 +18,7 @@ namespace ProjectQ.Model
         public Answer()
         {
             this.AnswerRatings = new HashSet<AnswerRating>();
-            this.AnswerViewRights = new HashSet<AnswerViewRight>();
+            this.PurchasedAnswers = new HashSet<PurchasedAnswer>();
         }
     
         public int Id { get; set; }
@@ -37,6 +37,6 @@ namespace ProjectQ.Model
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerViewRight> AnswerViewRights { get; set; }
+        public virtual ICollection<PurchasedAnswer> PurchasedAnswers { get; set; }
     }
 }

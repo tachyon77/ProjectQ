@@ -12,13 +12,13 @@ namespace ProjectQ.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerViewRight
+    public partial class PurchasedAnswer
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public int AnswerId { get; set; }
-        public int ViewerId { get; set; }
-        public System.DateTime GrantDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public System.DateTime PurchaseDate { get; set; }
+        public string HtmlContent { get; set; }
     
         public virtual Answer Answer { get; set; }
         public virtual User User { get; set; }

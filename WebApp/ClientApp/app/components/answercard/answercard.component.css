@@ -51,3 +51,8 @@
     color:lightgray;
     font-style:italic;
 }
+
+.buy-offer {
+    float: right;
+    padding:1em;
+}

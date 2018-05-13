@@ -31,16 +31,6 @@ namespace ProjectQ.BusinessLogic
 
         #endregion
 
-        #region Private Methods
-        async Task<bool> IsUserAuthorizedToView(int userId, int answerId)
-        {
-            var answer = await FindAsync(answerId);
-            return userId == answer.UserId;
-            //TODO: Of course there will be other users who can be authorized
-            // Need to implement table for managing view permissions.
-        }
-        #endregion
-
         #region Interface Implementations
 
         async Task<int> IAnswerManager.AddAsync(Answer answer, int userId)
@@ -167,16 +157,16 @@ namespace ProjectQ.BusinessLogic
             return _unitOfWork.AnswerRepository.AnswerExists(id);
         }
 
-        async Task<ProtectedAnswerContent> IAnswerManager.FindProtectedAsync(int userId, int answerId)
+        /*async Task<ProtectedAnswerContent> IAnswerManager.FindProtectedAsync(int userId, int answerId)
         {
-            if (await IsUserAuthorizedToView(userId, answerId))
+            if (await _unitOfWork.AnswerRepository.HasViewRight(userId, answerId))
             {
                 return await _unitOfWork.AnswerRepository.FindProtectedAsync(answerId);
             }
 
             throw new Exception("Unauthorized");
             
-        }
+        }*/
 
         
 

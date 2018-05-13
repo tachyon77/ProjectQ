@@ -37,20 +37,30 @@ namespace ProjectQ.DAL.EntityFramework
             IQuestionRepository.GetAllForUserAsync(int userId)
         {
 
-            var questionPreviews = 
-                from question in _context.Questions.Include(q=>q.User).Where(q => !q.IsDeleted)
-                select new UserSpecificQuestionPreview()
-                {
-                    IsFollowing = question.QuestionFollowers.Any(
-                            x => x.IsFollowing && x.UserId == userId),
-                    Question = question,
-                    PreviewAnswer = question.Answers
+            try
+            {
+                var questionPreviews =
+                    from question in 
+                        _context.Questions
+                        .Include(q => q.User)
+                        .Where(q => !q.IsDeleted)
+                    select new UserSpecificQuestionPreview()
+                    {
+                        IsFollowing = question.QuestionFollowers.Any(
+                                x => x.IsFollowing && x.UserId == userId),
+                        Question = question,
+                        PreviewAnswer = question.Answers
                                     .Where(a => !a.IsDeleted)
                                     .OrderByDescending(a => a.OriginDate)
-                                    .SingleOrDefault()
-                };
+                                    .FirstOrDefault()
+                    };
 
-            return await questionPreviews.ToListAsync();
+                return await questionPreviews.ToListAsync();
+            }catch (Exception _e)
+            {
+                Console.Write(_e.StackTrace);
+                return null;
+            }
         }
 
         async Task<Question> IQuestionRepository.FindAsync(int id)

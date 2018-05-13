@@ -287,4 +287,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ViewerId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3baabfa3-6377-47ec-9ec4-953948aad54e" ChangeDateTime="05/12/2018 16:01:31">
+    <Property Name="ElementName" Value="[dbo].[AnswerViewRights].[ViewerId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerViewRights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="64c36258-ea72-4266-b120-d4927e87fa33" ChangeDateTime="05/12/2018 19:11:23">
+    <Property Name="ElementName" Value="[dbo].[AnswerViewRights].[GrantDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerViewRights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PurchaseDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d7815e81-0ae3-4f15-87a6-b2976ce0cc95" ChangeDateTime="05/12/2018 19:11:31">
+    <Property Name="ElementName" Value="[dbo].[AnswerViewRights].[IsDeleted]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnswerViewRights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HtmlContent" />
+  </Operation>
 </Operations>

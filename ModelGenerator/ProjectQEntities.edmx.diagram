@@ -4,34 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="22fd42c90aa441d9a5eff31650c4040e" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjectQModel.AnswerDraft" Width="1.5" PointX="5.25" PointY="15.375" />
-        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="7.5" PointY="17.125" />
-        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="5.25" PointY="19.125" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="13.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="34.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="31.625" />
-        <EntityTypeShape EntityType="ProjectQModel.ProtectedAnswerContent" Width="1.5" PointX="3" PointY="20" />
-        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="8.25" PointY="20.625" />
-        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="23.75" />
-        <EntityTypeShape EntityType="ProjectQModel.User" Width="1.5" PointX="0.75" PointY="14.5" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_ProtectedAnswerContents" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Educations_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Employments_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Notifications_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Questions_Users" />
-        <EntityTypeShape EntityType="ProjectQModel.AnswerViewRight" Width="1.5" PointX="10.5" PointY="17.5" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerViewRights_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerViewRights_Users" />
+      <Diagram DiagramId="afc439f114a94d65aa8cf1aa3d4a2fcb" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectQModel.AnswerDraft" Width="1.5" PointX="5.25" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.ProtectedAnswerContent" Width="1.5" PointX="6" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.PurchasedAnswer" Width="1.5" PointX="10.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectQModel.User" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Answers_ProtectedAnswerContents" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Answers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_PurchasedAnswers_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Educations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Employments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Notifications_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_PurchasedAnswers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectQModel.FK_Questions_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

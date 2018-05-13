@@ -14,7 +14,7 @@ namespace ProjectQ.BusinessLogic
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
             int questionId, int userId);
         Task<Answer> FindAsync(int id);
-        Task<ProtectedAnswerContent> FindProtectedAsync(int userId, int answerId);
+        //Task<ProtectedAnswerContent> FindProtectedAsync(int userId, int answerId);
         bool AnswerExists(int id);
     }
 }

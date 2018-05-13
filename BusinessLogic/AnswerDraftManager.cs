@@ -25,16 +25,6 @@ namespace ProjectQ.BusinessLogic
 
         #endregion
 
-        #region Private Methods
-        async Task<bool> IsUserAuthorizedToView(int userId, int answerId)
-        {
-            var draft = await FindAsync(answerId);
-            return userId == draft.UserId;
-            //TODO: Of course there will be other users who can be authorized
-            // Need to implement table for managing view permissions.
-        }
-        #endregion
-
         #region Interface Implementations
 
         async Task<int> IAnswerDraftManager.AddAsync(AnswerDraft draft, int userId)
@@ -62,31 +52,26 @@ namespace ProjectQ.BusinessLogic
         // This method should not rely on draft.Id as the Id wouldn't always be valid.
         async Task IAnswerDraftManager.AddOrUpdateAsync(int userId, AnswerDraft draft)
         {
-            try
+            var dbRecord = _unitOfWork.AnswerDraftRepository.GetForQuestionAndUser(draft.QuestionId, userId);
+
+            if (dbRecord == default(AnswerDraft))
             {
-                var dbRecord = _unitOfWork.AnswerDraftRepository.GetForQuestionAndUser(draft.QuestionId, userId);
-
-                if (dbRecord == default(AnswerDraft))
-                {
-                    await (this as IAnswerDraftManager).AddAsync(draft, userId);
-                }
-                else
-                {
-                    if (dbRecord.UserId != userId)
-                    {
-                        throw new Exception("Unauthorized");
-                    }
-
-                    draft.Id = dbRecord.Id;
-
-                    await _unitOfWork.AnswerDraftRepository
-                        .UpdateAsync(draft);
-                    await _unitOfWork.SaveAsync();
-                }
-            }catch (Exception _e)
-            {
-                Console.WriteLine(_e.StackTrace);
+                await (this as IAnswerDraftManager).AddAsync(draft, userId);
             }
+            else
+            {
+                if (dbRecord.UserId != userId)
+                {
+                    throw new Exception("Unauthorized");
+                }
+
+                draft.Id = dbRecord.Id;
+
+                await _unitOfWork.AnswerDraftRepository
+                    .UpdateAsync(draft);
+                await _unitOfWork.SaveAsync();
+            }
+            
         }
 
         public Task DeleteAsync(int userId, int whatId)
