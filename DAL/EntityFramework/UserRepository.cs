@@ -39,7 +39,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         User IUserRepository.FindByUniqueName(string uniqueName)
         {
-            return _context.Users.SingleOrDefault(x=>x.UniqueName.Equals(uniqueName));
+            return _context.Users.FirstOrDefault(x=>x.UniqueName.Equals(uniqueName));
         }
     }
 }

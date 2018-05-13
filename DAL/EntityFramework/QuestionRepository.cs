@@ -69,7 +69,7 @@ namespace ProjectQ.DAL.EntityFramework
                 .Include(x => x.Answers)
                 .Include(x=>x.User)
                 .Include(x=>x.QuestionFollowers)
-                .SingleAsync(x => x.Id.Equals(id));
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         bool IQuestionRepository.QuestionExists(int id)

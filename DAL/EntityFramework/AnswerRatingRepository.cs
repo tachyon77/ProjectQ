@@ -27,7 +27,7 @@ namespace ProjectQ.DAL.EntityFramework
         async Task<AnswerRating> IAnswerRatingRepository.GetByAnswerAndUserAsync(
             int answerId, int userId)
         {
-            return await _context.AnswerRatings.SingleOrDefaultAsync(
+            return await _context.AnswerRatings.FirstOrDefaultAsync(
                 x=>x.UserId.Equals(userId) &&
                 x.AnswerId.Equals(answerId));
         }

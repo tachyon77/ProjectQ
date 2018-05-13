@@ -24,7 +24,7 @@ namespace ProjectQ.DAL.EntityFramework
             QuestionFollower questionFollower)
         {
             var existingRecord = await _context.QuestionFollowers
-                .SingleOrDefaultAsync(
+                .FirstOrDefaultAsync(
                     x=>x.QuestionId== questionFollower.QuestionId
                     && 
                     x.UserId == questionFollower.UserId);
@@ -55,7 +55,7 @@ namespace ProjectQ.DAL.EntityFramework
             int questionId, int userId)
         {
             var existingRecord = await _context.QuestionFollowers
-               .SingleAsync(
+               .FirstOrDefaultAsync(
                    x => x.QuestionId == questionId
                    &&
                    x.UserId == userId);

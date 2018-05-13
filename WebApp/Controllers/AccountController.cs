@@ -70,7 +70,7 @@ namespace ProjectQ.WebApp.Controllers
                     .PasswordSignInAsync(data.Email, data.Password, true, false);
                 if (result.Succeeded)
                 {
-                    var appUser = _signInManager.UserManager.Users.Single(x=>x.Email.Equals(data.Email));
+                    var appUser = _signInManager.UserManager.Users.FirstOrDefault(x=>x.Email.Equals(data.Email));
 
                     var user = await _userManager.FindAsync(appUser.UserId);
                     return Ok(user);

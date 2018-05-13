@@ -54,7 +54,7 @@ namespace ProjectQ.DAL.EntityFramework
                     a=> new UserSpecificAnswerView()
                     {
                         Answer = a,
-                        Rating = a.AnswerRatings.SingleOrDefault(x=>x.UserId.Equals(a.UserId)),
+                        Rating = a.AnswerRatings.FirstOrDefault(x=>x.UserId.Equals(a.UserId)),
                         AverageRating = a.AnswerRatings.Any() ?
                             Convert.ToDecimal(a.AnswerRatings.Average(r => r.Rating))
                             :
@@ -67,7 +67,7 @@ namespace ProjectQ.DAL.EntityFramework
         async public Task<Answer> FindAsync(int id)
         {
             return await _context.Answers.Include(x=>x.User)
-                .SingleOrDefaultAsync(x=>x.Id.Equals(id));
+                .FirstOrDefaultAsync(x=>x.Id.Equals(id));
         }
 
         async Task IAnswerRepository.UpdateAsync(Answer answer)
@@ -100,7 +100,7 @@ namespace ProjectQ.DAL.EntityFramework
         {
             return await _context.Answers
                 .Include(x => x.ProtectedAnswerContent)
-                .SingleAsync(x => x.Id.Equals(id));
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         #endregion

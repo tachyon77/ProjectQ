@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
 using ProjectQ.Model;
 
 namespace ProjectQ.DAL.EntityFramework
@@ -39,7 +36,7 @@ namespace ProjectQ.DAL.EntityFramework
             int questionId,
             int userId)
         {
-            return _context.AnswerDrafts.SingleOrDefault
+            return _context.AnswerDrafts.FirstOrDefault
                 (
                     x =>
                         !x.IsDeleted 
