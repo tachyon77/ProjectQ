@@ -96,11 +96,11 @@ namespace ProjectQ.DAL.EntityFramework
         #endregion
 
         #region Private methods
-        async Task<Answer> FindAnswerIncludeProtectedAsync(int id)
+        async Task<Answer> FindAnswerIncludeProtectedAsync(int answerId)
         {
             return await _context.Answers
                 .Include(x => x.ProtectedAnswerContent)
-                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+                .FirstOrDefaultAsync(x => x.Id.Equals(answerId));
         }
 
         #endregion

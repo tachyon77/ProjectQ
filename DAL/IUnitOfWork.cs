@@ -11,6 +11,7 @@ namespace ProjectQ.DAL
         IQuestionFollowerRepository QuestionFollowerRepository { get; }
         IQuestionRepository QuestionRepository { get; }
         IAnswerRepository AnswerRepository { get; }
+        IPurchasedAnswerRepository PurchasedAnswerRepository { get; }
         IAnswerDraftRepository AnswerDraftRepository { get; }
         INotificationRepository NotificationRepository { get; }
         IAnswerRatingRepository AnswerRatingRepository { get; }

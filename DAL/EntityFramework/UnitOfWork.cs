@@ -15,6 +15,7 @@ namespace ProjectQ.DAL.EntityFramework
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
         private IAnswerRepository _answerRepository;
+        private IPurchasedAnswerRepository _purchasedAnswerRepository;
         private IAnswerDraftRepository _answerDraftRepository;
         private IAnswerRatingRepository _answerRatingRepository;
         private INotificationRepository _notificationRepository;
@@ -101,6 +102,18 @@ namespace ProjectQ.DAL.EntityFramework
                     _answerRepository = new AnswerRepository(_context);
                 }
                 return _answerRepository;
+            }
+        }
+
+        IPurchasedAnswerRepository IUnitOfWork.PurchasedAnswerRepository
+        {
+            get
+            {
+                if (_purchasedAnswerRepository == null)
+                {
+                    _purchasedAnswerRepository = new PurchasedAnswerRepository(_context);
+                }
+                return _purchasedAnswerRepository;
             }
         }
 
