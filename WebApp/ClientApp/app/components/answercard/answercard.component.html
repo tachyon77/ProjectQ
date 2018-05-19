@@ -1,8 +1,5 @@
 ﻿<p *ngIf="!answerView"><em>Loading...</em></p>
 <div *ngIf="answerView" class="answer-card">
-
-   
-
     <div *ngIf="!isUpdateAnswerVisible">
         <div class="answer-user" *ngIf="answerView.answer.user">
             {{answerView.answer.user.name}}
@@ -21,14 +18,14 @@
                       *ngIf="answerView.answer.isProtected && !isAuthor">
                     <!--Buy-->
                     <button 
-                            class="btn btn-success"
+                            class="btn btn-success btn-sm"
                             (click)="OnPurchaseClick()">
                         <i class="fas fa-shopping-cart"></i>
                         Buy
                     </button>
 
                     <!--counter offer-->
-                    <button class="btn btn-secondary"
+                    <button class="btn btn-secondary btn-sm"
                             (click)="OnCounterOfferClick()">
                         <i class="fas fa-hand-holding-usd"></i>
                         Counter offer
@@ -92,14 +89,14 @@
 
         <!--Edit-->
         <button *ngIf="isAuthor"
-                class="btn btn-default"
+                class="btn btn-default btn-sm"
                 (click)="OnEditClick()">
             Edit
         </button>
 
         <!--Delete-->
         <button *ngIf="isAuthor"
-                class="btn btn-default"
+                class="btn btn-default btn-sm"
                 (click)="OnDeleteClick()">
             <span *ngIf="answerView.answer.isDeleted">Undelete</span>
             <span *ngIf="!answerView.answer.isDeleted">Delete</span>

@@ -20,17 +20,17 @@
             </div>
 
             <button *ngIf="isAsker"
-                    class="btn btn-default"
+                    class="btn btn-default btn-sm"
                     (click)="OnEditQuestionClick()">
                 Edit Question
             </button>
             <button *ngIf="!isAnswerWritten"
-                    class="btn btn-default"
+                    class="btn btn-default btn-sm"
                     (click)="OnAnswerClick()">
                 Answer
             </button>
             <button *ngIf="isAsker"
-                    class="btn btn-danger delete-question"
+                    class="btn btn-danger delete-question btn-sm"
                     (click)="OnDeleteQuestionClick()">
                 <span *ngIf="question.isDeleted">Undelete</span>
                 <span *ngIf="!question.isDeleted">Delete</span>
