@@ -11,6 +11,7 @@ export class AnswerDraft {
     originDate: Date;
     htmlContent: string;
     user: User;
+    price: number;
 }
 
 

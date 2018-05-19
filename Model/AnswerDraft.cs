@@ -22,7 +22,8 @@ namespace ProjectQ.Model
         public bool IsProtected { get; set; }
         public System.DateTime ExpiryDate { get; set; }
         public bool IsDeleted { get; set; }
-    
+        public int Price { get; set; }
+
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }
     }

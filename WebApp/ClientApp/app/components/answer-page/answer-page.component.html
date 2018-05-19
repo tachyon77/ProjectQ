@@ -23,23 +23,15 @@
             </div>
 
             <div [innerHTML]="answerContent"
-                 [ngClass]="{
-             'answer-content': true,
-             'deleted-answer': answer.isDeleted}">
+                 class="answer-content">
             </div>
             <button class="btn btn-default"
                     (click)="OnEditClick()">
                 Edit
             </button>
-            <button *ngIf="!answer.isDeleted"
-                    class="btn btn-default"
+            <button class="btn btn-default"
                     (click)="OnDeleteClick()">
                 Delete
-            </button>
-            <button *ngIf="answer.isDeleted"
-                    class="btn btn-default"
-                    (click)="OnUnDeleteClick()">
-                Undelete
             </button>
         </div>
 

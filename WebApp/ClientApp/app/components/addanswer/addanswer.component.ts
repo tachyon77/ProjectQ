@@ -93,8 +93,8 @@ export class AddAnswerComponent {
             });
     }
 
-    onSaveDraft() {
-        
+    onSaveDraft(form: AnswerForm) {
+        this._draft.price = form.price;
         this.answerDraftService.update(this._draft)
             .subscribe(() => {
                 this.lastSaved = new Date();

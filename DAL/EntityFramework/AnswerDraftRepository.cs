@@ -57,6 +57,7 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.HtmlContent = draft.HtmlContent;
             dbRecord.IsProtected = draft.IsProtected;
             dbRecord.ExpiryDate = draft.ExpiryDate;
+            dbRecord.Price = draft.Price;
         }
 
 

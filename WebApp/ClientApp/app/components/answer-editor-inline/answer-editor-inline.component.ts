@@ -30,6 +30,7 @@ export class AnswerEditorInlineComponent{
                         this._draft = json as AnswerDraft;
                         this._curProtectedContent = this._draft.htmlContent;
 
+                        this.initForm();
                         this.scheduleDraftStatusUpdater();
                     },
                     error => console.error(error)
@@ -68,9 +69,9 @@ export class AnswerEditorInlineComponent{
         return this._draft;
     }
 
-    ngOnInit() {
+    initForm() {
         this.form = this.formBuilder.group({
-            price: this.formBuilder.control(0, Validators.compose([
+            price: this.formBuilder.control(this.draft.price, Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),
         });
@@ -106,7 +107,8 @@ export class AnswerEditorInlineComponent{
             });
     }
 
-    onSaveDraft() {
+    onSaveDraft(form: AnswerForm) {
+        this._draft.price = form.price;
         this.answerDraftService.update(this._draft)
             .subscribe(() => {
                 this.lastSaved = new Date();

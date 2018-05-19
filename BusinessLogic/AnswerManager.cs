@@ -61,6 +61,7 @@ namespace ProjectQ.BusinessLogic
                         QuestionId = question.Id,
                         UserId = user.Id,
                         ExpiryDate = now,
+                        Price = answer.Price
                     },
                     shouldSaveContext: false
                 );
@@ -117,7 +118,7 @@ namespace ProjectQ.BusinessLogic
             var draft = _unitOfWork.AnswerDraftRepository
                 .GetForQuestionAndUser(answer.QuestionId, userId);
 
-            draft.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
+            syncDraftToAnswer(draft, answer);
 
             await _unitOfWork.AnswerDraftRepository
                 .UpdateAsync(draft);
@@ -169,7 +170,15 @@ namespace ProjectQ.BusinessLogic
             
         }*/
 
-        
+        #endregion
+
+        #region Private methods
+
+        void syncDraftToAnswer(AnswerDraft draft, Answer answer)
+        {
+            draft.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
+            draft.Price = answer.Price;
+        } 
 
         #endregion
     }

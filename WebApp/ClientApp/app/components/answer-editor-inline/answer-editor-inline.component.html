@@ -1,4 +1,6 @@
-﻿<form [formGroup]="form"
+﻿<em *ngIf="!answer || !draft">Loading ...</em>
+<form *ngIf="answer && draft"
+      [formGroup]="form"
       (ngSubmit)="onSubmit(form.value)"
       class="answer-form">
 
@@ -12,8 +14,7 @@
                        class="form-control"
                        name="price"
                        id="price"
-                       formControlName="price"
-                       placeholder="$">
+                       formControlName="price">
             </div>
         </div>
     </div>
@@ -28,7 +29,8 @@
             class="btn btn-primary btn-sm">
         Save
     </button>
-    <button (click)="onSaveDraft()"
+    <button type="button"
+            (click)="onSaveDraft(form.value)"
             class="btn btn-light no-border btn-sm">
         Save Draft
     </button>
