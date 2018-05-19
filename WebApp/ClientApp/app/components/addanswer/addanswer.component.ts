@@ -1,10 +1,15 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { AnswerService, Answer, ProtectedAnswerContent } from '../../services/answers.service'
 import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
 import { RedactorService } from '../../services/redactor.service'
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+interface AnswerForm {
+    price: number;
+}
 
 @Component({
     selector: 'add-answer',
@@ -12,13 +17,13 @@ import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
     styleUrls:['./addanswer.component.css'],
 })
 export class AddAnswerComponent {
-    form: FormGroup;
     private _draft: AnswerDraft = new AnswerDraft();
     private _answer: Answer = new Answer();
     initialContent: string;
     lastSaved: Date;
     draftUpdate: string;
     dateFilter = new ReadableDatePipe();
+    form: FormGroup;
 
     @Output() answerAdded = new EventEmitter();
 
@@ -26,7 +31,9 @@ export class AddAnswerComponent {
         private formBuilder: FormBuilder,
         private answerService: AnswerService,
         private answerDraftService: AnswerDraftService,
-        private redactorService: RedactorService) { }
+        private redactorService: RedactorService) {
+    }
+
 
     get draft() {
         return this._draft;
@@ -58,9 +65,12 @@ export class AddAnswerComponent {
     }
 
     ngOnInit() {
+
         this.form = this.formBuilder.group({
-            text: this.formBuilder.control('', Validators.compose([Validators.required])),            
-        });   
+            price: this.formBuilder.control(0, Validators.compose([
+                Validators.pattern('[0-9]+'),
+            ])),
+        });
 
         setInterval(
             () => {
@@ -75,7 +85,7 @@ export class AddAnswerComponent {
         );
     }
 
-    onSubmit() {
+    onSubmit(form: AnswerForm) {
         this._answer.protectedAnswerContent = new ProtectedAnswerContent();
 
         this._answer.protectedAnswerContent.htmlContent = this._draft.htmlContent;

@@ -1,17 +1,44 @@
-﻿<div class="content-editor-container">
-    <content-editor [content]="initialContent"
-                    [enableRedaction]="true"
-                    (contentChanged)="onContentChange($event)">
-    </content-editor>   
-</div>
-<button type="submit"
-        (click)="onSubmit()"
-        class="btn btn-primary">
-    Submit
-</button>
-<button (click)="onSaveDraft()"
-        class="btn btn-light no-border">
-    Save Draft
-</button>
-<span class="draft-status">{{draftUpdate}}</span>
- 
+﻿<form [formGroup]="form"
+      (ngSubmit)="onSubmit(form.value)"
+      class="answer-form">
+
+    <div class="form-row align-items-center">
+        <div class="col-sm-3 my-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Price</div>
+                </div>
+                <input type="text" 
+                       class="form-control"
+                       name="price"
+                       id="price" 
+                       formControlName="price"
+                       placeholder="$">
+            </div>
+        </div>
+    </div>
+
+    <div class="content-editor-container">
+        <content-editor [content]="initialContent"
+                        [enableRedaction]="true"
+                        (contentChanged)="onContentChange($event)">
+        </content-editor>
+    </div>
+
+
+    <button type="submit"
+            [disabled]="!form.valid"
+            class="btn btn-primary btn-sm">
+        Submit
+    </button>
+    <button (click)="onSaveDraft()"
+            class="btn btn-light no-border btn-sm">
+        Save Draft
+    </button>
+    <span class="draft-status">{{draftUpdate}}</span>
+</form>
+
+
+
+
+
