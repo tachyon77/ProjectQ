@@ -12,8 +12,8 @@ export class Answer {
     isProtected: boolean;
     redactedHtmlContent: string; // To be used in general
     user: User;
-    protectedAnswerContent: ProtectedAnswerContent;
-    // To be used by author for ediring or for users with permission.
+    protectedAnswerContent: ProtectedAnswerContent; // To be used by author for ediring or for users with permission.
+    price: number;
 }
 
 export class ProtectedAnswerContent {

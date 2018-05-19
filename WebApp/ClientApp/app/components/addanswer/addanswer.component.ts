@@ -87,7 +87,7 @@ export class AddAnswerComponent {
 
     onSubmit(form: AnswerForm) {
         this._answer.protectedAnswerContent = new ProtectedAnswerContent();
-
+        this._answer.price = form.price;
         this._answer.protectedAnswerContent.htmlContent = this._draft.htmlContent;
         this._answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this._draft.htmlContent);
 
