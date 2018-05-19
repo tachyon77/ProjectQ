@@ -6,7 +6,6 @@
     [OriginDate] DATETIME          NOT NULL,
     [IsProtected]  BIT           NOT NULL,
     [ExpiryDate] DATE          NOT NULL,
-    [IsDeleted] BIT NOT NULL DEFAULT 0, 
     [ProtectedAnswerContentId] INT NOT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Answers_Questions] FOREIGN KEY ([QuestionId]) REFERENCES [dbo].[Questions] ([Id]) ON DELETE CASCADE,

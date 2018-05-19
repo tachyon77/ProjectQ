@@ -28,7 +28,6 @@ namespace ProjectQ.Model
         public System.DateTime OriginDate { get; set; }
         public bool IsProtected { get; set; }
         public System.DateTime ExpiryDate { get; set; }
-        public bool IsDeleted { get; set; }
         public int ProtectedAnswerContentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

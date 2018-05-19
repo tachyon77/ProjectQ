@@ -35,7 +35,7 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         async Task<IEnumerable<UserSpecificAnswerView>> 
-            IAnswerRepository.GetForQuestionAndUserAsync(
+            IAnswerRepository.GetViewForQuestionAndUserAsync(
             int questionId,
             int userId)
         {
@@ -43,10 +43,8 @@ namespace ProjectQ.DAL.EntityFramework
                 _context.Answers
                 .Include(a=>a.User)
                 .Include(a=>a.AnswerRatings)
-                .Where
-                (
-                    a => !a.IsDeleted && a.QuestionId.Equals(questionId)
-                ).ToListAsync();
+                .Where(a => a.QuestionId.Equals(questionId)).
+                ToListAsync();
 
             var userSpecificAnswerViews = answers
                 .ToList()
@@ -83,8 +81,8 @@ namespace ProjectQ.DAL.EntityFramework
 
         async public Task DeleteAsync(int answerId)
         {
-            var dbRecord = await FindAsync(answerId);
-            dbRecord.IsDeleted = true;
+            Answer dbRecord = await FindAsync(answerId);
+            _context.Answers.Remove(dbRecord);
         }
 
         async Task<ProtectedAnswerContent> IAnswerRepository.FindProtectedAsync(int id)

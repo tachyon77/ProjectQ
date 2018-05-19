@@ -31,10 +31,15 @@
                     (click)="OnEditClick()">
                 Edit
             </button>
-            <button class="btn btn-default"
+            <button *ngIf="!answer.isDeleted"
+                    class="btn btn-default"
                     (click)="OnDeleteClick()">
-                <span *ngIf="answer.isDeleted">Undelete</span>
-                <span *ngIf="!answer.isDeleted">Delete</span>
+                Delete
+            </button>
+            <button *ngIf="answer.isDeleted"
+                    class="btn btn-default"
+                    (click)="OnUnDeleteClick()">
+                Undelete
             </button>
         </div>
 

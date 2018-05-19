@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 
 export class Answer {
     id: number;
-    isDeleted: boolean;
     questionId: number;
     originDate: Date;
     isProtected: boolean;
@@ -83,4 +82,12 @@ export class AnswerService {
             null
         ).map(response => { });
     }
+
+    unDelete(answerId: number) {
+        return this.http.put(
+            'api/Answers/undelete/' + answerId, // TODO: not implemented yet.
+            null
+        ).map(response => { });
+    }
+
 }

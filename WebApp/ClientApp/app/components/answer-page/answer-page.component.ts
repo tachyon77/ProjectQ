@@ -73,8 +73,14 @@ export class AnswerPageComponent implements OnInit {
     }
 
     OnDeleteClick() {
-        this.answer.isDeleted = !this.answer.isDeleted;
         this.answerService.delete(this.answer.id)
+            .subscribe(() => {
+                //this.answerDeleted.emit(this.answer);
+            });
+    }
+
+    OnUnDeleteClick() {
+        this.answerService.unDelete(this.answer.id)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
             });

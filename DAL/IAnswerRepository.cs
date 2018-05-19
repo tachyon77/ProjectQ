@@ -12,9 +12,10 @@ namespace ProjectQ.DAL
         Task AddAsync(Answer answer);
         Task UpdateAsync(Answer answer);
         Task DeleteAsync(int answerId);
-        Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
+        Task<IEnumerable<UserSpecificAnswerView>> GetViewForQuestionAndUserAsync(
             int questionId,
             int userId);
+        //Task<Answer> GetAnswerWrittenByUserForQuestion(int userId, int questionId);
         Task<Answer> FindAsync(int id);
         Task<ProtectedAnswerContent> FindProtectedAsync(int answerId);
         bool AnswerExists(int id);

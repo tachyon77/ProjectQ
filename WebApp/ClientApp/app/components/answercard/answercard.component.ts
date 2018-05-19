@@ -79,7 +79,6 @@ export class AnswerCardComponent {
     }
 
     OnDeleteClick() {
-        this.answerView.answer.isDeleted = !this.answerView.answer.isDeleted;
         this.answerService.delete(this.answerView.answer.id)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
