@@ -1,8 +1,9 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, Answer, ProtectedAnswerContent } from '../../services/answers.service'
+import { AnswerService, Answer, ProtectedAnswerContent, AnswerForm } from '../../services/answers.service'
 import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
 import { RedactorService } from '../../services/redactor.service'
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 // Input: answer id
 // Output: Answer updated event, Update canelled event.
@@ -46,8 +47,10 @@ export class AnswerEditorInlineComponent{
     dateFilter = new ReadableDatePipe();
     // We need this to save the original content in case we want to cancel update and revert back
     private _curProtectedContent: string;
+    form: FormGroup;
 
     constructor(
+        private formBuilder: FormBuilder,
         private answerService: AnswerService,
         private answerDraftService: AnswerDraftService,
         private redactorService: RedactorService,
@@ -63,6 +66,14 @@ export class AnswerEditorInlineComponent{
 
     get draft() {
         return this._draft;
+    }
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            price: this.formBuilder.control(0, Validators.compose([
+                Validators.pattern('[0-9]+'),
+            ])),
+        });
     }
 
     scheduleDraftStatusUpdater() {
@@ -82,9 +93,9 @@ export class AnswerEditorInlineComponent{
         this.draft.htmlContent = content;
     }
 
-    onSubmit() {
-
+    onSubmit(form: AnswerForm) {
         this.answer.protectedAnswerContent = new ProtectedAnswerContent();
+        this.answer.price = form.price;
         this.answer.protectedAnswerContent.htmlContent = this.draft.htmlContent;
         this.answer.redactedHtmlContent =
             this.redactorService.getRedactedHtml(this.draft.htmlContent);

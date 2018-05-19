@@ -1,15 +1,11 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 
-import { AnswerService, Answer, ProtectedAnswerContent } from '../../services/answers.service'
+import { AnswerService, Answer, ProtectedAnswerContent, AnswerForm } from '../../services/answers.service'
 import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
 import { RedactorService } from '../../services/redactor.service'
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-
-interface AnswerForm {
-    price: number;
-}
 
 @Component({
     selector: 'add-answer',

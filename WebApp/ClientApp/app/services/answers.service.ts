@@ -5,6 +5,11 @@ import { AnswerRating } from './answerrating.service'
 
 import 'rxjs/add/operator/map';
 
+export class AnswerForm {
+    price: number;
+}
+
+
 export class Answer {
     id: number;
     questionId: number;
