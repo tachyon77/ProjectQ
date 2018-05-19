@@ -50,7 +50,7 @@ namespace ProjectQ.BusinessLogic
         }
 
         // This method should not rely on draft.Id as the Id wouldn't always be valid.
-        async Task IAnswerDraftManager.AddOrUpdateAsync(int userId, AnswerDraft draft)
+        async Task IAnswerDraftManager.AddOrUpdateAsync(int userId, AnswerDraft draft, bool shouldSaveContext)
         {
             var dbRecord = _unitOfWork.AnswerDraftRepository.GetForQuestionAndUser(draft.QuestionId, userId);
 
@@ -69,7 +69,11 @@ namespace ProjectQ.BusinessLogic
 
                 await _unitOfWork.AnswerDraftRepository
                     .UpdateAsync(draft);
-                await _unitOfWork.SaveAsync();
+
+                if (shouldSaveContext)
+                {
+                    await _unitOfWork.SaveAsync();
+                }
             }
             
         }

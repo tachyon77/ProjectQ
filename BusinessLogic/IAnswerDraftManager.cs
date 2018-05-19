@@ -9,7 +9,7 @@ namespace ProjectQ.BusinessLogic
     public interface IAnswerDraftManager
     {
         Task<int> AddAsync(AnswerDraft draft, int userId);
-        Task AddOrUpdateAsync(int userId, AnswerDraft draft);
+        Task AddOrUpdateAsync(int userId, AnswerDraft draft, bool shouldSaveContext);
         Task DeleteAsync(int userId, int draftId);
         AnswerDraft GetForQuestionAndUser(int questionId, int userId);
         Task<AnswerDraft> FindAsync(int id);

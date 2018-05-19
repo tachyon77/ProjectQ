@@ -61,7 +61,8 @@ namespace ProjectQ.BusinessLogic
                         QuestionId = question.Id,
                         UserId = user.Id,
                         ExpiryDate = now,
-                    }
+                    },
+                    shouldSaveContext: false
                 );
 
             var followers =
@@ -144,7 +145,7 @@ namespace ProjectQ.BusinessLogic
             return await
                 _unitOfWork
                 .AnswerRepository
-                .GetForQuestionAndUserAsync(questionId, userId);
+                .GetViewForQuestionAndUserAsync(questionId, userId);
         }
 
         async public Task<Answer> FindAsync(int id)

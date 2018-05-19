@@ -84,7 +84,9 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
             await _draftManager.AddOrUpdateAsync(
-                (await _userManager.GetUserAsync(User)).UserId, updated);
+                (await _userManager.GetUserAsync(User)).UserId, 
+                updated, 
+                shouldSaveContext:true);
 
             return new NoContentResult();
         }
