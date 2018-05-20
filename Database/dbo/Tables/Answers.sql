@@ -4,7 +4,6 @@
     [UserId]     INT           NOT NULL,
 	[RedactedHtmlContent]        VARCHAR (MAX) NULL,
     [OriginDate] DATETIME          NOT NULL,
-    [IsProtected]  BIT           NOT NULL,
     [ExpiryDate] DATE          NOT NULL,
     [ProtectedAnswerContentId] INT NOT NULL, 
     [Price] INT NOT NULL DEFAULT 0, 

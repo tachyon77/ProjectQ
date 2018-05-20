@@ -39,8 +39,7 @@ namespace ProjectQ.DAL.EntityFramework
             return _context.AnswerDrafts.FirstOrDefault
                 (
                     x =>
-                        !x.IsDeleted 
-                    &&  x.QuestionId.Equals(questionId)
+                        x.QuestionId.Equals(questionId)
                     &&  x.UserId.Equals(userId)
                 );
         }
@@ -55,7 +54,6 @@ namespace ProjectQ.DAL.EntityFramework
             var dbRecord = await FindAsync(draft.Id);
 
             dbRecord.HtmlContent = draft.HtmlContent;
-            dbRecord.IsProtected = draft.IsProtected;
             dbRecord.ExpiryDate = draft.ExpiryDate;
             dbRecord.Price = draft.Price;
         }
@@ -64,7 +62,7 @@ namespace ProjectQ.DAL.EntityFramework
         async public Task DeleteAsync(int answerId)
         {
             var dbRecord = await FindAsync(answerId);
-            dbRecord.IsDeleted = true;
+            _context.AnswerDrafts.Remove(dbRecord);
         }
 
         #endregion

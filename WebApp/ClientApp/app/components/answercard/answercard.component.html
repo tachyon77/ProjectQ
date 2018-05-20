@@ -15,7 +15,7 @@
             <div class="answer-date">
                 Answered {{answerView.answer.originDate | readableDate}}
                 <span class="buy-offer"
-                      *ngIf="answerView.answer.isProtected && !isAuthor">
+                      *ngIf="answerView.answer.price > 0 && !isAuthor">
                     <!--Buy-->
                     <button 
                             class="btn btn-success btn-sm"

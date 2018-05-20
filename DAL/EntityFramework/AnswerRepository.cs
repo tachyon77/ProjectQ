@@ -74,7 +74,6 @@ namespace ProjectQ.DAL.EntityFramework
 
             dbRecord.ProtectedAnswerContent.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
             dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
-            dbRecord.IsProtected = answer.IsProtected;
             dbRecord.ExpiryDate = answer.ExpiryDate;
             dbRecord.Price = answer.Price;
         }

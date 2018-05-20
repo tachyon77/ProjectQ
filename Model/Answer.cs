@@ -26,7 +26,6 @@ namespace ProjectQ.Model
         public int UserId { get; set; }
         public string RedactedHtmlContent { get; set; }
         public System.DateTime OriginDate { get; set; }
-        public bool IsProtected { get; set; }
         public System.DateTime ExpiryDate { get; set; }
         public int ProtectedAnswerContentId { get; set; }
         public int Price { get; set; }

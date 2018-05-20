@@ -19,7 +19,6 @@ namespace ProjectQ.Model
         public int UserId { get; set; }
         public string HtmlContent { get; set; }
         public System.DateTime OriginDate { get; set; }
-        public bool IsProtected { get; set; }
         public System.DateTime ExpiryDate { get; set; }
         public bool IsDeleted { get; set; }
     
