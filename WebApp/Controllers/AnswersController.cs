@@ -65,27 +65,6 @@ namespace WebApp.Controllers
             return Ok(Answer);
         }
 
-        /*
-        // GET: api/Answers/Protected/5
-        [HttpGet("Protected/{id}")]
-        public async Task<IActionResult> GetProtectedAnswer([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var userId = (await _userManager.GetUserAsync(User)).UserId;
-            var protectedAnswer = await _answerManager.FindProtectedAsync(userId, id);
-
-            if (protectedAnswer == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(protectedAnswer);
-        }
-        */
 
         // POST: api/Answers
         [HttpPost]

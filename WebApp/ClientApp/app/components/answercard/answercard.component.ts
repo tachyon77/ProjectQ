@@ -85,6 +85,13 @@ export class AnswerCardComponent {
             });
     }
 
+    OnPurchaseClick() {
+        this.answerService.purchase(this.answerView.answer.id)
+            .subscribe(() => {
+                alert("Purchase successful");
+            });
+    }
+
     onAnswerUpdated(answer: Answer) {
         this.answerView.answer = answer;
         this.answerContent =

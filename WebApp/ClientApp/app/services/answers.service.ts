@@ -54,20 +54,17 @@ export class AnswerService {
         });
     }
 
-    /*
-    getProtectedContent(answerId: number) {
-        return this.http.get(
-            'api/Answers/Protected/' + answerId
-        ).map(response => {
-            return response;
-        });
-    }
-    */
-
     add(answer: Answer) {
         return this.http.post(
             'api/Answers',
             answer          
+        ).map(response => { });
+    }
+
+    purchase(answerId: number) {
+        return this.http.post(
+            'api/PurchasedAnswers',
+            answerId
         ).map(response => { });
     }
 
