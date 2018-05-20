@@ -23,6 +23,10 @@ export class NotificationPopoverComponent{
         this._notifications = [];
         this.visible = true;
         this.fistClick = true;
+        this.loadNotifications();
+    }
+
+    loadNotifications() {
         this.notificationService.getUnseen()
             .subscribe(result => {
                 this._notifications = result as Notification[];
@@ -32,7 +36,7 @@ export class NotificationPopoverComponent{
 
     onMarkAllReadClick() {
         this.notificationService.markAllAsSeen()
-            .subscribe(result => { });
+            .subscribe(result => { this.loadNotifications(); });
     }
 
     onNotificationClick(id: number) {
