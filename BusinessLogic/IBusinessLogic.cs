@@ -45,6 +45,7 @@ namespace ProjectQ.BusinessLogic
     public interface INotificationManager
     {
         Task MarkSeenAsync(int id);
+        Task MarkAllSeenAsync(int userId);
         Task<IEnumerable<Notification>> GetForUserAsync(int userId);
     }
 

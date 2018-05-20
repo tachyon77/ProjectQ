@@ -29,4 +29,10 @@ export class NotificationService {
             });
     }
 
+    markAllAsSeen() {
+        return this.http.post('api/notifications/markallseen', null)
+            .map(response => {
+                return response;
+            });
+    }
 }

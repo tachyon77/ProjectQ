@@ -47,11 +47,19 @@ namespace WebApp.Controllers
                 (await _userManager.GetUserAsync(User)).UserId);
         }
 
-        // POST: api/Notifications
+        // POST: api/Notifications/markseen
         [HttpPost("markseen")]
         async public Task MarkSeen([FromBody] int id)
         {
             await _notificationManager.MarkSeenAsync(id);
+        }
+
+        // POST: api/Notifications/markallseen
+        [HttpPost("markallseen")]
+        async public Task MarkAllSeen()
+        {
+            var userId = (await _userManager.GetUserAsync(User)).UserId;
+            await _notificationManager.MarkAllSeenAsync(userId);
         }
 
         // GET: api/Notifications/ws

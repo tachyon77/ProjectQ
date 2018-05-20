@@ -38,6 +38,15 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
+        async Task INotificationManager.MarkAllSeenAsync(int userId)
+        {
+            var notifications = await _unitOfWork.NotificationRepository.GetUnseenForUserAsyc(userId);
+
+            notifications.ToList().ForEach( n=> { n.IsSeen = true; } );
+
+            await _unitOfWork.SaveAsync();
+        }
+
 
         #endregion
     }

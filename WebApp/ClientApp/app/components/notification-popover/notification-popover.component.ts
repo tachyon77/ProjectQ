@@ -30,6 +30,11 @@ export class NotificationPopoverComponent{
             }, error => console.error(error));
     }
 
+    onMarkAllReadClick() {
+        this.notificationService.markAllAsSeen()
+            .subscribe(result => { });
+    }
+
     onNotificationClick(id: number) {
         this.notificationService.markAsSeen(id)
             .subscribe(result => { });
