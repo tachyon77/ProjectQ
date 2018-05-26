@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RedactorService } from '../../services/redactor.service';
 import { PurchasedAnswerService, PurchasedAnswer } from '../../services/purchased-answers.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
@@ -29,6 +30,7 @@ export class PurchasedAnswersComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private purchasedAnswerService: PurchasedAnswerService,
         private sanitizer: DomSanitizer,
+        private redactorService: RedactorService,
     ) {
         this.loadPurchasedAnswers();
     }
@@ -39,5 +41,9 @@ export class PurchasedAnswersComponent implements OnInit {
                 this.purchasedAnswers = response as PurchasedAnswer[];
             }
         );
+    }
+
+    removeRedactionMarkers(html: string) {
+        return this.redactorService.getRedactionMarkersFreeHtml(html);
     }
 }

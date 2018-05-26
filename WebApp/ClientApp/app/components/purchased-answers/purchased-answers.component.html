@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="purchasedAnswers">
     <div *ngFor="let purchasedAnswer of purchasedAnswers">
-        <html-content [htmlString]="purchasedAnswer.htmlContent"
+        <html-content [htmlString]="removeRedactionMarkers(purchasedAnswer.htmlContent)"
                       class="answer-content">
         </html-content>
     </div>
