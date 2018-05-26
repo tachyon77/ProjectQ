@@ -1,11 +1,18 @@
-﻿<div *ngIf="!purchasedAnswers">
-    Loading your purchased answers ...
+﻿<div *ngIf="!purchasedAnswerViews">
+    <em>Loading your purchased answers ...</em>
 </div>
-<div *ngIf="purchasedAnswers">
-    <div *ngFor="let purchasedAnswer of purchasedAnswers">
-        <html-content [htmlString]="removeRedactionMarkers(purchasedAnswer.htmlContent)"
+<div *ngIf="purchasedAnswerViews">
+    <div class="section-heading">
+        Your Purchased Answers
+    </div>
+    <div *ngFor="let purchasedAnswerView of purchasedAnswerViews">
+        <h5>
+            {{purchasedAnswerView.question.title}}
+        </h5>
+        <html-content [htmlString]="removeRedactionMarkers(purchasedAnswerView.purchasedAnswer.htmlContent)"
                       class="answer-content">
         </html-content>
+        <hr />
     </div>
 
 </div>

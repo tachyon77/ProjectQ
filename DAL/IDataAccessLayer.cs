@@ -25,7 +25,7 @@ namespace ProjectQ.DAL
     public interface IPurchasedAnswerRepository
     {
         Task AddAsync(PurchasedAnswer purchasedAnswer);
-        Task<IEnumerable<PurchasedAnswer>> GetForUserAsync(int userId);
+        Task<IEnumerable<PurchasedAnswerView>> GetForUserAsync(int userId);
     }
 
     public interface IUserRepository

@@ -53,7 +53,7 @@ namespace ProjectQ.BusinessLogic
     {
         // This is to be called after payment/credit card transaction is successful
         Task<int> PurchaseAsync(int answerId, int userId, decimal price);
-        Task<IEnumerable<PurchasedAnswer>> GetForUserAsync(int userId);
+        Task<IEnumerable<PurchasedAnswerView>> GetForUserAsync(int userId);
     }
 
     public interface IQuestionFollowerManager

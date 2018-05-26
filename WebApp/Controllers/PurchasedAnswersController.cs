@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PurchasedAnswer>> Get()
+        public async Task<IEnumerable<PurchasedAnswerView>> Get()
         {
             int userId = (await _userManager.GetUserAsync(User)).UserId;
             return await _purchasedAnswerManager.GetForUserAsync(userId);

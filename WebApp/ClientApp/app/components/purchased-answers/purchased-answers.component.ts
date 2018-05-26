@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RedactorService } from '../../services/redactor.service';
-import { PurchasedAnswerService, PurchasedAnswer } from '../../services/purchased-answers.service';
+import { PurchasedAnswerService, PurchasedAnswer, PurchasedAnswerView } from '../../services/purchased-answers.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
@@ -12,7 +12,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 export class PurchasedAnswersComponent implements OnInit {
 
-    purchasedAnswers: PurchasedAnswer[];
+    purchasedAnswerViews: PurchasedAnswerView[];
 
     private paramsSubscription: any;
 
@@ -38,7 +38,7 @@ export class PurchasedAnswersComponent implements OnInit {
     loadPurchasedAnswers() {
         this.purchasedAnswerService.get().subscribe(
             response => {
-                this.purchasedAnswers = response as PurchasedAnswer[];
+                this.purchasedAnswerViews = response as PurchasedAnswerView[];
             }
         );
     }

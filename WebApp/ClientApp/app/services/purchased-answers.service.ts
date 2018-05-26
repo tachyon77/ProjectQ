@@ -1,7 +1,12 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Question } from './questions.service';
 import 'rxjs/add/operator/map';
+
+export class PurchasedAnswerView {
+    purchasedAnswer: PurchasedAnswer;
+    question: Question;
+}
 
 export class PurchasedAnswer {
     id: number;
