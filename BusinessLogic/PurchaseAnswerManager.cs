@@ -30,6 +30,12 @@ namespace ProjectQ.BusinessLogic
 
         #region Interface Implementations
 
+        async Task<IEnumerable<PurchasedAnswer>> IPurchaseAnswerManager.GetForUserAsync(int userId)
+        {
+            return await _unitOfWork.PurchasedAnswerRepository.GetForUserAsync(userId);
+        }
+
+
         async Task<int> IPurchaseAnswerManager.PurchaseAsync(int answerId, int userId, decimal price)
         {
             var answer = await _unitOfWork.AnswerRepository.FindAsync(answerId);

@@ -24,6 +24,7 @@ import { CredentialsEditorComponent } from './components/credentials-editor/cred
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
 import { DisplayQuestionsComponent } from './components/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
+import { HtmlContentComponent } from './components/html-content/html-content.component';
 import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
 import { IdentityService } from './services/identity.service';
 import { LandingPageComponent } from './components/landingpage/landingpage.component';
@@ -31,6 +32,7 @@ import { LoginFormComponent } from './components/loginform/loginform.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
+import { PurchasedAnswersComponent } from './components/purchased-answers/purchased-answers.component'
 import { QuestionDetailComponent } from './components/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questioncard/questioncard.component';
 import { QuestionService } from './services/questions.service';
@@ -44,6 +46,7 @@ import { UserQuestionsComponent } from './components/user-questions/user-questio
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
+import { PurchasedAnswerService } from './services/purchased-answers.service';
 
 
 @NgModule({
@@ -64,16 +67,18 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         DisplayQuestionsComponent,
         FocusDirective,
         HomeComponent,
+        HtmlContentComponent,
         InlineTextEditorComponent,
         LandingPageComponent,
         LoginFormComponent,
         NavMenuComponent,
         NotificationPopoverComponent,
-        RegistrationFormComponent,
+        PurchasedAnswersComponent,
         QuestionDetailComponent,
         QuestionCardComponent,
         QuestionEditorComponent,
         ReadableDatePipe,
+        RegistrationFormComponent,
         UserProfileComponent,
         UserQuestionsComponent,
     ],
@@ -84,6 +89,7 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
         AnswerRatingService,
         IdentityService,
         NotificationService,
+        PurchasedAnswerService,
         QuestionService,
         QuestionFollowerService,
         RedactorService,

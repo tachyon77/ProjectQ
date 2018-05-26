@@ -41,6 +41,9 @@
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.ts" />
+    <None Remove="ClientApp\app\components\html-content\html-content.component.css" />
+    <None Remove="ClientApp\app\components\html-content\html-content.component.html" />
+    <None Remove="ClientApp\app\components\html-content\html-content.component.ts" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.css" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.html" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.ts" />
@@ -48,6 +51,9 @@
     <None Remove="ClientApp\app\components\addquestion\addquestionform.component.html" />
     <None Remove="ClientApp\app\components\addquestion\addquestionform.component.ts" />
     <None Remove="ClientApp\app\components\displayquestions\displayquestions.component.css" />
+    <None Remove="ClientApp\app\components\purchased-answers\purchased-answers.component.css" />
+    <None Remove="ClientApp\app\components\purchased-answers\purchased-answers.component.html" />
+    <None Remove="ClientApp\app\components\purchased-answers\purchased-answers.component.ts" />
     <None Remove="ClientApp\app\components\questioncard\questioncard.component.ts" />
     <None Remove="ClientApp\app\components\questiondetail\questiondetail.component.ts" />
     <None Remove="ClientApp\app\components\questioneditor\questioneditor.component.css" />
@@ -66,6 +72,7 @@
     <None Remove="ClientApp\app\services\application-user.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
+    <None Remove="ClientApp\app\services\purchased-answers.service.ts" />
     <None Remove="ClientApp\app\services\questionfollower.service.ts" />
     <None Remove="ClientApp\app\services\redactor.service.ts" />
     <None Remove="Properties\PublishProfiles\Project-Q - Web Deploy.pubxml" />
@@ -88,9 +95,16 @@
     <TypeScriptCompile Include="ClientApp\app\components\answer-page\answer-page.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-page\answer-page.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-page\answer-page.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\html-content\html-content.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\html-content\html-content.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\html-content\html-content.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answercard\answercard.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\answercard\answercard.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answercard\answercard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\purchased-answers\purchased-answers.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\purchased-answers\purchased-answers.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\purchased-answers\purchased-answers.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\purchased-answers.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answers.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.html" />

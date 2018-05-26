@@ -29,6 +29,11 @@ namespace ProjectQ.DAL.EntityFramework
             await _context.PurchasedAnswers.AddAsync(purchasedAnswer);
         }
 
+        async Task<IEnumerable<PurchasedAnswer>> IPurchasedAnswerRepository.GetForUserAsync(int userId)
+        {
+            return await _context.PurchasedAnswers.Where(x => x.UserId.Equals(userId)).ToListAsync();
+        }
+
         #endregion
     }
 }

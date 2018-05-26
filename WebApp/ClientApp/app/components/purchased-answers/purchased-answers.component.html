@@ -1,0 +1,11 @@
+﻿<div *ngIf="!purchasedAnswers">
+    Loading your purchased answers ...
+</div>
+<div *ngIf="purchasedAnswers">
+    <div *ngFor="let purchasedAnswer of purchasedAnswers">
+        <html-content [htmlString]="purchasedAnswer.htmlContent"
+                      class="answer-content">
+        </html-content>
+    </div>
+
+</div>

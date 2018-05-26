@@ -30,6 +30,13 @@ namespace WebApp.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<PurchasedAnswer>> Get()
+        {
+            int userId = (await _userManager.GetUserAsync(User)).UserId;
+            return await _purchasedAnswerManager.GetForUserAsync(userId);
+        }
+
         // POST: api/PurchasedAnswers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] int answerId)
