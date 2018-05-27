@@ -8,7 +8,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 })
 
 export class HtmlContentComponent {
-    safeHtmlContent: SafeHtml;
+    safeHtmlContent: SafeHtml | undefined;
 
     @Input()
     set htmlString(html: string) {

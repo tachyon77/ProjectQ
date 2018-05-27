@@ -2,7 +2,8 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { QuestionService, Question } from '../../services/questions.service'
+import { Question } from '../../models/Question';
+import { QuestionService } from '../../services/questions.service'
 
 @Component({
     selector: 'add-question-form',
@@ -10,9 +11,9 @@ import { QuestionService, Question } from '../../services/questions.service'
     styleUrls: ['./addquestionform.component.css'],
 })
 export class AddQuestionFormComponent {
-    form: FormGroup;
+    form: FormGroup | undefined;
     description: string = "";
-    updatedDescription: string;
+    updatedDescription: string = "";
 
     constructor(
         private formBuilder: FormBuilder,

@@ -1,19 +1,11 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from './identity.service';
 
-import 'rxjs/add/operator/map';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
-export class AnswerDraft {
-    id: number;
-    isDeleted: boolean;
-    questionId: number;
-    originDate: Date;
-    htmlContent: string;
-    user: User;
-    price: number;
-}
-
+import { User } from '../models/User';
+import { AnswerDraft } from '../models/AnswerDraft';
 
 @Injectable()
 export class AnswerDraftService {
@@ -21,33 +13,55 @@ export class AnswerDraftService {
         private http: HttpClient) {
     }
 
-    getForQuestion(questionId: number) {
-        return this.http.get(
+    getForQuestion(questionId: number): Observable<AnswerDraft> {
+        return this.http.get<AnswerDraft>(
             'api/AnswerDrafts/ForQuestion/' + questionId
-            ).map(response => {
-                return response;
-            });
+        ).pipe(
+            tap(answers => console.log(`fetched drafr`)),
+            catchError(this.handleError<AnswerDraft>('getForQuestion'))
+        );
     }
 
-    getById(draftId: number) {
-        return this.http.get(
+    getById(draftId: number): Observable<AnswerDraft>  {
+        return this.http.get<AnswerDraft>(
             'api/AnswerDrafts/' + draftId
-        ).map(response => {
-            return response;
-        });
+        ).pipe(
+            tap(answers => console.log(`fetched draft`)),
+            catchError(this.handleError<AnswerDraft>('get by id'))
+        );
     }
 
-    update(draft: AnswerDraft) {
+    update(draft: AnswerDraft): Observable<any> {
         return this.http.put(
             'api/AnswerDrafts/' + draft.id,
             draft
-        ).map(response => { });
+        ).pipe(
+            tap(answers => console.log(`updated draft`)),
+            catchError(this.handleError('update draft'))
+        );
     }
 
-    delete(draftId: number) {
+    delete(draftId: number): Observable<any> {
         return this.http.put(
             'api/AnswerDrafts/delete/' + draftId,
             null
-        ).map(response => { });
+        ).pipe(
+            tap(answers => console.log(`deleted draft`)),
+            catchError(this.handleError('delete draft'))
+        );
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+
+            // TODO: better job of transforming error for user consumption
+            //this.log(`${operation} failed: ${error.message}`);
+
+            // Let the app keep running by returning an empty result.
+            return of(result as T);
+        };
     }
 }

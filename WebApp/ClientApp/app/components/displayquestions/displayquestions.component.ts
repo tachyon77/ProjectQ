@@ -7,13 +7,16 @@ import { QuestionService, UserSpecificQuestionPreview } from '../../services/que
     styleUrls: ['./displayquestions.component.css'],
 })
 export class DisplayQuestionsComponent {
-    public questionViews: UserSpecificQuestionPreview[];
+    questionViews: UserSpecificQuestionPreview[] | undefined;
 
     constructor(
         private questionService: QuestionService) {
-        this.questionService.get().subscribe(result => {
-            this.questionViews = result as UserSpecificQuestionPreview[];
-        }, error => console.error(error));
+        this.questionService.get().subscribe(
+            (result: UserSpecificQuestionPreview[]) => {
+                this.questionViews = result;
+            },
+            (error:string) => console.error(error)
+        );
     }
 }
 

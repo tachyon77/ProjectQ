@@ -1,9 +1,12 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
+
+import { User } from '../../models/User';
 import { UserSpecificQuestionPreview } from '../../services/questions.service'
 import { QuestionFollowerService } from '../../services/questionfollower.service'
-import { AnswerService, Answer } from '../../services/answers.service'
+import { AnswerService } from '../../services/answers.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { Question } from '../../models/Question';
 
 @Component({
     selector: 'question-card',
@@ -11,41 +14,44 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
     styleUrls: ['./questioncard.component.css']
 })
 export class QuestionCardComponent {
-    previewAnswerContent: SafeHtml;
-    questionDescription: SafeHtml;
-    private _questionView: UserSpecificQuestionPreview;
+    previewAnswerContent: SafeHtml | undefined;
+    questionDescription: SafeHtml | undefined;
+    private _questionView: UserSpecificQuestionPreview | undefined;
 
     onFollow() {
         this.questionFollowerService.follow(
-            this._questionView.question.id).subscribe(
+            this._questionView!.question.id).subscribe(
             () => {
-                this._questionView.isFollowing = true;
+                this._questionView!.isFollowing = true;
             }
         );
     }
 
     onUnfollow() {
         this.questionFollowerService.unfollow(
-            this._questionView.question.id).subscribe(
+            this._questionView!.question.id).subscribe(
             () => {
-                this._questionView.isFollowing = false;
+                this._questionView!.isFollowing = false;
             }
         );
     }
 
     @Input()
-    set questionView(questionView: UserSpecificQuestionPreview) {
-        this._questionView = questionView;
-        this.questionDescription =
-            this.sanitizer.bypassSecurityTrustHtml(questionView.question.description);
-        if (questionView.previewAnswer) {
-            this.previewAnswerContent =
-                this.sanitizer.bypassSecurityTrustHtml(
-                questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ");
+    set questionView(questionView: UserSpecificQuestionPreview | undefined) {
+
+        if(questionView){
+            this._questionView = questionView;
+            this.questionDescription =
+                this.sanitizer.bypassSecurityTrustHtml(questionView.question.description);
+            if (questionView.previewAnswer) {
+                this.previewAnswerContent =
+                    this.sanitizer.bypassSecurityTrustHtml(
+                        questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ");
+            }
         }
     }
 
-    get questionView() {
+    get questionView(): (UserSpecificQuestionPreview | undefined) {
         return this._questionView;
     }
 

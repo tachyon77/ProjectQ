@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IdentityService, User } from '../../services/identity.service';
+
+import { User } from '../../models/User';
+import { IdentityService } from '../../services/identity.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    user: User;
+    user: User | undefined;
     isLoggedIn: boolean = true;
 
     constructor(

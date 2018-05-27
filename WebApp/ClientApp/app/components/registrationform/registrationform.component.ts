@@ -11,7 +11,7 @@ export class RegistrationFormComponent {
 
     isEmailSent: boolean = false;
     @Output() registrationCompleted = new EventEmitter();
-    form: FormGroup;
+    form: FormGroup | undefined;
 
     constructor(
         private formBuilder: FormBuilder,

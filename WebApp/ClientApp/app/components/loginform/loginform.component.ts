@@ -10,7 +10,7 @@ import { IdentityService, LoginCredential } from '../../services/identity.servic
 export class LoginFormComponent {
 
     @Output() loggedIn = new EventEmitter();
-    form: FormGroup;
+    form: FormGroup | undefined;
 
     constructor(
         private formBuilder: FormBuilder,

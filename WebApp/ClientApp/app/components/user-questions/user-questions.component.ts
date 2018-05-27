@@ -1,7 +1,9 @@
 ﻿import { Component, Input } from '@angular/core';
+
+import { User } from '../../models/User';
+import { Question } from '../../models/Question';
 import { ApplicationUserService } from '../../services/application-user.service'
-import { Question, QuestionService } from '../../services/questions.service';
-import { User } from '../../services/identity.service';
+import { QuestionService } from '../../services/questions.service';
 
 @Component({
     selector: 'user-questions',
@@ -11,15 +13,15 @@ import { User } from '../../services/identity.service';
 
 export class UserQuestionsComponent {
 
-    private _user: User;
-    private _questions: Question[];
+    private _user: User | undefined;
+    private _questions: Question[] | undefined;
 
     @Input()
-    set user(u: User) {
+    set user(u: User | undefined) {
         this._user = u;
     }
 
-    get user() {
+    get user(): (User | undefined) {
         return this._user;
     }
 

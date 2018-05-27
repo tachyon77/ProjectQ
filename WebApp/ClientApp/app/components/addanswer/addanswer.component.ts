@@ -1,11 +1,14 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
-
-import { AnswerService, Answer, ProtectedAnswerContent, AnswerForm } from '../../services/answers.service'
-import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
-import { RedactorService } from '../../services/redactor.service'
-import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+import { Answer, ProtectedAnswerContent } from '../../models/Answer';
+import { AnswerDraft } from '../../models/AnswerDraft';
+import { AnswerService, AnswerForm } from '../../services/answers.service'
+import { AnswerDraftService } from '../../services/answer-drafts.service'
+import { RedactorService } from '../../services/redactor.service'
+import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
+
 
 @Component({
     selector: 'add-answer',
@@ -15,11 +18,11 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class AddAnswerComponent {
     private _draft: AnswerDraft = new AnswerDraft();
     private _answer: Answer = new Answer();
-    initialContent: string;
-    lastSaved: Date;
-    draftUpdate: string;
+    initialContent: string = "";
+    lastSaved: Date | undefined;
+    draftUpdate: string = "";
     dateFilter = new ReadableDatePipe();
-    form: FormGroup;
+    form: FormGroup | undefined;
 
     @Output() answerAdded = new EventEmitter();
 
@@ -82,8 +85,8 @@ export class AddAnswerComponent {
     }
 
     onSubmit(form: AnswerForm) {
-        this._answer.protectedAnswerContent = new ProtectedAnswerContent();
         this._answer.price = form.price;
+        this._answer.protectedAnswerContent = new ProtectedAnswerContent();
         this._answer.protectedAnswerContent.htmlContent = this._draft.htmlContent;
         this._answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this._draft.htmlContent);
 

@@ -2,9 +2,13 @@
     from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AnswerService, Answer, UserSpecificAnswerView } from '../../services/answers.service'
-import { QuestionService, Question } from '../../services/questions.service'
-import { IdentityService, User } from '../../services/identity.service'
+import { User } from '../../models/User';
+import { Answer } from '../../models/Answer';
+import { Question } from '../../models/Question';
+
+import { AnswerService, UserSpecificAnswerView } from '../../services/answers.service'
+import { QuestionService } from '../../services/questions.service'
+import { IdentityService } from '../../services/identity.service'
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -14,15 +18,15 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 })
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
-    public answerViews: UserSpecificAnswerView[];
-    questionDescription: SafeHtml;
-    public question: Question;
-    public isQuestionEditorVisible: boolean;
+    public answerViews: UserSpecificAnswerView[] | undefined;
+    questionDescription: SafeHtml | undefined;
+    public question: Question | undefined;
+    public isQuestionEditorVisible: boolean = false;
     private paramsSubscription: any;
-    public isAddAnswerVisible: boolean;
-    loggedInUser: User;
-    isAnswerWritten: boolean;
-    myAnswerId: number;
+    public isAddAnswerVisible: boolean = false;
+    loggedInUser: User | undefined;
+    isAnswerWritten: boolean = false;
+    myAnswerId: number | undefined;;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -50,9 +54,9 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.isQuestionEditorVisible = true;
     }
 
+    // TODO
     OnDeleteQuestionClick() {
-        this.question.isDeleted = !this.question.isDeleted;
-        this.questionService.update(this.question)
+        this.questionService.update(this.question!)
             .subscribe(result => {
             }, error => console.error(error));
     }
@@ -63,10 +67,10 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
 
     loadQuestion(questionId: number) {
         this.questionService.getById(questionId)
-            .subscribe(result => {
-                this.question = result as Question;
+            .subscribe((question: Question) => {
+                this.question = question;
                 this.questionDescription =
-                    this.sanitizer.bypassSecurityTrustHtml(this.question.description);
+                    this.sanitizer.bypassSecurityTrustHtml(question.description);
             }, error => console.error(error));
     }
 
@@ -93,7 +97,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         if (!this.isAnswerWritten && this.answerViews && this.loggedInUser) {
             this.answerViews.forEach(
                 (av) => {
-                    if (av.answer.user.id == this.loggedInUser.id) {
+                    if (av.answer!.user!.id == this.loggedInUser!.id) {
                         this.isAnswerWritten = true;
                         this.myAnswerId = av.answer.id;
                     }
@@ -106,7 +110,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.loadLoggedInUser();
         this.paramsSubscription = 
             this.activatedRoute.params
-                .subscribe(params => {
+                .subscribe((params:any) => {
                     let questionId = Number(params['id']);
                     this.loadQuestion(questionId);
                     this.loadAnswers(questionId);
@@ -115,17 +119,17 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     }
 
     onAnswerAdded(answer: Answer) {
-        this.loadAnswers(this.question.id);
+        this.loadAnswers(this.question!.id);
         this.isAddAnswerVisible = false;
     }
 
     onAnswerDeleted(answer: Answer) {
-        this.loadAnswers(this.question.id);
+        this.loadAnswers(this.question!.id);
     }
 
     onQuestionEdited(question: Question) {
         this.isQuestionEditorVisible = false;
-        this.loadQuestion(this.question.id);
+        this.loadQuestion(this.question!.id);
     }
 
     onQuestionEditCancelled() {

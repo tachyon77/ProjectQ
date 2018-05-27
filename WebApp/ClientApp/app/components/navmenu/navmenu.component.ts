@@ -1,15 +1,17 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+
+import { User } from '../../models/User';
 import { Notification, NotificationService } from '../../services/notification.service'
-import { User } from '../../services/identity.service';
+
 @Component({
     selector: 'nav-menu',
     templateUrl: './navmenu.component.html',
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent implements AfterViewInit{
-    private _user: User;
-    private _isNotificationsVisible: boolean;
-    private _notificationCount: number;
+    private _user: User | undefined;
+    private _isNotificationsVisible: boolean = false;
+    private _notificationCount: number = 0;
     private _notifications: Notification[];
 
     @Output() loggedOut = new EventEmitter();
@@ -68,15 +70,18 @@ export class NavMenuComponent implements AfterViewInit{
     }
 
     @Input()
-    set user(u: User) {
+    set user(u: User | undefined) {
         this._user = u;
     }
 
-    getUserId() {
-        return this.user.id;
+    getUserId(): (number | undefined) {
+        if (this.user) {
+            return this.user.id;
+        }
+       
     }
 
-    get user() {
+    get user(): (User | undefined) {
         return this._user;
     }
 

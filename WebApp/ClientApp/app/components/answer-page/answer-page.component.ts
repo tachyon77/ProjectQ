@@ -1,11 +1,17 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, Answer } from '../../services/answers.service'
-import { AnswerRating, AnswerRatingService } from '../../services/answerrating.service'
+
+import { User } from '../../models/User';
+import { AnswerRating } from '../../models/AnswerRating';
+import { Answer } from '../../models/Answer';
+import { Question } from '../../models/Question';
+
+import { AnswerService } from '../../services/answers.service'
+import { AnswerRatingService } from '../../services/answerrating.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { IdentityService, User } from '../../services/identity.service'
+import { IdentityService } from '../../services/identity.service'
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService, Question } from '../../services/questions.service';
+import { QuestionService } from '../../services/questions.service';
 
 @Component({
     selector: 'answer-page',
@@ -14,13 +20,13 @@ import { QuestionService, Question } from '../../services/questions.service';
 })
 
 export class AnswerPageComponent implements OnInit {
-    answerContent: SafeHtml;
-    private _answer: Answer;
+    answerContent: SafeHtml | undefined;
+    private _answer: Answer | undefined;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
     private paramsSubscription: any;
-    question: Question;
-    questionDescription: SafeHtml;
+    question: Question | undefined;
+    questionDescription: SafeHtml | undefined;
 
     get answer() {
         return this._answer;
@@ -39,7 +45,7 @@ export class AnswerPageComponent implements OnInit {
     ngOnInit() {
         this.paramsSubscription =
             this.activatedRoute.params.subscribe(
-                params => {
+                (params:any) => {
                     let answerId = Number(params['id']);
                     this.loadAnswer(answerId);
                 }
@@ -57,11 +63,11 @@ export class AnswerPageComponent implements OnInit {
 
     loadAnswer(id: number) {
         this.answerService.getById(id).subscribe(
-            json => {
-                this._answer = json as Answer;
+            (answer: Answer) => {
+                this._answer = answer;
                 this.answerContent =
-                    this.sanitizer.bypassSecurityTrustHtml(this._answer.redactedHtmlContent);
-                this.loadQuestion(this.answer.questionId);
+                    this.sanitizer.bypassSecurityTrustHtml(answer.redactedHtmlContent);
+                this.loadQuestion(answer.questionId!);
 
             },
             error => console.error(error)
@@ -73,14 +79,14 @@ export class AnswerPageComponent implements OnInit {
     }
 
     OnDeleteClick() {
-        this.answerService.delete(this.answer.id)
+        this.answerService.delete(this.answer!.id!)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
             });
     }
 
     OnUnDeleteClick() {
-        this.answerService.unDelete(this.answer.id)
+        this.answerService.unDelete(this.answer!.id!)
             .subscribe(() => {
                 //this.answerDeleted.emit(this.answer);
             });

@@ -11,20 +11,20 @@ import { Education, Employment, ApplicationUserService, Credentials } from '../.
     styleUrls: ['./credentials-editor.component.css']
 })
 export class CredentialsEditorComponent implements OnInit {
-    name: string;
-    userId: string;
+    name: string = "";
+    userId: number | undefined;
     educations: Education[] = [];
     employments: Employment[] = [];
 
-    educationAddModal: BsModalRef;
-    educationEditModal: BsModalRef;
-    employmentAddModal: BsModalRef;
-    employmentEditModal: BsModalRef;
+    educationAddModal: BsModalRef | undefined;
+    educationEditModal: BsModalRef | undefined;
+    employmentAddModal: BsModalRef | undefined;
+    employmentEditModal: BsModalRef | undefined;
 
-    educationAddForm: FormGroup;
-    educationEditForm: FormGroup;
-    employmentAddForm: FormGroup;
-    employmentEditForm: FormGroup;
+    educationAddForm: FormGroup | undefined;
+    educationEditForm: FormGroup | undefined;
+    employmentAddForm: FormGroup | undefined;
+    employmentEditForm: FormGroup | undefined;
 
     constructor(
         private profileService: ApplicationUserService,
@@ -117,7 +117,7 @@ export class CredentialsEditorComponent implements OnInit {
     onAddEducationSubmit(education: Education) {
         this.profileService.addEducaion(education)
             .subscribe(() => {
-                this.educationAddModal.hide();
+                this.educationAddModal!.hide();
                 this.loadCredentials();
             }
         );
@@ -126,7 +126,7 @@ export class CredentialsEditorComponent implements OnInit {
     onEditEducationSubmit(education: Education) {
         this.profileService.updateEducaion(education)
             .subscribe(() => {
-                this.educationEditModal.hide();
+                this.educationEditModal!.hide();
                 this.loadCredentials();
             }
         );
@@ -135,7 +135,7 @@ export class CredentialsEditorComponent implements OnInit {
     onAddEmploymentSubmit(employment: Employment) {
         this.profileService.addEmployment(employment)
             .subscribe(() => {
-                this.employmentAddModal.hide();
+                this.employmentAddModal!.hide();
                 this.loadCredentials();
             }
         );
@@ -144,21 +144,22 @@ export class CredentialsEditorComponent implements OnInit {
     onEditEmploymentSubmit(employment: Employment) {
         this.profileService.updateEmployment(employment)
             .subscribe(() => {
-                this.employmentEditModal.hide();
+                this.employmentEditModal!.hide();
                 this.loadCredentials();
             }
         );
     }
 
     loadCredentials() {
-        this.profileService.getCredentials(this.userId).subscribe(
-            response => {
-                let credetials = response as Credentials;
-                this.educations = [];
-                this.employments = [];
-                credetials.educations.forEach((e) => { this.educations.push(e); });
-                credetials.employments.forEach((e) => { this.employments.push(e); });
-            }
-        );
+        if (this.userId) {
+            this.profileService.getCredentials(this.userId).subscribe(
+                (credentials: Credentials) => {
+                    this.educations = [];
+                    this.employments = [];
+                    credentials.educations.forEach((e) => { this.educations.push(e); });
+                    credentials.employments.forEach((e) => { this.employments.push(e); });
+                }
+            );
+        }
     }
 }

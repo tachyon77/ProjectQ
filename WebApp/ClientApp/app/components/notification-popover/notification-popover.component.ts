@@ -9,7 +9,7 @@ import { Notification, NotificationService } from '../../services/notification.s
     },
 })
 export class NotificationPopoverComponent{
-    private _notificationCount: number;
+    private _notificationCount: number = 0;
     private fistClick: boolean = true;
     public visible: boolean = true;
     private _notifications: Notification[];

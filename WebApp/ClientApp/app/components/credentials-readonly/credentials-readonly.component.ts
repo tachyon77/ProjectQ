@@ -9,7 +9,7 @@ import { Education, Employment } from '../../services/application-user.service';
     styleUrls: ['./credentials-readonly.component.css']
 })
 export class CredentialsReadonlyComponent implements OnInit {
-    name: string;
+    name: string = "";
     educations: Education[] = [];
     employments: Employment[] = [];
 

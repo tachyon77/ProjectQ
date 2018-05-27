@@ -8,8 +8,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
     styleUrls:['./inlinetexteditor.component.css'],
 })
 export class InlineTextEditorComponent implements AfterViewInit{
-    curContent: SafeHtml;
-    public newContent: string;
+    curContent: SafeHtml | undefined;
+    public newContent: string = "";
     @Output() contentChanged = new EventEmitter();
     public emitFocusEvent = new EventEmitter<boolean>();
 

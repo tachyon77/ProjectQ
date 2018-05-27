@@ -2,7 +2,8 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { QuestionService, Question } from '../../services/questions.service'
+import { Question } from '../../models/Question';
+import { QuestionService } from '../../services/questions.service'
 
 @Component({
     selector: 'question-editor',
@@ -10,20 +11,32 @@ import { QuestionService, Question } from '../../services/questions.service'
     styleUrls: ['./questioneditor.component.css'],
 })
 export class QuestionEditorComponent implements OnInit {
-    form: FormGroup;
-    private _question: Question;
-    updatedDescription: string;
+    form: FormGroup | undefined;
+    private _question: Question | undefined;
+    updatedDescription: string = "";
 
     @Output() questionEdited = new EventEmitter();
     @Output() questionEditCancelled = new EventEmitter();
 
     @Input()
-    set question(question: Question) {
-        this._question = question;
-        this.updatedDescription = question.description;
+    set question(question: Question | undefined) {
+        if (question) {
+            this._question = question;
+            this.updatedDescription = question.description;
+
+            this.form = this.formBuilder.group({
+                title: this.formBuilder.control(question.title, Validators.compose([
+                    Validators.required,
+                ])),
+                offeredPrice: this.formBuilder.control(question.offeredPrice,
+                    Validators.compose([
+                        Validators.pattern('[0-9]+'),
+                    ]))
+            });
+        }
     }
 
-    get question() {
+    get question(): (Question | undefined) {
         return this._question;
     }
 
@@ -37,19 +50,12 @@ export class QuestionEditorComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.form = this.formBuilder.group({
-            title: this.formBuilder.control(this.question.title, Validators.compose([
-                Validators.required,
-            ])),
-            offeredPrice: this.formBuilder.control(this.question.offeredPrice,
-                Validators.compose([
-                Validators.pattern('[0-9]+'),
-                ]))
-        });
+
+       
     }
 
     onSubmit(question: Question) {
-        question.id = this.question.id;
+        question.id = this.question!.id;
         question.description = this.updatedDescription;
         this.questionService.update(question)
             .subscribe(() => {

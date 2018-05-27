@@ -13,13 +13,13 @@ interface LinkFormData {
     styleUrls:['./contenteditor.component.css'],
 })
 export class ContentEditorComponent implements AfterViewInit{
-    imgURL: string;
-    editPosition: Range;
-    curContent: SafeHtml;
-    public newContent: string;
-    insertLinkModal: BsModalRef;
-    linkForm: FormGroup;
-    private _enableRedaction: boolean;
+    imgURL: string | undefined;
+    editPosition: Range | undefined;
+    curContent: SafeHtml | undefined;
+    public newContent: string = "";
+    insertLinkModal: BsModalRef | undefined;
+    linkForm: FormGroup | undefined;
+    private _enableRedaction: boolean = false;
 
     @Output() contentChanged = new EventEmitter();
     public emitFocusEvent = new EventEmitter<boolean>();
@@ -146,7 +146,8 @@ export class ContentEditorComponent implements AfterViewInit{
         }
 
         document.execCommand('createLink', false, link);
-        this.insertLinkModal.hide();
+        // Guarded by ngIf
+        this.insertLinkModal!.hide();
     }
 
 

@@ -5,7 +5,7 @@
     selector: '[focus]'
 })
 export class FocusDirective {
-    @Input('focus') focusEvent: EventEmitter<boolean>;
+    @Input('focus') focusEvent: EventEmitter<boolean> = new EventEmitter();
 
     constructor(
         @Inject(ElementRef) private element: ElementRef,

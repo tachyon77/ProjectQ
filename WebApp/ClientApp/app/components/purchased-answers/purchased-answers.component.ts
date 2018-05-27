@@ -10,21 +10,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
     styleUrls: ['./purchased-answers.component.css']
 })
 
-export class PurchasedAnswersComponent implements OnInit {
+export class PurchasedAnswersComponent {
 
-    purchasedAnswerViews: PurchasedAnswerView[];
-
-    private paramsSubscription: any;
-
-    ngOnInit() {
-        this.paramsSubscription =
-            this.activatedRoute.params
-            .subscribe(params => {
-                //this.profileUserId = params['id'];
-                
-            });
-    }
-
+    purchasedAnswerViews: PurchasedAnswerView[] | undefined;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -37,8 +25,8 @@ export class PurchasedAnswersComponent implements OnInit {
 
     loadPurchasedAnswers() {
         this.purchasedAnswerService.get().subscribe(
-            response => {
-                this.purchasedAnswerViews = response as PurchasedAnswerView[];
+            (response: PurchasedAnswerView[]) => {
+                this.purchasedAnswerViews = response;
             }
         );
     }

@@ -1,9 +1,14 @@
 ﻿import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { AnswerService, Answer, ProtectedAnswerContent, AnswerForm } from '../../services/answers.service'
-import { AnswerDraftService, AnswerDraft } from '../../services/answer-drafts.service'
+
+import { AnswerDraft } from '../../models/AnswerDraft';
+import { Answer, ProtectedAnswerContent } from '../../models/Answer';
+import { AnswerService, AnswerForm } from '../../services/answers.service'
+import { AnswerDraftService } from '../../services/answer-drafts.service'
 import { RedactorService } from '../../services/redactor.service'
 import { ReadableDatePipe } from '../../pipes/readable-date.pipe';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+
 
 // Input: answer id
 // Output: Answer updated event, Update canelled event.
@@ -21,11 +26,11 @@ export class AnswerEditorInlineComponent{
     @Input()
     set answerId(id: number) {
         this.answerService.getById(id).subscribe(
-            json => {
-                this._answer = json as Answer;
+            (answer: Answer) => {
+                this._answer = answer;
 
                 // There will always be a draft if there is an answer.
-                this.answerDraftService.getForQuestion(this.answer.questionId).subscribe(
+                this.answerDraftService.getForQuestion(answer.questionId!).subscribe(
                     json => {
                         this._draft = json as AnswerDraft;
                         this._curProtectedContent = this._draft.htmlContent;
@@ -40,22 +45,24 @@ export class AnswerEditorInlineComponent{
         );
     }
 
-    private _answer: Answer;
-    private _answerId: number;
-    private _draft: AnswerDraft;
-    lastSaved: Date;
-    draftUpdate: string;
+    private _answer: Answer | undefined;
+    private _answerId: number | undefined;
+    private _draft: AnswerDraft | undefined;
+    lastSaved: Date | undefined;
+    draftUpdate: string = "";
     dateFilter = new ReadableDatePipe();
     // We need this to save the original content in case we want to cancel update and revert back
-    private _curProtectedContent: string;
-    form: FormGroup;
+    private _curProtectedContent: string = "";
+    form: FormGroup | undefined;
 
     constructor(
         private formBuilder: FormBuilder,
         private answerService: AnswerService,
         private answerDraftService: AnswerDraftService,
         private redactorService: RedactorService,
-    ) { }
+    ) {
+        this._answer = new Answer();
+    }
 
     get curProtectedContent() {
         return this._curProtectedContent;
@@ -71,7 +78,8 @@ export class AnswerEditorInlineComponent{
 
     initForm() {
         this.form = this.formBuilder.group({
-            price: this.formBuilder.control(this.draft.price, Validators.compose([
+            // non null assertion : only called after draft it successfully loaded
+            price: this.formBuilder.control(this.draft!.price, Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),
         });
@@ -91,25 +99,27 @@ export class AnswerEditorInlineComponent{
     }
 
     onContentChange(content: string) {
-        this.draft.htmlContent = content;
+        this.draft!.htmlContent = content;
     }
 
     onSubmit(form: AnswerForm) {
-        this.answer.protectedAnswerContent = new ProtectedAnswerContent();
-        this.answer.price = form.price;
-        this.answer.protectedAnswerContent.htmlContent = this.draft.htmlContent;
-        this.answer.redactedHtmlContent =
-            this.redactorService.getRedactedHtml(this.draft.htmlContent);
+        this.answer!.price = form.price;
+        this.answer!.protectedAnswerContent = new ProtectedAnswerContent();
+        // form only loaded when draft is loaded
+        this.answer!.protectedAnswerContent!.htmlContent = this.draft!.htmlContent;
+        this.answer!.redactedHtmlContent =
+            this.redactorService.getRedactedHtml(this.draft!.htmlContent);
 
-        this.answerService.update(this.answer)
+        this.answerService.update(this.answer!)
             .subscribe(() => {
                 this.answerUpdated.emit(this.answer);
             });
     }
 
     onSaveDraft(form: AnswerForm) {
-        this._draft.price = form.price;
-        this.answerDraftService.update(this._draft)
+        // callable only after draft is loaded
+        this._draft!.price = form.price;
+        this.answerDraftService.update(this._draft!)
             .subscribe(() => {
                 this.lastSaved = new Date();
                 this.draftUpdate = "Draft saved " + this.dateFilter.transform(this.lastSaved);
