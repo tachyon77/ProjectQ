@@ -1,8 +1,14 @@
 ﻿<p *ngIf="!questionViews"><em>Loading...</em></p>
 
 <div *ngIf="questionViews" class="question-list">
-    <div *ngFor="let questionView of questionViews">
-        <question-card [questionView]="questionView">
+    <ng-container *ngFor="let questionView of questionViews">
+        <question-card [questionView]="questionView"
+                        inViewport
+                        (inViewportAction)="onEnterLeaveViewport($event, questionView.question)">
         </question-card>
-    </div>
+    </ng-container>
 </div>
+
+
+
+

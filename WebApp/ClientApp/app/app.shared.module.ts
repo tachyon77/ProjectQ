@@ -47,7 +47,7 @@ import { UserQuestionsComponent } from './components/user-questions/user-questio
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { PurchasedAnswerService } from './services/purchased-answers.service';
-
+import { InViewportModule } from 'ng-in-viewport';
 
 @NgModule({
     entryComponents: [
@@ -95,6 +95,7 @@ import { PurchasedAnswerService } from './services/purchased-answers.service';
         RedactorService,
     ],
     imports: [
+        InViewportModule.forRoot(),
         CommonModule,
         HttpClientModule,
         FormsModule,
