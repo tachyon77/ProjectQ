@@ -36,19 +36,27 @@ export class ApplicationUserService {
     constructor(private http: HttpClient) {
     }
 
-    getProfile(id: number): Observable<User> {
-        return this.http.get<User>('api/profile/' + id)
+    getProfile(id: number | undefined): Observable<User> {
+        var url = 'api/profile';
+
+        if (id) {
+            url = url + "/" + id;
+        }
+        return this.http.get<User>(url)
             .pipe(
                 tap(_ => console.log(``)),
                 catchError(this.handleError<User>('get'))
             );
     }
 
-    getCredentials(id: number): Observable<Credentials> {
-
-        return this.http.get<Credentials>('api/credentials/' + id)
+    getCredentials(id: number | undefined): Observable<Credentials> {
+        var url = 'api/credentials';
+        if (id) {
+            url = url + '/' + id;
+        }
+        return this.http.get<Credentials>(url)
             .pipe(
-                tap(_ => console.log(``)),
+                tap(_ => console.log(`received credential`)),
                 catchError(this.handleError<Credentials>('get'))
             );
     }
@@ -56,7 +64,7 @@ export class ApplicationUserService {
     updateUser(user: User): Observable<any> {
         return this.http.put('api/profile', user)
             .pipe(
-                tap(_ => console.log(``)),
+                tap(_ => console.log(`updated profule info`)),
                 catchError(this.handleError('update credential'))
             );
     }
@@ -64,7 +72,7 @@ export class ApplicationUserService {
     addEducaion(education: Education): Observable<any> {
         return this.http.post('api/credentials/educations', education)
             .pipe(
-                tap(_ => console.log(``)),
+                tap(_ => console.log(`added education`)),
                 catchError(this.handleError('add education'))
             );
     }

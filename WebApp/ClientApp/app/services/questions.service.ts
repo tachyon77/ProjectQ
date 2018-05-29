@@ -60,7 +60,6 @@ export class QuestionService {
         );
     }
 
-    // TODO: fix the controller method argument
     /** PUT: update the hero on the server */
     update(question: Question): Observable<any> {
         return this.http.put(this.questionsUrl, question, httpOptions).pipe(

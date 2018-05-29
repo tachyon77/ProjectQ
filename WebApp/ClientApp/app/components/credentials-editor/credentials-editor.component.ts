@@ -151,15 +151,14 @@ export class CredentialsEditorComponent implements OnInit {
     }
 
     loadCredentials() {
-        if (this.userId) {
-            this.profileService.getCredentials(this.userId).subscribe(
-                (credentials: Credentials) => {
-                    this.educations = [];
-                    this.employments = [];
-                    credentials.educations.forEach((e) => { this.educations.push(e); });
-                    credentials.employments.forEach((e) => { this.employments.push(e); });
-                }
-            );
-        }
+        this.profileService.getCredentials(this.userId).subscribe(
+            (credentials: Credentials) => {
+                this.educations = [];
+                this.employments = [];
+                credentials.educations.forEach((e) => { this.educations.push(e); });
+                credentials.employments.forEach((e) => { this.employments.push(e); });
+            }
+        );
+        
     }
 }
