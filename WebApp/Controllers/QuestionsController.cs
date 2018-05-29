@@ -84,10 +84,10 @@ namespace WebApp.Controllers
                 new { id = question.Id }, question);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, [FromBody] Question updated)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Question updated)
         {
-            if (updated == null || updated.Id != id)
+            if (updated == null)
             {
                 return BadRequest();
             }
