@@ -17,8 +17,7 @@
                 <span class="buy-offer"
                       *ngIf="answerView.answer.price > 0 && !isAuthor">
                     <!--Buy-->
-                    <button 
-                            class="btn btn-success btn-sm"
+                    <button class="btn btn-success btn-sm"
                             (click)="OnPurchaseClick()">
                         <i class="fas fa-shopping-cart"></i>
                         Buy
@@ -31,7 +30,7 @@
                         Counter offer
                     </button>
                 </span>
-            </div>          
+            </div>
         </div>
 
         <!--Rating-->
@@ -81,9 +80,9 @@
         </div>
 
         <!--Answer Content-->
-        <div [innerHTML]="answerContent"
-             class="answer-content">
-        </div>
+        <html-content [htmlString]="answerView.answer.redactedHtmlContent"
+                      class="answer-content">
+        </html-content>
 
         <!--Edit-->
         <button *ngIf="isAuthor"

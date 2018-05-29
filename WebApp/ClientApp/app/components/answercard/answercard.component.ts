@@ -6,7 +6,6 @@ import { User } from '../../models/User';
 import { AnswerRating } from '../../models/AnswerRating';
 
 import { AnswerRatingService } from '../../services/answerrating.service'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { IdentityService } from '../../services/identity.service'
 
 
@@ -17,7 +16,6 @@ import { IdentityService } from '../../services/identity.service'
 })
 
 export class AnswerCardComponent {
-    answerContent: SafeHtml | undefined;
     private _answerView: UserSpecificAnswerView | undefined;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
@@ -50,8 +48,8 @@ export class AnswerCardComponent {
     set answerView(answerView: UserSpecificAnswerView | undefined) {
         if (answerView) {
             this._answerView = answerView;
-            this.answerContent =
-                this.sanitizer.bypassSecurityTrustHtml(answerView.answer.redactedHtmlContent);
+            //this.answerContent =
+               // this.sanitizer.bypassSecurityTrustHtml(answerView.answer.redactedHtmlContent);
 
             if (answerView.rating == null) {
                 this.rating[0] = true;
@@ -109,8 +107,6 @@ export class AnswerCardComponent {
     onAnswerUpdated(answer: Answer) {
         // non null assertion: Guaraded by ngIf
         this.answerView!.answer = answer;
-        this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answer.redactedHtmlContent);
         this.isUpdateAnswerVisible = false;
     }
 
