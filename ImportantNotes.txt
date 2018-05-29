@@ -30,4 +30,15 @@ not needed. The burden will be on the caller to check for nulls. Communication b
 caller and callee on when to expect null or not will be through testing.
 
 8. Any propoerty that can't be initialized in constrctr needs to include undefined.
+9. Relationship between the major tools and concepts:
+
+JavaScript -> Served by -> Node (Node.js)
+NPM = package manager for JavaScript modules, used by Node
+TypeScript => subset of JS. 
+Angular CLI => a JS module (?)
+Angular Compiler => node module that coverts TS => JS (?)
+WebPack => a node module, used to bundle javascript modules
+Webpack-CLI => a node module
+
+
 

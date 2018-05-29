@@ -18,6 +18,17 @@ export class QuestionCardComponent {
     questionDescription: SafeHtml | undefined;
     private _questionView: UserSpecificQuestionPreview | undefined;
 
+    onEnterLeaveViewport(event: any, question: Question) {
+        const { entry , target, value } = event;
+
+        console.log(question.title);
+
+        //console.log('entry', entry);
+        //console.log('target', target);
+        //console.log('value', value);
+
+    }
+
     onFollow() {
         this.questionFollowerService.follow(
             this._questionView!.question.id).subscribe(

@@ -1,6 +1,5 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { QuestionService, UserSpecificQuestionPreview } from '../../services/questions.service'
-import { InViewportDirective, InViewportMetadata } from 'ng-in-viewport';
 
 import { Question } from '../../models/Question';
 
@@ -23,16 +22,6 @@ export class DisplayQuestionsComponent {
         );
     }
 
-    onEnterLeaveViewport(event : any, question: Question) {
-        const { [InViewportMetadata]: { entry }, target, value } = event;
-
-        console.log(question.title);
-
-        //console.log('entry', entry);
-        //console.log('target', target);
-        console.log('value', value);
-        
-    }
 }
 
 

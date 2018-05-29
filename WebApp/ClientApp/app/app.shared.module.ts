@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 
 // Custom Directives
 import { FocusDirective } from './directives/focus.directive'
+import { ViewPortWatcherDirective } from './directives/viewport-watcher.directive'
 
 // ProjectQ components
 import { AppComponent } from './components/app/app.component';
@@ -43,11 +44,11 @@ import { RedactorService } from './services/redactor.service'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
+import { ViewportWatcherService } from './directives/viewport-watcher.service';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { PurchasedAnswerService } from './services/purchased-answers.service';
-import { InViewportModule } from 'ng-in-viewport';
 
 @NgModule({
     entryComponents: [
@@ -81,6 +82,7 @@ import { InViewportModule } from 'ng-in-viewport';
         RegistrationFormComponent,
         UserProfileComponent,
         UserQuestionsComponent,
+        ViewPortWatcherDirective,
     ],
     providers: [
         ApplicationUserService,
@@ -93,9 +95,9 @@ import { InViewportModule } from 'ng-in-viewport';
         QuestionService,
         QuestionFollowerService,
         RedactorService,
+        ViewportWatcherService,
     ],
     imports: [
-        InViewportModule.forRoot(),
         CommonModule,
         HttpClientModule,
         FormsModule,

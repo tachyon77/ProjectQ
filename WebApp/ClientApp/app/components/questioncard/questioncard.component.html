@@ -1,7 +1,9 @@
 ﻿<p *ngIf="!questionView"><em>Loading...</em></p>
 
 <div *ngIf="questionView">
-    <div class="card">        
+    <div class="card"
+         inViewport
+        (inViewportAction)="onEnterLeaveViewport($event, questionView.question)">        
         <div class="card-body">
             <h3 class="card-title">
                 <a [routerLink]="['/question-detail', questionView.question.id]"
