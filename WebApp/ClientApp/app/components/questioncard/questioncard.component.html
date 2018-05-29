@@ -19,9 +19,9 @@
                 Asked by {{questionView.question.user.name}}
                 {{questionView.question.originDate | readableDate}}
             </h6>
-            <div [innerHTML]="questionDescription"
+            <html-content [htmlString]="questionView.question.description"
                  class="card-text">
-            </div>
+            </html-content>
 
             <div *ngIf="!questionView.isFollowing">
                 <button (click)="onFollow()"

@@ -15,9 +15,9 @@
                 </span>
             </div>
 
-            <div [innerHTML]="questionDescription"
-                 class="question-description">
-            </div>
+            <html-content [htmlString]="question.description"
+                          class="question-description">
+            </html-content>
 
             <button *ngIf="isAsker"
                     class="btn btn-default btn-sm"

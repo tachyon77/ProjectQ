@@ -9,7 +9,6 @@ import { Question } from '../../models/Question';
 import { AnswerService, UserSpecificAnswerView } from '../../services/answers.service'
 import { QuestionService } from '../../services/questions.service'
 import { IdentityService } from '../../services/identity.service'
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'question-detail',
@@ -19,7 +18,6 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 export class QuestionDetailComponent implements OnInit, OnDestroy {
     public answerViews: UserSpecificAnswerView[] | undefined;
-    questionDescription: SafeHtml | undefined;
     public question: Question | undefined;
     public isQuestionEditorVisible: boolean = false;
     private paramsSubscription: any;
@@ -29,7 +27,6 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
     myAnswerId: number | undefined;;
 
     constructor(
-        private sanitizer: DomSanitizer,
         private activatedRoute: ActivatedRoute,
         private identityService: IdentityService,
         private answerService: AnswerService,
@@ -69,8 +66,6 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         this.questionService.getById(questionId)
             .subscribe((question: Question) => {
                 this.question = question;
-                this.questionDescription =
-                    this.sanitizer.bypassSecurityTrustHtml(question.description);
             }, error => console.error(error));
     }
 

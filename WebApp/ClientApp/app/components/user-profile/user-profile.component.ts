@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ApplicationUserService, Education, Employment, Credentials} from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials-readonly/credentials-readonly.component'
 import { CredentialsEditorComponent } from '../../components/credentials-editor/credentials-editor.component'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 import { User } from '../../models/User';
 
@@ -25,7 +24,6 @@ export class UserProfileComponent implements OnInit {
     private _currentProfile: User | undefined;
     private _updatedProfile: User | undefined;
     private _credetials: Credentials | undefined;
-    introductionContent: SafeHtml | undefined;
 
     private paramsSubscription: any;
 
@@ -81,9 +79,6 @@ export class UserProfileComponent implements OnInit {
             .updateUser(this._updatedProfile!)
             .subscribe(() => {
                 this._currentProfile!.introduction = this._updatedProfile!.introduction;
-                this.introductionContent =
-                    this.sanitizer.bypassSecurityTrustHtml(this._currentProfile!.introduction);
-
                 this.isIntroductionEditorVisible = false;
             });
     }
@@ -108,15 +103,13 @@ export class UserProfileComponent implements OnInit {
     ngOnInit() {
         this.paramsSubscription =
             this.activatedRoute.params
-            .subscribe((params:any) => {
+            .subscribe((params: any) => {
                 this.profileUserId = params['id'];
 
-                this.applicationUserService.getProfile(this.profileUserId!).subscribe(
+                this.applicationUserService.getProfile(this.profileUserId).subscribe(
                     response => {
                         this._currentProfile = response as User;
-                        this._updatedProfile = { ...this._currentProfile };
-                        this.introductionContent =
-                            this.sanitizer.bypassSecurityTrustHtml(this._currentProfile.introduction);
+                        this._updatedProfile = { ...this._currentProfile };                       
                     }
                 );
                 this.applicationUserService.getCredentials(this.profileUserId!).subscribe(
@@ -132,8 +125,7 @@ export class UserProfileComponent implements OnInit {
     constructor(
         private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
-        private applicationUserService: ApplicationUserService,
-        private sanitizer: DomSanitizer,
+        private applicationUserService: ApplicationUserService
     ) {
         
     }

@@ -9,9 +9,9 @@
                 ${{question.offeredPrice}}
             </span>
         </div>
-        <div [innerHTML]="questionDescription"
-                class="question-description">
-        </div>
+        <html-content [htmlString]="question.description"
+                      class="question-description">
+        </html-content>
     </div>
     <hr />
     <p *ngIf="!answer"><em>Loading...</em></p>
@@ -22,9 +22,10 @@
                 <div class="answer-date">Answered {{answer.originDate | readableDate}}</div>
             </div>
 
-            <div [innerHTML]="answerContent"
-                 class="answer-content">
-            </div>
+            <html-content [htmlString]="answerContent"
+                          class="answer-content">
+            </html-content>
+
             <button class="btn btn-default"
                     (click)="OnEditClick()">
                 Edit

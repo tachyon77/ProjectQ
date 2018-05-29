@@ -77,8 +77,7 @@ export class AnswerCardComponent {
 
     constructor(
         private answerService: AnswerService,
-        private answerRatingService: AnswerRatingService,
-        private sanitizer: DomSanitizer
+        private answerRatingService: AnswerRatingService
     ) {
         this.isUpdateAnswerVisible = false;
         this.rating = [false, false, false, false, false, false];

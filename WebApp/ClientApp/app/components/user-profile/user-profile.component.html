@@ -30,10 +30,10 @@
                         Cancel
                     </button>
 
-                    <div class="profile-introduction"
-                         [innerHTML]="introductionContent"
-                         *ngIf="!isIntroductionEditorVisible && currentProfile">
-                    </div>
+                    <html-content class="profile-introduction"
+                                  [htmlString]="currentProfile.introduction"
+                                  *ngIf="!isIntroductionEditorVisible && currentProfile">
+                    </html-content>
                     <button (click)="showIntroductionEditor()"
                             *ngIf="!isIntroductionEditorVisible"
                             class="edit-link btn btn-light">

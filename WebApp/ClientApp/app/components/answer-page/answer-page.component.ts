@@ -7,7 +7,6 @@ import { Question } from '../../models/Question';
 
 import { AnswerService } from '../../services/answers.service'
 import { AnswerRatingService } from '../../services/answerrating.service'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { IdentityService } from '../../services/identity.service'
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ActivatedRoute } from '@angular/router';
@@ -20,13 +19,11 @@ import { QuestionService } from '../../services/questions.service';
 })
 
 export class AnswerPageComponent implements OnInit {
-    answerContent: SafeHtml | undefined;
     private _answer: Answer | undefined;
     public isUpdateAnswerVisible: boolean;
     @Output() answerDeleted = new EventEmitter();
     private paramsSubscription: any;
     question: Question | undefined;
-    questionDescription: SafeHtml | undefined;
 
     get answer() {
         return this._answer;
@@ -37,7 +34,6 @@ export class AnswerPageComponent implements OnInit {
         private answerService: AnswerService,
         private questionService: QuestionService,
         private answerRatingService: AnswerRatingService,
-        private sanitizer: DomSanitizer
     ) {
         this.isUpdateAnswerVisible = false;
     }
@@ -56,8 +52,6 @@ export class AnswerPageComponent implements OnInit {
         this.questionService.getById(questionId)
             .subscribe(result => {
                 this.question = result as Question;
-                this.questionDescription =
-                    this.sanitizer.bypassSecurityTrustHtml(this.question.description);
             }, error => console.error(error));
     }
 
@@ -65,8 +59,6 @@ export class AnswerPageComponent implements OnInit {
         this.answerService.getById(id).subscribe(
             (answer: Answer) => {
                 this._answer = answer;
-                this.answerContent =
-                    this.sanitizer.bypassSecurityTrustHtml(answer.redactedHtmlContent);
                 this.loadQuestion(answer.questionId!);
 
             },
@@ -94,8 +86,6 @@ export class AnswerPageComponent implements OnInit {
 
     onAnswerUpdated(answer: Answer) {
         this._answer = answer;
-        this.answerContent =
-            this.sanitizer.bypassSecurityTrustHtml(answer.redactedHtmlContent);
         this.isUpdateAnswerVisible = false;
     }
 
