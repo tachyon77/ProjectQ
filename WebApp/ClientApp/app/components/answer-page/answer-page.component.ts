@@ -60,7 +60,6 @@ export class AnswerPageComponent implements OnInit {
             (answer: Answer) => {
                 this._answer = answer;
                 this.loadQuestion(answer.questionId!);
-
             },
             error => console.error(error)
         );

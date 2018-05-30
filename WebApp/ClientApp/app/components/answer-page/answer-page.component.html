@@ -22,15 +22,15 @@
                 <div class="answer-date">Answered {{answer.originDate | readableDate}}</div>
             </div>
 
-            <html-content [htmlString]="answerContent"
+            <html-content [htmlString]="answer.redactedHtmlContent"
                           class="answer-content">
             </html-content>
 
-            <button class="btn btn-default"
+            <button class="btn btn-default btn-sm"
                     (click)="OnEditClick()">
                 Edit
             </button>
-            <button class="btn btn-default"
+            <button class="btn btn-default btn-sm"
                     (click)="OnDeleteClick()">
                 Delete
             </button>
