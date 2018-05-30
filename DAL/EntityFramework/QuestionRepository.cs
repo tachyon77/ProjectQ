@@ -30,7 +30,6 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.Title = question.Title;
             dbRecord.Description = question.Description;
             dbRecord.OfferedPrice = question.OfferedPrice;
-            dbRecord.IsDeleted = question.IsDeleted;
         }
 
         async Task<IEnumerable<UserSpecificQuestionPreview>> 
@@ -40,7 +39,6 @@ namespace ProjectQ.DAL.EntityFramework
                 from question in 
                     _context.Questions
                     .Include(q => q.User)
-                    .Where(q => !q.IsDeleted)
                 select new UserSpecificQuestionPreview()
                 {
                     IsFollowing = question.QuestionFollowers.Any(
@@ -73,7 +71,7 @@ namespace ProjectQ.DAL.EntityFramework
             int userId)
         {
             return await _context.Questions
-                .Where(x => x.UserId.Equals(userId) && !x.IsDeleted)
+                .Where(x => x.UserId.Equals(userId))
                 .OrderByDescending(x=>x.OriginDate)
                 .ToListAsync();
         }
