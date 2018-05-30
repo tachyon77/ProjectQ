@@ -40,9 +40,9 @@
             <div *ngIf="!previewAnswerContent">
                 <em>No answers yet</em>
             </div>
-            <div *ngIf="previewAnswerContent"
-                 [innerHTML]="previewAnswerContent">
-            </div>
+            <html-content *ngIf="previewAnswerContent"
+                          [htmlString]="previewAnswerContent">
+            </html-content>
         </div>
     </div>
 </div>

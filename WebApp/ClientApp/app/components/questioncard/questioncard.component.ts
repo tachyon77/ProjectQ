@@ -1,6 +1,5 @@
 ﻿import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 import { User } from '../../models/User';
 import { UserSpecificQuestionPreview } from '../../services/questions.service'
@@ -14,7 +13,7 @@ import { Question } from '../../models/Question';
     styleUrls: ['./questioncard.component.css']
 })
 export class QuestionCardComponent {
-    previewAnswerContent: SafeHtml | undefined;
+    previewAnswerContent: string = "";
     private _questionView: UserSpecificQuestionPreview | undefined;
 
     onEnterLeaveViewport(event: any, question: Question) {
@@ -52,9 +51,7 @@ export class QuestionCardComponent {
         if(questionView){
             this._questionView = questionView;           
             if (questionView.previewAnswer) {
-                this.previewAnswerContent =
-                    this.sanitizer.bypassSecurityTrustHtml(
-                        questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ");
+                this.previewAnswerContent = questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ";
             }
         }
     }
@@ -64,7 +61,6 @@ export class QuestionCardComponent {
     }
 
     constructor(
-        private sanitizer: DomSanitizer,
         private questionFollowerService: QuestionFollowerService
     ) {
     }
