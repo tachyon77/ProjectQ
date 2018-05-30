@@ -16,6 +16,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         public DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<QuestionView> QuestionViews { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<PurchasedAnswer> PurchasedAnswers { get; set; }
         public DbSet<AnswerDraft> AnswerDrafts { get; set; }

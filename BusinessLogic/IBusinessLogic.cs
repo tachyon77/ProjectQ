@@ -91,4 +91,9 @@ namespace ProjectQ.BusinessLogic
         Task<Question> FindAsync(int id);
         bool QuestionExists(int id);
     }
+
+    public interface IQuestionViewManager
+    {
+        Task AddAsync(QuestionView question);
+    }
 }

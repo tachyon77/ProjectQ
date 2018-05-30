@@ -14,6 +14,7 @@ namespace ProjectQ.DAL.EntityFramework
     {
         private readonly ProjectQEntities _context;
         private IQuestionRepository _questionRepository;
+        private IQuestionViewRepository _questionViewRepository;
         private IAnswerRepository _answerRepository;
         private IPurchasedAnswerRepository _purchasedAnswerRepository;
         private IAnswerDraftRepository _answerDraftRepository;
@@ -90,6 +91,18 @@ namespace ProjectQ.DAL.EntityFramework
                     _questionRepository = new QuestionRepository(_context);                 
                 }
                 return _questionRepository;
+            }
+        }
+
+        IQuestionViewRepository IUnitOfWork.QuestionViewRepository
+        {
+            get
+            {
+                if (_questionViewRepository == null)
+                {
+                    _questionViewRepository = new QuestionViewRepository(_context);
+                }
+                return _questionViewRepository;
             }
         }
 

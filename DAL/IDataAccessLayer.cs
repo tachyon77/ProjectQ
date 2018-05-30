@@ -46,6 +46,11 @@ namespace ProjectQ.DAL
         bool QuestionExists(int id);
     }
 
+    public interface IQuestionViewRepository
+    {
+        Task AddAsync(QuestionView _);
+    }
+
     public interface INotificationRepository
     {
         Task<Notification> FindAsync(int id);

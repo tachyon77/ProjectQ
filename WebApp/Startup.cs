@@ -89,6 +89,7 @@ namespace ProjectQ.WebApp
 
             services.AddSingleton(Configuration);
 
+            services.AddScoped<IUserIdProvider, AspUserIdProvider>();
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<IPurchaseAnswerManager, PurchaseAnswerManager>();
