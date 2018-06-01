@@ -29,7 +29,7 @@ namespace ProjectQ.BusinessLogic
                 QuestionId = questionId,
                 UserId = userId,
                 EventTime = DateTime.UtcNow,
-                IpAddress = "0.0.0.0"
+                IPAddress = "0.0.0.0"
             };
 
             await _unitOfWork.QuestionViewRepository.AddAsync(questionView);
@@ -38,7 +38,7 @@ namespace ProjectQ.BusinessLogic
             {
                 await _unitOfWork.SaveAsync();
             }
-            catch (Exception _e)
+            catch
             {
                 // we catch and ignore for two reasons:
                 // 1. This is a non critical operation. So nothing big if there is an issue
