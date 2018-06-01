@@ -16,15 +16,16 @@
                 Answered {{answerView.answer.originDate | readableDate}}
                 <span class="buy-offer"
                       *ngIf="answerView.answer.price > 0 && !isAuthor">
+                    <span class="price-tag">${{answerView.answer.price}}</span>
                     <!--Buy-->
-                    <button class="btn btn-success btn-sm"
+                    <button class="btn btn-success btn-sm ml-3"
                             (click)="OnPurchaseClick()">
                         <i class="fas fa-shopping-cart"></i>
                         Buy
                     </button>
 
                     <!--counter offer-->
-                    <button class="btn btn-secondary btn-sm"
+                    <button class="btn btn-secondary btn-sm ml-2"
                             (click)="OnCounterOfferClick()">
                         <i class="fas fa-hand-holding-usd"></i>
                         Counter offer
@@ -80,24 +81,27 @@
         </div>
 
         <!--Answer Content-->
-        <html-content [htmlString]="answerView.answer.redactedHtmlContent"
-                      class="answer-content">
-        </html-content>
+        <div class="my-4">
+            <html-content [htmlString]="answerView.answer.redactedHtmlContent"
+                          class="answer-content">
+            </html-content>
+        </div>
 
-        <!--Edit-->
-        <button *ngIf="isAuthor"
-                class="btn btn-default btn-sm"
-                (click)="OnEditClick()">
-            Edit
-        </button>
+        <div *ngIf="isAuthor">
+            <!--Edit-->
+            <button class="btn btn-sm"
+                    (click)="OnEditClick()">
+                Edit
+            </button>
 
-        <!--Delete-->
-        <button *ngIf="isAuthor"
-                class="btn btn-default btn-sm"
-                (click)="OnDeleteClick()">
-            <span *ngIf="answerView.answer.isDeleted">Undelete</span>
-            <span *ngIf="!answerView.answer.isDeleted">Delete</span>
-        </button>
+            <!--Delete-->
+            <button class="btn btn-sm ml-1"
+                    (click)="OnDeleteClick()">
+                <span *ngIf="answerView.answer.isDeleted">Undelete</span>
+                <span *ngIf="!answerView.answer.isDeleted">Delete</span>
+            </button>
+        </div>
+        
     </div>
 
     <!--Answer editor-->
