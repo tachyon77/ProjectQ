@@ -27,8 +27,8 @@ namespace ProjectQ.Model
         public string RedactedHtmlContent { get; set; }
         public System.DateTime OriginDate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
-        public bool IsDeleted { get; set; }
         public int ProtectedAnswerContentId { get; set; }
+        public int Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }

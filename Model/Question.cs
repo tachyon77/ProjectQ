@@ -20,6 +20,7 @@ namespace ProjectQ.Model
             this.AnswerDrafts = new HashSet<AnswerDraft>();
             this.Answers = new HashSet<Answer>();
             this.QuestionFollowers = new HashSet<QuestionFollower>();
+            this.QuestionTopics = new HashSet<QuestionTopic>();
             this.QuestionViews = new HashSet<QuestionView>();
         }
     
@@ -38,8 +39,10 @@ namespace ProjectQ.Model
         public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionFollower> QuestionFollowers { get; set; }
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionTopic> QuestionTopics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionView> QuestionViews { get; set; }
-        public virtual User User { get; set; }
     }
 }

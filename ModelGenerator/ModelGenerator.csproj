@@ -98,6 +98,15 @@
     <Compile Include="QuestionFollower.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuestionTopic.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionView.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Topic.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>

@@ -36,6 +36,9 @@ namespace ProjectQ.Model
         public virtual DbSet<PurchasedAnswer> PurchasedAnswers { get; set; }
         public virtual DbSet<QuestionFollower> QuestionFollowers { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<QuestionTopic> QuestionTopics { get; set; }
+        public virtual DbSet<QuestionView> QuestionViews { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }
