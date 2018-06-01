@@ -59,7 +59,7 @@ export class ViewPortWatcherDirective implements AfterViewInit, OnDestroy {
         if (force || (entry && entry.target === this.elementRef.nativeElement)) {
             const value = force || (this.config.partial ? entry!.intersectionRatio > 0 : entry!.intersectionRatio === 1);
             this.action$.emit({
-                entry: { entry },
+                entry: entry,
                 target: this.elementRef.nativeElement,
                 value
             });

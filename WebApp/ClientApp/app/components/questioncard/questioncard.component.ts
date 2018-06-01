@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { User } from '../../models/User';
 import { UserSpecificQuestionPreview } from '../../services/questions.service'
 import { QuestionFollowerService } from '../../services/questionfollower.service'
+import { QuestionViewService } from '../../services/question-views.service';
 import { AnswerService } from '../../services/answers.service'
 import { Question } from '../../models/Question';
 
@@ -19,8 +20,17 @@ export class QuestionCardComponent {
     onEnterLeaveViewport(event: any, question: Question) {
         const { entry , target, value } = event;
 
-        console.log(question.title);
+        let intObsEntry = entry as IntersectionObserverEntry;
 
+        if (intObsEntry.intersectionRatio === 1) {
+            console.log(`${question.title} became visible`);
+            this.questionViewService.add(
+                this._questionView!.question.id).subscribe(
+                    () => {
+                    }
+                );
+        }
+        
         //console.log('entry', entry);
         //console.log('target', target);
         //console.log('value', value);
@@ -61,7 +71,8 @@ export class QuestionCardComponent {
     }
 
     constructor(
-        private questionFollowerService: QuestionFollowerService
+        private questionViewService: QuestionViewService,
+        private questionFollowerService: QuestionFollowerService,
     ) {
     }
 

@@ -49,6 +49,7 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { PurchasedAnswerService } from './services/purchased-answers.service';
+import { QuestionViewService } from './services/question-views.service';
 
 @NgModule({
     entryComponents: [
@@ -93,6 +94,7 @@ import { PurchasedAnswerService } from './services/purchased-answers.service';
         NotificationService,
         PurchasedAnswerService,
         QuestionService,
+        QuestionViewService,
         QuestionFollowerService,
         RedactorService,
         ViewportWatcherService,

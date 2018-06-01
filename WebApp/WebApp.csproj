@@ -83,6 +83,7 @@
     <None Remove="ClientApp\app\services\identity.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\purchased-answers.service.ts" />
+    <None Remove="ClientApp\app\services\question-views.service.ts" />
     <None Remove="ClientApp\app\services\questionfollower.service.ts" />
     <None Remove="ClientApp\app\services\redactor.service.ts" />
     <None Remove="Properties\PublishProfiles\Project-Q - Web Deploy.pubxml" />
@@ -138,6 +139,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\displayquestions\displayquestions.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questiondetail\questiondetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\questioncard\questioncard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\question-views.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\questions.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\user-questions\user-questions.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\user-questions\user-questions.component.html" />

@@ -94,6 +94,6 @@ namespace ProjectQ.BusinessLogic
 
     public interface IQuestionViewManager
     {
-        Task AddAsync(QuestionView question);
+        Task AddAsync(int questionId, int userId);
     }
 }

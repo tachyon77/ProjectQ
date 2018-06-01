@@ -16,7 +16,7 @@ namespace WebApp.Controllers
     [Route("api/QuestionViews")]
     public class QuestionViewsController : Controller
     {
-        private readonly IUserIdProvider _userIdProvider;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IQuestionViewManager _questionViewManager;
 
         /// <summary>
@@ -26,26 +26,26 @@ namespace WebApp.Controllers
         /// <param name="questionViewManager"></param>
         public QuestionViewsController(
             IQuestionViewManager questionViewManager,
-            IUserIdProvider userIdProvider
+            UserManager<ApplicationUser> userManager
             )
         {
             _questionViewManager = questionViewManager;
-            _userIdProvider = userIdProvider;
+            _userManager = userManager;
         }
 
 
         // POST: api/QuestionViews
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] QuestionView questionView)
+        public async Task<IActionResult> Post([FromBody] int questionId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            questionView.UserId = await _userIdProvider.GetUserIdAsync();
+            int userId = (await _userManager.GetUserAsync(User)).UserId;
 
-            await _questionViewManager.AddAsync(questionView);
+            await _questionViewManager.AddAsync(questionId, userId);
 
             return NoContent();
         }
