@@ -13,7 +13,7 @@ using ProjectQ.WebApp.Services;
 namespace WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/QuestionViews")]
+    [Route("api/QuestionTopics")]
     public class QuestionTopicsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
