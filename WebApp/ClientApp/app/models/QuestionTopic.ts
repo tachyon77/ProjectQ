@@ -1,5 +1,4 @@
 ﻿export class QuestionTopic {
-    id: number;
-    questionId: number;
-    topicId: number;
+    questionId: number | undefined;
+    topicId: number | undefined;
 }

@@ -1,18 +1,12 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { User } from '../models/User';
-import { Question } from '../models/Question';
-import { Answer } from '../models/Answer';
-
-
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-
 
 
 @Injectable()
@@ -28,7 +22,7 @@ export class QuestionViewService {
     add(questionId: number): Observable<any> {
         return this.http.post(this.apiUrlRoot, questionId, httpOptions).pipe(
             tap(_ => console.log(`added question view`)),
-            catchError(this.handleError<any>('add question view'))
+            catchError(this.handleError('add question view'))
         );
     }
 
