@@ -20,6 +20,7 @@ import { AnswerRatingService } from './services/answerrating.service';
 import { AnswerCardComponent } from './components/answercard/answercard.component';
 import { AddAnswerComponent } from './components/addanswer/addanswer.component';
 import { AddQuestionFormComponent } from './components/addquestion/addquestionform.component';
+import { CardPayComponent } from './components/card-pay/card-pay.component';
 import { CredentialsReadonlyComponent } from './components/credentials-readonly/credentials-readonly.component';
 import { CredentialsEditorComponent } from './components/credentials-editor/credentials-editor.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
@@ -41,6 +42,7 @@ import { QuestionService } from './services/questions.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
 import { QuestionEditorComponent } from './components/questioneditor/questioneditor.component';
 import { QuestionViewService } from './services/question-views.service';
+import { QuestionTopic } from './models/QuestionTopic';
 import { QuestionTopicService } from './services/question-topics.service';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'
@@ -51,7 +53,8 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
-import { QuestionTopic } from './models/QuestionTopic';
+import { NgxStripeModule } from 'ngx-stripe';
+
 
 @NgModule({
     entryComponents: [
@@ -65,6 +68,7 @@ import { QuestionTopic } from './models/QuestionTopic';
         AnswerEditorInlineComponent,
         AnswerPageComponent,
         AddAnswerComponent,
+        CardPayComponent,
         CredentialsReadonlyComponent,
         CredentialsEditorComponent,
         ContentEditorComponent,
@@ -110,6 +114,7 @@ import { QuestionTopic } from './models/QuestionTopic';
         AlertModule.forRoot(),
         ModalModule.forRoot(),
         PopoverModule.forRoot(),
+        NgxStripeModule.forRoot('pk_test_DAraSvJLJBImk4lRam9CiLq8'),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

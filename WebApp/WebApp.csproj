@@ -42,6 +42,9 @@
     <None Remove="ClientApp\app\components\answercard\answercard.component.css" />
     <None Remove="ClientApp\app\components\answercard\answercard.component.html" />
     <None Remove="ClientApp\app\components\answercard\answercard.component.ts" />
+    <None Remove="ClientApp\app\components\card-pay\card-pay.component.css" />
+    <None Remove="ClientApp\app\components\card-pay\card-pay.component.html" />
+    <None Remove="ClientApp\app\components\card-pay\card-pay.component.ts" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.css" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.html" />
     <None Remove="ClientApp\app\components\content-editor\contenteditor.component.ts" />
@@ -102,6 +105,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\answer-editor-inline\answer-editor-inline.component.ts" />
