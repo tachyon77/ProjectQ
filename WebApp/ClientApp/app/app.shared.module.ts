@@ -34,11 +34,14 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
 import { PurchasedAnswersComponent } from './components/purchased-answers/purchased-answers.component'
+import { PurchasedAnswerService } from './services/purchased-answers.service';
 import { QuestionDetailComponent } from './components/questiondetail/questiondetail.component';
 import { QuestionCardComponent } from './components/questioncard/questioncard.component';
 import { QuestionService } from './services/questions.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
 import { QuestionEditorComponent } from './components/questioneditor/questioneditor.component';
+import { QuestionViewService } from './services/question-views.service';
+import { QuestionTopicService } from './services/question-topics.service';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
@@ -48,8 +51,7 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
-import { PurchasedAnswerService } from './services/purchased-answers.service';
-import { QuestionViewService } from './services/question-views.service';
+import { QuestionTopic } from './models/QuestionTopic';
 
 @NgModule({
     entryComponents: [
@@ -96,6 +98,7 @@ import { QuestionViewService } from './services/question-views.service';
         QuestionService,
         QuestionViewService,
         QuestionFollowerService,
+        QuestionTopicService,
         RedactorService,
         ViewportWatcherService,
     ],

@@ -91,6 +91,7 @@ namespace ProjectQ.WebApp
 
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IQuestionViewManager, QuestionViewManager>();
+            services.AddScoped<IQuestionTopicManager, QuestionTopicManager>();
             services.AddScoped<IAnswerManager, AnswerManager>();
             services.AddScoped<IPurchaseAnswerManager, PurchaseAnswerManager>();
             services.AddScoped<IAnswerDraftManager, AnswerDraftManager>();

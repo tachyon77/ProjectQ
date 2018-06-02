@@ -51,6 +51,13 @@ namespace ProjectQ.DAL
         Task AddAsync(QuestionView _);
     }
 
+    public interface IQuestionTopicRepository
+    {
+        Task AddAsync(QuestionTopic _);
+        Task RemoveAsync(QuestionTopic _);
+        Task<IEnumerable<Topic>> GetAllForQuestionAsync(int questionId);
+    }
+
     public interface INotificationRepository
     {
         Task<Notification> FindAsync(int id);

@@ -92,6 +92,13 @@ namespace ProjectQ.BusinessLogic
         bool QuestionExists(int id);
     }
 
+    public interface IQuestionTopicManager
+    {
+        Task AddAsync(int questionId, int topicId);
+        Task RemoveAsync(int questionId, int topicId);
+        Task<IEnumerable<Topic>> GetAllForQuestionAsync(int questionId);
+    }
+
     public interface IQuestionViewManager
     {
         Task AddAsync(int questionId, int userId);
