@@ -4,6 +4,7 @@ import { AnswerService, UserSpecificAnswerView } from '../../services/answers.se
 import { Answer } from '../../models/Answer';
 import { User } from '../../models/User';
 import { AnswerRating } from '../../models/AnswerRating';
+import { AnswerPaymentResult, AnswerPayment } from '../../models/AnswerPayment';
 
 import { AnswerRatingService } from '../../services/answerrating.service'
 import { IdentityService } from '../../services/identity.service'
@@ -21,6 +22,7 @@ export class AnswerCardComponent {
     @Output() answerDeleted = new EventEmitter();
     public rating: boolean[];
     private _loggedInUser: User | undefined;
+    answerPayment: AnswerPayment | undefined;
 
     get isAuthor() {
         return this.loggedInUser
@@ -48,8 +50,11 @@ export class AnswerCardComponent {
     set answerView(answerView: UserSpecificAnswerView | undefined) {
         if (answerView) {
             this._answerView = answerView;
-            //this.answerContent =
-               // this.sanitizer.bypassSecurityTrustHtml(answerView.answer.redactedHtmlContent);
+            this.answerPayment = new AnswerPayment();
+            let ans = this._answerView.answer
+            this.answerPayment.amount = ans.price;
+            this.answerPayment.answerId = ans.id;
+            this.answerPayment.paymentTypeId = 1; // TODO: remove hard coding
 
             if (answerView.rating == null) {
                 this.rating[0] = true;
@@ -83,6 +88,15 @@ export class AnswerCardComponent {
         this.rating = [false, false, false, false, false, false];
     }
 
+    OnChargeProcessed(isSuccessful: boolean) {
+         if (isSuccessful) {                
+            this.answerService.purchase(this.answerView!.answer!.id!)
+                .subscribe(() => {
+                    alert("Purchase successful");
+                });
+        }
+    }
+
     OnEditClick() {
         this.isUpdateAnswerVisible = true;
     }
@@ -96,11 +110,7 @@ export class AnswerCardComponent {
     }
 
     OnPurchaseClick() {
-        // non null assertion: Guaraded by ngIf
-        this.answerService.purchase(this.answerView!.answer!.id!)
-            .subscribe(() => {
-                alert("Purchase successful");
-            });
+        console.log("nothing should happen");
     }
 
     onAnswerUpdated(answer: Answer) {

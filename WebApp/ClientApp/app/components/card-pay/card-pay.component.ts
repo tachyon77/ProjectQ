@@ -1,7 +1,10 @@
-﻿import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
+
+import { AnswerPaymentResult, AnswerPayment } from '../../models/AnswerPayment';
+import { AnswerPaymentService } from '../../services/answer-payment.service';
 
 @Component({
     selector: 'card-pay',
@@ -11,6 +14,7 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 export class CardPayComponent implements OnInit {
     elements: Elements | undefined;
     card: StripeElement | undefined;
+    private _answerPayment: AnswerPayment | undefined;
 
     // optional parameters
     elementsOptions: ElementsOptions = {
@@ -19,8 +23,22 @@ export class CardPayComponent implements OnInit {
 
     stripeTest: FormGroup | undefined;
 
+    @Input()
+    set answerPayment(ap: AnswerPayment | undefined) {
+        if (ap) {
+            this._answerPayment = ap;
+        } 
+    }
+
+    get answerPayment(): AnswerPayment | undefined {
+        return this._answerPayment;
+    }
+
+    @Output() chargeProcessed = new EventEmitter<boolean>();
+
     constructor(
         private fb: FormBuilder,
+        private answerPaymentService: AnswerPaymentService,
         private stripeService: StripeService) { }
 
     ngOnInit() {
@@ -61,6 +79,19 @@ export class CardPayComponent implements OnInit {
                     // Use the token to create a charge or a customer
                     // https://stripe.com/docs/charges
                     console.log(result.token);
+
+                    // non-null assertion guarded by ngIf
+                    this.answerPayment!.token = result.token.id;
+                    this.answerPaymentService.postPayment(this.answerPayment!)
+                        .subscribe(
+                        paymentStatus => {
+                            this.chargeProcessed.emit(paymentStatus.isSuccessful);                               
+                            },
+                        error => {
+                            this.chargeProcessed.emit(false);
+                            }
+                        );
+
                 } else if (result.error) {
                     // Error creating the token
                     console.log(result.error.message);

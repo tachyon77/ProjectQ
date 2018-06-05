@@ -16,6 +16,7 @@ import { AnswerService } from './services/answers.service';
 import { AnswerDraftService } from './services/answer-drafts.service';
 import { AnswerEditorInlineComponent } from './components/answer-editor-inline/answer-editor-inline.component';
 import { AnswerPageComponent } from './components/answer-page/answer-page.component';
+import { AnswerPaymentService } from './services/answer-payment.service';
 import { AnswerRatingService } from './services/answerrating.service';
 import { AnswerCardComponent } from './components/answercard/answercard.component';
 import { AddAnswerComponent } from './components/addanswer/addanswer.component';
@@ -95,6 +96,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         ApplicationUserService,
         AnswerService,
         AnswerDraftService,
+        AnswerPaymentService,
         AnswerRatingService,
         IdentityService,
         NotificationService,

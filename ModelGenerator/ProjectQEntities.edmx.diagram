@@ -39,6 +39,11 @@
         <AssociationConnector Association="ProjectQModel.FK_QuestionViews_Questions" />
         <AssociationConnector Association="ProjectQModel.FK_QuestionTopics_Topics" />
         <AssociationConnector Association="ProjectQModel.FK_QuestionViews_Users" />
+        <EntityTypeShape EntityType="ProjectQModel.AnswerPayment" Width="1.5" PointX="8.5" PointY="15.5" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_Answers" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_Users" />
+        <EntityTypeShape EntityType="ProjectQModel.PaymentType" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_PaymentTypes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

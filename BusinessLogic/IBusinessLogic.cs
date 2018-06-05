@@ -49,6 +49,18 @@ namespace ProjectQ.BusinessLogic
         Task<IEnumerable<Notification>> GetForUserAsync(int userId);
     }
 
+    public interface IAnswerPaymentManager
+    {
+        Task<AnswerPaymentStatus> ProcessPaymentAsync(AnswerPayment answerPayment);
+    }
+
+    public interface ICreditCardCharger
+    {
+        // Token is created using Checkout or Elements.
+        // Get the payment token submitted by the form:
+        AnswerPaymentStatus CreateCharge(int amount, string description, int userId, string token);
+    }
+
     public interface IPurchaseAnswerManager
     {
         // This is to be called after payment/credit card transaction is successful

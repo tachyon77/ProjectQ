@@ -40,5 +40,7 @@ namespace ProjectQ.Model
         public virtual DbSet<QuestionView> QuestionViews { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AnswerPayment> AnswerPayments { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
     }
 }

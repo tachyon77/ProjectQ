@@ -17,6 +17,17 @@
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="AnswerPayments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="AnswerRatings">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,6 +108,13 @@
           <Property Name="OriginDate" Type="datetime" Nullable="false" />
           <Property Name="EventDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Link" Type="nvarchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="ProtectedAnswerContents">
           <Key>
@@ -197,6 +215,42 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AnswerDrafts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_Answers">
+          <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -415,12 +469,14 @@
         </Association>
         <EntityContainer Name="ProjectQModelStoreContainer">
           <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDrafts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerPayments" EntityType="Self.AnswerPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRatings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employments" EntityType="Self.Employments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProtectedAnswerContents" EntityType="Self.ProtectedAnswerContents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchasedAnswers" EntityType="Self.PurchasedAnswers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionFollowers" EntityType="Self.QuestionFollowers" Schema="dbo" store:Type="Tables" />
@@ -436,6 +492,18 @@
           <AssociationSet Name="FK_AnswerDrafts_Users" Association="Self.FK_AnswerDrafts_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_Answers" Association="Self.FK_AnswerPayments_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_PaymentTypes" Association="Self.FK_AnswerPayments_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_Users" Association="Self.FK_AnswerPayments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
           </AssociationSet>
           <AssociationSet Name="FK_AnswerRatings_Answers" Association="Self.FK_AnswerRatings_Answers">
             <End Role="Answers" EntitySet="Answers" />
@@ -602,6 +670,20 @@
             <End Role="User" EntitySet="Users" />
             <End Role="QuestionView" EntitySet="QuestionViews" />
           </AssociationSet>
+          <EntitySet Name="AnswerPayments" EntityType="ProjectQModel.AnswerPayment" />
+          <AssociationSet Name="FK_AnswerPayments_Answers" Association="ProjectQModel.FK_AnswerPayments_Answers">
+            <End Role="Answer" EntitySet="Answers" />
+            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_Users" Association="ProjectQModel.FK_AnswerPayments_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <EntitySet Name="PaymentTypes" EntityType="ProjectQModel.PaymentType" />
+          <AssociationSet Name="FK_AnswerPayments_PaymentTypes" Association="ProjectQModel.FK_AnswerPayments_PaymentTypes">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerDraft">
           <Key>
@@ -648,6 +730,7 @@
           <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
           <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Answers_Users" FromRole="Answer" ToRole="User" />
           <NavigationProperty Name="PurchasedAnswers" Relationship="ProjectQModel.FK_PurchasedAnswers_Answers" FromRole="Answer" ToRole="PurchasedAnswer" />
+          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_Answers" FromRole="Answer" ToRole="AnswerPayment" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -808,6 +891,7 @@
           <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Users" FromRole="User" ToRole="QuestionFollower" />
           <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_Users" FromRole="User" ToRole="Question" />
           <NavigationProperty Name="QuestionViews" Relationship="ProjectQModel.FK_QuestionViews_Users" FromRole="User" ToRole="QuestionView" />
+          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_Users" FromRole="User" ToRole="AnswerPayment" />
         </EntityType>
         <Association Name="FK_AnswerDrafts_Questions">
           <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1">
@@ -1049,6 +1133,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AnswerPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerPayments_Answers" FromRole="AnswerPayment" ToRole="Answer" />
+          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerPayments_Users" FromRole="AnswerPayment" ToRole="User" />
+          <NavigationProperty Name="PaymentType" Relationship="ProjectQModel.FK_AnswerPayments_PaymentTypes" FromRole="AnswerPayment" ToRole="PaymentType" />
+        </EntityType>
+        <Association Name="FK_AnswerPayments_Answers">
+          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayment">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_Users">
+          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_PaymentTypes" FromRole="PaymentType" ToRole="AnswerPayment" />
+        </EntityType>
+        <Association Name="FK_AnswerPayments_PaymentTypes">
+          <End Type="ProjectQModel.PaymentType" Role="PaymentType" Multiplicity="1" />
+          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayment">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1234,6 +1376,26 @@
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UniqueName" ColumnName="UniqueName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerPayments">
+            <EntityTypeMapping TypeName="ProjectQModel.AnswerPayment">
+              <MappingFragment StoreEntitySet="AnswerPayments">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="ProjectQModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

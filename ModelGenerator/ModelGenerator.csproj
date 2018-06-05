@@ -55,6 +55,9 @@
     <Compile Include="AnswerDraft.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="AnswerPayment.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="AnswerRating.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
@@ -68,6 +71,9 @@
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Notification.cs">
+      <DependentUpon>ProjectQEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentType.cs">
       <DependentUpon>ProjectQEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectQEntities.Context.cs">

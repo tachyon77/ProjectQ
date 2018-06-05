@@ -1,41 +1,31 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Question } from '../models/Question';
-import { QuestionTopic } from '../models/QuestionTopic';
-
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+import { AnswerPayment, AnswerPaymentResult } from '../models/AnswerPayment';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class QuestionTopicService {
-
-    constructor(private http: HttpClient) {
+export class AnswerPaymentService {
+    constructor(
+        private http: HttpClient) {
     }
 
-    private apiUrlRoot = 'api/QuestionTopics';
+    private apiUrlRoot = 'api/AnswerPayments';
 
-    add(questionId: number, topicId: number): Observable<any> {
-        let questionTopic = new QuestionTopic();
-        questionTopic.questionId = questionId;
-        questionTopic.topicId = topicId;
-
-        return this.http.post(this.apiUrlRoot, questionTopic, httpOptions).pipe(
-            tap(_ => console.log(`added question topic`)),
-            catchError(this.handleError<any>('add question topic'))
+    postPayment(answerPayment: AnswerPayment): Observable<AnswerPaymentResult> {
+        console.log("posting payment");
+        return this.http.post<AnswerPaymentResult>(this.apiUrlRoot, answerPayment, httpOptions).pipe(
+            tap(_ => console.log(`posted payment`)),
+            catchError(this.handleError<AnswerPaymentResult>('post payment'))
         );
     }
 
-    /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
 
@@ -49,5 +39,4 @@ export class QuestionTopicService {
             return of(result as T);
         };
     }
-
 }

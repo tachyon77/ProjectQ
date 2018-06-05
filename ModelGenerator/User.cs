@@ -27,6 +27,7 @@ namespace ProjectQ.Model
             this.QuestionFollowers = new HashSet<QuestionFollower>();
             this.Questions = new HashSet<Question>();
             this.QuestionViews = new HashSet<QuestionView>();
+            this.AnswerPayments = new HashSet<AnswerPayment>();
         }
     
         public int Id { get; set; }
@@ -54,5 +55,7 @@ namespace ProjectQ.Model
         public virtual ICollection<Question> Questions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionView> QuestionViews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnswerPayment> AnswerPayments { get; set; }
     }
 }

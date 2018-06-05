@@ -14,27 +14,31 @@
 
             <div class="answer-date">
                 Answered {{answerView.answer.originDate | readableDate}}
-                <span *ngIf="answerView.answer.price > 0 && !isAuthor"
-                      class="buy-offer">
-                    <span class="price-tag">${{answerView.answer.price}}</span>
-                    <!--Buy-->
-                    <button class="btn btn-success btn-sm ml-3"
-                            (click)="OnPurchaseClick()">
-                        <i class="fas fa-shopping-cart"></i>
-                        Buy
-                    </button>
 
-                    <!--counter offer-->
-                    <button class="btn btn-secondary btn-sm ml-2"
-                            (click)="OnCounterOfferClick()">
-                        <i class="fas fa-hand-holding-usd"></i>
-                        Counter offer
-                    </button>
-
-                    <card-pay *ngIf="false"></card-pay>
-
-                </span>
             </div>
+        </div>
+
+        <div *ngIf="answerView.answer.price > 0 && !isAuthor"
+              class="buy-offer">
+            <span class="price-tag">${{answerView.answer.price}}</span>
+            <!--Buy-->
+            <button class="btn btn-success btn-sm ml-3"
+                    (click)="OnPurchaseClick()">
+                <i class="fas fa-shopping-cart"></i>
+                Buy
+            </button>
+
+            <!--counter offer-->
+            <button class="btn btn-secondary btn-sm ml-2"
+                    (click)="OnCounterOfferClick()">
+                <i class="fas fa-hand-holding-usd"></i>
+                Counter offer
+            </button>
+
+            <card-pay *ngIf="true"
+                      [answerPayment]="answerPayment"
+                      (chargeProcessed)="OnChargeProcessed($event)">
+            </card-pay>
         </div>
 
         <!--Rating-->

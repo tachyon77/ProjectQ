@@ -4,6 +4,11 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL
 {
+    public interface IAnswerPaymentRepository
+    {
+        Task AddAsync(AnswerPayment answerPayment);
+    }
+
     public interface IAnswerDraftRepository
     {
         Task AddAsync(AnswerDraft draft);

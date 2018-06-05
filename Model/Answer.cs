@@ -19,6 +19,7 @@ namespace ProjectQ.Model
         {
             this.AnswerRatings = new HashSet<AnswerRating>();
             this.PurchasedAnswers = new HashSet<PurchasedAnswer>();
+            this.AnswerPayments = new HashSet<AnswerPayment>();
         }
     
         public int Id { get; set; }
@@ -29,7 +30,7 @@ namespace ProjectQ.Model
         public System.DateTime ExpiryDate { get; set; }
         public int ProtectedAnswerContentId { get; set; }
         public int Price { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerRating> AnswerRatings { get; set; }
         public virtual ProtectedAnswerContent ProtectedAnswerContent { get; set; }
@@ -37,5 +38,7 @@ namespace ProjectQ.Model
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchasedAnswer> PurchasedAnswers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnswerPayment> AnswerPayments { get; set; }
     }
 }
