@@ -40,5 +40,6 @@ Angular Compiler => node module that coverts TS => JS (?)
 WebPack => a node module, used to bundle javascript modules
 Webpack-CLI => a node module
 
+10. <app> is the root module. 
 
 

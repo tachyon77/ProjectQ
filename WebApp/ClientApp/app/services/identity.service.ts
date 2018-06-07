@@ -60,7 +60,7 @@ export class IdentityService {
     getLoggedInUser(): Observable<User> {
         return this.http.get<User>('api/account/user')
             .pipe(
-                tap(_ => console.log(``)),
+                tap(_ => console.log(`logged in`)),
                 catchError(this.handleError<User>('get logged in user'))
             );
     }
@@ -77,10 +77,10 @@ export class IdentityService {
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
+            //console.error(error); // log to console instead
 
             // TODO: better job of transforming error for user consumption
-            //this.log(`${operation} failed: ${error.message}`);
+            console.log(`${operation} failed: ${error.message}`);
 
             // Let the app keep running by returning an empty result.
             return of(result as T);

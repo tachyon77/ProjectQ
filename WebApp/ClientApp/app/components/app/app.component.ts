@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     user: User | undefined;
-    isLoggedIn: boolean = true;
+    isLoggedIn: boolean = false;
 
     constructor(
         private identityService: IdentityService,
@@ -40,12 +40,16 @@ export class AppComponent {
 
     ngOnInit() {
         this.identityService.getLoggedInUser().subscribe(
-            data => { // success path
-                this.user = data as User;
-                this.isLoggedIn = true;
+            (user: User) => {
+                if (user) {
+                    this.user = user;
+                    this.isLoggedIn = true;
+                } else {
+                    this.isLoggedIn = false;
+                }
             }, 
             error => {
-                this.isLoggedIn = false;
+                // not supposed to come here. Error is already caught in service layer.
             }
         );
     }
