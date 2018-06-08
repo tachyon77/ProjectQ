@@ -55,7 +55,7 @@ namespace ProjectQ.WebApp.Controllers
                 return Ok(user);
             }
 
-            return Unauthorized();
+            return NotFound();
         }
 
 

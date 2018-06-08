@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { IdentityService, LoginCredential } from '../../services/identity.service';
+import { User } from '../../models/User';
 
 @Component({
     selector: 'login-form',
@@ -32,8 +33,12 @@ export class LoginFormComponent {
 
     onSubmit(loginForm: LoginCredential) {
         this.identityService.login(loginForm).subscribe(
-            data => {
-                this.loggedIn.emit(data);
+            (user: User) => {
+                if (user) {
+                    this.loggedIn.emit(user);
+                } else {
+                    alert("Login Failed.");
+                }
             },
             error => {
                 alert("Login failed: " + error);
