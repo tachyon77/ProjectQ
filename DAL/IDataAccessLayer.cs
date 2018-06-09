@@ -4,6 +4,11 @@ using ProjectQ.Model;
 
 namespace ProjectQ.DAL
 {
+    public interface IInvitationRequestRepository
+    {
+        Task AddAsync(InvitationRequest invitationRequest);
+    }
+
     public interface IAnswerPaymentRepository
     {
         Task AddAsync(AnswerPayment answerPayment);

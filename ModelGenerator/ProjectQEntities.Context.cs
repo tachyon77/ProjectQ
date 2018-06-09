@@ -42,5 +42,6 @@ namespace ProjectQ.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<AnswerPayment> AnswerPayments { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<InvitationRequest> InvitationRequests { get; set; }
     }
 }

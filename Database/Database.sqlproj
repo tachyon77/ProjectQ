@@ -84,6 +84,7 @@
     <Build Include="dbo\Tables\QuestionTopics.sql" />
     <Build Include="dbo\Tables\AnswerPayments.sql" />
     <Build Include="dbo\Tables\PaymentTypes.sql" />
+    <Build Include="dbo\Tables\InvitationRequests.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />

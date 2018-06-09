@@ -1,28 +1,38 @@
 <div class="text-center">
     <h1>Welcome to  Project-Q</h1>
+    <h3>[Beta]</h3>
     <br />
     <img src="../../../../wwwroot/images/eagle.jpg"
          class="center-block img-responsive" />
     <div class="engraved-text">A place to ask questions fearlessly.</div>
 </div>
 <br />
-<div *ngIf="showLoginForm"
+<div *ngIf="state==0"
      class="login-form">
     <login-form (loggedIn)="onLoggedIn($event)"
                 (showRegistration)="onShowRegistration()">
 
     </login-form>
-    <div class="text-center">
+    <div *ngIf="false"
+         class="text-center">
         <button type="button"
                 (click)="onShowRegistration()"
                 class="login-control btn btn-light">
             Register
         </button>
     </div>
-    
+
+    <div class="text-center">
+        <button type="button"
+                (click)="onRequestInvite()"
+                class="login-control btn btn-link">
+            Request Invitation
+        </button>
+    </div>
+
 </div>
 
-<div *ngIf="!showLoginForm" class="login-form">
+<div *ngIf="state==1" class="login-form">
     <registration-form (registrationCompleted)="onRegistrationCompleted()"
                        (showLogin)="onShowLogin()">
 
@@ -34,6 +44,12 @@
             Login
         </button>
     </div>
+</div>
+
+<div *ngIf="state==2" class="login-form">
+    <request-invite (inviteReqSubmitted)="onInviteReqSubmitted()">
+
+    </request-invite>
 </div>
 
 

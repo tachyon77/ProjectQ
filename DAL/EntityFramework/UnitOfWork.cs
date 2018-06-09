@@ -26,10 +26,24 @@ namespace ProjectQ.DAL.EntityFramework
         private IUserRepository _userRepository;
         private IEmploymentRepository _employmentRepository;
         private IEducationRepository _educationRepository;
+        private IInvitationRequestRepository _invitationRequestRepository;
 
         public UnitOfWork(ProjectQEntities context)
         {
             _context = context;
+        }
+
+        IInvitationRequestRepository IUnitOfWork.InvitationRequestRepository
+        {
+            get
+            {
+                if (_invitationRequestRepository == null)
+                {
+                    _invitationRequestRepository =
+                        new InvitationRequestRepository(_context);
+                }
+                return _invitationRequestRepository;
+            }
         }
 
         IUserRepository IUnitOfWork.UserRepository

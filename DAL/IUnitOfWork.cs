@@ -8,6 +8,7 @@ namespace ProjectQ.DAL
 { 
     public interface IUnitOfWork
     {
+        IInvitationRequestRepository InvitationRequestRepository { get; }
         IQuestionFollowerRepository QuestionFollowerRepository { get; }
         IQuestionRepository QuestionRepository { get; }
         IQuestionViewRepository QuestionViewRepository { get; }

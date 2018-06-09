@@ -29,5 +29,6 @@ namespace ProjectQ.DAL.EntityFramework
         public DbSet<AnswerRating> AnswerRatings { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<Employment> Employments { get; set; }
+        public DbSet<InvitationRequest> InvitationRequests { get; set; }
     }
 }

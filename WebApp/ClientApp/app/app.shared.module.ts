@@ -48,6 +48,8 @@ import { QuestionTopicService } from './services/question-topics.service';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
+import { RequestInviteComponent } from './components/request-invite/request-invite.component';
+import { RequestInviteService } from './services/request-invite.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ViewportWatcherService } from './directives/viewport-watcher.service';
@@ -88,6 +90,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         QuestionEditorComponent,
         ReadableDatePipe,
         RegistrationFormComponent,
+        RequestInviteComponent,
         UserProfileComponent,
         UserQuestionsComponent,
         ViewPortWatcherDirective,
@@ -106,6 +109,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         QuestionFollowerService,
         QuestionTopicService,
         RedactorService,
+        RequestInviteService,
         ViewportWatcherService,
     ],
     imports: [
@@ -126,6 +130,7 @@ import { NgxStripeModule } from 'ngx-stripe';
             { path: 'add-question-form', component: AddQuestionFormComponent },
             { path: 'question-detail/:id', component: QuestionDetailComponent },
             { path: 'answer-page/:id', component: AnswerPageComponent },
+            { path: 'request-invite', component: RequestInviteComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

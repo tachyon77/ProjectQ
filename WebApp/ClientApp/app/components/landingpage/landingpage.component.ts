@@ -10,7 +10,11 @@ import { IdentityService, LoginCredential } from '../../services/identity.servic
 })
 export class LandingPageComponent {
 
-    showLoginForm: boolean = true;
+    // 0: login form
+    // 1: registration form
+    // 2: Request invitation form
+    state: number = 0;
+
 
     @Output() loggedIn = new EventEmitter();
 
@@ -21,7 +25,7 @@ export class LandingPageComponent {
     }
 
     onRegistrationCompleted() {
-        this.showLoginForm = true;
+        this.state = 0;
     }
 
     onLoggedIn(event: Event) {
@@ -29,11 +33,19 @@ export class LandingPageComponent {
     }
 
     onShowLogin() {
-        this.showLoginForm = true;
+        this.state = 0;
     }
 
     onShowRegistration() {
-        this.showLoginForm = false;
+        this.state = 1;
+    }
+
+    onRequestInvite() {
+        this.state = 2;
+    }
+
+    onInviteReqSubmitted() {
+        this.state = 0;
     }
 
 }

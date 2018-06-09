@@ -89,6 +89,7 @@ namespace ProjectQ.WebApp
 
             services.AddSingleton(Configuration);
 
+            services.AddScoped<IInvitationRequestManager, InvitationRequestManager>();
             services.AddScoped<IQuestionManager, QuestionManager>();
             services.AddScoped<IQuestionViewManager, QuestionViewManager>();
             services.AddScoped<IQuestionTopicManager, QuestionTopicManager>();

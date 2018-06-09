@@ -27,6 +27,7 @@
           <Property Name="Time" Type="datetime" Nullable="false" />
           <Property Name="PaymentTypeId" Type="int" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="AnswerRatings">
           <Key>
@@ -97,6 +98,16 @@
           <Property Name="Start" Type="datetime" />
           <Property Name="End" Type="datetime" />
           <Property Name="IsCurrent" Type="bit" />
+        </EntityType>
+        <EntityType Name="InvitationRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -475,6 +486,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employments" EntityType="Self.Employments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvitationRequests" EntityType="Self.InvitationRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProtectedAnswerContents" EntityType="Self.ProtectedAnswerContents" Schema="dbo" store:Type="Tables" />
@@ -684,6 +696,7 @@
             <End Role="PaymentType" EntitySet="PaymentTypes" />
             <End Role="AnswerPayment" EntitySet="AnswerPayments" />
           </AssociationSet>
+          <EntitySet Name="InvitationRequests" EntityType="ProjectQModel.InvitationRequest" />
         </EntityContainer>
         <EntityType Name="AnswerDraft">
           <Key>
@@ -1146,6 +1159,7 @@
           <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerPayments_Answers" FromRole="AnswerPayment" ToRole="Answer" />
           <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerPayments_Users" FromRole="AnswerPayment" ToRole="User" />
           <NavigationProperty Name="PaymentType" Relationship="ProjectQModel.FK_AnswerPayments_PaymentTypes" FromRole="AnswerPayment" ToRole="PaymentType" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_AnswerPayments_Answers">
           <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
@@ -1191,6 +1205,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InvitationRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1383,6 +1407,7 @@
           <EntitySetMapping Name="AnswerPayments">
             <EntityTypeMapping TypeName="ProjectQModel.AnswerPayment">
               <MappingFragment StoreEntitySet="AnswerPayments">
+                <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
@@ -1395,6 +1420,17 @@
           <EntitySetMapping Name="PaymentTypes">
             <EntityTypeMapping TypeName="ProjectQModel.PaymentType">
               <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvitationRequests">
+            <EntityTypeMapping TypeName="ProjectQModel.InvitationRequest">
+              <MappingFragment StoreEntitySet="InvitationRequests">
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

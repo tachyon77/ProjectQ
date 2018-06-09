@@ -4,6 +4,11 @@ using ProjectQ.Model;
 
 namespace ProjectQ.BusinessLogic
 {
+    public interface IInvitationRequestManager
+    {
+        Task AddAsync(InvitationRequest invitationRequest);
+    }
+
     public interface IAnswerDraftManager
     {
         Task<int> AddAsync(AnswerDraft draft, int userId);
