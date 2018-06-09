@@ -20,6 +20,7 @@ namespace ProjectQ.Model
         public System.DateTime Time { get; set; }
         public int PaymentTypeId { get; set; }
         public int Amount { get; set; }
+        public string Token { get; set; }
     
         public virtual Answer Answer { get; set; }
         public virtual User User { get; set; }
