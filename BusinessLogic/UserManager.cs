@@ -46,6 +46,7 @@ namespace ProjectQ.BusinessLogic
             {
                 uniqueName = dashedName + i.ToString();
                 isAlreadyUsed = _unitOfWork.UserRepository.FindByUniqueName(uniqueName) != null;
+                ++i;
             };
 
             return uniqueName;
