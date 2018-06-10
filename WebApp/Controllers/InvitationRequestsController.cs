@@ -13,7 +13,6 @@ namespace WebApp.Controllers
     [Route("api/InvitationRequests")]
     public class InvitationRequestsController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IInvitationRequestManager _invitationRequestManager;
 
         /// <summary>
@@ -22,12 +21,10 @@ namespace WebApp.Controllers
         /// <param name="unitOfWork"></param>
         /// <param name="invitationRequestManager"></param>
         public InvitationRequestsController(
-            IInvitationRequestManager invitationRequestManager,
-            UserManager<ApplicationUser> userManager
+            IInvitationRequestManager invitationRequestManager
             )
         {
             _invitationRequestManager = invitationRequestManager;
-            _userManager = userManager;
         }
 
         // POST: api/InvitationRequests
