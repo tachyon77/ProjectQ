@@ -23,6 +23,7 @@ export class AnswerCardComponent {
     public rating: boolean[];
     private _loggedInUser: User | undefined;
     answerPayment: AnswerPayment | undefined;
+    showPaymentForm: boolean = false;
 
     get isAuthor() {
         return this.loggedInUser
@@ -93,6 +94,7 @@ export class AnswerCardComponent {
             this.answerService.purchase(this.answerView!.answer!.id!)
                 .subscribe(() => {
                     alert("Purchase successful");
+                    this.showPaymentForm = false;
                 });
         }
     }
@@ -110,7 +112,7 @@ export class AnswerCardComponent {
     }
 
     OnPurchaseClick() {
-        console.log("nothing should happen");
+        this.showPaymentForm = true;
     }
 
     onAnswerUpdated(answer: Answer) {

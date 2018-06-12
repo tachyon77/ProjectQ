@@ -35,7 +35,7 @@
                 Counter offer
             </button>
 
-            <card-pay *ngIf="false"
+            <card-pay *ngIf="showPaymentForm"
                       [answerPayment]="answerPayment"
                       (chargeProcessed)="OnChargeProcessed($event)">
             </card-pay>
