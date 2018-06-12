@@ -41,5 +41,7 @@ WebPack => a node module, used to bundle javascript modules
 Webpack-CLI => a node module
 
 10. <app> is the root module. 
+11. If you ever get dizzy figuring out how angular and webpack relate, read this:
+https://angular.io/guide/webpack
 
 
