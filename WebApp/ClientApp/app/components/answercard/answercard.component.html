@@ -19,11 +19,11 @@
         </div>
 
         <div *ngIf="answerView.answer.price > 0 && !isAuthor"
-              class="buy-offer">
+             class="buy-offer">
             <span class="price-tag">${{answerView.answer.price}}</span>
             <!--Buy-->
             <button class="btn btn-success btn-sm ml-3"
-                    (click)="OnPurchaseClick()">
+                    (click)="onOpenCreditPay(cardPaymentTemplate)">
                 <i class="fas fa-shopping-cart"></i>
                 Buy
             </button>
@@ -34,11 +34,6 @@
                 <i class="fas fa-hand-holding-usd"></i>
                 Counter offer
             </button>
-
-            <card-pay *ngIf="showPaymentForm"
-                      [answerPayment]="answerPayment"
-                      (chargeProcessed)="OnChargeProcessed($event)">
-            </card-pay>
         </div>
 
         <!--Rating-->
@@ -119,3 +114,22 @@
         </answer-editor-inline>
     </div>
 </div>
+
+<!--Modal Template: Card Payment-->
+<ng-template #cardPaymentTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Payment</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="creditPayModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <card-pay [answerPayment]="answerPayment"
+                  (chargeProcessed)="OnChargeProcessed($event)">
+        </card-pay>
+    </div>
+
+    <div class="credential-footer">
+        <button type="button" class="btn btn-default" (click)="creditPayModal.hide()">Close</button>
+    </div>
+</ng-template>

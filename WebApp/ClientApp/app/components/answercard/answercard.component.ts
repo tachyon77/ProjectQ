@@ -1,4 +1,4 @@
-﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { AnswerService, UserSpecificAnswerView } from '../../services/answers.service'
 
 import { Answer } from '../../models/Answer';
@@ -8,6 +8,7 @@ import { AnswerPaymentResult, AnswerPayment } from '../../models/AnswerPayment';
 
 import { AnswerRatingService } from '../../services/answerrating.service'
 import { IdentityService } from '../../services/identity.service'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class AnswerCardComponent {
     private _loggedInUser: User | undefined;
     answerPayment: AnswerPayment | undefined;
     showPaymentForm: boolean = false;
+    creditPayModal: BsModalRef | undefined;
 
     get isAuthor() {
         return this.loggedInUser
@@ -83,7 +85,8 @@ export class AnswerCardComponent {
 
     constructor(
         private answerService: AnswerService,
-        private answerRatingService: AnswerRatingService
+        private answerRatingService: AnswerRatingService,
+        private modalService: BsModalService,
     ) {
         this.isUpdateAnswerVisible = false;
         this.rating = [false, false, false, false, false, false];
@@ -93,7 +96,7 @@ export class AnswerCardComponent {
          if (isSuccessful) {                
             this.answerService.purchase(this.answerView!.answer!.id!)
                 .subscribe(() => {
-                    alert("Purchase successful");
+                    alert("Purchase successful. You can view purchased answers in your profile page.");
                     this.showPaymentForm = false;
                 });
         }
@@ -111,8 +114,10 @@ export class AnswerCardComponent {
             });
     }
 
-    OnPurchaseClick() {
-        this.showPaymentForm = true;
+    onOpenCreditPay(template: TemplateRef<any>) {
+        this.creditPayModal = this.modalService.show(
+            template, { }
+        );
     }
 
     onAnswerUpdated(answer: Answer) {
