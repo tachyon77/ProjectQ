@@ -5,7 +5,7 @@ export interface Question {
     description: string;
     id: number;
     isDeleted: boolean;
-    offeredPrice: number;
+    offeredPrice: number = 0;
     originDate: Date;
     user: User;
 }
