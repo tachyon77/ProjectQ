@@ -67,10 +67,10 @@
             <input #x type="text" class="form-control url-input"
                    placeholder="Image URL..."
                    [(ngModel)]="imgURL"
-                   aria-label="Input group example"
                    aria-describedby="btnGroupAddon">
             <div class="input-group-append url-input">
                 <button (click)="onInsertImage()"
+                        type="button"
                         class="input-group-text">
                     Insert
                 </button>
