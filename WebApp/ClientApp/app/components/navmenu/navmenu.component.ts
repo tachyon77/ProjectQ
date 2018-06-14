@@ -30,11 +30,11 @@ export class NavMenuComponent implements AfterViewInit{
 
     ngAfterViewInit() {
 
-        var scheme = "ws";
-        var port = document.location.port ? (":" + document.location.port) : "";
-        var connectionUrl = scheme + "://" + document.location.hostname + port + "/api/Notifications/ws";
+        let protocol = location.protocol === "https:" ? "wss:" : "ws:";
+        let port = document.location.port ? (":" + document.location.port) : "";
+        let webSocketURL = protocol + "://" + document.location.hostname + port + "/api/Notifications/ws";
 
-        var socket = new WebSocket(connectionUrl);
+        var socket = new WebSocket(webSocketURL);
         socket.onopen = function (event) {
             console.log("connection open!");
         };
