@@ -97,21 +97,31 @@ namespace ProjectQ.BusinessLogic.Services
 
             if(_websockets.ContainsKey(userId))
             {
+                var closedWebSockets = new List<WebSocket>();
+
                 foreach(var ws in _websockets[userId])
                 {
                     if (ws.State.Equals(WebSocketState.Open))
                     {
-                        await ws.SendAsync(
+                        try
+                        {
+                            await ws.SendAsync(
                             buffer, WebSocketMessageType.Text,
                             true,
                             CancellationToken.None);
-
+                        }
+                        catch (Exception _e)
+                        {
+                            closedWebSockets.Add(ws);
+                        }
                     }
                     else
                     {
-                        Unsubscribe(userId, ws);
+                        closedWebSockets.Add(ws);
                     }
                 }
+
+                closedWebSockets.ForEach( ws => { Unsubscribe(userId, ws); });
             }
             
         }
