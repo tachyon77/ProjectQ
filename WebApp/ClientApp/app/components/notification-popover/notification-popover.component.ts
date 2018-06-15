@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { Notification, NotificationService } from '../../services/notification.service'
+import { Notification } from '../../services/notification.service'
+
 @Component({
     selector: 'notification-popover',
     templateUrl: './notification-popover.component.html',
@@ -9,39 +10,28 @@ import { Notification, NotificationService } from '../../services/notification.s
     },
 })
 export class NotificationPopoverComponent{
-    private _notificationCount: number = 0;
     private fistClick: boolean = true;
-    public visible: boolean = true;
-    private _notifications: Notification[];
+    visible: boolean = true;
+
+    @Input() notifications: Notification[] = [];
 
     @Output() notificationDismissed = new EventEmitter();
+    @Output() notificationClicked = new EventEmitter<number>();
+    @Output() notificationAllMarkedSeen = new EventEmitter<number>();
 
     constructor(
-        private notificationService: NotificationService,
         private _eref: ElementRef
     ) {
-        this._notifications = [];
         this.visible = true;
         this.fistClick = true;
-        this.loadNotifications();
-    }
-
-    loadNotifications() {
-        this.notificationService.getUnseen()
-            .subscribe(result => {
-                this._notifications = result as Notification[];
-                this._notificationCount = this._notifications.length;
-            }, error => console.error(error));
     }
 
     onMarkAllReadClick() {
-        this.notificationService.markAllAsSeen()
-            .subscribe(result => { this.loadNotifications(); });
+        this.notificationAllMarkedSeen.emit();
     }
 
     onNotificationClick(id: number) {
-        this.notificationService.markAsSeen(id)
-            .subscribe(result => { });
+        this.notificationClicked.emit(id);
     }
 
     onClick(event:any) {
@@ -55,14 +45,6 @@ export class NotificationPopoverComponent{
             }
         }
             
-    }
-
-    get notificationCount() {
-        return this._notifications.length;
-    }
-
-    get notifications() {
-        return this._notifications
     }
 
 }

@@ -34,15 +34,18 @@
             <li class="nav-item dropdown"
                 [routerLinkActive]="['link-active']">
                 <div class="notification-parent">
-                    <a [ngClass]="{'nav-link': true, 'notification-badge': notificationCount, 'pointer-cursor': true}"
-                       attr.data-badge={{notificationCount}}
+                    <a [ngClass]="{'nav-link': true, 'notification-badge': notifications.length, 'pointer-cursor': true}"
+                       attr.data-badge={{notifications.length}}
                        (click)="toggleNotification()">
                         <i class="far fa-bell"></i>
                         Notifications
                     </a>
                     <div class="notification-popover" 
                          *ngIf="isNotificationsVisible">
-                        <notification-popover (notificationDismissed)="onNotificationDismissed()">
+                        <notification-popover [notifications]="notifications"
+                                              (notificationDismissed)="onNotificationDismissed()"
+                                              (notificationClicked)="onNotificationClicked($event)"
+                                              (notificationAllMarkedSeen)="onNotificationAllMarkedSeen()">
                         </notification-popover>
                     </div>
                 </div>

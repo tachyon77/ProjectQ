@@ -10,29 +10,27 @@ import { Notification, NotificationService } from '../../services/notification.s
 })
 export class NavMenuComponent implements AfterViewInit{
     private _user: User | undefined;
-    private _isNotificationsVisible: boolean = false;
-    private _notificationCount: number = 0;
-    private _notifications: Notification[];
+    isNotificationsVisible: boolean = false;
+    notifications: Notification[] = [];
 
     @Output() loggedOut = new EventEmitter();
 
     constructor(private notificationService: NotificationService) {
-        this._notifications = [];
     }
 
     onNotificationDismissed() {
-        this._isNotificationsVisible = false;
+        this.isNotificationsVisible = false;
     }
 
     toggleNotification() {
-        this._isNotificationsVisible = !this._isNotificationsVisible;
+        this.isNotificationsVisible = !this.isNotificationsVisible;
     }
 
     ngAfterViewInit() {
 
         let protocol = location.protocol === "https:" ? "wss:" : "ws:";
         let port = document.location.port ? (":" + document.location.port) : "";
-        let webSocketURL = protocol + "://" + document.location.hostname + port + "/api/Notifications/ws";
+        let webSocketURL = protocol + "//" + document.location.hostname + port + "/api/Notifications/ws";
 
         var socket = new WebSocket(webSocketURL);
         socket.onopen = function (event) {
@@ -49,24 +47,20 @@ export class NavMenuComponent implements AfterViewInit{
             var data = event.data;
             if (data != "ping")
             {
-                var notification = JSON.parse(data) as Notification;
-                this._notifications.push(notification);
+                //var notification = JSON.parse(data) as Notification;
+                //this.notifications.push(notification);
+                this.loadNotifications();
             }
         };
 
         this.notificationService.getUnseen().subscribe(
             data => {
-                this._notifications = data as Notification[];
-                this._notificationCount = this._notifications.length;
+                this.notifications = data as Notification[];
             },
             error => {
                 console.error(error);
             }
         );
-    }
-
-    get isNotificationsVisible() {
-        return this._isNotificationsVisible;
     }
 
     @Input()
@@ -85,15 +79,27 @@ export class NavMenuComponent implements AfterViewInit{
         return this._user;
     }
 
-    get notificationCount() {
-        return this._notifications.length;
-    }
-
-    get notifications() {
-        return this._notifications
-    }
 
     logoutClick() {
         this.loggedOut.emit();
     }
+
+    loadNotifications() {
+        this.notificationService.getUnseen()
+            .subscribe(result => {
+                this.notifications = result as Notification[];
+                console.log(`Loaded ${this.notifications.length} notifications`);
+            }, error => console.error(error));
+    }
+
+    onNotificationAllMarkedSeen() {
+        this.notificationService.markAllAsSeen()
+            .subscribe(result => { this.loadNotifications(); });
+    }
+
+    onNotificationClicked(id: number) {
+        this.notificationService.markAsSeen(id)
+            .subscribe(result => { this.loadNotifications(); });
+    }
+
 }
