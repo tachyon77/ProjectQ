@@ -53,14 +53,7 @@ export class NavMenuComponent implements AfterViewInit{
             }
         };
 
-        this.notificationService.getUnseen().subscribe(
-            data => {
-                this.notifications = data as Notification[];
-            },
-            error => {
-                console.error(error);
-            }
-        );
+        this.loadNotifications();
     }
 
     @Input()
