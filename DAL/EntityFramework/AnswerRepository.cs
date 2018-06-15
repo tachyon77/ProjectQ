@@ -52,7 +52,7 @@ namespace ProjectQ.DAL.EntityFramework
                     a=> new UserSpecificAnswerView()
                     {
                         Answer = a,
-                        Rating = a.AnswerRatings.FirstOrDefault(x=>x.UserId.Equals(a.UserId)),
+                        Rating = a.AnswerRatings.FirstOrDefault(x=>x.UserId.Equals(userId)),
                         AverageRating = a.AnswerRatings.Any() ?
                             Convert.ToDecimal(a.AnswerRatings.Average(r => r.Rating))
                             :
