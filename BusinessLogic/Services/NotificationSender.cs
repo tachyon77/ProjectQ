@@ -112,6 +112,8 @@ namespace ProjectQ.BusinessLogic.Services
                         }
                         catch (Exception _e)
                         {
+                            // This is rather common case. Happens when client
+                            // closes the browser.
                             closedWebSockets.Add(ws);
                         }
                     }
@@ -121,6 +123,8 @@ namespace ProjectQ.BusinessLogic.Services
                     }
                 }
 
+                // We need this list closedWebSockets as Unsubscribe modifies
+                // the _websockets[userId] list foreach is working on.
                 closedWebSockets.ForEach( ws => { Unsubscribe(userId, ws); });
             }
             
