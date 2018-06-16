@@ -49,15 +49,24 @@ namespace ProjectQ.DAL.EntityFramework
             var userSpecificAnswerViews = answers
                 .ToList()
                 .ConvertAll(
-                    a=> new UserSpecificAnswerView()
+                    a=>
                     {
-                        Answer = a,
-                        Rating = a.AnswerRatings.FirstOrDefault(x=>x.UserId.Equals(userId)),
-                        AverageRating = a.AnswerRatings.Any() ?
-                            Convert.ToDecimal(a.AnswerRatings.Average(r => r.Rating))
-                            :
-                            0
+                        if (a.User.Id != userId && a.IsAnonymous)
+                        {
+                            a.User = new User() { Name = "Anonymous" };
+                        };
+
+                        return new UserSpecificAnswerView()
+                        {
+                            Answer = a,
+                            Rating = a.AnswerRatings.FirstOrDefault(x => x.UserId.Equals(userId)),
+                            AverageRating = a.AnswerRatings.Any() ?
+                              Convert.ToDecimal(a.AnswerRatings.Average(r => r.Rating))
+                              :
+                              0
+                        };
                     }
+                   
                 );
             return userSpecificAnswerViews;
         }

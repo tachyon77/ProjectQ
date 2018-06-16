@@ -86,7 +86,7 @@ namespace ProjectQ.BusinessLogic
                         UserId = follower,
 
                         EventDescription =
-                            user.Name + " wrote an answer for \""
+                            (answer.IsAnonymous? "Anonymous" : user.Name) + " wrote an answer for \""
                             + question.Title.Substring(0, notificationLength)
                             + " ...\"",
                         Link = "/question-detail/" + question.Id

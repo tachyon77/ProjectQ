@@ -31,6 +31,8 @@ export class AddAnswerComponent {
         private answerService: AnswerService,
         private answerDraftService: AnswerDraftService,
         private redactorService: RedactorService) {
+
+        this.createForm();
     }
 
 
@@ -49,7 +51,10 @@ export class AddAnswerComponent {
                     let draft = json as AnswerDraft;
                     this._draft = draft;
                     this.initialContent = draft.htmlContent;
-                    this.initForm();
+                    this.form!.setValue({
+                        price: this._draft.price,
+                        isAnonymous: this._draft.isAnonymous
+                    })
                     this.startDraftLastSavedMessageUpdater();
                 } else {
                     this.initialContent = "";
@@ -64,7 +69,7 @@ export class AddAnswerComponent {
         this.draft.htmlContent = content;
     }
 
-    initForm() {
+    createForm() {
         this.form = this.formBuilder.group({
             price: this.formBuilder.control(this.draft.price, Validators.compose([
                 Validators.pattern('[0-9]+'),
