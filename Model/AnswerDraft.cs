@@ -21,6 +21,7 @@ namespace ProjectQ.Model
         public System.DateTime OriginDate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
         public int Price { get; set; }
+        public bool IsAnonymous { get; set; }
 
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }

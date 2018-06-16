@@ -8,16 +8,25 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Price</div>
                 </div>
-                <input type="text" 
+                <input type="text"
                        class="form-control"
                        name="price"
-                       id="price" 
+                       id="price"
                        formControlName="price"
                        placeholder="$">
             </div>
+
+        </div>
+        <div class="col-sm-3">
+            <input type="checkbox" 
+                   class="form-control"
+                   name="isAnonymous"
+                   id="isAnonymous"
+                   formControlName="isAnonymous"/> 
+            Anonymous
         </div>
     </div>
-
+    
     <div class="content-editor-container">
         <content-editor [content]="initialContent"
                         [enableRedaction]="true"
@@ -32,6 +41,7 @@
         Submit
     </button>
     <button (click)="onSaveDraft(form.value)"
+            type="button"
             class="btn btn-light no-border btn-sm ml-1">
         Save Draft
     </button>

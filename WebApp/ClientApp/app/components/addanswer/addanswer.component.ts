@@ -46,7 +46,6 @@ export class AddAnswerComponent {
         this.answerDraftService.getForQuestion(questionId).subscribe(
             json => {
                 if (json) {
-                    console.log("json is not null, " + json);
                     let draft = json as AnswerDraft;
                     this._draft = draft;
                     this.initialContent = draft.htmlContent;
@@ -66,9 +65,10 @@ export class AddAnswerComponent {
     ngOnInit() {
 
         this.form = this.formBuilder.group({
-            price: this.formBuilder.control(0, Validators.compose([
+            price: this.formBuilder.control(this.draft.price, Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),
+            isAnonymous: this.formBuilder.control(this.draft.isAnonymous),
         });
 
         setInterval(
@@ -98,6 +98,7 @@ export class AddAnswerComponent {
 
     onSaveDraft(form: AnswerForm) {
         this._draft.price = form.price;
+        this._draft.isAnonymous = form.isAnonymous;
         this.answerDraftService.update(this._draft)
             .subscribe(() => {
                 this.lastSaved = new Date();

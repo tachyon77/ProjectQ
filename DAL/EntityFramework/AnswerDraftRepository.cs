@@ -56,6 +56,7 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.HtmlContent = draft.HtmlContent;
             dbRecord.ExpiryDate = draft.ExpiryDate;
             dbRecord.Price = draft.Price;
+            dbRecord.IsAnonymous = draft.IsAnonymous;
         }
 
 

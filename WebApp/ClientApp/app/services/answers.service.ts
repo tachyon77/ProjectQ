@@ -11,8 +11,12 @@ const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+// AnswerForm is different from Answer because
+// Answer price and anonymity comes from form
+// but the content comes from content-editor.
 export interface AnswerForm {
     price: number;
+    isAnonymous: boolean;
 }
 
 export interface UserSpecificAnswerView {

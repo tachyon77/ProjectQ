@@ -4,4 +4,5 @@
     originDate: Date | undefined;
     htmlContent: string = "";
     price: number = 0;
+    isAnonymous: boolean = false;
 }
