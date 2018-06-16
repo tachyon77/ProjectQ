@@ -17,7 +17,7 @@ export class AnswerDraftService {
         return this.http.get<AnswerDraft>(
             'api/AnswerDrafts/ForQuestion/' + questionId
         ).pipe(
-            tap(answers => console.log(`fetched drafr`)),
+            tap(answers => console.log(`fetched draft`)),
             catchError(this.handleError<AnswerDraft>('getForQuestion'))
         );
     }

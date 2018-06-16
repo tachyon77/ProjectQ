@@ -16,4 +16,5 @@ export class Answer {
     protectedAnswerContent: ProtectedAnswerContent | undefined;
     user: User | undefined;
     price: number = 0;
+    isAnonymous: boolean = false;
 }

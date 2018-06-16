@@ -76,6 +76,7 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.RedactedHtmlContent = answer.RedactedHtmlContent;
             dbRecord.ExpiryDate = answer.ExpiryDate;
             dbRecord.Price = answer.Price;
+            dbRecord.IsAnonymous = answer.IsAnonymous;
         }
 
 

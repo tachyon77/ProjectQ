@@ -49,6 +49,8 @@ export class AddAnswerComponent {
                     let draft = json as AnswerDraft;
                     this._draft = draft;
                     this.initialContent = draft.htmlContent;
+                    this.initForm();
+                    this.startDraftLastSavedMessageUpdater();
                 } else {
                     this.initialContent = "";
                 }
@@ -62,15 +64,16 @@ export class AddAnswerComponent {
         this.draft.htmlContent = content;
     }
 
-    ngOnInit() {
-
+    initForm() {
         this.form = this.formBuilder.group({
             price: this.formBuilder.control(this.draft.price, Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),
             isAnonymous: this.formBuilder.control(this.draft.isAnonymous),
         });
+    }
 
+    startDraftLastSavedMessageUpdater() {
         setInterval(
             () => {
                 if (this.lastSaved) {
@@ -86,6 +89,7 @@ export class AddAnswerComponent {
 
     onSubmit(form: AnswerForm) {
         this._answer.price = form.price;
+        this._answer.isAnonymous = form.isAnonymous;
         this._answer.protectedAnswerContent = new ProtectedAnswerContent();
         this._answer.protectedAnswerContent.htmlContent = this._draft.htmlContent;
         this._answer.redactedHtmlContent = this.redactorService.getRedactedHtml(this._draft.htmlContent);
