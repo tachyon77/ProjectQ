@@ -4,47 +4,47 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="afc439f114a94d65aa8cf1aa3d4a2fcb" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjectQModel.AnswerDraft" Width="1.5" PointX="8.25" PointY="25.125" />
-        <EntityTypeShape EntityType="ProjectQModel.AnswerRating" Width="1.5" PointX="6" PointY="15.5" />
-        <EntityTypeShape EntityType="ProjectQModel.Answer" Width="1.5" PointX="5.25" PointY="20.75" />
-        <EntityTypeShape EntityType="ProjectQModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ProjectQModel.Education" Width="1.5" PointX="3" PointY="30.875" />
-        <EntityTypeShape EntityType="ProjectQModel.Employment" Width="1.5" PointX="3" PointY="10.125" />
-        <EntityTypeShape EntityType="ProjectQModel.Notification" Width="1.5" PointX="3" PointY="16.875" />
-        <EntityTypeShape EntityType="ProjectQModel.ProtectedAnswerContent" Width="1.5" PointX="3" PointY="21.75" />
-        <EntityTypeShape EntityType="ProjectQModel.PurchasedAnswer" Width="1.5" PointX="7.5" PointY="19.5" />
-        <EntityTypeShape EntityType="ProjectQModel.QuestionFollower" Width="1.5" PointX="5.25" PointY="25.375" />
-        <EntityTypeShape EntityType="ProjectQModel.Question" Width="1.5" PointX="3" PointY="34.125" />
-        <EntityTypeShape EntityType="ProjectQModel.QuestionTopic" Width="1.5" PointX="5.25" PointY="35.125" />
-        <EntityTypeShape EntityType="ProjectQModel.QuestionView" Width="1.5" PointX="5.25" PointY="29.375" />
-        <EntityTypeShape EntityType="ProjectQModel.Topic" Width="1.5" PointX="3" PointY="39.375" />
-        <EntityTypeShape EntityType="ProjectQModel.User" Width="1.5" PointX="0.75" PointY="15" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerDrafts_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerRatings_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_ProtectedAnswerContents" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_Answers_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_PurchasedAnswers_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_Educations_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Employments_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Notifications_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_PurchasedAnswers_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionFollowers_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_Questions_Users" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionTopics_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionViews_Questions" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionTopics_Topics" />
-        <AssociationConnector Association="ProjectQModel.FK_QuestionViews_Users" />
-        <EntityTypeShape EntityType="ProjectQModel.AnswerPayment" Width="1.5" PointX="8.5" PointY="15.5" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_Answers" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_Users" />
-        <EntityTypeShape EntityType="ProjectQModel.PaymentType" Width="1.5" PointX="3.375" PointY="0.875" />
-        <AssociationConnector Association="ProjectQModel.FK_AnswerPayments_PaymentTypes" />
-        <EntityTypeShape EntityType="ProjectQModel.InvitationRequest" Width="1.5" PointX="3.375" PointY="3.75" />
+      <Diagram DiagramId="28d8ed7d79f843719957f4a0a53b8144" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AnswerDraft" Width="1.5" PointX="5.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AnswerPayment" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AnswerRating" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Answer" Width="1.5" PointX="8.25" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Education" Width="1.5" PointX="3" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employment" Width="1.5" PointX="3" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InvitationRequest" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Notification" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PaymentType" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ProtectedAnswerContent" Width="1.5" PointX="6" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PurchasedAnswer" Width="1.5" PointX="10.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.QuestionFollower" Width="1.5" PointX="5.25" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Question" Width="1.5" PointX="3" PointY="40.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.QuestionTopic" Width="1.5" PointX="5.25" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.QuestionView" Width="1.5" PointX="5.25" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Topic" Width="1.5" PointX="3" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="17.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_AnswerDrafts_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerDrafts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerPayments_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerPayments_PaymentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerPayments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerRatings_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AnswerRatings_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Answers_ProtectedAnswerContents" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Answers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Answers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PurchasedAnswers_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Educations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Notifications_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PurchasedAnswers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionFollowers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionFollowers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Questions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionTopics_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionViews_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionTopics_Topics" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_QuestionViews_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

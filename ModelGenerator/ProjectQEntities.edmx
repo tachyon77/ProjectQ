@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProjectQModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AnswerDrafts">
           <Key>
             <PropertyRef Name="Id" />
@@ -53,6 +53,7 @@
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="ProtectedAnswerContentId" Type="int" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -166,7 +167,7 @@
           <Property Name="OfferedPrice" Type="decimal" Precision="12" Scale="0" Nullable="false" />
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
           <Property Name="HasMinQualification" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionTopics">
           <Key>
@@ -478,7 +479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjectQModelStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDrafts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerPayments" EntityType="Self.AnswerPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRatings" Schema="dbo" store:Type="Tables" />
@@ -586,118 +587,11 @@
             <End Role="QuestionViews" EntitySet="QuestionViews" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ProjectQModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ProjectQEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AnswerDrafts" EntityType="ProjectQModel.AnswerDraft" />
-          <EntitySet Name="AnswerRatings" EntityType="ProjectQModel.AnswerRating" />
-          <EntitySet Name="Answers" EntityType="ProjectQModel.Answer" />
-          <EntitySet Name="AspNetUsers" EntityType="ProjectQModel.AspNetUser" />
-          <EntitySet Name="Educations" EntityType="ProjectQModel.Education" />
-          <EntitySet Name="Employments" EntityType="ProjectQModel.Employment" />
-          <EntitySet Name="Notifications" EntityType="ProjectQModel.Notification" />
-          <EntitySet Name="ProtectedAnswerContents" EntityType="ProjectQModel.ProtectedAnswerContent" />
-          <EntitySet Name="PurchasedAnswers" EntityType="ProjectQModel.PurchasedAnswer" />
-          <EntitySet Name="QuestionFollowers" EntityType="ProjectQModel.QuestionFollower" />
-          <EntitySet Name="Questions" EntityType="ProjectQModel.Question" />
-          <EntitySet Name="QuestionTopics" EntityType="ProjectQModel.QuestionTopic" />
-          <EntitySet Name="QuestionViews" EntityType="ProjectQModel.QuestionView" />
-          <EntitySet Name="Topics" EntityType="ProjectQModel.Topic" />
-          <EntitySet Name="Users" EntityType="ProjectQModel.User" />
-          <AssociationSet Name="FK_AnswerDrafts_Questions" Association="ProjectQModel.FK_AnswerDrafts_Questions">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="AnswerDraft" EntitySet="AnswerDrafts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AnswerDrafts_Users" Association="ProjectQModel.FK_AnswerDrafts_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AnswerDraft" EntitySet="AnswerDrafts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AnswerRatings_Answers" Association="ProjectQModel.FK_AnswerRatings_Answers">
-            <End Role="Answer" EntitySet="Answers" />
-            <End Role="AnswerRating" EntitySet="AnswerRatings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AnswerRatings_Users" Association="ProjectQModel.FK_AnswerRatings_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AnswerRating" EntitySet="AnswerRatings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Answers_ProtectedAnswerContents" Association="ProjectQModel.FK_Answers_ProtectedAnswerContents">
-            <End Role="ProtectedAnswerContent" EntitySet="ProtectedAnswerContents" />
-            <End Role="Answer" EntitySet="Answers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Answers_Questions" Association="ProjectQModel.FK_Answers_Questions">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="Answer" EntitySet="Answers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Answers_Users" Association="ProjectQModel.FK_Answers_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Answer" EntitySet="Answers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchasedAnswers_Answers" Association="ProjectQModel.FK_PurchasedAnswers_Answers">
-            <End Role="Answer" EntitySet="Answers" />
-            <End Role="PurchasedAnswer" EntitySet="PurchasedAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Educations_Users" Association="ProjectQModel.FK_Educations_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Education" EntitySet="Educations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employments_Users" Association="ProjectQModel.FK_Employments_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Employment" EntitySet="Employments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Notifications_Users" Association="ProjectQModel.FK_Notifications_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchasedAnswers_Users" Association="ProjectQModel.FK_PurchasedAnswers_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="PurchasedAnswer" EntitySet="PurchasedAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionFollowers_Questions" Association="ProjectQModel.FK_QuestionFollowers_Questions">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="QuestionFollower" EntitySet="QuestionFollowers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionFollowers_Users" Association="ProjectQModel.FK_QuestionFollowers_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="QuestionFollower" EntitySet="QuestionFollowers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Questions_Users" Association="ProjectQModel.FK_Questions_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Question" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionTopics_Questions" Association="ProjectQModel.FK_QuestionTopics_Questions">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="QuestionTopic" EntitySet="QuestionTopics" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionViews_Questions" Association="ProjectQModel.FK_QuestionViews_Questions">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="QuestionView" EntitySet="QuestionViews" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionTopics_Topics" Association="ProjectQModel.FK_QuestionTopics_Topics">
-            <End Role="Topic" EntitySet="Topics" />
-            <End Role="QuestionTopic" EntitySet="QuestionTopics" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionViews_Users" Association="ProjectQModel.FK_QuestionViews_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="QuestionView" EntitySet="QuestionViews" />
-          </AssociationSet>
-          <EntitySet Name="AnswerPayments" EntityType="ProjectQModel.AnswerPayment" />
-          <AssociationSet Name="FK_AnswerPayments_Answers" Association="ProjectQModel.FK_AnswerPayments_Answers">
-            <End Role="Answer" EntitySet="Answers" />
-            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AnswerPayments_Users" Association="ProjectQModel.FK_AnswerPayments_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
-          </AssociationSet>
-          <EntitySet Name="PaymentTypes" EntityType="ProjectQModel.PaymentType" />
-          <AssociationSet Name="FK_AnswerPayments_PaymentTypes" Association="ProjectQModel.FK_AnswerPayments_PaymentTypes">
-            <End Role="PaymentType" EntitySet="PaymentTypes" />
-            <End Role="AnswerPayment" EntitySet="AnswerPayments" />
-          </AssociationSet>
-          <EntitySet Name="InvitationRequests" EntityType="ProjectQModel.InvitationRequest" />
-        </EntityContainer>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AnswerDraft">
           <Key>
             <PropertyRef Name="Id" />
@@ -709,8 +603,23 @@
           <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_AnswerDrafts_Questions" FromRole="AnswerDraft" ToRole="Question" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerDrafts_Users" FromRole="AnswerDraft" ToRole="User" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_AnswerDrafts_Questions" FromRole="AnswerDrafts" ToRole="Questions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AnswerDrafts_Users" FromRole="AnswerDrafts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="AnswerPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK_AnswerPayments_Answers" FromRole="AnswerPayments" ToRole="Answers" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_AnswerPayments_PaymentTypes" FromRole="AnswerPayments" ToRole="PaymentTypes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AnswerPayments_Users" FromRole="AnswerPayments" ToRole="Users" />
         </EntityType>
         <EntityType Name="AnswerRating">
           <Key>
@@ -723,8 +632,8 @@
           <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="Rating" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerRatings_Answers" FromRole="AnswerRating" ToRole="Answer" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerRatings_Users" FromRole="AnswerRating" ToRole="User" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK_AnswerRatings_Answers" FromRole="AnswerRatings" ToRole="Answers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AnswerRatings_Users" FromRole="AnswerRatings" ToRole="Users" />
         </EntityType>
         <EntityType Name="Answer">
           <Key>
@@ -738,18 +647,19 @@
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ProtectedAnswerContentId" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AnswerRatings" Relationship="ProjectQModel.FK_AnswerRatings_Answers" FromRole="Answer" ToRole="AnswerRating" />
-          <NavigationProperty Name="ProtectedAnswerContent" Relationship="ProjectQModel.FK_Answers_ProtectedAnswerContents" FromRole="Answer" ToRole="ProtectedAnswerContent" />
-          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Answers_Users" FromRole="Answer" ToRole="User" />
-          <NavigationProperty Name="PurchasedAnswers" Relationship="ProjectQModel.FK_PurchasedAnswers_Answers" FromRole="Answer" ToRole="PurchasedAnswer" />
-          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_Answers" FromRole="Answer" ToRole="AnswerPayment" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AnswerPayments" Relationship="Self.FK_AnswerPayments_Answers" FromRole="Answers" ToRole="AnswerPayments" />
+          <NavigationProperty Name="AnswerRatings" Relationship="Self.FK_AnswerRatings_Answers" FromRole="Answers" ToRole="AnswerRatings" />
+          <NavigationProperty Name="ProtectedAnswerContent" Relationship="Self.FK_Answers_ProtectedAnswerContents" FromRole="Answers" ToRole="ProtectedAnswerContents" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Answers_Users" FromRole="Answers" ToRole="Users" />
+          <NavigationProperty Name="PurchasedAnswers" Relationship="Self.FK_PurchasedAnswers_Answers" FromRole="Answers" ToRole="PurchasedAnswers" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -772,12 +682,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="School" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="Concentration" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="School" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Concentration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SecondaryConcentration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DegreeType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GraduationYear" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Educations_Users" FromRole="Education" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Educations_Users" FromRole="Educations" ToRole="Users" />
         </EntityType>
         <EntityType Name="Employment">
           <Key>
@@ -785,12 +695,22 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Position" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Start" Type="DateTime" Precision="3" />
           <Property Name="End" Type="DateTime" Precision="3" />
           <Property Name="IsCurrent" Type="Boolean" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Employments_Users" FromRole="Employment" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Employments_Users" FromRole="Employments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="InvitationRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -800,17 +720,25 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="IsSeen" Type="Boolean" Nullable="false" />
           <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EventDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Link" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Notifications_Users" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Notifications_Users" FromRole="Notifications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnswerPayments" Relationship="Self.FK_AnswerPayments_PaymentTypes" FromRole="PaymentTypes" ToRole="AnswerPayments" />
         </EntityType>
         <EntityType Name="ProtectedAnswerContent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HtmlContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_ProtectedAnswerContents" FromRole="ProtectedAnswerContent" ToRole="Answer" />
+          <Property Name="HtmlContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_ProtectedAnswerContents" FromRole="ProtectedAnswerContents" ToRole="Answers" />
         </EntityType>
         <EntityType Name="PurchasedAnswer">
           <Key>
@@ -820,9 +748,9 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="AnswerId" Type="Int32" Nullable="false" />
           <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HtmlContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_PurchasedAnswers_Answers" FromRole="PurchasedAnswer" ToRole="Answer" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_PurchasedAnswers_Users" FromRole="PurchasedAnswer" ToRole="User" />
+          <Property Name="HtmlContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK_PurchasedAnswers_Answers" FromRole="PurchasedAnswers" ToRole="Answers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PurchasedAnswers_Users" FromRole="PurchasedAnswers" ToRole="Users" />
         </EntityType>
         <EntityType Name="QuestionFollower">
           <Key>
@@ -833,8 +761,8 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="IsFollowing" Type="Boolean" Nullable="false" />
           <Property Name="OriginDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_QuestionFollowers_Questions" FromRole="QuestionFollower" ToRole="Question" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_QuestionFollowers_Users" FromRole="QuestionFollower" ToRole="User" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionFollowers_Questions" FromRole="QuestionFollowers" ToRole="Questions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_QuestionFollowers_Users" FromRole="QuestionFollowers" ToRole="Users" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -842,19 +770,19 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OriginDate" Type="DateTime" Precision="3" />
-          <Property Name="OfferedPrice" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="OfferedPrice" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
           <Property Name="HasMinQualification" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AnswerDrafts" Relationship="ProjectQModel.FK_AnswerDrafts_Questions" FromRole="Question" ToRole="AnswerDraft" />
-          <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_Questions" FromRole="Question" ToRole="Answer" />
-          <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Questions" FromRole="Question" ToRole="QuestionFollower" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_Questions_Users" FromRole="Question" ToRole="User" />
-          <NavigationProperty Name="QuestionTopics" Relationship="ProjectQModel.FK_QuestionTopics_Questions" FromRole="Question" ToRole="QuestionTopic" />
-          <NavigationProperty Name="QuestionViews" Relationship="ProjectQModel.FK_QuestionViews_Questions" FromRole="Question" ToRole="QuestionView" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AnswerDrafts" Relationship="Self.FK_AnswerDrafts_Questions" FromRole="Questions" ToRole="AnswerDrafts" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
+          <NavigationProperty Name="QuestionFollowers" Relationship="Self.FK_QuestionFollowers_Questions" FromRole="Questions" ToRole="QuestionFollowers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Questions_Users" FromRole="Questions" ToRole="Users" />
+          <NavigationProperty Name="QuestionTopics" Relationship="Self.FK_QuestionTopics_Questions" FromRole="Questions" ToRole="QuestionTopics" />
+          <NavigationProperty Name="QuestionViews" Relationship="Self.FK_QuestionViews_Questions" FromRole="Questions" ToRole="QuestionViews" />
         </EntityType>
         <EntityType Name="QuestionTopic">
           <Key>
@@ -863,8 +791,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="TopicId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_QuestionTopics_Questions" FromRole="QuestionTopic" ToRole="Question" />
-          <NavigationProperty Name="Topic" Relationship="ProjectQModel.FK_QuestionTopics_Topics" FromRole="QuestionTopic" ToRole="Topic" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionTopics_Questions" FromRole="QuestionTopics" ToRole="Questions" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_QuestionTopics_Topics" FromRole="QuestionTopics" ToRole="Topics" />
         </EntityType>
         <EntityType Name="QuestionView">
           <Key>
@@ -874,565 +802,641 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Question" Relationship="ProjectQModel.FK_QuestionViews_Questions" FromRole="QuestionView" ToRole="Question" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_QuestionViews_Users" FromRole="QuestionView" ToRole="User" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionViews_Questions" FromRole="QuestionViews" ToRole="Questions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_QuestionViews_Users" FromRole="QuestionViews" ToRole="Users" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="QuestionTopics" Relationship="ProjectQModel.FK_QuestionTopics_Topics" FromRole="Topic" ToRole="QuestionTopic" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuestionTopics" Relationship="Self.FK_QuestionTopics_Topics" FromRole="Topics" ToRole="QuestionTopics" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UniqueName" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Introduction" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AnswerDrafts" Relationship="ProjectQModel.FK_AnswerDrafts_Users" FromRole="User" ToRole="AnswerDraft" />
-          <NavigationProperty Name="AnswerRatings" Relationship="ProjectQModel.FK_AnswerRatings_Users" FromRole="User" ToRole="AnswerRating" />
-          <NavigationProperty Name="Answers" Relationship="ProjectQModel.FK_Answers_Users" FromRole="User" ToRole="Answer" />
-          <NavigationProperty Name="Educations" Relationship="ProjectQModel.FK_Educations_Users" FromRole="User" ToRole="Education" />
-          <NavigationProperty Name="Employments" Relationship="ProjectQModel.FK_Employments_Users" FromRole="User" ToRole="Employment" />
-          <NavigationProperty Name="Notifications" Relationship="ProjectQModel.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
-          <NavigationProperty Name="PurchasedAnswers" Relationship="ProjectQModel.FK_PurchasedAnswers_Users" FromRole="User" ToRole="PurchasedAnswer" />
-          <NavigationProperty Name="QuestionFollowers" Relationship="ProjectQModel.FK_QuestionFollowers_Users" FromRole="User" ToRole="QuestionFollower" />
-          <NavigationProperty Name="Questions" Relationship="ProjectQModel.FK_Questions_Users" FromRole="User" ToRole="Question" />
-          <NavigationProperty Name="QuestionViews" Relationship="ProjectQModel.FK_QuestionViews_Users" FromRole="User" ToRole="QuestionView" />
-          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_Users" FromRole="User" ToRole="AnswerPayment" />
+          <Property Name="UniqueName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AnswerDrafts" Relationship="Self.FK_AnswerDrafts_Users" FromRole="Users" ToRole="AnswerDrafts" />
+          <NavigationProperty Name="AnswerPayments" Relationship="Self.FK_AnswerPayments_Users" FromRole="Users" ToRole="AnswerPayments" />
+          <NavigationProperty Name="AnswerRatings" Relationship="Self.FK_AnswerRatings_Users" FromRole="Users" ToRole="AnswerRatings" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Users" FromRole="Users" ToRole="Answers" />
+          <NavigationProperty Name="Educations" Relationship="Self.FK_Educations_Users" FromRole="Users" ToRole="Educations" />
+          <NavigationProperty Name="Employments" Relationship="Self.FK_Employments_Users" FromRole="Users" ToRole="Employments" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Users" FromRole="Users" ToRole="Notifications" />
+          <NavigationProperty Name="PurchasedAnswers" Relationship="Self.FK_PurchasedAnswers_Users" FromRole="Users" ToRole="PurchasedAnswers" />
+          <NavigationProperty Name="QuestionFollowers" Relationship="Self.FK_QuestionFollowers_Users" FromRole="Users" ToRole="QuestionFollowers" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Users" FromRole="Users" ToRole="Questions" />
+          <NavigationProperty Name="QuestionViews" Relationship="Self.FK_QuestionViews_Users" FromRole="Users" ToRole="QuestionViews" />
         </EntityType>
         <Association Name="FK_AnswerDrafts_Questions">
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.AnswerDraft" Role="AnswerDraft" Multiplicity="*" />
+          <End Role="AnswerDrafts" Type="Self.AnswerDraft" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AnswerDraft">
+            <Dependent Role="AnswerDrafts">
               <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AnswerDrafts_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.AnswerDraft" Role="AnswerDraft" Multiplicity="*" />
+          <End Role="AnswerDrafts" Type="Self.AnswerDraft" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AnswerDraft">
+            <Dependent Role="AnswerDrafts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_Answers">
+          <End Role="Answers" Type="Self.Answer" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerPayments_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="AnswerPayments" Type="Self.AnswerPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerPayments">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AnswerRatings_Answers">
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
-          <End Type="ProjectQModel.AnswerRating" Role="AnswerRating" Multiplicity="*" />
+          <End Role="Answers" Type="Self.Answer" Multiplicity="1" />
+          <End Role="AnswerRatings" Type="Self.AnswerRating" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answer">
+            <Principal Role="Answers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AnswerRating">
+            <Dependent Role="AnswerRatings">
               <PropertyRef Name="AnswerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AnswerRatings_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.AnswerRating" Role="AnswerRating" Multiplicity="*" />
+          <End Role="AnswerRatings" Type="Self.AnswerRating" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AnswerRating">
+            <Dependent Role="AnswerRatings">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_ProtectedAnswerContents">
-          <End Type="ProjectQModel.ProtectedAnswerContent" Role="ProtectedAnswerContent" Multiplicity="1" />
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="*" />
+          <End Role="ProtectedAnswerContents" Type="Self.ProtectedAnswerContent" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProtectedAnswerContent">
+            <Principal Role="ProtectedAnswerContents">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Answer">
+            <Dependent Role="Answers">
               <PropertyRef Name="ProtectedAnswerContentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="*" />
+          <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Answer">
+            <Dependent Role="Answers">
               <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="*" />
+          <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Answer">
+            <Dependent Role="Answers">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PurchasedAnswers_Answers">
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
-          <End Type="ProjectQModel.PurchasedAnswer" Role="PurchasedAnswer" Multiplicity="*" />
+          <End Role="Answers" Type="Self.Answer" Multiplicity="1" />
+          <End Role="PurchasedAnswers" Type="Self.PurchasedAnswer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answer">
+            <Principal Role="Answers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PurchasedAnswer">
+            <Dependent Role="PurchasedAnswers">
               <PropertyRef Name="AnswerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Educations_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.Education" Role="Education" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Educations" Type="Self.Education" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Education">
+            <Dependent Role="Educations">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employments_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.Employment" Role="Employment" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Employments" Type="Self.Employment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Employment">
+            <Dependent Role="Employments">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Notifications_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjectQModel.Notification" Role="Notification" Multiplicity="*" />
+          <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Notification">
+            <Dependent Role="Notifications">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PurchasedAnswers_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.PurchasedAnswer" Role="PurchasedAnswer" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="PurchasedAnswers" Type="Self.PurchasedAnswer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PurchasedAnswer">
+            <Dependent Role="PurchasedAnswers">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionFollowers_Questions">
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionFollower" Role="QuestionFollower" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionFollowers" Type="Self.QuestionFollower" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionFollower">
+            <Dependent Role="QuestionFollowers">
               <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionFollowers_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionFollower" Role="QuestionFollower" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="QuestionFollowers" Type="Self.QuestionFollower" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionFollower">
+            <Dependent Role="QuestionFollowers">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Question">
+            <Dependent Role="Questions">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionTopics_Questions">
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionTopic" Role="QuestionTopic" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionTopics" Type="Self.QuestionTopic" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionTopic">
+            <Dependent Role="QuestionTopics">
               <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionViews_Questions">
-          <End Type="ProjectQModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionView" Role="QuestionView" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionViews" Type="Self.QuestionView" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionView">
+            <Dependent Role="QuestionViews">
               <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionTopics_Topics">
-          <End Type="ProjectQModel.Topic" Role="Topic" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionTopic" Role="QuestionTopic" Multiplicity="*" />
+          <End Role="Topics" Type="Self.Topic" Multiplicity="1" />
+          <End Role="QuestionTopics" Type="Self.QuestionTopic" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Topic">
+            <Principal Role="Topics">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionTopic">
+            <Dependent Role="QuestionTopics">
               <PropertyRef Name="TopicId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionViews_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.QuestionView" Role="QuestionView" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="QuestionViews" Type="Self.QuestionView" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="QuestionView">
+            <Dependent Role="QuestionViews">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="AnswerPayment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AnswerId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Answer" Relationship="ProjectQModel.FK_AnswerPayments_Answers" FromRole="AnswerPayment" ToRole="Answer" />
-          <NavigationProperty Name="User" Relationship="ProjectQModel.FK_AnswerPayments_Users" FromRole="AnswerPayment" ToRole="User" />
-          <NavigationProperty Name="PaymentType" Relationship="ProjectQModel.FK_AnswerPayments_PaymentTypes" FromRole="AnswerPayment" ToRole="PaymentType" />
-          <Property Name="Token" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_AnswerPayments_Answers">
-          <End Type="ProjectQModel.Answer" Role="Answer" Multiplicity="1" />
-          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Answer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AnswerPayment">
-              <PropertyRef Name="AnswerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AnswerPayments_Users">
-          <End Type="ProjectQModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AnswerPayment">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PaymentType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AnswerPayments" Relationship="ProjectQModel.FK_AnswerPayments_PaymentTypes" FromRole="PaymentType" ToRole="AnswerPayment" />
-        </EntityType>
-        <Association Name="FK_AnswerPayments_PaymentTypes">
-          <End Type="ProjectQModel.PaymentType" Role="PaymentType" Multiplicity="1" />
-          <End Type="ProjectQModel.AnswerPayment" Role="AnswerPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AnswerPayment">
-              <PropertyRef Name="PaymentTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="InvitationRequest">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        </Schema>
+        <EntityContainer Name="ProjectQEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDraft" />
+          <EntitySet Name="AnswerPayments" EntityType="Self.AnswerPayment" />
+          <EntitySet Name="AnswerRatings" EntityType="Self.AnswerRating" />
+          <EntitySet Name="Answers" EntityType="Self.Answer" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Educations" EntityType="Self.Education" />
+          <EntitySet Name="Employments" EntityType="Self.Employment" />
+          <EntitySet Name="InvitationRequests" EntityType="Self.InvitationRequest" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="ProtectedAnswerContents" EntityType="Self.ProtectedAnswerContent" />
+          <EntitySet Name="PurchasedAnswers" EntityType="Self.PurchasedAnswer" />
+          <EntitySet Name="QuestionFollowers" EntityType="Self.QuestionFollower" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="QuestionTopics" EntityType="Self.QuestionTopic" />
+          <EntitySet Name="QuestionViews" EntityType="Self.QuestionView" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_AnswerDrafts_Questions" Association="Self.FK_AnswerDrafts_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerDrafts_Users" Association="Self.FK_AnswerDrafts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerDrafts" EntitySet="AnswerDrafts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_Answers" Association="Self.FK_AnswerPayments_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_PaymentTypes" Association="Self.FK_AnswerPayments_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerPayments_Users" Association="Self.FK_AnswerPayments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerPayments" EntitySet="AnswerPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerRatings_Answers" Association="Self.FK_AnswerRatings_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="AnswerRatings" EntitySet="AnswerRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerRatings_Users" Association="Self.FK_AnswerRatings_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AnswerRatings" EntitySet="AnswerRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_ProtectedAnswerContents" Association="Self.FK_Answers_ProtectedAnswerContents">
+            <End Role="ProtectedAnswerContents" EntitySet="ProtectedAnswerContents" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_Users" Association="Self.FK_Answers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchasedAnswers_Answers" Association="Self.FK_PurchasedAnswers_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="PurchasedAnswers" EntitySet="PurchasedAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Educations_Users" Association="Self.FK_Educations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Educations" EntitySet="Educations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employments_Users" Association="Self.FK_Employments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Employments" EntitySet="Employments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Users" Association="Self.FK_Notifications_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchasedAnswers_Users" Association="Self.FK_PurchasedAnswers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PurchasedAnswers" EntitySet="PurchasedAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_Questions" Association="Self.FK_QuestionFollowers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionFollowers" EntitySet="QuestionFollowers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionFollowers_Users" Association="Self.FK_QuestionFollowers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="QuestionFollowers" EntitySet="QuestionFollowers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Users" Association="Self.FK_Questions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionTopics_Questions" Association="Self.FK_QuestionTopics_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionTopics" EntitySet="QuestionTopics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionViews_Questions" Association="Self.FK_QuestionViews_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionViews" EntitySet="QuestionViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionTopics_Topics" Association="Self.FK_QuestionTopics_Topics">
+            <End Role="Topics" EntitySet="Topics" />
+            <End Role="QuestionTopics" EntitySet="QuestionTopics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionViews_Users" Association="Self.FK_QuestionViews_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="QuestionViews" EntitySet="QuestionViews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectQModelStoreContainer" CdmEntityContainer="ProjectQEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ProjectQEntities">
           <EntitySetMapping Name="AnswerDrafts">
-            <EntityTypeMapping TypeName="ProjectQModel.AnswerDraft">
+            <EntityTypeMapping TypeName="Model.AnswerDraft">
               <MappingFragment StoreEntitySet="AnswerDrafts">
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AnswerRatings">
-            <EntityTypeMapping TypeName="ProjectQModel.AnswerRating">
-              <MappingFragment StoreEntitySet="AnswerRatings">
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Answers">
-            <EntityTypeMapping TypeName="ProjectQModel.Answer">
-              <MappingFragment StoreEntitySet="Answers">
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProtectedAnswerContentId" ColumnName="ProtectedAnswerContentId" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="RedactedHtmlContent" ColumnName="RedactedHtmlContent" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="ProjectQModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
-                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
-                <ScalarProperty Name="LockoutEnd" ColumnName="LockoutEnd" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Educations">
-            <EntityTypeMapping TypeName="ProjectQModel.Education">
-              <MappingFragment StoreEntitySet="Educations">
-                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
-                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
-                <ScalarProperty Name="SecondaryConcentration" ColumnName="SecondaryConcentration" />
-                <ScalarProperty Name="Concentration" ColumnName="Concentration" />
-                <ScalarProperty Name="School" ColumnName="School" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employments">
-            <EntityTypeMapping TypeName="ProjectQModel.Employment">
-              <MappingFragment StoreEntitySet="Employments">
-                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
-                <ScalarProperty Name="End" ColumnName="End" />
-                <ScalarProperty Name="Start" ColumnName="Start" />
-                <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="ProjectQModel.Notification">
-              <MappingFragment StoreEntitySet="Notifications">
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProtectedAnswerContents">
-            <EntityTypeMapping TypeName="ProjectQModel.ProtectedAnswerContent">
-              <MappingFragment StoreEntitySet="ProtectedAnswerContents">
-                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchasedAnswers">
-            <EntityTypeMapping TypeName="ProjectQModel.PurchasedAnswer">
-              <MappingFragment StoreEntitySet="PurchasedAnswers">
-                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
-                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
-                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QuestionFollowers">
-            <EntityTypeMapping TypeName="ProjectQModel.QuestionFollower">
-              <MappingFragment StoreEntitySet="QuestionFollowers">
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="IsFollowing" ColumnName="IsFollowing" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Questions">
-            <EntityTypeMapping TypeName="ProjectQModel.Question">
-              <MappingFragment StoreEntitySet="Questions">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="HasMinQualification" ColumnName="HasMinQualification" />
-                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
-                <ScalarProperty Name="OfferedPrice" ColumnName="OfferedPrice" />
-                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QuestionTopics">
-            <EntityTypeMapping TypeName="ProjectQModel.QuestionTopic">
-              <MappingFragment StoreEntitySet="QuestionTopics">
-                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QuestionViews">
-            <EntityTypeMapping TypeName="ProjectQModel.QuestionView">
-              <MappingFragment StoreEntitySet="QuestionViews">
-                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Topics">
-            <EntityTypeMapping TypeName="ProjectQModel.Topic">
-              <MappingFragment StoreEntitySet="Topics">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ProjectQModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UniqueName" ColumnName="UniqueName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AnswerPayments">
-            <EntityTypeMapping TypeName="ProjectQModel.AnswerPayment">
+            <EntityTypeMapping TypeName="Model.AnswerPayment">
               <MappingFragment StoreEntitySet="AnswerPayments">
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PaymentTypes">
-            <EntityTypeMapping TypeName="ProjectQModel.PaymentType">
-              <MappingFragment StoreEntitySet="PaymentTypes">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="AnswerRatings">
+            <EntityTypeMapping TypeName="Model.AnswerRating">
+              <MappingFragment StoreEntitySet="AnswerRatings">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="Model.Answer">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RedactedHtmlContent" ColumnName="RedactedHtmlContent" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="ProtectedAnswerContentId" ColumnName="ProtectedAnswerContentId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEnd" ColumnName="LockoutEnd" />
+                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
+                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educations">
+            <EntityTypeMapping TypeName="Model.Education">
+              <MappingFragment StoreEntitySet="Educations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Concentration" ColumnName="Concentration" />
+                <ScalarProperty Name="SecondaryConcentration" ColumnName="SecondaryConcentration" />
+                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employments">
+            <EntityTypeMapping TypeName="Model.Employment">
+              <MappingFragment StoreEntitySet="Employments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InvitationRequests">
-            <EntityTypeMapping TypeName="ProjectQModel.InvitationRequest">
+            <EntityTypeMapping TypeName="Model.InvitationRequest">
               <MappingFragment StoreEntitySet="InvitationRequests">
-                <ScalarProperty Name="IP" ColumnName="IP" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="Model.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="Model.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProtectedAnswerContents">
+            <EntityTypeMapping TypeName="Model.ProtectedAnswerContent">
+              <MappingFragment StoreEntitySet="ProtectedAnswerContents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchasedAnswers">
+            <EntityTypeMapping TypeName="Model.PurchasedAnswer">
+              <MappingFragment StoreEntitySet="PurchasedAnswers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionFollowers">
+            <EntityTypeMapping TypeName="Model.QuestionFollower">
+              <MappingFragment StoreEntitySet="QuestionFollowers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="IsFollowing" ColumnName="IsFollowing" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="Model.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OriginDate" ColumnName="OriginDate" />
+                <ScalarProperty Name="OfferedPrice" ColumnName="OfferedPrice" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="HasMinQualification" ColumnName="HasMinQualification" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTopics">
+            <EntityTypeMapping TypeName="Model.QuestionTopic">
+              <MappingFragment StoreEntitySet="QuestionTopics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionViews">
+            <EntityTypeMapping TypeName="Model.QuestionView">
+              <MappingFragment StoreEntitySet="QuestionViews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="Model.Topic">
+              <MappingFragment StoreEntitySet="Topics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UniqueName" ColumnName="UniqueName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

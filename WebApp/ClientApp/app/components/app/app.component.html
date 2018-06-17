@@ -1,15 +1,26 @@
-<div *ngIf="isLoggedIn">
-    <nav-menu [user]="user"
-              (loggedOut)="onLogout($event)">
-    </nav-menu>
-    <div class="body-content">
-        <router-outlet></router-outlet>
+<div class='container-fluid'>
+    <div *ngIf="isLoggedIn"
+          class="row">
+        <nav-menu [user]="user"
+                  (loggedOut)="onLogout($event)">
+        </nav-menu>
+    </div>
+    <div *ngIf="isLoggedIn"
+          class="row body-content">
+        <div class="offset-md-1 col-md-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+    <div *ngIf="!isLoggedIn">
+        <landing-page (loggedIn)="onLogin($event)">
+        </landing-page>
     </div>
 </div>
-<div *ngIf="!isLoggedIn">
-    <landing-page (loggedIn)="onLogin($event)">
-    </landing-page>
-</div>
+
+
+
+
 
 
 

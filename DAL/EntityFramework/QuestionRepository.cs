@@ -30,6 +30,7 @@ namespace ProjectQ.DAL.EntityFramework
             dbRecord.Title = question.Title;
             dbRecord.Description = question.Description;
             dbRecord.OfferedPrice = question.OfferedPrice;
+            dbRecord.IsAnonymous = question.IsAnonymous;
         }
 
         async Task<IEnumerable<UserSpecificQuestionPreview>> 
@@ -49,8 +50,7 @@ namespace ProjectQ.DAL.EntityFramework
                                 .FirstOrDefault()
                 };
 
-            return await questionPreviews.ToListAsync();
-            
+            return await questionPreviews.ToListAsync();    
         }
 
         async Task<Question> IQuestionRepository.FindAsync(int id)

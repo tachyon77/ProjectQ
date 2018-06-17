@@ -57,10 +57,28 @@ namespace ProjectQ.BusinessLogic
             int userId
             )
         {
-            return (await _unitOfWork
+            var questionPreviews = (await _unitOfWork
                 .QuestionRepository
                 .GetAllForUserAsync(userId))
                 .OrderByDescending(x=>x.Question.OriginDate);
+
+            questionPreviews.ToList().ForEach(questionPreview =>
+            {
+                if (questionPreview.Question.IsAnonymous)
+                {
+                    if (questionPreview.Question.User.Id == userId)
+                    {
+                        questionPreview.Question.User = new User() { Name = "You [Anonymously]" };
+                    }
+                    else
+                    {
+                        questionPreview.Question.User = new User() { Name = "Anonymous" };
+                    }
+
+                };
+            });
+
+            return questionPreviews;
         }
 
         async Task<Question> IQuestionManager.FindAsync(int id)

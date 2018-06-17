@@ -8,4 +8,5 @@ export interface Question {
     offeredPrice: number;
     originDate: Date;
     user: User;
+    isAnonymous: boolean;
 }

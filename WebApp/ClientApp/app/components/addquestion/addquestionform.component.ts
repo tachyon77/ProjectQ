@@ -25,6 +25,7 @@ export class AddQuestionFormComponent {
             title: this.formBuilder.control('', Validators.compose([
                 Validators.required,
             ])),
+            isAnonymous: this.formBuilder.control(false),
             offeredPrice: this.formBuilder.control(0, Validators.compose([
                 Validators.pattern('[0-9]+'),
             ])),

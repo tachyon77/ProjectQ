@@ -1,36 +1,62 @@
-﻿<div class="offset-md-2 col-md-8">
+﻿<div class="add-question">
     <form [formGroup]="form"
           (ngSubmit)="onSubmit(form.value)">
-        <div>
-            <h4>Title</h4>
+
+        <div class="row">
+            <h4>
+                Question
+            </h4>
+        </div>
+        <div class="row">
             <textarea rows="2"
-                      class="form-control"
+                      class="col-md-12 form-control"
                       name="title" id="title"
                       formControlName="title">
             </textarea>
+        </div>
 
-            <h4>Details</h4>
-            <content-editor [content]="description"
-                            (contentChanged)="onDescriptionChanged($event)">
-            </content-editor>
+        <div class="row pt-5">
+            <h5>Context</h5>
+        </div>
 
-            <h4>$ Reward:</h4>
+        <div class="row pt-2">
+            <div class="col pl-0">
+                <content-editor [content]="description"
+                                (contentChanged)="onDescriptionChanged($event)">
+                </content-editor>
+            </div>
+        </div>
+
+        <div class="row pt-3">
+            <h5>$ Reward:</h5>
             <input type="number"
-                   class="form-control"
+                   class="form-control form-inline"
                    name="OfferedPrice" id="OfferedPrice"
                    formControlName="offeredPrice" />
-
         </div>
-        <br />
-        <button class="btn btn-primary"
-                type="submit" [disabled]="!form.valid">
-            Post
-        </button>
-        <button *ngIf ="false"
-                class="btn btn-secondary ml-1"
-                (click)="onCancel()">
-            Cancel
-        </button>
+
+        <div class="row pt-2">
+            <label class="checkbox-inline">
+                <input type="checkbox"
+                       name="isAnonymous"
+                       id="isAnonymous"
+                       formControlName="isAnonymous"
+                       value=""> Anonymous
+            </label>
+        </div>
+
+        <div class="row pt-2">
+            <button class="col-md-1 btn btn-primary"
+                    type="submit" [disabled]="!form.valid">
+                Post
+            </button>
+            <button *ngIf="false"
+                    class="cl-md-1 btn btn-secondary ml-1"
+                    (click)="onCancel()">
+                Cancel
+            </button>
+        </div>
+
     </form>
 </div>
 
