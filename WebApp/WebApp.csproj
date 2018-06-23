@@ -51,6 +51,9 @@
     <None Remove="ClientApp\app\components\html-content\html-content.component.css" />
     <None Remove="ClientApp\app\components\html-content\html-content.component.html" />
     <None Remove="ClientApp\app\components\html-content\html-content.component.ts" />
+    <None Remove="ClientApp\app\components\image-uploader\image-uploader.component.css" />
+    <None Remove="ClientApp\app\components\image-uploader\image-uploader.component.html" />
+    <None Remove="ClientApp\app\components\image-uploader\image-uploader.component.ts" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.css" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.html" />
     <None Remove="ClientApp\app\components\inline-text-editor\inlinetexteditor.component.ts" />
@@ -109,6 +112,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\addanswer\addanswer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\image-uploader\image-uploader.component.css" />
+    <TypeScriptCompile Include="ClientApp\app\components\image-uploader\image-uploader.component.html" />
+    <TypeScriptCompile Include="ClientApp\app\components\image-uploader\image-uploader.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.css" />
     <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.html" />
     <TypeScriptCompile Include="ClientApp\app\components\card-pay\card-pay.component.ts" />

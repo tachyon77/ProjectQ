@@ -28,6 +28,7 @@ import { ContentEditorComponent } from './components/content-editor/contentedito
 import { DisplayQuestionsComponent } from './components/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
 import { HtmlContentComponent } from './components/html-content/html-content.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
 import { IdentityService } from './services/identity.service';
 import { LandingPageComponent } from './components/landingpage/landingpage.component';
@@ -79,6 +80,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         FocusDirective,
         HomeComponent,
         HtmlContentComponent,
+        ImageUploaderComponent,
         InlineTextEditorComponent,
         LandingPageComponent,
         LoginFormComponent,
