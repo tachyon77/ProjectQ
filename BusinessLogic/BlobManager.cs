@@ -28,13 +28,14 @@ namespace ProjectQ.BusinessLogic
 
         #region Interface Implementations
 
-        async Task<string> IBlobManager.AddAsync(string container, Stream blob)
+        async Task<string> IBlobManager.AddAsync(string container, string blobName, Stream blobStream)
         {
             var blobContainer = _blobClientProvider.BlobClient.GetContainerReference(container);
-            string blobName = Guid.NewGuid().ToString();
-            var blockBlob = blobContainer.GetBlockBlobReference(blobName);
-            await blockBlob.UploadFromStreamAsync(blob);
-            return blobName;
+            string uniqueBlobName = blobName + "_" + Guid.NewGuid().ToString();
+            var blockBlob = blobContainer.GetBlockBlobReference(uniqueBlobName);
+            blobStream.Seek(0, SeekOrigin.Begin);
+            await blockBlob.UploadFromStreamAsync(blobStream);
+            return uniqueBlobName;
         }
 
         async Task<MemoryStream> IBlobManager.FindAsync(string container, string blobName)

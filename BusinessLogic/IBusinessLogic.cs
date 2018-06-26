@@ -7,7 +7,7 @@ namespace ProjectQ.BusinessLogic
 {
     public interface IBlobManager
     {
-        Task<string> AddAsync(string container, Stream blob);
+        Task<string> AddAsync(string container, string blobName, Stream blobStream);
         void Remove(string container, string blobName);
         Task<MemoryStream> FindAsync(string container, string blobName);
     }

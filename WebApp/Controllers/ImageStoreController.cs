@@ -15,6 +15,8 @@ namespace WebApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IBlobManager _blobManager;
+        private readonly string ImageContainer = "images";
+        private readonly string ContentType = "image/jpeg";
 
         /// <summary>
         /// Dependency Injector Constructor.
@@ -34,7 +36,22 @@ namespace WebApp.Controllers
         [HttpGet("{name}")]
         async public Task<IActionResult> Get([FromRoute] string name)
         {
-            return File((await _blobManager.FindAsync("images", name)).ToArray(), "image/jpeg");
+            return File((await _blobManager.FindAsync(ImageContainer, name)).ToArray(), ContentType);
+        }
+
+        // POST: api/imagestore/test.jpg {Form data}
+        [HttpPost]
+        async public Task<IActionResult> Post()
+        {
+            var formFile = Request.Form.Files?.FirstOrDefault();
+            if (formFile == null)
+            {
+                return BadRequest();
+            }
+
+            var fileDataMemoryStream = new MemoryStream();
+            await formFile.CopyToAsync(fileDataMemoryStream);
+            return Ok(await _blobManager.AddAsync(ImageContainer, formFile.FileName, fileDataMemoryStream));
         }
     }
 }
