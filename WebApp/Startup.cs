@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
 using ProjectQ.WebApp.Services;
@@ -82,10 +85,15 @@ namespace ProjectQ.WebApp
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc(options =>
+            services.AddMvc(config =>
             {
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                config.Filters.Add(new AuthorizeFilter(policy));
             });
+
 
             services.AddSingleton(Configuration);
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.WebApp.Services;
 using ProjectQ.BusinessLogic;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectQ.WebApp.Controllers
 {
@@ -27,6 +27,7 @@ namespace ProjectQ.WebApp.Controllers
 
     [Produces("application/json")]
     [Route("api/Account")]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
