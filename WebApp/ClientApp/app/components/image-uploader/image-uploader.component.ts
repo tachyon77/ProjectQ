@@ -1,7 +1,6 @@
 ﻿import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
-import { AnswerPaymentResult, AnswerPayment } from '../../models/AnswerPayment';
-import { AnswerPaymentService } from '../../services/answer-payment.service';
+import { ImageStoreService } from '../../services/image-store.service';
 
 @Component({
     selector: 'image-uploader',
@@ -11,8 +10,9 @@ import { AnswerPaymentService } from '../../services/answer-payment.service';
 export class ImageUploaderComponent {
 
     selectedFile: File | undefined;
-   
-    constructor() { }
+
+    constructor(private imageStoreService: ImageStoreService) {
+    }
 
     onFileSelected(event: any) {
         this.selectedFile = <File>event.target.files[0];
@@ -20,5 +20,10 @@ export class ImageUploaderComponent {
 
     onUpload() {
         console.log(this.selectedFile);
+        const fd = new FormData();
+        fd.append('image', this.selectedFile!, "alpha");
+        this.imageStoreService.upload(fd)
+            .subscribe(() => { });
+
     }
 }

@@ -1,9 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ProjectQ.Model;
 
 namespace ProjectQ.BusinessLogic
 {
+    public interface IBlobManager
+    {
+        Task<string> AddAsync(string container, Stream blob);
+        void Remove(string container, string blobName);
+        Task<MemoryStream> FindAsync(string container, string blobName);
+    }
+
     public interface IInvitationRequestManager
     {
         Task AddAsync(InvitationRequest invitationRequest);

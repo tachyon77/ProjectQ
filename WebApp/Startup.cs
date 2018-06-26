@@ -103,10 +103,12 @@ namespace ProjectQ.WebApp
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IAnswerRatingManager, AnswerRatingManager>();
             services.AddScoped<IQuestionFollowerManager, QuestionFollowerManager>();
+            services.AddScoped<IBlobManager, BlobManager>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();
+            services.AddSingleton<IBlobClientProvider, BlobClientProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

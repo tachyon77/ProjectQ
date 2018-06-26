@@ -28,6 +28,7 @@ import { ContentEditorComponent } from './components/content-editor/contentedito
 import { DisplayQuestionsComponent } from './components/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
 import { HtmlContentComponent } from './components/html-content/html-content.component';
+import { ImageStoreService } from './services/image-store.service';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { InlineTextEditorComponent } from './components/inline-text-editor/inlinetexteditor.component';
 import { IdentityService } from './services/identity.service';
@@ -103,6 +104,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         AnswerDraftService,
         AnswerPaymentService,
         AnswerRatingService,
+        ImageStoreService,
         IdentityService,
         NotificationService,
         PurchasedAnswerService,

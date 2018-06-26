@@ -91,6 +91,7 @@
     <None Remove="ClientApp\app\services\answerrating.service.ts" />
     <None Remove="ClientApp\app\services\application-user.service.ts" />
     <None Remove="ClientApp\app\services\identity.service.ts" />
+    <None Remove="ClientApp\app\services\image-store.service.ts" />
     <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\purchased-answers.service.ts" />
     <None Remove="ClientApp\app\services\question-topics.service.ts" />
@@ -143,6 +144,7 @@
     <TypeScriptCompile Include="ClientApp\app\models\RequestInvite.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\User.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answer-payment.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\image-store.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\request-invite.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\purchased-answers.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\answers.service.ts" />
@@ -185,7 +187,6 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Screenshots\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
