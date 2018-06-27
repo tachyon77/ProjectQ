@@ -2,6 +2,8 @@
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ImageStoreService } from '../../services/image-store.service';
+import { Observable } from 'rxjs';
 
 interface LinkFormData {
     link: string;
@@ -13,11 +15,11 @@ interface LinkFormData {
     styleUrls:['./contenteditor.component.css'],
 })
 export class ContentEditorComponent implements AfterViewInit{
-    imgURL: string | undefined;
     editPosition: Range | undefined;
     curContent: SafeHtml | undefined;
     public newContent: string = "";
     insertLinkModal: BsModalRef | undefined;
+    insertImageModal: BsModalRef | undefined;
     linkForm: FormGroup | undefined;
     private _enableRedaction: boolean = false;
 
@@ -49,12 +51,17 @@ export class ContentEditorComponent implements AfterViewInit{
         this.saveSelection();
     }
 
+    baseUrl: string | undefined;
+
     constructor(
+        @Inject('BASE_URL') baseUrl: string,
         private sanitizer: DomSanitizer,
         private formBuilder: FormBuilder,
         private modalService: BsModalService,
+        private imageStoreService: ImageStoreService,
     ) {
         this.enableRedaction = false;
+        this.baseUrl = baseUrl;
     }
 
     onShowInsertLink(template: TemplateRef<any>) {
@@ -72,6 +79,13 @@ export class ContentEditorComponent implements AfterViewInit{
         );
     }
 
+    onShowInsertImage(template: TemplateRef<any>) {
+        const initialState = {
+        };
+        this.insertImageModal = this.modalService.show(
+            template, { initialState }
+        );
+    }
 
     onContentChange(event: any) {
         this.contentChanged.emit(this.newContent); 
@@ -96,10 +110,43 @@ export class ContentEditorComponent implements AfterViewInit{
         }
     }
 
+    selectedFile: File | undefined;
+    imageUrl: string | undefined;
+
+    onImageFileSelected(event: any) {
+        this.selectedFile = <File>event.target.files[0];
+        console.log(this.selectedFile);
+        this.imageUrl = this.selectedFile!.name;
+    }
+
+    upload(): Observable<any> {
+        const formData = new FormData();
+        formData.append('image', this.selectedFile!, this.selectedFile!.name);
+        return this.imageStoreService.upload(formData);
+    }
+
     onInsertImage() {
+
         this.restoreSelection();
-        var html = "<img class='img-fluid' src='" + this.imgURL + "'>";
-        document.execCommand("insertHTML", false, html);
+
+        if (this.imageUrl) {
+            let imageUrlLowerCase = this.imageUrl.toLowerCase();
+            if (imageUrlLowerCase.startsWith("http://") || imageUrlLowerCase.startsWith("https://")) {
+                var html = "<img class='img-fluid' src='" + this.imageUrl + "'>";
+                document.execCommand("insertHTML", false, html);
+                // Guarded by ngIf
+                this.insertImageModal!.hide();
+            } else {
+                this.upload().subscribe(
+                    (imagePath) => {
+                        this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
+                        var html = "<img class='img-fluid' src='" + this.imageUrl + "'>";
+                        document.execCommand("insertHTML", false, html);
+                        // Guarded by ngIf
+                        this.insertImageModal!.hide();
+                    });
+            }
+        }
     }
 
     onBlur() {

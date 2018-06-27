@@ -16,8 +16,9 @@ export class ImageStoreService {
 
     /** POST: add a new Answer to the server */
     upload(fd: FormData): Observable<any> {
+        console.log(fd);
         return this.http.post<any>(this.apiRootUrl, fd).pipe(
-            tap(_ => console.log(`uploaded file`)),
+            tap(p => console.log(`uploaded file ${p}`)),
             catchError(this.handleError<any>('upload File'))
         );
     }

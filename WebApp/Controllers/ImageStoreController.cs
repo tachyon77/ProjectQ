@@ -41,6 +41,7 @@ namespace WebApp.Controllers
 
         // POST: api/imagestore/test.jpg {Form data}
         [HttpPost]
+        [Produces("application/json")]
         async public Task<IActionResult> Post()
         {
             var formFile = Request.Form.Files?.FirstOrDefault();

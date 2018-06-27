@@ -17,7 +17,7 @@
                     (click)="onUnRedact()"
                     class="btn btn-secondary">
                 <em>Reveal</em>
-            </button>            
+            </button>
 
             <!--Format Bold-->
             <button type="button"
@@ -60,10 +60,17 @@
                     class="btn btn-secondary">
                 <i class="fas fa-link"></i>
             </button>
+
+            <!--Insert Image-->
+            <button type="button"
+                    (click)="onShowInsertImage(insertImageTemplate)"
+                    class="btn btn-secondary">
+                <i class="far fa-image"></i>
+            </button>
         </div>
 
         <!--Insert Image-->
-        <div class="input-group">
+        <!--div class="input-group">
             <input #x type="text" class="form-control url-input"
                    placeholder="Image URL..."
                    [(ngModel)]="imgURL"
@@ -76,7 +83,7 @@
                 </button>
             </div>
 
-        </div>
+        </div-->
     </div>
 
     <div #el contenteditable="true"
@@ -119,6 +126,43 @@
                 Save
             </button>
         </form>
+    </div>
+</ng-template>
+
+<!--Modal Template: Insert Image-->
+<ng-template #insertImageTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Insert an Image</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="insertImageModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Url</label>
+            <input type="text"
+                   [(ngModel)]="imageUrl"
+                   class="form-control col-sm-6"
+                   placeholder="image url">
+                
+            <div class="col-sm-2">
+                <input #fileInput
+                        type="file"
+                        hidden
+                        (change)="onImageFileSelected($event)">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="fileInput.click()">
+                    <i class="far fa-folder-open"></i> Browse
+                </button>
+            </div>
+        </div>
+        
+        <button type="button"
+                (click)="onInsertImage()"
+                class="btn btn-primary">
+            Insert
+        </button>
     </div>
 </ng-template>
 
