@@ -44,4 +44,22 @@ Webpack-CLI => a node module
 11. If you ever get dizzy figuring out how angular and webpack relate, read this:
 https://angular.io/guide/webpack
 
+12. How does XSRF token solve the cookie problem if itself is sent as a cookie?
+
+https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-prevention-tokens-in-cookies
+	Using a cookie to provide the CSRF token to the client does not allow a successful attack 
+	because the attacker cannot read the value of the cookie and therefore cannot put into 
+	the place the server-side CSRF validation requires it to be.
+
+	The attacker will be able to cause a request to the server with both the auth token cookie 
+	and the CSRF cookie in the request headers. But the server is not looking for the CSRF token 
+	as a cookie in the request headers, it's looking in the payload of the request. 
+	And even if the attacker knows where to put the CSRF token in the payload, they would 
+	have to read its value to put it there. But the browser's cross-origin policy prevents 
+	reading any cookie value from the target website.
+
+	The same logic does not apply to the auth token cookie, because the server is expects 
+	it in the request headers and the attacker does not have to do anything special to put it there.
+
+13. Use Gremlin Graph API is for managing relate questions.
 

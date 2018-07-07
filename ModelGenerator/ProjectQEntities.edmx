@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AnswerDrafts">
           <Key>
             <PropertyRef Name="Id" />
@@ -16,6 +16,7 @@
           <Property Name="OriginDate" Type="datetime" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AnswerPayments">
           <Key>
@@ -478,7 +479,7 @@
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
+        </Association>        
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AnswerDrafts" EntityType="Self.AnswerDrafts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnswerPayments" EntityType="Self.AnswerPayments" Schema="dbo" store:Type="Tables" />
@@ -588,7 +589,7 @@
           </AssociationSet>
         </EntityContainer>
       </Schema>
-    </edmx:StorageModels>
+	  </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -605,6 +606,7 @@
           <Property Name="Price" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_AnswerDrafts_Questions" FromRole="AnswerDrafts" ToRole="Questions" />
           <NavigationProperty Name="User" Relationship="Self.FK_AnswerDrafts_Users" FromRole="AnswerDrafts" ToRole="Users" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="AnswerPayment">
           <Key>
@@ -1216,7 +1218,7 @@
           <AssociationSet Name="FK_QuestionViews_Users" Association="Self.FK_QuestionViews_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="QuestionViews" EntitySet="QuestionViews" />
-          </AssociationSet>
+          </AssociationSet>          
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1227,6 +1229,7 @@
           <EntitySetMapping Name="AnswerDrafts">
             <EntityTypeMapping TypeName="Model.AnswerDraft">
               <MappingFragment StoreEntitySet="AnswerDrafts">
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1439,7 +1442,7 @@
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />
               </MappingFragment>
             </EntityTypeMapping>
-          </EntitySetMapping>
+          </EntitySetMapping>         
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
