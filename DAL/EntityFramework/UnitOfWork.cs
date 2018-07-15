@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectQ.Model;
+﻿using System.Threading.Tasks;
 
 namespace ProjectQ.DAL.EntityFramework
 {
@@ -13,6 +8,7 @@ namespace ProjectQ.DAL.EntityFramework
     public class UnitOfWork: IUnitOfWork
     {
         private readonly ProjectQEntities _context;
+        private readonly IGraphQueries _graph;
         private IQuestionRepository _questionRepository;
         private IQuestionViewRepository _questionViewRepository;
         private IQuestionTopicRepository _questionTopicRepository;
@@ -28,9 +24,10 @@ namespace ProjectQ.DAL.EntityFramework
         private IEducationRepository _educationRepository;
         private IInvitationRequestRepository _invitationRequestRepository;
 
-        public UnitOfWork(ProjectQEntities context)
+        public UnitOfWork(ProjectQEntities context, IGraphQueries graph)
         {
             _context = context;
+            _graph = graph;
         }
 
         IInvitationRequestRepository IUnitOfWork.InvitationRequestRepository
@@ -104,7 +101,7 @@ namespace ProjectQ.DAL.EntityFramework
             {
                 if (_questionRepository == null)
                 {
-                    _questionRepository = new QuestionRepository(_context);                 
+                    _questionRepository = new QuestionRepository(_context, _graph);                 
                 }
                 return _questionRepository;
             }

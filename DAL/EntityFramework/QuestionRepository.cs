@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +10,13 @@ namespace ProjectQ.DAL.EntityFramework
     public class QuestionRepository : IQuestionRepository
     {
         #region Private Members
-        private ProjectQEntities _context;
+        private readonly ProjectQEntities _context;
+        private readonly IGraphQueries _graph;
         #endregion
 
-        public QuestionRepository(ProjectQEntities context)
+        public QuestionRepository(
+            ProjectQEntities context,
+            IGraphQueries graph)
         {
             _context = context;
         }
@@ -74,6 +76,12 @@ namespace ProjectQ.DAL.EntityFramework
                 .Where(x => x.UserId.Equals(userId))
                 .OrderByDescending(x=>x.OriginDate)
                 .ToListAsync();
+        }
+
+        async Task<IEnumerable<Question>> IQuestionRepository.GetRelatedQuestions(int questionId)
+        {
+            throw new NotImplementedException();
+            //return await _graph.FindRelatedQuestionsAsync(questionId);
         }
     }
 }

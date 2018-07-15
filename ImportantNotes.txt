@@ -62,4 +62,8 @@ https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-preven
 	it in the request headers and the attacker does not have to do anything special to put it there.
 
 13. Use Gremlin Graph API is for managing relate questions.
+14. Architectural goals for integrating Graph database
 
+	1. Do not require Businless Layer to call two inserts, or two updates to the
+	two underlying repos.
+	2. Do not require code dupliaction if another SQL database is used with the same Graph DB

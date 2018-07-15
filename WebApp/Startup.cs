@@ -18,6 +18,7 @@ using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
 using ProjectQ.WebApp.Services;
 using ProjectQ.DAL.EntityFramework;
+using ProjectQ.DAL.Graph;
 
 namespace ProjectQ.WebApp
 {//
@@ -114,6 +115,7 @@ namespace ProjectQ.WebApp
             services.AddScoped<IBlobManager, BlobManager>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddSingleton<IGraphQueries, CosmosGraph>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();
             services.AddSingleton<IBlobClientProvider, BlobClientProvider>();

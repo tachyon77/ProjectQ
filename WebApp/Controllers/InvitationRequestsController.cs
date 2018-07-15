@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/InvitationRequests")]
+    [AllowAnonymous]
     public class InvitationRequestsController : Controller
     {
         private readonly IInvitationRequestManager _invitationRequestManager;
