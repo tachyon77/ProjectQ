@@ -15,6 +15,7 @@ import { Question } from '../../models/Question';
 })
 export class QuestionCardComponent {
     previewAnswerContent: string = "";
+    previewQuestionDetail: string = "";
     private _questionView: UserSpecificQuestionPreview | undefined;
 
     onEnterLeaveViewport(event: any, question: Question) {
@@ -59,7 +60,16 @@ export class QuestionCardComponent {
     set questionView(questionView: UserSpecificQuestionPreview | undefined) {
 
         if(questionView){
-            this._questionView = questionView;           
+            this._questionView = questionView;
+            let questionDescription = questionView.question.description;
+            if (questionDescription.length > 80) {
+                //this.previewQuestionDetail = questionDescription.substring(0, 75) + " ... ";
+            } else {
+                //this.previewQuestionDetail = questionDescription;
+            }
+
+            this.previewQuestionDetail = questionDescription;
+
             if (questionView.previewAnswer) {
                 this.previewAnswerContent = questionView.previewAnswer.redactedHtmlContent.substring(0, 100) + " ... ";
             }

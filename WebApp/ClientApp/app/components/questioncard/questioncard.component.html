@@ -19,7 +19,7 @@
                 Asked by {{questionView.question.user.name}}
                 {{questionView.question.originDate | readableDate}}
             </h6>
-            <html-content [htmlString]="questionView.question.description"
+            <html-content [htmlString]="previewQuestionDetail" id="previewQuestion"
                  class="card-text">
             </html-content>
 

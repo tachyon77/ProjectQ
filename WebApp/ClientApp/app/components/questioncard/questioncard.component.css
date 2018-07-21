@@ -30,3 +30,9 @@
     font-weight: 700;
     font-size: large;
 }
+
+#previewQuestion {
+    display:block;
+    max-height:3em;
+    overflow: hidden;
+}
