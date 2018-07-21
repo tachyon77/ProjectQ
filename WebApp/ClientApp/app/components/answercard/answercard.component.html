@@ -90,6 +90,23 @@
             </div>
         </div>
 
+        <!--Payment-->
+        <div>
+            <div>
+                <h4>Payment Option</h4>
+                <div>
+                    <h5>Add New Card</h5>
+                    <card-pay [answerPayment]="answerPayment"
+                              (chargeProcessed)="OnChargeProcessed($event)">
+                    </card-pay>
+                </div>
+            </div>
+            <div>
+                <
+            </div>
+        </div>
+
+
         <!--Answer Content-->
         <div class="my-4">
             <html-content [htmlString]="answerView.answer.redactedHtmlContent"

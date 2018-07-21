@@ -5,6 +5,9 @@
     }
 }
 
+.no-padding{
+    padding:0px;
+}
 .body-content {
     margin-top: 60px;
 }
