@@ -3,12 +3,6 @@
     font-size:large;
 }
 
-.price-tag{
-    font-size:larger;
-    font-weight:700;
-    color:firebrick;
-}
-
 .answer-user {
     font-weight:600;
     margin-bottom:1em;
@@ -56,10 +50,4 @@
     float: right;
     color:lightgray;
     font-style:italic;
-}
-
-.buy-offer {
-    float: right;
-    padding-left:1em;
-    padding-top:1em;
 }

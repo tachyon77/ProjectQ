@@ -26,6 +26,7 @@ export class AnswerCardComponent {
     answerPayment: AnswerPayment | undefined;
     showPaymentForm: boolean = false;
     creditPayModal: BsModalRef | undefined;
+    isPaymentVisible: boolean = false;
 
     get isAuthor() {
         return this.loggedInUser

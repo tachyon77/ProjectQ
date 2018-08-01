@@ -31,7 +31,10 @@
     font-size: large;
 }
 
-#previewQuestion {
+.previewQuestion {
+    margin-bottom:1em;
+    font-size:smaller;
+    color:#555555;
     display:block;
     max-height:3em;
     overflow: hidden;

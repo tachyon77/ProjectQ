@@ -19,8 +19,8 @@
                 Asked by {{questionView.question.user.name}}
                 {{questionView.question.originDate | readableDate}}
             </h6>
-            <html-content [htmlString]="previewQuestionDetail" id="previewQuestion"
-                 class="card-text">
+            <html-content [htmlString]="previewQuestionDetail"
+                 class="card-text previewQuestion">
             </html-content>
 
             <div *ngIf="!questionView.isFollowing">

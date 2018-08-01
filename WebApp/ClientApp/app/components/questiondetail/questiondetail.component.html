@@ -19,24 +19,25 @@
                               class="question-description">
                 </html-content>
             </div>
-            
 
-            <button *ngIf="isAsker"
-                    class="btn btn-default btn-sm"
-                    (click)="OnEditQuestionClick()">
-                Edit Question
-            </button>
-            <button *ngIf="!isAnswerWritten"
-                    class="btn btn-default btn-sm ml-1"
-                    (click)="OnAnswerClick()">
-                Answer
-            </button>
-            <button *ngIf="isAsker"
-                    class="btn btn-danger delete-question btn-sm"
-                    (click)="OnDeleteQuestionClick()">
-                <span *ngIf="question.isDeleted">Undelete</span>
-                <span *ngIf="!question.isDeleted">Delete</span>
-            </button>
+            <div>
+                <button *ngIf="isAsker"
+                        class="btn btn-default btn-sm"
+                        (click)="OnEditQuestionClick()">
+                    Edit Question
+                </button>
+                <button *ngIf="!isAnswerWritten"
+                        class="btn btn-default btn-sm ml-1"
+                        (click)="OnAnswerClick()">
+                    Answer
+                </button>
+                <button *ngIf="isAsker"
+                        class="btn btn-danger delete-question btn-sm"
+                        (click)="OnDeleteQuestionClick()">
+                    <span *ngIf="question.isDeleted">Undelete</span>
+                    <span *ngIf="!question.isDeleted">Delete</span>
+                </button>
+            </div>
         </div>
 
 
@@ -69,24 +70,22 @@
             <hr />
         </div>
 
-
-        <div>
-            <div *ngIf="!answerViews">
-                Loading...
-            </div>
-            <div *ngIf="answerViews">
-                <h4>
-                    {{answerViews.length}} Answer
-                </h4>
-                <div *ngFor="let answerView of answerViews">
-                    <hr />
-                    <answer-card [answerView]="answerView"
-                                 [loggedInUser]="loggedInUser"
-                                 (answerDeleted)="onAnswerDeleted($event)">
-                    </answer-card>
-                </div>
+        <div *ngIf="!answerViews" class="row">
+            Loading...
+        </div>
+        <div *ngIf="answerViews">
+            <h4>
+                {{answerViews.length}} Answer
+            </h4>
+            <div *ngFor="let answerView of answerViews">
+                <hr />
+                <answer-card [answerView]="answerView"
+                             [loggedInUser]="loggedInUser"
+                             (answerDeleted)="onAnswerDeleted($event)">
+                </answer-card>
             </div>
         </div>
+        
     </div>
 </div>
 
