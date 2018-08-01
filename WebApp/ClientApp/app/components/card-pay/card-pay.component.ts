@@ -35,6 +35,7 @@ export class CardPayComponent implements OnInit {
     }
 
     @Output() chargeProcessed = new EventEmitter<boolean>();
+    @Output() cancelled = new EventEmitter();
 
     constructor(
         private fb: FormBuilder,
@@ -68,6 +69,10 @@ export class CardPayComponent implements OnInit {
                     this.card.mount('#card-element');
                 }
             });
+    }
+
+    onCancel() {
+        this.cancelled.emit();
     }
 
     buy() {

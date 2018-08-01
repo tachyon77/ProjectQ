@@ -1,12 +1,26 @@
 ﻿<form novalidate (ngSubmit)="buy($event)" [formGroup]="stripeTest">
     <div>
-        <input type="text" formControlName="name" placeholder="Jane Doe">
-        <div id="card-element" class="field"></div>
+        <input type="text" formControlName="name" placeholder="Name on card" class="form-control">
+        <div id="card-element" class="field mt-2"></div>
     </div>
     
-    <button *ngIf="answerPayment"
-            class="btn btn-sm btn-primary"
-            type="submit">
-        Complete Purchase
-    </button>
+    <hr />
+
+    <p class="text-center small-note">
+        By clicking Complete Purchase, you agree to Shared Mem's <a href="sharednmem.com">privacy notice</a> and <a href="sharedmem.com">conditions of use</a>.
+    </p>
+
+    <div class="mt-3">
+        <button *ngIf="answerPayment"
+                class="btn btn-sm btn-primary float-right"
+                type="submit">
+            Complete Purchase
+        </button>
+        <button class="btn btn-sm btn-secondary float-right mr-2"
+                type="button"
+                (click)="onCancel()">
+            Cancel
+        </button>
+    </div>
+    
 </form>
