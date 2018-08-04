@@ -1,6 +1,7 @@
-.welcome-text{
-    font-size:3em;
+.landing-page{
+
 }
+
 .beta-text{
     font-size:1.5em;
 }
@@ -18,28 +19,46 @@
     font-size:2em;
 }
 
-.major-punch-line {
+.ask-text {
+    margin-top:1em;
+    font-size: 2em;
+    letter-spacing: 15px;
+}
+
+.questions-text {
     font-size: 3em;
     letter-spacing: 15px;
 }
 
-.connecting-line{
+.with-text{
     color:lightgray;
-    font-size:1.5em;
+    font-size:1em;
+    margin-top:1.5em;
+    margin-bottom:1.5em;
 }
 
-.minor-punch-line{
-    letter-spacing:10px;
-}
 
-.freedom {
+.freedom-text {
     font-size: 2em;
+    letter-spacing: 20px;
     color: deepskyblue;
 }
 
-.power {
+.and-text {
+    color: lightgray;
+    font-size: 1em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+
+.power-text {
     font-size: 2em;
+    letter-spacing: 20px;
     color: crimson;
+}
+
+.eagle-image{
+    margin-top:-4em;
 }
 
 .engraved-text {

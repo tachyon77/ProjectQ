@@ -1,70 +1,75 @@
-<div class="text-center">
-    <div class="major-punch-line pt-5 pb-4">ASK QUESTIONS</div>
-    <div class="connecting-line">with</div>
-    <div class="minor-punch-line pt-4 pb-5"><span class="freedom">FREEDOM</span><span class="connecting-line mx-2">&</span><span class="power">POWER&nbsp;&nbsp;</span></div>
+<div class="landing-page">
+    <div class="text-center">
+        <div class="ask-text">ASK</div>
+        <div class="questions-text">QUESTIONS</div>
+        <div class="with-text">with</div>
+        <div class="freedom-text">FREEDOM</div>
+        <div class="and-text">&</div>
+        <div class="power-text">POWER</div>
 
-    <div class="pt-5 pb-4 text-center" *ngIf="false">
-        <button type="button"
-                (click)="onRequestInvite()"
-                class="btn btn-outline-danger">
-            Request Invitation
-        </button>
-    </div>
-
-    <img src="../../../../wwwroot/images/eagle-svg-gray-small.png"
-         class="center-block img-responsive mb-5" *ngIf="true" />
-</div>
-
-<div>    
-    <div *ngIf="state==0"
-         class="login-form offset-md-5 col-md-2">
-        <login-form (loggedIn)="onLoggedIn($event)"
-                    (showRegistration)="onShowRegistration()"
-                    >
-
-        </login-form>
-        <div *ngIf="false"
-             class="text-center">
+        <div class="pt-5 pb-4 text-center" *ngIf="false">
             <button type="button"
-                    (click)="onShowRegistration()"
-                    class="login-control btn btn-light">
-                Register
+                    (click)="onRequestInvite()"
+                    class="btn btn-outline-danger">
+                Request Invitation
             </button>
         </div>
 
-        
-
+        <img src="../../../../wwwroot/images/eagle-svg-gray.png"
+             class="center-block img-responsive eagle-image" *ngIf="true" />
     </div>
 
-    <div *ngIf="state==1" class="login-form">
-        <registration-form (registrationCompleted)="onRegistrationCompleted()"
-                           (showLogin)="onShowLogin()">
+    <div>
+        <div *ngIf="state==0"
+             class="login-form offset-md-5 col-md-2">
+            <login-form (loggedIn)="onLoggedIn($event)"
+                        (showRegistration)="onShowRegistration()">
 
-        </registration-form>
-        <div class="text-center">
-            <button type="button"
-                    (click)="onShowLogin()"
-                    class="login-control btn btn-light">
-                Login
-            </button>
+            </login-form>
+            <div *ngIf="false"
+                 class="text-center">
+                <button type="button"
+                        (click)="onShowRegistration()"
+                        class="login-control btn btn-light">
+                    Register
+                </button>
+            </div>
+
+
+
+        </div>
+
+        <div *ngIf="state==1" class="login-form">
+            <registration-form (registrationCompleted)="onRegistrationCompleted()"
+                               (showLogin)="onShowLogin()">
+
+            </registration-form>
+            <div class="text-center">
+                <button type="button"
+                        (click)="onShowLogin()"
+                        class="login-control btn btn-light">
+                    Login
+                </button>
+            </div>
+        </div>
+
+
+        <div *ngIf="state==2" class="login-form">
+            <request-invite (inviteReqSubmitted)="onInviteReqSubmitted()">
+
+            </request-invite>
+        </div>
+
+
+
+        <div class="px-1 pt-5 text-center">
+            <button class="btn btn-sm btn-link">About</button>
+            <span class="separator-dot">.</span>
+            <button class="btn btn-sm btn-link">Terms</button>
         </div>
     </div>
-
-
-    <div *ngIf="state==2" class="login-form">
-        <request-invite (inviteReqSubmitted)="onInviteReqSubmitted()">
-
-        </request-invite>
-    </div>
-
-    
-
-    <div class="px-1 pt-5 text-center">
-        <button class="btn btn-sm btn-link">About</button>
-        <span class="separator-dot">.</span>
-        <button class="btn btn-sm btn-link">Terms</button>
-    </div>
 </div>
+
 
 
 
