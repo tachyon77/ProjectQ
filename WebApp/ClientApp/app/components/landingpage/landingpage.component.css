@@ -33,32 +33,24 @@
 .with-text{
     color:lightgray;
     font-size:1em;
-    margin-top:1.5em;
-    margin-bottom:1.5em;
+    margin-top:1em;
+    margin-bottom:1em;
 }
 
-
-.freedom-text {
+.freedom-power-text {
     font-size: 2em;
     letter-spacing: 20px;
-    color: deepskyblue;
 }
 
 .and-text {
     color: lightgray;
     font-size: 1em;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
-}
-
-.power-text {
-    font-size: 2em;
-    letter-spacing: 20px;
-    color: crimson;
+    margin-top: 0em;
+    margin-bottom: 0em;
 }
 
 .eagle-image{
-    margin-top:-4em;
+    margin-top:0em;
 }
 
 .engraved-text {
