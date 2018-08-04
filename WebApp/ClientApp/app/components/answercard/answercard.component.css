@@ -12,6 +12,10 @@
     margin-bottom:1em;
 }
 
+.price-note {
+    font-size: smaller;
+}
+
 .deleted-answer {
     opacity: 0.2; /* Real browsers */
     filter: alpha(opacity = 20); /* MSIE */

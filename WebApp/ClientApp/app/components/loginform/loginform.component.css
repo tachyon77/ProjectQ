@@ -1,11 +1,15 @@
 .login-control{
-    margin:0.5em;
+    margin:0.25em;
     padding:0.25em;
 }
 
 .login-form{
     padding-top:0.5em;
     background-color:ghostwhite;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
 .engraved-text {

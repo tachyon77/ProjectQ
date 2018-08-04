@@ -1,3 +1,10 @@
+.welcome-text{
+    font-size:3em;
+}
+.beta-text{
+    font-size:1.5em;
+}
+
 .login-control{
     margin:0.5em;
     padding:0.25em;
@@ -5,11 +12,38 @@
 
 .login-form{
     padding-top:0.5em;
-    background-color:ghostwhite;
+}
+
+.separator-dot{
+    font-size:2em;
+}
+
+.major-punch-line {
+    font-size: 3em;
+    letter-spacing: 15px;
+}
+
+.connecting-line{
+    color:lightgray;
+    font-size:1.5em;
+}
+
+.minor-punch-line{
+    letter-spacing:10px;
+}
+
+.freedom {
+    font-size: 2em;
+    color: deepskyblue;
+}
+
+.power {
+    font-size: 2em;
+    color: crimson;
 }
 
 .engraved-text {
-    font-size:20px;
+    font-size:1.5em;
     font-family: Futura;
     background-color: #666666;
     -webkit-background-clip: text;

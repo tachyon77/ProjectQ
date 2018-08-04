@@ -1,27 +1,25 @@
 <div class="text-center">
     <form [formGroup]="form"
           (ngSubmit)="onSubmit(form.value)">
+
         <div>
             <input type="text"
                    autofocus
                    autocomplete="on"
-                   class="login-control"
+                   class="form-control login-control"
                    placeholder="Email"
                    name="email" id="email"
                    formControlName="Email" />
         </div>
-        <div>
+        <div class="mb-5">
             <input type="password"
                    autocomplete="on"
-                   class="login-control"
+                   class="form-control login-control"
                    placeholder="Password"
                    name="password" id="password"
                    formControlName="Password" />
-        </div>
-        
-        <div>
             <button type="submit"
-                    class="login-control btn btn-light">
+                    class="btn btn-sm btn-outline-secondary mt-2">
                 Login
             </button>
         </div>
