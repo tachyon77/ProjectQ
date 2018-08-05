@@ -22,12 +22,12 @@
 .ask-text {
     margin-top:1em;
     font-size: 2em;
-    letter-spacing: 15px;
+    letter-spacing: 0.75em;
 }
 
 .questions-text {
     font-size: 3em;
-    letter-spacing: 15px;
+    letter-spacing: 0.5em;
 }
 
 .with-text{
@@ -39,7 +39,7 @@
 
 .freedom-power-text {
     font-size: 2em;
-    letter-spacing: 20px;
+    letter-spacing: 0.75em;
 }
 
 .and-text {
