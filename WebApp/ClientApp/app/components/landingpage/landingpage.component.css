@@ -1,9 +1,4 @@
 .landing-page{
-
-}
-
-.beta-text{
-    font-size:1.5em;
 }
 
 .login-control{
@@ -15,51 +10,55 @@
     padding-top:0.5em;
 }
 
-.separator-dot{
-    font-size:2em;
-}
-
-.ask-text {
-    margin-top:1em;
-    font-size: 2em;
-    letter-spacing: 0.75em;
-}
-
-.questions-text {
-    font-size: 3em;
-    letter-spacing: 0.5em;
-}
-
-.with-text{
-    color:lightgray;
-    font-size:1em;
-    margin-top:1em;
-    margin-bottom:1em;
-}
-
-.freedom-power-text {
-    font-size: 2em;
-    letter-spacing: 0.75em;
-}
-
-.and-text {
-    color: lightgray;
-    font-size: 1em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-}
-
-.eagle-image{
-    margin-top:0em;
-}
-
-.engraved-text {
+.company-name {
+    font-family: "Helvetica Neue";
     font-size:1.5em;
-    font-family: Futura;
-    background-color: #666666;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: rgba(245,245,245,0.5) 3px 5px 1px;
+    font-weight:800;
 }
+
+.top-screen {
+    padding: 1em;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.bottom-screen {
+    padding: 1em;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.motto-text {
+    font-family: "Helvetica Neue";
+    font-size: 2em;
+}
+
+.center-screen {
+    padding: 1em;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.footer-screen {
+    padding: 1em;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.separator-dot {
+    font-size: 2em;
+}
+
+
