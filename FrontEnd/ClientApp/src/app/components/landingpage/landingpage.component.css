@@ -1,0 +1,64 @@
+.landing-page{
+}
+
+.login-control{
+    margin:0.5em;
+    padding:0.25em;
+}
+
+.login-form{
+    padding-top:0.5em;
+}
+
+.company-name {
+    font-family: "Helvetica Neue";
+    font-size:1.5em;
+    font-weight:800;
+}
+
+.top-screen {
+    padding: 1em;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.bottom-screen {
+    padding: 1em;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.motto-text {
+    font-family: "Helvetica Neue";
+    font-size: 2em;
+}
+
+.center-screen {
+    padding: 1em;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.footer-screen {
+    padding: 1em;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.separator-dot {
+    font-size: 2em;
+}
+
+

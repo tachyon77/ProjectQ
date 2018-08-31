@@ -1,0 +1,22 @@
+<div *ngIf="visible" class="arrow_box">
+    <div class="notification-content">
+        <div *ngIf="!notifications.length" class="text-center">
+            <span class="text-muted">No unread notifications.</span>
+        </div>
+        <button *ngIf="notifications.length"
+                (click)="onMarkAllReadClick()"
+                class="btn btn-light">
+            Mark all as read
+        </button>
+        <hr />
+        <div *ngFor="let notification of notifications">
+            <p class="pointer-cursor" (click)="onNotificationClick(notification.id)">
+                <a href={{notification.link}}>
+                    {{notification.eventDescription}}
+                </a>
+            </p>
+            <hr />
+        </div>
+    </div>
+</div>
+

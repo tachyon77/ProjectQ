@@ -1,0 +1,123 @@
+﻿<div class="offset-md-1 col-md-9">
+    <div class="row upper-section">
+        <div class="col-md-9 upper-left-section">
+            <div class="row">
+                <div *ngIf="currentProfile" class="col-md-4">
+                    <!--
+        <img src="currentProfile.pictureUrl" alt="currentProfile.name" height="200" width="200">
+    -->
+
+                    <button type="button"
+                            (click)="onShowChangePicture(changePictureTemplate)"
+                            class="btn btn-secondary">
+                        Change
+                    </button>
+                </div>
+
+                <div class="col-md-8">
+                    <span class="profile-name"
+                          *ngIf="!isNameEditorVisible && currentProfile">
+                        {{currentProfile.name}}
+                    </span>
+                    <button (click)="showNameEditor()"
+                            *ngIf="!isNameEditorVisible"
+                            class="edit-link btn btn-light">
+                        Edit
+                    </button>
+                    <inline-text-editor *ngIf="isNameEditorVisible && currentProfile"
+                                        [content]="currentProfile.name"
+                                        (contentChanged)="onNameChange($event)">
+                    </inline-text-editor>
+                    <button *ngIf="isNameEditorVisible"
+                            (click)="updateName()"
+                            class="btn btn-sm btn-primary">
+                        Save
+                    </button>
+                    <button *ngIf="isNameEditorVisible"
+                            (click)="onCancelNameChange()"
+                            class="btn btn-sm btn-secondary ml-1">
+                        Cancel
+                    </button>
+
+                    <html-content class="profile-introduction"
+                                  [htmlString]="currentProfile.introduction"
+                                  *ngIf="!isIntroductionEditorVisible && currentProfile">
+                    </html-content>
+                    <button (click)="showIntroductionEditor()"
+                            *ngIf="!isIntroductionEditorVisible"
+                            class="edit-link btn btn-light">
+                        Edit
+                    </button>
+                    <content-editor *ngIf="isIntroductionEditorVisible && currentProfile"
+                                    [content]="currentProfile.introduction"
+                                    (contentChanged)="onIntroductionChanged($event)">
+                    </content-editor>
+
+                    <button *ngIf="isIntroductionEditorVisible"
+                            (click)="updateIntroduction()"
+                            class="btn btn-sm btn-primary">
+                        Save
+                    </button>
+                    <button *ngIf="isIntroductionEditorVisible"
+                            (click)="onCancelIntroductionChange()"
+                            class="btn btn-sm btn-secondary">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-1 col-md-2 upper-right-section">
+            Credentials
+
+            <button (click)="onOpenCredentialsEditor()"
+                    class="btn btn-light btn-link">
+                Edit
+            </button>
+            {{latestEmployment}}
+            {{latestEducation}}
+
+        </div>
+    </div>
+
+    <div>
+        <purchased-answers>
+        </purchased-answers>
+    </div>
+</div>
+
+<!--Modal Template: Change Picture-->
+<ng-template #changePictureTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Choose Picture</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="changePictureModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Url</label>
+            <input type="text"
+                   [(ngModel)]="imageUrl"
+                   class="form-control col-sm-6"
+                   placeholder="image url">
+
+            <div class="col-sm-2">
+                <input #fileInput
+                       type="file"
+                       hidden
+                       (change)="onPictureFileSelected($event)">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="fileInput.click()">
+                    <i class="far fa-folder-open"></i> Browse
+                </button>
+            </div>
+        </div>
+
+        <button type="button"
+                (click)="onChanagePicture()"
+                class="btn btn-primary">
+            Apply Change
+        </button>
+    </div>
+</ng-template>

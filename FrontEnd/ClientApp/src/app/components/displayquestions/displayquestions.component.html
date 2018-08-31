@@ -1,0 +1,14 @@
+﻿<p *ngIf="!questionViews" class="col"><em>Loading...</em></p>
+
+<div *ngIf="questionViews" class="question-list">
+    <div *ngFor="let questionView of questionViews">
+        <question-card [questionView]="questionView">
+        </question-card>
+    </div>
+</div>
+
+
+
+
+
+

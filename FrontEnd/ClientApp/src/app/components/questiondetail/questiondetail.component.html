@@ -1,0 +1,91 @@
+﻿<div class="offset-md-1 col-md-9 question-detail">
+    <p *ngIf="!question"><em>Loading...</em></p>
+    <div *ngIf="question">
+        <div *ngIf="!isQuestionEditorVisible">
+            <div class="question-title">
+                <div *ngIf="question.isDeleted">
+                    <del>{{question.title}}</del>
+                </div>
+                <div *ngIf="!question.isDeleted">
+                    {{question.title}}
+                </div>
+                <span class="badge badge-secondary badge-success">
+                    ${{question.offeredPrice}}
+                </span>
+            </div>
+
+            <div class="my-4">
+                <html-content [htmlString]="question.description"
+                              class="question-description">
+                </html-content>
+            </div>
+
+            <div>
+                <button *ngIf="isAsker"
+                        class="btn btn-default btn-sm"
+                        (click)="OnEditQuestionClick()">
+                    Edit Question
+                </button>
+                <button *ngIf="!isAnswerWritten"
+                        class="btn btn-default btn-sm ml-1"
+                        (click)="OnAnswerClick()">
+                    Answer
+                </button>
+                <button *ngIf="isAsker"
+                        class="btn btn-danger delete-question btn-sm"
+                        (click)="OnDeleteQuestionClick()">
+                    <span *ngIf="question.isDeleted">Undelete</span>
+                    <span *ngIf="!question.isDeleted">Delete</span>
+                </button>
+            </div>
+        </div>
+
+
+        <div *ngIf="isQuestionEditorVisible">
+            <question-editor [question]="question"
+                             (questionEditCancelled)="onQuestionEditCancelled()"
+                             (questionEdited)="onQuestionEdited($event)">
+            </question-editor>
+        </div>
+
+        <div *ngIf="isAddAnswerVisible">
+            <add-answer [questionId]="question.id"
+                        (answerAdded)="onAnswerAdded($event)">
+            </add-answer>
+        </div>
+        <hr />
+        
+        <div *ngIf="isAnswerWritten">
+            <p class="edit-answer-banner">
+                You have written an Answer
+            </p>
+            <p class="edit-answer-button">
+                <button class="btn btn-secondary btn-light"
+                        [routerLink]="['/answer-page', myAnswerId]">
+                    
+                    Edit your answer
+                </button>
+            </p>
+            
+            <hr />
+        </div>
+
+        <div *ngIf="!answerViews" class="row">
+            Loading...
+        </div>
+        <div *ngIf="answerViews">
+            <h4>
+                {{answerViews.length}} Answer
+            </h4>
+            <div *ngFor="let answerView of answerViews">
+                <hr />
+                <answer-card [answerView]="answerView"
+                             [loggedInUser]="loggedInUser"
+                             (answerDeleted)="onAnswerDeleted($event)">
+                </answer-card>
+            </div>
+        </div>
+        
+    </div>
+</div>
+

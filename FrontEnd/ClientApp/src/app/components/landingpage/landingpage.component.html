@@ -1,0 +1,42 @@
+<div>
+    <div class="top-screen company-name">
+        Shared Mem
+    </div>
+    <div class="center-screen">
+
+        <div class="motto-text">Ask any question. No restrictions.</div>
+    </div>
+    <div class="bottom-screen">
+        <div *ngIf="state==0" class="text-center pb-4">
+            <button class="btn btn-sm btn-outline-success"
+                    (click)="onRequestInvite()">
+                Join Us
+            </button>
+        </div>
+        <div *ngIf="state==2">
+            <request-invite (inviteReqSubmitted)="onInviteReqSubmitted()">
+            </request-invite>
+        </div>
+
+        <div *ngIf="state==0">
+            <login-form (loggedIn)="onLoggedIn($event)"
+                        (showRegistration)="onShowRegistration()">
+            </login-form>
+        </div>
+        
+    </div>
+    <div class="footer-screen">
+        <button class="btn btn-sm btn-link">About</button>
+        <span class="separator-dot">.</span>
+        <button class="btn btn-sm btn-link">Terms</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+﻿.content-editor-container {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.draft-status{
+    color:lightgray;
+}
+
+.answer-form{
+    padding-top:2em;
+}

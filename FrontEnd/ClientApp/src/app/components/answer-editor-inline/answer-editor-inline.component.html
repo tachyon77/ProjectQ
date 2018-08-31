@@ -1,0 +1,46 @@
+﻿<em *ngIf="!answer || !draft">Loading ...</em>
+<form *ngIf="answer && draft"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit(form.value)"
+      class="answer-form">
+
+    <div class="form-row align-items-center">
+        <div class="col-sm-3 my-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Price</div>
+                </div>
+                <input type="text"
+                       class="form-control"
+                       name="price"
+                       id="price"
+                       formControlName="price">
+            </div>
+        </div>
+    </div>
+    <div class="content-editor-container">
+        <content-editor [content]="curProtectedContent"
+                        [enableRedaction]="true"
+                        (contentChanged)="onContentChange($event)">
+        </content-editor>
+    </div>
+    <button type="submit"
+            [disabled]="!answer || !form.valid"
+            class="btn btn-primary btn-sm">
+        Save
+    </button>
+    <button type="button"
+            (click)="onSaveDraft(form.value)"
+            class="btn btn-light no-border btn-sm ml-1">
+        Save Draft
+    </button>
+    <button type="submit"
+            (click)="onCancel()"
+            class="btn btn-secondary float-right btn-sm">
+        Cancel
+    </button>
+    <span class="draft-status">{{draftUpdate}}</span>
+</form>
+
+
+    

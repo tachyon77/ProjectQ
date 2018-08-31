@@ -67,3 +67,6 @@ https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-preven
 	1. Do not require Businless Layer to call two inserts, or two updates to the
 	two underlying repos.
 	2. Do not require code dupliaction if another SQL database is used with the same Graph DB
+
+15. Although typescript 2.x support non null assertion operator, only from 2.7 it supports
+	non null assertion in the property declarations.

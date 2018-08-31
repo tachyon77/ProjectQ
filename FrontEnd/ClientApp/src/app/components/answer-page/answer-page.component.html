@@ -1,0 +1,46 @@
+﻿<br />
+<div class="offset-md-1 col-md-9">
+    <p *ngIf="!question"><em>Loading...</em></p>
+    <div *ngIf="question">
+        <div class="question-title"
+             [routerLink]="['/question-detail', question.id]">
+            {{question.title}}
+            <span class="badge badge-secondary badge-success">
+                ${{question.offeredPrice}}
+            </span>
+        </div>
+        <html-content [htmlString]="question.description"
+                      class="question-description">
+        </html-content>
+    </div>
+    <hr />
+    <p *ngIf="!answer"><em>Loading...</em></p>
+    <div *ngIf="answer" class="answer-card">
+        <div *ngIf="!isUpdateAnswerVisible">
+            <div class="answer-user" *ngIf="answer && answer.user">
+                {{answer.user.name}}
+                <div class="answer-date">Answered {{answer.originDate | readableDate}}</div>
+            </div>
+
+            <html-content [htmlString]="answer.redactedHtmlContent"
+                          class="answer-content">
+            </html-content>
+
+            <button class="btn btn-default btn-sm"
+                    (click)="OnEditClick()">
+                Edit
+            </button>
+            <button class="btn btn-default btn-sm"
+                    (click)="OnDeleteClick()">
+                Delete
+            </button>
+        </div>
+
+        <div *ngIf="isUpdateAnswerVisible">
+            <answer-editor-inline [answerId]="answer.id"
+                                  (answerUpdated)="onAnswerUpdated($event)"
+                                  (updateCancelled)="onUpdateCancelled()">
+            </answer-editor-inline>
+        </div>
+    </div>
+</div>

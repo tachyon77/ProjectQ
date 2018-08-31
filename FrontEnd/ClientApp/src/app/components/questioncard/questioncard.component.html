@@ -1,0 +1,48 @@
+﻿<p *ngIf="!questionView"><em>Loading...</em></p>
+
+<div *ngIf="questionView">
+    <div class="card"
+         inViewport
+        (inViewportAction)="onEnterLeaveViewport($event, questionView.question)">        
+        <div class="card-body">
+            <h3 class="card-title">
+                <a [routerLink]="['/question-detail', questionView.question.id]"
+                   class="card-link">
+                    {{questionView.question.title}}
+                </a>
+                <span class="badge badge-light">
+                    ${{questionView.question.offeredPrice}}
+                </span>
+            </h3>
+
+            <h6 class="asked-by">
+                Asked by {{questionView.question.user.name}}
+                {{questionView.question.originDate | readableDate}}
+            </h6>
+            <html-content [htmlString]="previewQuestionDetail"
+                 class="card-text previewQuestion">
+            </html-content>
+
+            <div *ngIf="!questionView.isFollowing">
+                <button (click)="onFollow()"
+                        class="btn btn-light">
+                    <i class="fas fa-rss"></i>
+                    Follow
+                </button>
+            </div>
+            <div *ngIf="questionView.isFollowing">
+                <button (click)="onUnfollow()"
+                        class="btn btn-light">
+                    Following
+                </button>
+            </div>
+
+            <div *ngIf="!previewAnswerContent">
+                <em>No answers yet</em>
+            </div>
+            <html-content *ngIf="previewAnswerContent"
+                          [htmlString]="previewAnswerContent">
+            </html-content>
+        </div>
+    </div>
+</div>
