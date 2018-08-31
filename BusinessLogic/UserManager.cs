@@ -23,6 +23,13 @@ namespace ProjectQ.BusinessLogic
             return await _unitOfWork.UserRepository.FindAsync(id);
         }
 
+        async Task IUserManager.UpdatePictureUrlAsync(int id, string url)
+        {
+            var current = await _unitOfWork.UserRepository.FindAsync(id);
+            await _unitOfWork.UserRepository.UpdatePictureUrlAsync(id, url);
+            await _unitOfWork.SaveAsync();
+        }
+
         async Task IUserManager.UpdateAsync(int id, User updated)
         {
             var current = await _unitOfWork.UserRepository.FindAsync(id);

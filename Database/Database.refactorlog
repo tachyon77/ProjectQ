@@ -336,4 +336,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Email" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="68799b1c-b8f9-4ac8-ac07-42b41ddd2aa2" ChangeDateTime="08/28/2018 11:48:26">
+    <Property Name="ElementName" Value="[dbo].[Users].[Picture]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PictureUrl" />
+  </Operation>
 </Operations>

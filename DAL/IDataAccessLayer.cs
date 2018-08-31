@@ -43,6 +43,7 @@ namespace ProjectQ.DAL
         Task AddAsync(User user);
         Task<User> FindAsync(int id);
         User FindByUniqueName(string uniqueName);
+        Task UpdatePictureUrlAsync(int id, string url);
         Task UpdateAsync(int id, User updated);
     }
 

@@ -4,5 +4,6 @@
 	[UniqueName] NVARCHAR(300) NOT NULL,
     [Name] NVARCHAR(200) NOT NULL, 
     [Introduction] NVARCHAR(MAX) NOT NULL DEFAULT '', 
+    [PictureUrl] NVARCHAR(500) NULL , 
     CONSTRAINT [AK_Users_UniqueName] UNIQUE ([UniqueName]) 
 )

@@ -24,6 +24,12 @@ namespace ProjectQ.DAL.EntityFramework
             return await _context.Users.FindAsync(userId);
         }
 
+        async Task IUserRepository.UpdatePictureUrlAsync(int id, string url)
+        {
+            var user = await _context.Users.FindAsync(id);
+            user.PictureUrl = url;
+        }
+
         async Task IUserRepository.UpdateAsync(int id, User updated)
         {
             var user = await _context.Users.FindAsync(id);
