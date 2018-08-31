@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, TemplateRef, Inject } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationUserService, Credentials} from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials-readonly/credentials-readonly.component'
