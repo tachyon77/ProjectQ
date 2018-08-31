@@ -3,4 +3,5 @@
     name!: string;
     uniqueName!: string;
     introduction!: string;
+    pictureUrl!: string;
 }

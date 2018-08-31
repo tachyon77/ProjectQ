@@ -57,5 +57,14 @@ namespace WebApp.Controllers
             await _userManager.UpdateAsync(user.Id, updated);
             return new NoContentResult();
         }
+
+        [HttpPut("pictureurl")]
+        async public Task<IActionResult> UpdatePictureUrl([FromBody] User updated)
+        {
+            var aspUser = await _aspUserManager.GetUserAsync(User);
+            var user = await _userManager.FindAsync(aspUser.UserId);
+            await _userManager.UpdatePictureUrlAsync(user.Id, updated.PictureUrl);
+            return new NoContentResult();
+        }
     }
 }

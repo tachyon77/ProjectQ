@@ -43,8 +43,7 @@ import { QuestionCardComponent } from './components/questioncard/questioncard.co
 import { QuestionService } from './services/questions.service';
 import { QuestionFollowerService } from './services/questionfollower.service';
 import { QuestionEditorComponent } from './components/questioneditor/questioneditor.component';
-import { QuestionViewService } from './services/question-views.service';
-import { QuestionTopic } from './models/QuestionTopic';
+import { QuestionViewService } from './services/question-views.service';;
 import { QuestionTopicService } from './services/question-topics.service';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'

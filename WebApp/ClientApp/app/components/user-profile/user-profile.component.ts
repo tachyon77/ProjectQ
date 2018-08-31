@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Output } from '@angular/core';
+﻿import { Component, OnInit, Output, TemplateRef, Inject } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,8 @@ import { CredentialsReadonlyComponent } from '../../components/credentials-reado
 import { CredentialsEditorComponent } from '../../components/credentials-editor/credentials-editor.component'
 
 import { User } from '../../models/User';
+import { Observable } from 'rxjs/internal/Observable';
+import { ImageStoreService } from '../../services/image-store.service';
 
 @Component({
     selector: 'user-profile',
@@ -24,6 +26,8 @@ export class UserProfileComponent implements OnInit {
     private _currentProfile: User | undefined;
     private _updatedProfile: User | undefined;
     private _credetials: Credentials | undefined;
+    changePictureModal: BsModalRef | undefined;
+    baseUrl: string | undefined;
 
     private paramsSubscription: any;
 
@@ -45,6 +49,49 @@ export class UserProfileComponent implements OnInit {
 
     get loggedInUser() {
         return this._loggedInUser;
+    }
+
+    onShowChangePicture(template: TemplateRef<any>) {
+        const initialState = {
+        };
+        this.changePictureModal = this.modalService.show(
+            template, { initialState }
+        );
+    }
+
+    selectedFile: File | undefined;
+    imageUrl: string | undefined;
+
+    onPictureFileSelected(event: any) {
+        this.selectedFile = <File>event.target.files[0];
+        console.log(this.selectedFile);
+        this.imageUrl = this.selectedFile!.name;
+    }
+
+    upload(): Observable<any> {
+        const formData = new FormData();
+        formData.append('image', this.selectedFile!, this.selectedFile!.name);
+        return this.imageStoreService.upload(formData);
+    }
+
+    onChanagePicture() {
+
+        if (this.imageUrl) {
+            let imageUrlLowerCase = this.imageUrl.toLowerCase();
+            if (imageUrlLowerCase.startsWith("http://") || imageUrlLowerCase.startsWith("https://")) {
+                
+                // Guarded by ngIf
+                this.changePictureModal!.hide();
+            } else {
+                this.upload().subscribe(
+                    (imagePath) => {
+                        this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
+                        // Guarded by ngIf
+                        this.changePictureModal!.hide();
+                    });
+            }
+            this.currentProfile!.pictureUrl = this.imageUrl; // TODO !
+        }
     }
 
     onNameChange(newName: string) {
@@ -123,10 +170,12 @@ export class UserProfileComponent implements OnInit {
 
 
     constructor(
+        @Inject('BASE_URL') baseUrl: string,
         private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
-        private applicationUserService: ApplicationUserService
+        private applicationUserService: ApplicationUserService,
+        private imageStoreService: ImageStoreService,
     ) {
-        
+        this.baseUrl = baseUrl;
     }
 }

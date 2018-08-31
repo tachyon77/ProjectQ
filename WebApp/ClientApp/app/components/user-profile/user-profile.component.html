@@ -2,9 +2,18 @@
     <div class="row upper-section">
         <div class="col-md-9 upper-left-section">
             <div class="row">
-                <div class="col-md-4">
-                    <img src="https://qph.fs.quoracdn.net/main-thumb-254562851-200-gkjcpbysxnlvjjsfibjuswwtditddxpc.jpeg" alt="Mahbub Zaman" height="200" width="200">
+                <div *ngIf="currentProfile" class="col-md-4">
+                    <!--
+        <img src="currentProfile.pictureUrl" alt="currentProfile.name" height="200" width="200">
+    -->
+
+                    <button type="button"
+                            (click)="onShowChangePicture(changePictureTemplate)"
+                            class="btn btn-secondary">
+                        Change
+                    </button>
                 </div>
+
                 <div class="col-md-8">
                     <span class="profile-name"
                           *ngIf="!isNameEditorVisible && currentProfile">
@@ -75,3 +84,40 @@
         </purchased-answers>
     </div>
 </div>
+
+<!--Modal Template: Change Picture-->
+<ng-template #changePictureTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Choose Picture</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="changePictureModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Url</label>
+            <input type="text"
+                   [(ngModel)]="imageUrl"
+                   class="form-control col-sm-6"
+                   placeholder="image url">
+
+            <div class="col-sm-2">
+                <input #fileInput
+                       type="file"
+                       hidden
+                       (change)="onPictureFileSelected($event)">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="fileInput.click()">
+                    <i class="far fa-folder-open"></i> Browse
+                </button>
+            </div>
+        </div>
+
+        <button type="button"
+                (click)="onChanagePicture()"
+                class="btn btn-primary">
+            Apply Change
+        </button>
+    </div>
+</ng-template>
