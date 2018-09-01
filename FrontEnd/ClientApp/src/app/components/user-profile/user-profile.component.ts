@@ -67,29 +67,25 @@ export class UserProfileComponent implements OnInit {
         this.imageUrl = this.selectedFile!.name;
     }
 
-    upload(): Observable<any> {
+  upload(): Observable<any> {
         const formData = new FormData();
         formData.append('image', this.selectedFile!, this.selectedFile!.name);
         return this.imageStoreService.upload(formData);
     }
 
-    onChanagePicture() {
-
+  onChangePicture() {
+    
         if (this.imageUrl) {
             let imageUrlLowerCase = this.imageUrl.toLowerCase();
             if (imageUrlLowerCase.startsWith("http://") || imageUrlLowerCase.startsWith("https://")) {
-                
-                // Guarded by ngIf
-                this.changePictureModal!.hide();
             } else {
                 this.upload().subscribe(
                     (imagePath) => {
-                        this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
-                        // Guarded by ngIf
-                        this.changePictureModal!.hide();
-                    });
-            }
-            this.currentProfile!.pictureUrl = this.imageUrl; // TODO !
+                      this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
+                      this.updatePicture();
+                      this.changePictureModal!.hide();
+                });
+          }
         }
     }
 
@@ -109,6 +105,15 @@ export class UserProfileComponent implements OnInit {
     onCancelIntroductionChange() {
         this.isIntroductionEditorVisible = false;
         this._updatedProfile!.introduction = this._currentProfile!.introduction;
+    }
+
+  updatePicture() {
+    this._updatedProfile!.pictureUrl = this.imageUrl;
+    this.applicationUserService
+      .updatePictureUrl(this._updatedProfile!)
+        .subscribe(() => {
+          this._currentProfile!.pictureUrl = this._updatedProfile!.pictureUrl;
+        });
     }
 
     updateName() {
@@ -175,6 +180,6 @@ export class UserProfileComponent implements OnInit {
         private applicationUserService: ApplicationUserService,
         private imageStoreService: ImageStoreService,
     ) {
-        this.baseUrl = baseUrl;
+      this.baseUrl = baseUrl;
     }
 }

@@ -62,6 +62,14 @@ export class ApplicationUserService {
             );
     }
 
+  updatePictureUrl(user: User): Observable<any> {
+    return this.http.put('api/profile/pictureurl', user)
+      .pipe(
+        tap(_ => console.log(`updated profule info`)),
+        catchError(this.handleError('update credential'))
+      );
+  }
+
     updateUser(user: User): Observable<any> {
         return this.http.put('api/profile', user)
             .pipe(

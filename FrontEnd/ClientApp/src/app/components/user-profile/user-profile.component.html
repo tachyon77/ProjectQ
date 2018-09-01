@@ -1,18 +1,15 @@
-﻿<div class="offset-md-1 col-md-9">
+<div class="offset-md-1 col-md-9">
     <div class="row upper-section">
         <div class="col-md-9 upper-left-section">
             <div class="row">
-                <div *ngIf="currentProfile" class="col-md-4">
-                    <!--
-        <img src="currentProfile.pictureUrl" alt="currentProfile.name" height="200" width="200">
-    -->
-
-                    <button type="button"
-                            (click)="onShowChangePicture(changePictureTemplate)"
-                            class="btn btn-secondary">
-                        Change
-                    </button>
-                </div>
+              <div *ngIf="currentProfile" class="col-md-4">
+                <img src={{currentProfile.pictureUrl}} alt={{currentProfile.name}} style="max-height:200px;max-width:200px">
+                <button type="button"
+                        (click)="onShowChangePicture(changePictureTemplate)"
+                        class="btn btn-secondary">
+                  Change
+                </button>
+              </div>
 
                 <div class="col-md-8">
                     <span class="profile-name"
@@ -115,7 +112,7 @@
         </div>
 
         <button type="button"
-                (click)="onChanagePicture()"
+                (click)="onChangePicture()"
                 class="btn btn-primary">
             Apply Change
         </button>
