@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectQ.FrontEnd.Services
+namespace ProjectQ.BusinessLogic.Services
 {
     public interface IEmailSender
     {

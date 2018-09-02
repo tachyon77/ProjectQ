@@ -8,7 +8,7 @@ using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using ProjectQ.FrontEnd.Services;
+using ProjectQ.BusinessLogic.Services;
 
 namespace FrontEnd.Controllers
 {

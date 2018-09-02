@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
-using ProjectQ.FrontEnd.Services;
+using ProjectQ.BusinessLogic.Services;
 using ProjectQ.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
 

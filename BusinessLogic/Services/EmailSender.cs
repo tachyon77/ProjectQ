@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace ProjectQ.FrontEnd.Services
+namespace ProjectQ.BusinessLogic.Services
 {
     // This class is used by the application to send email for account confirmation and password reset.
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713

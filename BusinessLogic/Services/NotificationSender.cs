@@ -110,7 +110,7 @@ namespace ProjectQ.BusinessLogic.Services
                             true,
                             CancellationToken.None);
                         }
-                        catch (Exception _e)
+                        catch
                         {
                             // This is rather common case. Happens when client
                             // closes the browser.

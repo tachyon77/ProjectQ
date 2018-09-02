@@ -20,7 +20,6 @@ using ProjectQ.BusinessLogic.Services;
 using ProjectQ.DAL;
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
-using ProjectQ.FrontEnd.Services;
 using ProjectQ.DAL.EntityFramework;
 using ProjectQ.DAL.Graph;
 

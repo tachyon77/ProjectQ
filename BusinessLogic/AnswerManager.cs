@@ -15,6 +15,7 @@ namespace ProjectQ.BusinessLogic
         private IUnitOfWork _unitOfWork;
         private INotificationSender _notificationSender;
         private IAnswerDraftManager _draftManager;
+		private IEmailSender _emailSender;
         #endregion
 
         #region Cosntructors
@@ -22,11 +23,13 @@ namespace ProjectQ.BusinessLogic
         public AnswerManager(
             IUnitOfWork unitOfWork,
             INotificationSender notificationSender,
-            IAnswerDraftManager answerDraftManager)
+            IAnswerDraftManager answerDraftManager,
+			IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
             _notificationSender = notificationSender;
             _draftManager = answerDraftManager;
+			_emailSender = emailSender;
         }
 
         #endregion
@@ -99,7 +102,16 @@ namespace ProjectQ.BusinessLogic
 
             await _unitOfWork.SaveAsync();
 
-            notifications.ForEach( x=>_notificationSender.EnqueueSendRequest(x));
+            notifications.ForEach(
+				x =>
+				{
+					_notificationSender.EnqueueSendRequest(x);
+					_emailSender.SendEmailAsync(
+						"tachyon77@gmail.com", 
+						"New answer posted", 
+						$"Question link: {x.EventDescription}");
+				}
+			);
 
             return answer.Id;
         }
