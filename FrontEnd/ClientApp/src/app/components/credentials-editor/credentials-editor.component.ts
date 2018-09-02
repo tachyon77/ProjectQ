@@ -1,8 +1,7 @@
-import { Component, TemplateRef } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { Component, TemplateRef, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+
 import { Education, Employment, ApplicationUserService, Credentials } from '../../services/application-user.service';
 
 @Component({
