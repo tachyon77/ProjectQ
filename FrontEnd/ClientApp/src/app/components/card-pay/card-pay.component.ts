@@ -6,6 +6,10 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 import { AnswerPayment } from '../../models/AnswerPayment';
 import { AnswerPaymentService } from '../../services/answer-payment.service';
 
+export interface PaymentForm {
+    name: string;
+}
+
 @Component({
     selector: 'card-pay',
     templateUrl: './card-pay.component.html',
@@ -15,6 +19,7 @@ export class CardPayComponent implements OnInit {
     elements: Elements | undefined;
     card: StripeElement | undefined;
     private _answerPayment: AnswerPayment | undefined;
+
 
     // optional parameters
     elementsOptions: ElementsOptions = {
@@ -75,8 +80,8 @@ export class CardPayComponent implements OnInit {
         this.cancelled.emit();
     }
 
-    buy() {
-        const name = this.stripeTest!.get('name')!.value;
+    buy(form: PaymentForm) {
+        const name = form.name;
         this.stripeService
             .createToken(this.card!, { name })
             .subscribe(result => {

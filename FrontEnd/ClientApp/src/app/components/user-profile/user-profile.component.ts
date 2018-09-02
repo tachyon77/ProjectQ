@@ -150,6 +150,8 @@ export class UserProfileComponent implements OnInit {
         this.bsModalRef = this.modalService.show(CredentialsReadonlyComponent, { initialState });
     }
 
+    latestEmployment: string = "";
+    latestEducation: string = "";
 
     ngOnInit() {
         this.paramsSubscription =
@@ -166,6 +168,12 @@ export class UserProfileComponent implements OnInit {
                 this.applicationUserService.getCredentials(this.profileUserId!).subscribe(
                     response => {
                         this._credetials = response as Credentials;
+                        if (this._credetials.employments.length > 0) {
+                            this.latestEmployment = this._credetials.employments[0].position;
+                        }
+                        if (this._credetials.educations.length > 0) {
+                            this.latestEducation = this._credetials.educations[0].degreeType;
+                        }
                     }
                 );
                 

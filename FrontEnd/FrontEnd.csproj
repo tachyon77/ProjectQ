@@ -10,6 +10,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>fb995beb-0e37-45c0-ab9e-8f9760357632</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,10 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\.well-known\pki-validation\godaddy.html" />
   </ItemGroup>
 
   <ItemGroup>

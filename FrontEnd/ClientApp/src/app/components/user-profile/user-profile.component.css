@@ -1,4 +1,9 @@
-﻿.upper-section {
+.profile-picture{
+  max-height:200px;
+  max-width:200px;
+}
+
+.upper-section {
     padding-top: 1em;
 }
 

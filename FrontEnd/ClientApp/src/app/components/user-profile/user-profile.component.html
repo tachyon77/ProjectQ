@@ -2,14 +2,22 @@
     <div class="row upper-section">
         <div class="col-md-9 upper-left-section">
             <div class="row">
-              <div *ngIf="currentProfile" class="col-md-4">
-                <img src={{currentProfile.pictureUrl}} alt={{currentProfile.name}} style="max-height:200px;max-width:200px">
-                <button type="button"
-                        (click)="onShowChangePicture(changePictureTemplate)"
-                        class="btn btn-secondary">
-                  Change
-                </button>
-              </div>
+                <div *ngIf="currentProfile" class="col-md-4">
+                    <div class="row mb-2">
+                        <div>
+                            <img class="profile-picture" src={{currentProfile.pictureUrl}} alt={{currentProfile.name}}>
+                        </div>    
+                    </div>                    
+                    <div class="row">
+                        <div class="offset-md-6">
+                            <button type="button"
+                                    (click)="onShowChangePicture(changePictureTemplate)"
+                                    class="btn btn-light">
+                                Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-8">
                     <span class="profile-name"
