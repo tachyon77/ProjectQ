@@ -3,6 +3,10 @@
   max-width:200px;
 }
 
+.latest-credential{
+    font-size:smaller;
+}
+
 .upper-section {
     padding-top: 1em;
 }

@@ -71,16 +71,21 @@
                 </div>
             </div>
         </div>
-        <div class="offset-md-1 col-md-2 upper-right-section">
+        <div class="col-md-3 upper-right-section">
             Credentials
 
             <button (click)="onOpenCredentialsEditor()"
-                    class="btn btn-light btn-link">
+                    class="btn btn-light btn-sm">
                 Edit
             </button>
-            {{latestEmployment}}
-            {{latestEducation}}
-
+            <div class="latest-credential mt-3">
+                <i class="fas fa-briefcase"></i>
+                {{latestEmployment.position}}, {{latestEmployment.company}}
+            </div>
+            <div class="latest-credential mt-3">
+                <i class="fas fa-graduation-cap"></i>
+                {{latestEducation.degreeType}}, {{latestEducation.concentration}}, {{latestEducation.school}}
+            </div>
         </div>
     </div>
 

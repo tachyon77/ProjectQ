@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationUserService, Credentials} from '../../services/application-user.service';
+import { ApplicationUserService, Credentials, Employment, Education } from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials-readonly/credentials-readonly.component'
 import { CredentialsEditorComponent } from '../../components/credentials-editor/credentials-editor.component'
 
@@ -150,8 +150,8 @@ export class UserProfileComponent implements OnInit {
         this.bsModalRef = this.modalService.show(CredentialsReadonlyComponent, { initialState });
     }
 
-    latestEmployment: string = "";
-    latestEducation: string = "";
+    latestEmployment: Employment;
+    latestEducation: Education;
 
     ngOnInit() {
         this.paramsSubscription =
@@ -169,10 +169,10 @@ export class UserProfileComponent implements OnInit {
                     response => {
                         this._credetials = response as Credentials;
                         if (this._credetials.employments.length > 0) {
-                            this.latestEmployment = this._credetials.employments[0].position;
+                            this.latestEmployment = this._credetials.employments[0];
                         }
                         if (this._credetials.educations.length > 0) {
-                            this.latestEducation = this._credetials.educations[0].degreeType;
+                            this.latestEducation = this._credetials.educations[0];
                         }
                     }
                 );
