@@ -78,11 +78,11 @@
                     class="btn btn-light btn-sm">
                 Edit
             </button>
-            <div class="latest-credential mt-3">
+            <div *ngIf="latestEmployment" class="latest-credential mt-3">
                 <i class="fas fa-briefcase"></i>
                 {{latestEmployment.position}}, {{latestEmployment.company}}
             </div>
-            <div class="latest-credential mt-3">
+            <div *ngIf="latestEducation" class="latest-credential mt-3">
                 <i class="fas fa-graduation-cap"></i>
                 {{latestEducation.degreeType}}, {{latestEducation.concentration}}, {{latestEducation.school}}
             </div>
