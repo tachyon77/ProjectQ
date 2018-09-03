@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 using ProjectQ.Model;
 using Microsoft.EntityFrameworkCore;
-using ProjectQ.WebApp.Services;
 using ProjectQ.DAL.EntityFramework;
 using ProjectQ.DAL.Graph;
 

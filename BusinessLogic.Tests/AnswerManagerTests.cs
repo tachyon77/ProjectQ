@@ -19,14 +19,16 @@ namespace ProjectQ.BusinessLogic.Tests
         private Mock<IUnitOfWork> _mockUoW;
         private IAnswerManager _sut;
         private Mock<INotificationSender> _mockNS;
+		private Mock<IEmailSender> _mockES;
 
-        [SetUp]
+		[SetUp]
         public void Setup()
         {
             _mockQuestionRepo = new Mock<IQuestionRepository>();
             _mockAnswerRepo = new Mock<IAnswerRepository>();
             _mockAnswerDraftManager = new Mock<IAnswerDraftManager>();
             _mockNS = new Mock<INotificationSender>();
+			_mockES = new Mock<IEmailSender>();
 
             _mockUoW = new Mock<IUnitOfWork>();
 
@@ -42,7 +44,11 @@ namespace ProjectQ.BusinessLogic.Tests
                 .Setup(x => x.SaveAsync())
                 .Returns(Task.CompletedTask);
 
-            _sut = new AnswerManager(_mockUoW.Object, _mockNS.Object, _mockAnswerDraftManager.Object);
+            _sut = new AnswerManager(
+				_mockUoW.Object, 
+				_mockNS.Object, 
+				_mockAnswerDraftManager.Object,
+				_mockES.Object);
         }
         
         [Test]
