@@ -39,6 +39,7 @@ namespace ProjectQ.BusinessLogic
         async Task<int> IPurchaseAnswerManager.PurchaseAsync(int answerId, int userId, decimal price)
         {
             var answer = await _unitOfWork.AnswerRepository.FindAsync(answerId);
+			var answerAuthor = await _unitOfWork.UserRepository.FindAsync(answer.UserId);
 
             var question = await 
                 _unitOfWork
@@ -80,9 +81,9 @@ namespace ProjectQ.BusinessLogic
                         UserId = follower,
 
                         EventDescription =
-                            user.Name + " purchased an answer witten by XYZ to the question:  \""
-                            + question.Title.Substring(0, notificationLength)
-                            + " ...\"",
+                            $"{user.Name} purchased an answer written by " +
+							$"{answerAuthor.Name} to the question: " +
+							$"{question.Title.Substring(0, notificationLength) + " ..."}",
                         Link = "/question-detail/" + question.Id
                     };
 
