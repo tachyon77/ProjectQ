@@ -146,7 +146,7 @@ export class AnswerCardComponent {
         handler.open({
             name: 'Sharedmem',
             description: 'Purchase Answer',
-            amount: this.answerView!.answer!.price,
+            amount: this.answerView!.answer!.price * 100,
         });
     }
 
