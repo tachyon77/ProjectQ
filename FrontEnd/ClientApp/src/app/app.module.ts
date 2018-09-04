@@ -21,7 +21,6 @@ import { AnswerRatingService } from './services/answerrating.service';
 import { AnswerCardComponent } from './components/answercard/answercard.component';
 import { AddAnswerComponent } from './components/addanswer/addanswer.component';
 import { AddQuestionFormComponent } from './components/addquestion/addquestionform.component';
-import { CardPayComponent } from './components/card-pay/card-pay.component';
 import { CredentialsReadonlyComponent } from './components/credentials-readonly/credentials-readonly.component';
 import { CredentialsEditorComponent } from './components/credentials-editor/credentials-editor.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
@@ -56,8 +55,6 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
-import { NgxStripeModule } from 'ngx-stripe';
-
 
 @NgModule({
   entryComponents: [
@@ -71,7 +68,6 @@ import { NgxStripeModule } from 'ngx-stripe';
     AnswerEditorInlineComponent,
     AnswerPageComponent,
     AddAnswerComponent,
-    CardPayComponent,
     CredentialsReadonlyComponent,
     CredentialsEditorComponent,
     ContentEditorComponent,
@@ -121,7 +117,6 @@ import { NgxStripeModule } from 'ngx-stripe';
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_DAraSvJLJBImk4lRam9CiLq8'),
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
