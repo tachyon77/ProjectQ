@@ -1,4 +1,4 @@
-﻿<p *ngIf="!answerView">loading ...</p>
+<p *ngIf="!answerView">loading ...</p>
 <div *ngIf="answerView" class="answer-card">
     <div *ngIf="!isUpdateAnswerVisible" class="row no-gutters">
         <div class="col-md-6">
@@ -100,13 +100,6 @@
             <i class="fas fa-hand-holding-usd"></i>
             Counter offer
         </button>
-
-        <!--Payment-->
-        <div *ngIf="isPaymentVisible">
-            <card-pay [answerPayment]="answerPayment"
-                      (chargeProcessed)="OnChargeProcessed($event)">
-            </card-pay>
-        </div>
     </div>
 
     <!--Answer Content-->
@@ -140,18 +133,3 @@
     </div>
 </div>
 
-<!--Modal Template: Card Payment-->
-<ng-template #cardPaymentTemplate>
-    <div class="modal-header">
-        <span class="modal-title pull-left">Payment</span>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="creditPayModal.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <card-pay [answerPayment]="answerPayment"
-                  (chargeProcessed)="OnChargeProcessed($event)"
-                  (cancelled)="creditPayModal.hide()">
-        </card-pay>
-    </div>
-</ng-template>
