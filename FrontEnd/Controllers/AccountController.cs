@@ -101,14 +101,10 @@ namespace ProjectQ.FrontEnd.Controllers
 
         private string EmailConfirmationLink(IUrlHelper urlHelper, string userId, string code, string scheme)
         {
-            return urlHelper.Page(
-                "/Account/ConfirmEmail",
-                pageHandler: null,
-                values: new { userId, code },
-                protocol: scheme);
+			return Url.Link("RegistrationConfirmation", new { userId, code });
         }
 
-        [HttpGet("register")]
+        [HttpGet("register", Name ="RegistrationConfirmation")]
         public async Task<IActionResult> Confirm(string userId, string code)
         {
             var user = await _signInManager.UserManager.FindByIdAsync(userId);
