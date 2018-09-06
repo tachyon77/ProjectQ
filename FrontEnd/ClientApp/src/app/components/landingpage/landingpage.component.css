@@ -12,8 +12,12 @@
 
 .company-name {
     font-family: "Helvetica Neue";
-    font-size:1.5em;
-    font-weight:800;
+    font-size:2em;
+}
+
+.motto-text {
+    font-family: "Helvetica Neue";
+    font-size: 1.5em;
 }
 
 .top-screen {
@@ -34,11 +38,6 @@
     transform: translate(-50%, -50%)
 }
 
-.motto-text {
-    font-family: "Helvetica Neue";
-    font-size: 2em;
-}
-
 .center-screen {
     padding: 1em;
     position: absolute;
@@ -51,7 +50,7 @@
 .footer-screen {
     padding: 1em;
     position: absolute;
-    top: 90%;
+    top: 95%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
