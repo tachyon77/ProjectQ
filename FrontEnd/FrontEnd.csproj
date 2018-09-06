@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\.well-known\pki-validation\godaddy.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
