@@ -8,14 +8,14 @@
     </div>
     <div class="bottom-screen">
         <div *ngIf="state==0" class="text-center pb-4">
-            <button class="btn btn-sm btn-outline-success"
-                    (click)="onRequestInvite()">
-                Join Us
+            <button class="btn btn-sm btn-outline-secondary"
+                    (click)="onShowRegistration()">
+                Sign up
             </button>
         </div>
-        <div *ngIf="state==2">
-            <request-invite (inviteReqSubmitted)="onInviteReqSubmitted()">
-            </request-invite>
+        <div *ngIf="state==1">
+            <registration-form (registrationCompleted)="onRegistrationCompleted()">
+            </registration-form>
         </div>
 
         <div *ngIf="state==0">
