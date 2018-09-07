@@ -70,3 +70,9 @@ https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-preven
 
 15. Although typescript 2.x support non null assertion operator, only from 2.7 it supports
 	non null assertion in the property declarations.
+
+16. To attach debugger to IIS hosted app, attach to dotnet.exe, not w3wp.exe.
+17. Steps to do the https:
+	1. Use IIS to create CSR
+	2. Follow instructions from this site.
+	3. Use the DNS record method to verify ownership.
