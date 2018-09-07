@@ -44,15 +44,20 @@
                         Cancel
                     </button>
 
-                    <html-content class="profile-introduction"
-                                  [htmlString]="currentProfile.introduction"
-                                  *ngIf="!isIntroductionEditorVisible && currentProfile">
-                    </html-content>
-                    <button (click)="showIntroductionEditor()"
-                            *ngIf="!isIntroductionEditorVisible"
-                            class="edit-link btn btn-light">
-                        Edit
-                    </button>
+                    <div *ngIf="!isIntroductionEditorVisible && currentProfile">
+                        <html-content class="profile-introduction"
+                                      [htmlString]="currentProfile.introduction"
+                                      *ngIf="currentProfile.introduction">
+                        </html-content>
+                        <html-content class="profile-introduction"
+                                      htmlString="Introduce yourself here ..."
+                                      *ngIf="!currentProfile.introduction">
+                        </html-content>
+                        <button (click)="showIntroductionEditor()"
+                                class="edit-link btn btn-light">
+                            Edit
+                        </button>
+                    </div>
                     <content-editor *ngIf="isIntroductionEditorVisible && currentProfile"
                                     [content]="currentProfile.introduction"
                                     (contentChanged)="onIntroductionChanged($event)">
