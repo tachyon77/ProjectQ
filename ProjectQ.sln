@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Experiments.Encryption.AES"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{17B11456-8005-4250-BC35-E4A5257D7587}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{074AB586-AE88-47D5-A957-4C467B8DE9C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{17B11456-8005-4250-BC35-E4A5257D7587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17B11456-8005-4250-BC35-E4A5257D7587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17B11456-8005-4250-BC35-E4A5257D7587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074AB586-AE88-47D5-A957-4C467B8DE9C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074AB586-AE88-47D5-A957-4C467B8DE9C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074AB586-AE88-47D5-A957-4C467B8DE9C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074AB586-AE88-47D5-A957-4C467B8DE9C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

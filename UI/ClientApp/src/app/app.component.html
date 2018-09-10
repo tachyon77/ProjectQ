@@ -1,0 +1,22 @@
+<div class='container-fluid no-padding'>
+    <div *ngIf="isLoggedIn">
+        <div class="row">
+            <nav-menu [user]="user"
+                      (loggedOut)="onLogout($event)">
+            </nav-menu>
+        </div>
+
+        <div class="row body-content">
+            <div class="col-md-12">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isLoggedIn">
+        <div>
+            <landing-page (loggedIn)="onLogin($event)">
+            </landing-page>
+        </div>
+    </div>
+</div>
+

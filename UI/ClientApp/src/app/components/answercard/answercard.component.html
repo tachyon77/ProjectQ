@@ -1,0 +1,135 @@
+<p *ngIf="!answerView">loading ...</p>
+<div *ngIf="answerView" class="answer-card">
+    <div *ngIf="!isUpdateAnswerVisible" class="row no-gutters">
+        <div class="col-md-6">
+            <div class="row no-gutters answer-user" *ngIf="answerView.answer.user">
+                <!--Author Identity-->
+                <span *ngIf="answerView.answer.isAnonymous">
+                    Anonymous
+                </span>
+                <span *ngIf="!answerView.answer.isAnonymous">
+                    {{answerView.answer.user.name}}
+                </span>
+                <span *ngIf="isAuthor">
+                    [You]
+                </span>
+            </div>
+
+            <!--Answer Date time-->
+            <div class="row no-gutters answer-date">
+                Answered {{answerView.answer.originDate | readableDate}}
+            </div>
+
+            <!--Option to Rate Answer-->
+            <div *ngIf="!isAuthor" class="row no-gutters">
+                <div class="rating" *ngIf="rating[0]">
+                    <span (click)="rate(5)">☆</span>
+                    <span (click)="rate(4)">☆</span>
+                    <span (click)="rate(3)">☆</span>
+                    <span (click)="rate(2)">☆</span>
+                    <span (click)="rate(1)">☆</span>
+                </div>
+                <div class="rating" *ngIf="rating[1]">
+                    <span (click)="rate(5)">☆</span>
+                    <span (click)="rate(4)">☆</span>
+                    <span (click)="rate(3)">☆</span>
+                    <span (click)="rate(2)">☆</span>
+                    <span (click)="rate(1)">★</span>
+                </div>
+                <div class="rating" *ngIf="rating[2]">
+                    <span (click)="rate(5)">☆</span>
+                    <span (click)="rate(4)">☆</span>
+                    <span (click)="rate(3)">☆</span>
+                    <span (click)="rate(2)">★</span>
+                    <span (click)="rate(1)">★</span>
+                </div>
+                <div class="rating" *ngIf="rating[3]">
+                    <span (click)="rate(5)">☆</span>
+                    <span (click)="rate(4)">☆</span>
+                    <span (click)="rate(3)">★</span>
+                    <span (click)="rate(2)">★</span>
+                    <span (click)="rate(1)">★</span>
+                </div>
+                <div class="rating" *ngIf="rating[4]">
+                    <span (click)="rate(5)">☆</span>
+                    <span (click)="rate(4)">★</span>
+                    <span (click)="rate(3)">★</span>
+                    <span (click)="rate(2)">★</span>
+                    <span (click)="rate(1)">★</span>
+                </div>
+                <div class="rating" *ngIf="rating[5]">
+                    <span (click)="rate(5)">★</span>
+                    <span (click)="rate(4)">★</span>
+                    <span (click)="rate(3)">★</span>
+                    <span (click)="rate(2)">★</span>
+                    <span (click)="rate(1)">★</span>
+                </div>
+            </div>
+        </div>
+
+        <!--Average Rating-->
+        <div class="col-md-6">
+            <span *ngIf="!answerView.averageRating"
+                  class="no-rating">
+                No ratings yet
+            </span>
+            <span *ngIf="answerView.averageRating"
+                  class="average-rating">
+                {{answerView.averageRating}} / 5
+            </span>
+        </div>
+    </div>
+
+    <!--Answer Purchase Option-->
+    <div *ngIf="answerView.answer.price > 0 && !isAuthor" class="mt-3">
+        <hr />
+        <!--Buy-->
+        <span class="dollar-sign">$</span>
+        <span class="price-tag">{{answerView.answer.price}}.00</span>
+
+        <button class="btn btn-success ml-2"
+                (click)="onOpenCreditPay(cardPaymentTemplate)">
+            Buy
+        </button>
+        <span class="ml-2 price-note"> *Parts of this answer is hidden. You need to buy it to see full answer.</span>
+        
+        <hr />
+        <!--counter offer-->
+        <button hidden class="btn btn-secondary btn-sm ml-2"
+                (click)="OnCounterOfferClick()">
+            <i class="fas fa-hand-holding-usd"></i>
+            Counter offer
+        </button>
+    </div>
+
+    <!--Answer Content-->
+    <div class="my-4">
+        <html-content [htmlString]="answerView.answer.redactedHtmlContent"
+                      class="answer-content">
+        </html-content>
+    </div>
+
+    <div *ngIf="isAuthor">
+        <!--Edit-->
+        <button class="btn btn-sm"
+                (click)="OnEditClick()">
+            Edit
+        </button>
+
+        <!--Delete-->
+        <button class="btn btn-sm ml-1"
+                (click)="OnDeleteClick()">
+            <span *ngIf="answerView.answer.isDeleted">Undelete</span>
+            <span *ngIf="!answerView.answer.isDeleted">Delete</span>
+        </button>
+    </div>
+
+    <!--Answer editor-->
+    <div *ngIf="isUpdateAnswerVisible" class="row no-gutters">
+        <answer-editor-inline [answerId]="answerView.answer.id"
+                              (answerUpdated)="onAnswerUpdated($event)"
+                              (updateCancelled)="onUpdateCancelled()">
+        </answer-editor-inline>
+    </div>
+</div>
+

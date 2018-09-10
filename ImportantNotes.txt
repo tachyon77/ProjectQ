@@ -76,3 +76,7 @@ https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-preven
 	1. Use IIS to create CSR
 	2. Follow instructions from this site.
 	3. Use the DNS record method to verify ownership.
+18. Google-bot is not able to load the final html. It only sees "loading...". This makes
+this site unsuitable for being searchable through google. 
+
+One solution is to use Angular Universal. It does server side rendering (SSR).

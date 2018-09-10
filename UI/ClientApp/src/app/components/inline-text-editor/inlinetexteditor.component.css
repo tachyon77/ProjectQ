@@ -1,0 +1,13 @@
+﻿.content {
+    border: 1px solid #dfdfdf;
+    overflow: auto;
+    padding: 0.25em;
+    font-family: Georgia;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+

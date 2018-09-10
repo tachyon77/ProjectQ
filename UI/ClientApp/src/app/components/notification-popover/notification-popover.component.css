@@ -1,0 +1,66 @@
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.notification-content {
+    padding: 1em;
+    overflow-y: scroll;
+    height: auto;
+    max-height: 300px;
+}
+
+.arrow_box {
+    position: relative;
+    background: white;
+    border: 1px solid lightgray;
+    width: 400px;
+    height: auto;
+    border-radius:5px;
+}
+
+    .arrow_box:after, .arrow_box:before {
+        bottom: 100%;
+        left: 20%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .arrow_box:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-bottom-color: white;
+        border-width: 5px;
+        margin-left: -5px;
+    }
+
+    .arrow_box:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-bottom-color: lightgray;
+        border-width: 7px;
+        margin-left: -7px;
+    }
+
+
+a:link {
+    color: black;
+    font-weight: 400;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+    font-weight: 400;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}

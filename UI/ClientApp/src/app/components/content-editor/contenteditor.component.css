@@ -1,0 +1,28 @@
+﻿.content {
+    border: 1px solid #dfdfdf;
+    padding:1em;
+    overflow: auto;
+    min-height: 200px;
+}
+
+.content-toolbar {
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    border-right: 1px solid #dfdfdf;
+}
+
+.url-input {
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+
+.btn.btn-secondary{
+    background-color:white;
+    border:none;
+    color:#808080;
+}

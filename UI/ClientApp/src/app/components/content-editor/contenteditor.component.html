@@ -1,0 +1,169 @@
+﻿<div class="content-editor">
+    <div class="btn-toolbar content-toolbar justify-content-between"
+         role="toolbar" aria-label="">
+        <div class="btn-group mr-2" role="group" aria-label="">
+
+            <!--Hide/Redact content-->
+            <button *ngIf="enableRedaction"
+                    type="button"
+                    (click)="onRedact()"
+                    class="btn btn-secondary">
+                <s>Hide</s>
+            </button>
+
+            <!--Unhide content-->
+            <button *ngIf="enableRedaction"
+                    type="button"
+                    (click)="onUnRedact()"
+                    class="btn btn-secondary">
+                <em>Reveal</em>
+            </button>
+
+            <!--Format Bold-->
+            <button type="button"
+                    (click)="onBold()"
+                    class="btn btn-secondary">
+                <b>B</b>
+            </button>
+
+            <!--Format Italic-->
+            <button type="button"
+                    (click)="onItalic()"
+                    class="btn btn-secondary">
+                <i>I</i>
+            </button>
+
+            <!--Format Underline-->
+            <button type="button"
+                    (click)="onUnderline()"
+                    class="btn btn-secondary">
+                <u>U</u>
+            </button>
+
+            <!--Create Bullet list/ Unordered list-->
+            <button type="button"
+                    (click)="onUnorderedList()"
+                    class="btn btn-secondary">
+                <i class="fas fa-list-ul"></i>
+            </button>
+
+            <!--Create numbered list-->
+            <button type="button"
+                    (click)="onOrderedList()"
+                    class="btn btn-secondary">
+                <i class="fas fa-list-ol"></i>
+            </button>
+
+            <!--Insert Link-->
+            <button type="button"
+                    (click)="onShowInsertLink(insertLinkTemplate)"
+                    class="btn btn-secondary">
+                <i class="fas fa-link"></i>
+            </button>
+
+            <!--Insert Image-->
+            <button type="button"
+                    (click)="onShowInsertImage(insertImageTemplate)"
+                    class="btn btn-secondary">
+                <i class="far fa-image"></i>
+            </button>
+        </div>
+
+        <!--Insert Image-->
+        <!--div class="input-group">
+            <input #x type="text" class="form-control url-input"
+                   placeholder="Image URL..."
+                   [(ngModel)]="imgURL"
+                   aria-describedby="btnGroupAddon">
+            <div class="input-group-append url-input">
+                <button (click)="onInsertImage()"
+                        type="button"
+                        class="input-group-text">
+                    Insert
+                </button>
+            </div>
+
+        </div-->
+    </div>
+
+    <div #el contenteditable="true"
+         [focus]="emitFocusEvent"
+         (blur)="onBlur()"
+         class="content"
+         [innerHTML]="curContent"
+         (input)="newContent=el.innerHTML;onContentChange($event)">
+        {{curContent}}
+    </div>
+</div>
+
+<!--Modal Template: Insert Link-->
+<ng-template #insertLinkTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Insert a link</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="insertLinkModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="linkForm"
+              (ngSubmit)="onInsertLink(linkForm.value)">
+            <div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Link</label>
+                    <div class="col-sm-8">
+                        <input name="link"
+                               id="link"
+                               formControlName="link"
+                               type="text"
+                               class="form-control"
+                               placeholder="https://wwww.wikipedia.org">
+                    </div>
+                </div>
+            </div>
+            <button type="submit"
+                    [disabled]="!linkForm.valid"
+                    class="btn btn-primary">
+                Save
+            </button>
+        </form>
+    </div>
+</ng-template>
+
+<!--Modal Template: Insert Image-->
+<ng-template #insertImageTemplate>
+    <div class="modal-header">
+        <span class="modal-title pull-left">Insert an Image</span>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="insertImageModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Url</label>
+            <input type="text"
+                   [(ngModel)]="imageUrl"
+                   class="form-control col-sm-6"
+                   placeholder="image url">
+                
+            <div class="col-sm-2">
+                <input #fileInput
+                        type="file"
+                        hidden
+                        (change)="onImageFileSelected($event)">
+                <button type="button"
+                        class="btn btn-secondary"
+                        (click)="fileInput.click()">
+                    <i class="far fa-folder-open"></i> Browse
+                </button>
+            </div>
+        </div>
+        
+        <button type="button"
+                (click)="onInsertImage()"
+                class="btn btn-primary">
+            Insert
+        </button>
+    </div>
+</ng-template>
+
+

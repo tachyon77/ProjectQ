@@ -1,0 +1,54 @@
+﻿<form [formGroup]="form"
+      (ngSubmit)="onSubmit(form.value)"
+      class="answer-form">
+
+    <div class="form-row align-items-center">
+        <div class="col-md-3 my-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Price</div>
+                </div>
+                <input type="text"
+                       class="form-control"
+                       name="price"
+                       id="price"
+                       formControlName="price"
+                       placeholder="$">
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <input type="checkbox" 
+                   class="form-control"
+                   name="isAnonymous"
+                   id="isAnonymous"
+                   formControlName="isAnonymous"/> 
+            Anonymous
+        </div>
+    </div>
+    
+    <div class="content-editor-container">
+        <content-editor [content]="initialContent"
+                        [enableRedaction]="true"
+                        (contentChanged)="onContentChange($event)">
+        </content-editor>
+    </div>
+
+
+    <button type="submit"
+            [disabled]="!form.valid"
+            class="btn btn-primary btn-sm">
+        Submit
+    </button>
+    <button (click)="onSaveDraft(form.value)"
+            type="button"
+            class="btn btn-light no-border btn-sm ml-1">
+        Save Draft
+    </button>
+    <span class="draft-status">{{draftUpdate}}</span>
+</form>
+
+
+
+
+

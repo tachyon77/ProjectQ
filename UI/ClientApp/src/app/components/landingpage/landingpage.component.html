@@ -1,0 +1,33 @@
+<div class="landing-page">
+    <div class="company-name center-align">
+        Shared Mem
+    </div>
+    <div class="motto-text center-align">
+        Ask any question. No restrictions.
+    </div>
+
+    <div *ngIf="state==0" class="pb-4 center-align">
+        <button class="btn btn-sm btn-light"
+                (click)="onShowRegistration()">
+            Sign up
+        </button>
+    </div>
+
+    <div *ngIf="state==1" class="center-align">
+        <registration-form (registrationCompleted)="onRegistrationCompleted()">
+        </registration-form>
+    </div>
+
+    <div *ngIf="state==0">
+        <login-form (loggedIn)="onLoggedIn($event)"
+                    (showRegistration)="onShowRegistration()">
+        </login-form>
+    </div>
+
+    <div class="center-align pt-5 mt-5">
+        <button class="btn btn-sm btn-link">About</button>
+        <span class="separator-dot">.</span>
+        <button class="btn btn-sm btn-link">Terms</button>
+    </div>
+</div>
+

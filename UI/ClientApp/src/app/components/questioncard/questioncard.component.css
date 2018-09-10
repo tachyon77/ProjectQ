@@ -1,0 +1,41 @@
+﻿.card-body {
+    background-color: white;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+.card-text{
+    margin-top:1em;
+    font-family:Tahoma;
+}
+
+.card{
+    margin-bottom:1em;
+    margin-top:1em;
+}
+
+.card-link{
+    color:black;
+}
+
+.asked-by{
+    font-size:small;
+    font-family:Verdana;
+    color:GrayText;
+
+}
+.card-title {
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: large;
+}
+
+.previewQuestion {
+    margin-bottom:1em;
+    font-size:smaller;
+    color:#555555;
+    display:block;
+    max-height:3em;
+    overflow: hidden;
+}

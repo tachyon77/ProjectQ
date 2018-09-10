@@ -1,0 +1,10 @@
+﻿<div #el contenteditable="true"
+        [focus]="emitFocusEvent"
+        class="content"
+        [innerHTML]="curContent"
+        (input)="newContent=el.innerHTML;onContentChange($event)">
+    {{curContent}}
+</div>
+
+
+
