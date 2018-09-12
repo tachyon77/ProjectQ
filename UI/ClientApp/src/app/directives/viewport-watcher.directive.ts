@@ -1,6 +1,6 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output, PLATFORM_ID } from '@angular/core';
+﻿import { AfterViewInit, Directive, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Subscription } from 'rxjs-compat/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 import { InViewportConfig, ViewportWatcherService } from './viewport-watcher.service';
 

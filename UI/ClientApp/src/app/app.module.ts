@@ -1,9 +1,9 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
-import { AppRoutingModule }     from './app-routing.module';
-
+// Angular modules
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 // Custom Directives
 import { FocusDirective } from './directives/focus.directive'
@@ -56,26 +56,10 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 
-
-import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
-
 @NgModule({
   entryComponents: [
     CredentialsReadonlyComponent,
     CredentialsEditorComponent,
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'sharedmem-front-end' }),
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AlertModule.forRoot(),
-    ModalModule.forRoot(),
-    PopoverModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -125,14 +109,27 @@ import { isPlatformBrowser } from '@angular/common';
     RequestInviteService,
     ViewportWatcherService,
   ],
-  bootstrap: [ AppComponent ]
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AlertModule.forRoot(),
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'landing-page', component: LandingPageComponent },
+      { path: 'profile/:id', component: UserProfileComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'add-question-form', component: AddQuestionFormComponent },
+      { path: 'question-detail/:id', component: QuestionDetailComponent },
+      { path: 'answer-page/:id', component: AnswerPageComponent },
+      { path: 'request-invite', component: RequestInviteComponent },
+      { path: '**', redirectTo: 'home' },
+    ])
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(APP_ID) private appId: string) {
-    const platform = isPlatformBrowser(platformId) ?
-      'in the browser' : 'on the server';
-    console.log(`Running ${platform} with appId=${appId}`);
-  }
-}
+export class AppModule { }

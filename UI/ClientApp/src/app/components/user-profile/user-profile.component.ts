@@ -1,8 +1,6 @@
 import { Component, OnInit, TemplateRef, Inject, Optional } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { APP_BASE_HREF } from '@angular/common';
-
 import { ApplicationUserService, Credentials, Employment, Education } from '../../services/application-user.service';
 import { CredentialsReadonlyComponent } from '../../components/credentials-readonly/credentials-readonly.component'
 import { CredentialsEditorComponent } from '../../components/credentials-editor/credentials-editor.component'
@@ -10,6 +8,7 @@ import { CredentialsEditorComponent } from '../../components/credentials-editor/
 import { User } from '../../models/User';
 import { ImageStoreService } from '../../services/image-store.service';
 import { Observable } from 'rxjs';
+import { APP_BASE_HREF } from '@angular/common';
 
 @Component({
     selector: 'user-profile',
@@ -184,12 +183,12 @@ export class UserProfileComponent implements OnInit {
 
 
     constructor(
-        @Optional() @Inject(APP_BASE_HREF) origin: string,
+      @Optional() @Inject(APP_BASE_HREF) baseUrl: string,
         private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
         private applicationUserService: ApplicationUserService,
         private imageStoreService: ImageStoreService,
     ) {
-      this.baseUrl = origin;
+      this.baseUrl = baseUrl;
     }
 }

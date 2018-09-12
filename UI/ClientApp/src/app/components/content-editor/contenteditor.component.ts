@@ -54,15 +54,15 @@ export class ContentEditorComponent implements AfterViewInit{
 
     baseUrl: string | undefined;
 
-    constructor(
-        @Optional() @Inject(APP_BASE_HREF) origin: string,
+  constructor(
+    @Optional() @Inject(APP_BASE_HREF) baseUrl: string,
         private sanitizer: DomSanitizer,
         private formBuilder: FormBuilder,
         private modalService: BsModalService,
         private imageStoreService: ImageStoreService,
     ) {
-      this.enableRedaction = false;
-      this.baseUrl = origin;
+        this.enableRedaction = false;
+        this.baseUrl = baseUrl;
     }
 
     onShowInsertLink(template: TemplateRef<any>) {

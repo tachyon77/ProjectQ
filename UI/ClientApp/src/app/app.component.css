@@ -1,14 +1,13 @@
 @media (max-width: 767px) {
-  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-  .body-content {
-    padding-top: 50px;
-  }
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+        padding-top: 50px;
+    }
 }
 
-.no-padding {
-  padding: 0px;
+.no-padding{
+    padding:0px;
 }
-
 .body-content {
-  margin-top: 60px;
+    margin-top: 60px;
 }

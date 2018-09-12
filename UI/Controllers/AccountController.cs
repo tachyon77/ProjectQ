@@ -49,30 +49,15 @@ namespace ProjectQ.FrontEnd.Controllers
         async public Task<IActionResult>
            GetUser()
         {
-			User user;
+            if (User.Identity.IsAuthenticated)
+            {
+                var aspUser = await _signInManager.UserManager.GetUserAsync(User);
+                var user = await _userManager.FindAsync(aspUser.UserId);
+                return Ok(user);
+            }
 
-			if (!User.Identity.IsAuthenticated)
-			{
-				var signInAnonymous = await _signInManager
-					.PasswordSignInAsync("anonymous@sharedmem.com", "anonymous", false, false);
-				if (!signInAnonymous.Succeeded)
-				{
-					throw new Exception("Something went wrong.");
-				}
-				else
-				{
-					var appUser = _signInManager.UserManager.Users.FirstOrDefault(x => x.Email.Equals("anonymous@sharedmem.com"));
-					user = await _userManager.FindAsync(appUser.UserId);
-				}
-			}
-			else
-			{
-				var aspUser = await _signInManager.UserManager.GetUserAsync(User);
-				user = await _userManager.FindAsync(aspUser.UserId);				
-			}
-
-			return Ok(user);
-		}
+            return NotFound();
+        }
 
 
         [HttpPost]
