@@ -80,3 +80,11 @@ https://stackoverflow.com/questions/20504846/why-is-it-common-to-put-csrf-preven
 this site unsuitable for being searchable through google. 
 
 One solution is to use Angular Universal. It does server side rendering (SSR).
+
+19. Copying an Angular 6 app into solution didn't work initially because:
+		ClientApp/Dist had an extra dir like this:
+		ClientApp/Dist/ClientApp/....
+
+		It should be ClientApp/dist/...
+
+	Needed to change output dir in angular.json
