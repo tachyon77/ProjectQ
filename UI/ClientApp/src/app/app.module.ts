@@ -49,6 +49,8 @@ import { RedactorService } from './services/redactor.service'
 import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { RequestInviteComponent } from './components/request-invite/request-invite.component';
 import { RequestInviteService } from './services/request-invite.service';
+import { TextSearchComponent } from './components/text-search/textsearch.component';
+import { TextSearchService } from './services/textsearch.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserQuestionsComponent } from './components/user-questions/user-questions.component';
 import { ViewportWatcherService } from './directives/viewport-watcher.service';
@@ -86,29 +88,31 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
     QuestionEditorComponent,
     ReadableDatePipe,
     RegistrationFormComponent,
-    RequestInviteComponent,
+      RequestInviteComponent,
+      TextSearchComponent,
     UserProfileComponent,
     UserQuestionsComponent,
     ViewPortWatcherDirective,
   ],
-  providers: [
-    ApplicationUserService,
-    AnswerService,
-    AnswerDraftService,
-    AnswerPaymentService,
-    AnswerRatingService,
-    ImageStoreService,
-    IdentityService,
-    NotificationService,
-    PurchasedAnswerService,
-    QuestionService,
-    QuestionViewService,
-    QuestionFollowerService,
-    QuestionTopicService,
-    RedactorService,
-    RequestInviteService,
-    ViewportWatcherService,
-  ],
+    providers: [
+        ApplicationUserService,
+        AnswerService,
+        AnswerDraftService,
+        AnswerPaymentService,
+        AnswerRatingService,
+        ImageStoreService,
+        IdentityService,
+        NotificationService,
+        PurchasedAnswerService,
+        QuestionService,
+        QuestionViewService,
+        QuestionFollowerService,
+        QuestionTopicService,
+        RedactorService,
+        RequestInviteService,
+        TextSearchService,
+        ViewportWatcherService,
+    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
