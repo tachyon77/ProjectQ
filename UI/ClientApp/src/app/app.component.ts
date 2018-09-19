@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 
 import { User } from './models/User';
-import { IdentityService } from './services/identity.service';
+import { IdentityService, LoginCredential } from './services/identity.service';
 import { Router } from '@angular/router';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
     selector: 'app-root',
+    providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
@@ -14,6 +16,7 @@ export class AppComponent {
     isLoggedIn: boolean = false;
 
     constructor(
+        private location: Location,
         private identityService: IdentityService,
         private router: Router) {
 
@@ -38,7 +41,8 @@ export class AppComponent {
         );
     }
 
-    ngOnInit() {
+
+    loadUser() {
         this.identityService.getLoggedInUser().subscribe(
             (user: User) => {
                 if (user) {
@@ -47,10 +51,34 @@ export class AppComponent {
                 } else {
                     this.isLoggedIn = false;
                 }
-            }, 
+            },
             error => {
                 // not supposed to come here. Error is already caught in service layer.
             }
         );
+    }
+
+    ngOnInit() {
+        if (this.location.path() == '/anonymous') {
+            var loginForm = new LoginCredential();
+            loginForm.Email = "anonymous@sharedmem.com";
+            loginForm.Password = "anonymous";
+
+            this.identityService.login(loginForm).subscribe(
+                (user: User) => {
+                    if (user) {
+                        this.loadUser();
+                    } else {
+                        alert("Login Failed.");
+                    }
+                },
+                error => {
+                    alert("Login failed: " + error);
+                }
+            );
+           
+        } else {
+            this.loadUser();
+        }
     }
 }
