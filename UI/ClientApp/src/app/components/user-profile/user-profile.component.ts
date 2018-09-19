@@ -8,7 +8,6 @@ import { CredentialsEditorComponent } from '../../components/credentials-editor/
 import { User } from '../../models/User';
 import { ImageStoreService } from '../../services/image-store.service';
 import { Observable } from 'rxjs';
-import { APP_BASE_HREF } from '@angular/common';
 
 @Component({
     selector: 'user-profile',
@@ -82,7 +81,7 @@ export class UserProfileComponent implements OnInit {
             } else {
                 this.upload().subscribe(
                     (imagePath) => {
-                      this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
+                      this.imageUrl = "/api/imagestore/" + imagePath;
                       this.updatePicture();
                       this.changePictureModal!.hide();
                 });
@@ -183,12 +182,10 @@ export class UserProfileComponent implements OnInit {
 
 
     constructor(
-      @Optional() @Inject(APP_BASE_HREF) baseUrl: string,
         private modalService: BsModalService,
         private activatedRoute: ActivatedRoute,
         private applicationUserService: ApplicationUserService,
         private imageStoreService: ImageStoreService,
     ) {
-      this.baseUrl = baseUrl;
     }
 }
