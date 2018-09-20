@@ -140,7 +140,7 @@ export class ContentEditorComponent implements AfterViewInit{
             } else {
                 this.upload().subscribe(
                     (imagePath) => {
-                        this.imageUrl = this.baseUrl!.concat("/api/imagestore/").concat(imagePath);
+                        this.imageUrl = "/api/imagestore/" + imagePath;
                         var html = "<img class='img-fluid' src='" + this.imageUrl + "'>";
                         document.execCommand("insertHTML", false, html);
                         // Guarded by ngIf
