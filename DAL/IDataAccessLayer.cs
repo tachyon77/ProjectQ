@@ -28,7 +28,7 @@ namespace ProjectQ.DAL
     {
         Task AddFollowerAsync(QuestionFollower questionFollower);
         Task RemoveFollowerAsync(int questionId, int userId);
-        HashSet<int> GetFollowersForQuestion(int questionId);
+        IEnumerable<User> GetFollowersForQuestion(int questionId);
 
     }
 

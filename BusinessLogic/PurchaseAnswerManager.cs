@@ -46,8 +46,9 @@ namespace ProjectQ.BusinessLogic
                 .QuestionRepository.FindAsync(answer.QuestionId);
 
             var user = await _unitOfWork.UserRepository.FindAsync(userId);
+			var questionAuthor = await _unitOfWork.UserRepository.FindAsync(question.UserId);
 
-            var now = DateTime.UtcNow;
+			var now = DateTime.UtcNow;
             var protectedContent = await _unitOfWork.AnswerRepository.FindProtectedAsync(answerId);
 
             var purchasedAnswer = new PurchasedAnswer()
@@ -65,20 +66,22 @@ namespace ProjectQ.BusinessLogic
                 _unitOfWork.QuestionFollowerRepository
                 .GetFollowersForQuestion(question.Id);
 
-            followers.Add(question.UserId);
+			var notificationReceivers = new List<User>(followers);
+			notificationReceivers.Add(questionAuthor);
 
-            var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
+			var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
 
             var notifications = new List<Notification>();
 
-            foreach(var follower in followers)
+            foreach(var notificationReceiver in notificationReceivers)
             {
                 var notification =
                     new Notification()
                     {
                         IsSeen = false,
                         OriginDate = answer.OriginDate,
-                        UserId = follower,
+                        UserId = notificationReceiver.Id,
+						User = notificationReceiver,
 
                         EventDescription =
                             $"{user.Name} purchased an answer written by " +

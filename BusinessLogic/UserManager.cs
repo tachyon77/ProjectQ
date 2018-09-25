@@ -59,11 +59,12 @@ namespace ProjectQ.BusinessLogic
             return uniqueName;
         }
 
-        async Task<User> IUserManager.AddAsync(string name)
+        async Task<User> IUserManager.AddAsync(string name, string email)
         {
             var newUser = new User()
             {
                 Name = name,
+				Email = email,
                 UniqueName = computeUniqueName(name),
                 Introduction = "",
             };

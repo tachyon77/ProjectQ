@@ -5,6 +5,11 @@ using ProjectQ.Model;
 
 namespace ProjectQ.BusinessLogic
 {
+	public interface ISearchManager
+	{
+		Task<IEnumerable<SearchResult>> SearchAsync(string searchPhrase);
+	}
+
     public interface IBlobManager
     {
         Task<string> AddAsync(string container, string blobName, Stream blobStream);
@@ -89,7 +94,7 @@ namespace ProjectQ.BusinessLogic
 
     public interface IUserManager
     {
-        Task<User> AddAsync(string name);
+        Task<User> AddAsync(string name, string email);
         Task<User> FindAsync(int id);
         User FindByUniqueName(string uniqueName);
         Task UpdatePictureUrlAsync(int id, string url);

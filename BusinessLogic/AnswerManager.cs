@@ -46,9 +46,10 @@ namespace ProjectQ.BusinessLogic
                 _unitOfWork
                 .QuestionRepository.FindAsync(answer.QuestionId);
 
-            var user = await _unitOfWork.UserRepository.FindAsync(userId);
+            var answerAuthor = await _unitOfWork.UserRepository.FindAsync(userId);
+			var questionAuthor = await _unitOfWork.UserRepository.FindAsync(question.UserId);
 
-            var now = DateTime.UtcNow;
+			var now = DateTime.UtcNow;
             answer.UserId = userId;
             answer.OriginDate = now;
 
@@ -62,7 +63,7 @@ namespace ProjectQ.BusinessLogic
                         HtmlContent = answer.ProtectedAnswerContent.HtmlContent,
                         OriginDate = now,
                         QuestionId = question.Id,
-                        UserId = user.Id,
+                        UserId = answerAuthor.Id,
                         ExpiryDate = now,
                         Price = answer.Price
                     },
@@ -73,23 +74,25 @@ namespace ProjectQ.BusinessLogic
                 _unitOfWork.QuestionFollowerRepository
                 .GetFollowersForQuestion(question.Id);
 
-            followers.Add(question.UserId);
+			var notificationReceivers = new List<User>(followers);
+			notificationReceivers.Add(questionAuthor);
 
             var notificationLength = question.Title.Length > 26 ? 25 : question.Title.Length;
 
             var notifications = new List<Notification>();
 
-            foreach(var follower in followers)
+            foreach(var notificationReceiver in notificationReceivers)
             {
                 var notification =
                     new Notification()
                     {
                         IsSeen = false,
                         OriginDate = answer.OriginDate,
-                        UserId = follower,
+                        UserId = notificationReceiver.Id,
+						User = notificationReceiver,
 
                         EventDescription =
-                            (answer.IsAnonymous? "Anonymous" : user.Name) + " wrote an answer for \""
+                            (answer.IsAnonymous? "Anonymous" : answerAuthor.Name) + " wrote an answer for \""
                             + question.Title.Substring(0, notificationLength)
                             + " ...\"",
                         Link = "/question-detail/" + question.Id
@@ -107,7 +110,7 @@ namespace ProjectQ.BusinessLogic
 				{
 					_notificationSender.EnqueueSendRequest(x);
 					_emailSender.SendEmailAsync(
-						"tachyon77@gmail.com", 
+						x.User.Email, 
 						"New answer posted", 
 						$"Question link: {x.EventDescription}");
 				}

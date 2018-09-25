@@ -40,15 +40,16 @@ namespace ProjectQ.DAL.EntityFramework
             }            
         }
 
-        HashSet<int> IQuestionFollowerRepository
+        IEnumerable<User> IQuestionFollowerRepository
             .GetFollowersForQuestion(int questionId)
         {
 
-            var followers = _context.QuestionFollowers
-                .Where(x => x.IsFollowing && x.QuestionId.Equals(questionId))
-                .Select(x => x.UserId);
+			var followers = from follower in _context.QuestionFollowers
+							join user in _context.Users on follower.UserId equals user.Id
+							where follower.IsFollowing && follower.QuestionId == questionId
+							select user;
 
-            return followers.ToHashSet();
+            return followers.Distinct();
         }
 
         async Task IQuestionFollowerRepository.RemoveFollowerAsync(
