@@ -95,7 +95,7 @@ namespace ProjectQ.BusinessLogic
                             (answer.IsAnonymous? "Anonymous" : answerAuthor.Name) + " wrote an answer for \""
                             + question.Title.Substring(0, notificationLength)
                             + " ...\"",
-                        Link = "/question-detail/" + question.Id
+                        Link = "https://www.sharedmem.com/question-detail/" + question.Id
                     };
 
                 notifications.Add(notification);
@@ -112,7 +112,7 @@ namespace ProjectQ.BusinessLogic
 					_emailSender.SendEmailAsync(
 						x.User.Email, 
 						"New answer posted", 
-						$"Question link: {x.EventDescription}");
+						$"Question link: {x.Link}");
 				}
 			);
 
