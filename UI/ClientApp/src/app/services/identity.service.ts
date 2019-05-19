@@ -10,12 +10,18 @@ import { User } from '../models/User';
 export class LoginCredential {
     Email!: string;
     Password!: string;
+    ConfirmPassword!: string;
 }
 
 export class RegistrationForm {
     Email!: string;
     Password!: string;
     ConfirmEmailCode!: string;
+}
+
+export class RegistrationRequestReponse {
+    isSucceeded: boolean;
+    errorCode: string;
 }
 
 

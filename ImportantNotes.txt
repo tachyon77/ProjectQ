@@ -1,6 +1,9 @@
 1. Run this to make sure node is building successfully. Otherwise deployment will fail even though it runs fine locally.
 node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod
 
+2. If there is any error in the typescript, you will not get any compile error. And it doesn't matter 
+if that page is loaded or not, the app will simply fail to launch.
+
 2. Why am I using EF model classes directly to send data to the front end?
 Without doing so, I will have to recreate all query results by converting each object in a 
 collection to the new type. It will make all queries slower for the benefit of only few 
@@ -88,3 +91,5 @@ One solution is to use Angular Universal. It does server side rendering (SSR).
 		It should be ClientApp/dist/...
 
 	Needed to change output dir in angular.json
+20. Identifying topics in a document is called Topic Modeling:
+https://medium.com/mlreview/topic-modeling-with-scikit-learn-e80d33668730
