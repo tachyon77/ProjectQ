@@ -56,6 +56,8 @@ export class RegistrationFormComponent {
             .subscribe((result: RegistrationRequestReponse) => {
                 if (result.isSucceeded == true) {
                     this.isEmailSent = true;
+                    alert('Please check your email to confirm registration');
+                    this.registrationCompleted.emit();
                 }
                 else {
                     alert(result.errorCode);

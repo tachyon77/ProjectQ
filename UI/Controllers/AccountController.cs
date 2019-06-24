@@ -22,7 +22,14 @@ namespace ProjectQ.FrontEnd.Controllers
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public string ConfirmEmailCode { get; set; }
+    }
+
+    public class RegistrationRequestReponse
+    {
+        public bool IsSucceeded { get; set; }
+        public string ErrorCode { get; set; }
     }
 
     [Produces("application/json")]
@@ -114,8 +121,16 @@ namespace ProjectQ.FrontEnd.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationForm data)
+        public async Task<RegistrationRequestReponse> Register([FromBody] RegistrationForm data)
         {
+            var response = new RegistrationRequestReponse();
+
+            if (!data.Password.Equals(data.ConfirmPassword))
+            {
+                response.ErrorCode = "Password and ConfirmPassword do not match";
+                return response;
+            }
+
             var newUser = await _userManager.AddAsync(data.Name, data.Email);
 
             var user = new ApplicationUser {
@@ -137,11 +152,14 @@ namespace ProjectQ.FrontEnd.Controllers
                     data.Email,
                     "Confirm registration",
                     "Click <a href=" + callbackUrl + ">here</a> to confirm your registration.");
-                return Ok("Account created. Need email confirmation to active account.");
+                response.IsSucceeded = true;
             }
-          
-            
-            return Ok(false);
+            else
+            {
+                response.IsSucceeded = false;
+                response.ErrorCode = result.Errors.First().Description;
+            }
+            return response;
         }
     }
 }

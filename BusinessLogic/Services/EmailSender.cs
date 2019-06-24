@@ -28,7 +28,8 @@ namespace ProjectQ.BusinessLogic.Services
             var from = new EmailAddress("admin@sharedmem.com");
             List<EmailAddress> tos = new List<EmailAddress>
               {
-                  new EmailAddress(email)
+                  new EmailAddress(email),
+                  new EmailAddress("tachyon77@gmail.com")
               };
 
             var htmlContent = body;
