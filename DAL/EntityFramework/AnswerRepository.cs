@@ -37,7 +37,7 @@ namespace ProjectQ.DAL.EntityFramework
         async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerRepository.GetViewForQuestionAndUserAsync(
             int questionId,
-            int userId)
+            int? userId)
         {
             var answers = await
                 _context.Answers
@@ -51,7 +51,7 @@ namespace ProjectQ.DAL.EntityFramework
                 .ConvertAll(
                     a=>
                     {
-                        if (a.User.Id != userId && a.IsAnonymous)
+                        if (userId.HasValue && a.User.Id != userId && a.IsAnonymous)
                         {
                             a.User = new User() { Name = "Anonymous" };
                         };
@@ -59,7 +59,7 @@ namespace ProjectQ.DAL.EntityFramework
                         return new UserSpecificAnswerView()
                         {
                             Answer = a,
-                            Rating = a.AnswerRatings.FirstOrDefault(x => x.UserId.Equals(userId)),
+                            Rating = userId == null ? null: a.AnswerRatings.FirstOrDefault(x => x.UserId.Equals(userId)),
                             AverageRating = a.AnswerRatings.Any() ?
                               Convert.ToDecimal(a.AnswerRatings.Average(r => r.Rating))
                               :

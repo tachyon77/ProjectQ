@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.Controllers
 {
@@ -31,23 +32,25 @@ namespace FrontEnd.Controllers
         }
         // GET: api/Answers
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Answer> GetAnswers()
         {
             throw new NotImplementedException();
         }
 
         [HttpGet("ForQuestion/{questionId}")]
-        public async Task<IEnumerable<UserSpecificAnswerView>> 
-            GetForQuestion([FromRoute] int questionId)
+        [AllowAnonymous]
+        public async Task<IEnumerable<UserSpecificAnswerView>>
+            GetForQuestionAndUser([FromRoute] int questionId)
         {
-            var userId = (await _userManager.GetUserAsync(User)).UserId;
             return await _answerManager.GetForQuestionAndUserAsync(
-                questionId, userId);
+                questionId, (await _userManager.GetUserAsync(User))?.UserId);
         }
 
 
         // GET: api/Answers/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAnswer([FromRoute] int id)
         {
             if (!ModelState.IsValid)

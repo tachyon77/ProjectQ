@@ -54,7 +54,7 @@ namespace ProjectQ.BusinessLogic
         }
 
         async Task<IEnumerable<UserSpecificQuestionPreview>> IQuestionManager.GetAllForUserAsync(
-            int userId
+            int? userId
             )
         {
             var questionPreviews = (await _unitOfWork
@@ -66,7 +66,7 @@ namespace ProjectQ.BusinessLogic
             {
                 if (questionPreview.Question.IsAnonymous)
                 {
-                    if (questionPreview.Question.User.Id == userId)
+                    if (userId.HasValue && questionPreview.Question.User.Id == userId)
                     {
                         questionPreview.Question.User = new User() { Name = "You [Anonymously]" };
                     }

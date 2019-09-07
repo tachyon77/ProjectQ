@@ -20,8 +20,12 @@ namespace ProjectQ.DAL.Graph
         private static GremlinServer _server;
         private static GremlinClient _client;
 
+		public DateTime now;
+
         public CosmosGraph()
         {
+			now = DateTime.Now;
+
             _server = new GremlinServer(
                 hostname, port, enableSsl: true,
                 username: "/dbs/" + database + "/colls/" + collection,
@@ -34,9 +38,37 @@ namespace ProjectQ.DAL.Graph
 
         }
 
-        async Task<IEnumerable<Question>> IGraphQueries.FindRelatedQuestionsAsync(int questionId)
+		public DateTime When()
+		{
+			return now;
+		}
+
+        async public void HelloWorld(int questionId)
         {
-            string query = "";
+			Dictionary<string, string> gremlinQueries = new Dictionary<string, string>
+			{
+				{ "Cleanup",        "g.V().drop()" },
+				{ "AddVertex 1",    "g.addV('person').property('id', 'Mahbub').property('firstName', 'Mahbub').property('age', 38)" },
+				{ "AddVertex 2",    "g.addV('person').property('id', 'mary').property('firstName', 'Mary').property('lastName', 'Andersen').property('age', 39)" },
+				{ "AddVertex 3",    "g.addV('person').property('id', 'ben').property('firstName', 'Ben').property('lastName', 'Miller')" },
+				{ "AddVertex 4",    "g.addV('person').property('id', 'robin').property('firstName', 'Robin').property('lastName', 'Wakefield')" },
+				{ "AddEdge 1",      "g.V('thomas').addE('knows').to(g.V('mary'))" },
+				{ "AddEdge 2",      "g.V('thomas').addE('knows').to(g.V('ben'))" },
+				{ "AddEdge 3",      "g.V('ben').addE('knows').to(g.V('robin'))" },
+				{ "UpdateVertex",   "g.V('thomas').property('age', 44)" },
+				{ "CountVertices",  "g.V().count()" },
+				{ "Filter Range",   "g.V().hasLabel('person').has('age', gt(40))" },
+				{ "Project",        "g.V().hasLabel('person').values('firstName')" },
+				{ "Sort",           "g.V().hasLabel('person').order().by('firstName', decr)" },
+				{ "Traverse",       "g.V('thomas').out('knows').hasLabel('person')" },
+				{ "Traverse 2x",    "g.V('thomas').out('knows').hasLabel('person').out('knows').hasLabel('person')" },
+				{ "Loop",           "g.V('thomas').repeat(out()).until(has('id', 'robin')).path()" },
+				{ "DropEdge",       "g.V('thomas').outE('knows').where(inV().has('id', 'mary')).drop()" },
+				{ "CountEdges",     "g.E().count()" },
+				{ "DropVertex",     "g.V('thomas').drop()" },
+			};
+
+			string query = gremlinQueries["Cleanup"];
             
             var result = await _client.SubmitAsync<dynamic>(query);
 
@@ -46,10 +78,11 @@ namespace ProjectQ.DAL.Graph
                 string output = JsonConvert.SerializeObject(item);
                 Console.WriteLine(String.Format("\tResult:\n\t{0}", output));
             }
-            
-
-            throw new NotImplementedException();
         }
 
-    }
+		async Task<IEnumerable<Question>> IGraphQueries.FindRelatedQuestionsAsync(int questionId)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

@@ -38,7 +38,7 @@ namespace ProjectQ.BusinessLogic
         Task UpdateAsync(int userId, Answer answer);
         Task DeleteAsync(int userId, int answerId);
         Task<IEnumerable<UserSpecificAnswerView>> GetForQuestionAndUserAsync(
-            int questionId, int userId);
+            int questionId, int? userId);
         Task<Answer> FindAsync(int id);
         //Task<ProtectedAnswerContent> FindProtectedAsync(int userId, int answerId);
         bool AnswerExists(int id);
@@ -117,7 +117,7 @@ namespace ProjectQ.BusinessLogic
     {
         Task AddAsync(Question question, int userId);
         Task UpdateAsync(int userId, Question question);
-        Task<IEnumerable<UserSpecificQuestionPreview>> GetAllForUserAsync(int userId);
+        Task<IEnumerable<UserSpecificQuestionPreview>> GetAllForUserAsync(int? userId);
         Task<IEnumerable<Question>> GetAllAskedByAsync(int userId);
         Task<Question> FindAsync(int id);
         bool QuestionExists(int id);

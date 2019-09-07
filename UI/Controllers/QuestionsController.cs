@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectQ.Model;
 using ProjectQ.BusinessLogic;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.Controllers
 {
     [Produces("application/json")]
     [Route("api/Questions")]
+    
     public class QuestionsController : Controller
     {
         private readonly UserManager<ApplicationUser> _aspUserManager;
@@ -33,10 +31,11 @@ namespace FrontEnd.Controllers
         }
         // GET: api/Questions
         [HttpGet]
+        [AllowAnonymous]
         async public Task<IEnumerable<UserSpecificQuestionPreview>> GetQuestions()
         {
             return  await _questionManager.GetAllForUserAsync(
-                (await _aspUserManager.GetUserAsync(User)).UserId );
+                (await _aspUserManager.GetUserAsync(User))?.UserId );
         }
 
         // GET: api/questions/my
@@ -50,6 +49,7 @@ namespace FrontEnd.Controllers
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetQuestion([FromRoute] int id)
         {
             if (!ModelState.IsValid)

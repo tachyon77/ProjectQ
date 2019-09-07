@@ -6,6 +6,7 @@ namespace ProjectQ.DAL
 {
     public interface IGraphQueries
     {
+		System.DateTime When();
         Task<IEnumerable<Question>> FindRelatedQuestionsAsync(int questionId);
     }
 }

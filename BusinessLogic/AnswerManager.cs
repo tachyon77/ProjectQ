@@ -156,7 +156,7 @@ namespace ProjectQ.BusinessLogic
 
         async Task<IEnumerable<UserSpecificAnswerView>> 
             IAnswerManager.GetForQuestionAndUserAsync(
-            int questionId, int userId)
+            int questionId, int? userId)
         {
             return await
                 _unitOfWork
@@ -185,6 +185,24 @@ namespace ProjectQ.BusinessLogic
             
         }*/
 
+        Task IAnswerManager.DeleteAsync(int userId, int answerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestionAsync(int questionId)
+        {
+            return await
+                _unitOfWork
+                .AnswerRepository
+                .GetViewForQuestionAsync(questionId);
+        }
+
+        Task<Answer> IAnswerManager.FindAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Private methods
@@ -193,7 +211,7 @@ namespace ProjectQ.BusinessLogic
         {
             draft.HtmlContent = answer.ProtectedAnswerContent.HtmlContent;
             draft.Price = answer.Price;
-        } 
+        }       
 
         #endregion
     }

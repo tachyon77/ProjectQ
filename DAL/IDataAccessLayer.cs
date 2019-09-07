@@ -49,9 +49,10 @@ namespace ProjectQ.DAL
 
     public interface IQuestionRepository
     {
+		System.DateTime When();
         Task AddAsync(Question question);
         Task UpdateAsync(Question question);
-        Task<IEnumerable<UserSpecificQuestionPreview>> GetAllForUserAsync(int userId);
+        Task<IEnumerable<UserSpecificQuestionPreview>> GetAllForUserAsync(int? userId);
         Task<IEnumerable<Question>> GetAllAskedByAsync(int userId);
 
         Task<IEnumerable<Question>> GetRelatedQuestions(int questionId);
@@ -111,7 +112,7 @@ namespace ProjectQ.DAL
         Task DeleteAsync(int answerId);
         Task<IEnumerable<UserSpecificAnswerView>> GetViewForQuestionAndUserAsync(
             int questionId,
-            int userId);
+            int? userId);
         //Task<Answer> GetAnswerWrittenByUserForQuestion(int userId, int questionId);
         Task<Answer> FindAsync(int id);
         Task<ProtectedAnswerContent> FindProtectedAsync(int answerId);

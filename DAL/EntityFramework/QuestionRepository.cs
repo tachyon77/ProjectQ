@@ -19,7 +19,14 @@ namespace ProjectQ.DAL.EntityFramework
             IGraphQueries graph)
         {
             _context = context;
+			_graph = graph;
         }
+
+		DateTime IQuestionRepository.When()
+		{
+			return _graph.When();
+		}
+
         async Task IQuestionRepository.AddAsync(Question question)
         {
             await _context.Questions.AddAsync(question);
@@ -36,7 +43,7 @@ namespace ProjectQ.DAL.EntityFramework
         }
 
         async Task<IEnumerable<UserSpecificQuestionPreview>> 
-            IQuestionRepository.GetAllForUserAsync(int userId)
+            IQuestionRepository.GetAllForUserAsync(int? userId)
         {
             var questionPreviews =
                 from question in 
@@ -44,7 +51,7 @@ namespace ProjectQ.DAL.EntityFramework
                     .Include(q => q.User)
                 select new UserSpecificQuestionPreview()
                 {
-                    IsFollowing = question.QuestionFollowers.Any(
+                    IsFollowing = userId.HasValue && question.QuestionFollowers.Any(
                             x => x.IsFollowing && x.UserId == userId),
                     Question = question,
                     PreviewAnswer = question.Answers
@@ -80,8 +87,7 @@ namespace ProjectQ.DAL.EntityFramework
 
         async Task<IEnumerable<Question>> IQuestionRepository.GetRelatedQuestions(int questionId)
         {
-            throw new NotImplementedException();
-            //return await _graph.FindRelatedQuestionsAsync(questionId);
+			return await _graph.FindRelatedQuestionsAsync(questionId);
         }
     }
 }
