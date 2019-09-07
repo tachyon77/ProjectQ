@@ -190,14 +190,6 @@ namespace ProjectQ.BusinessLogic
             throw new NotImplementedException();
         }
 
-        async Task<IEnumerable<Answer>> IAnswerManager.GetForQuestionAsync(int questionId)
-        {
-            return await
-                _unitOfWork
-                .AnswerRepository
-                .GetViewForQuestionAsync(questionId);
-        }
-
         Task<Answer> IAnswerManager.FindAsync(int id)
         {
             throw new NotImplementedException();
