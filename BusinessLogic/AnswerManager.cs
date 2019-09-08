@@ -141,7 +141,7 @@ namespace ProjectQ.BusinessLogic
             await _unitOfWork.SaveAsync();
         }
 
-        async public Task DeleteAsync(int userId, int answerId)
+        async Task IAnswerManager.DeleteAsync(int userId, int answerId)
         {
             var dbRecord = await _unitOfWork.AnswerRepository.FindAsync(answerId);
             if (dbRecord.UserId != userId)
@@ -164,7 +164,7 @@ namespace ProjectQ.BusinessLogic
                 .GetViewForQuestionAndUserAsync(questionId, userId);
         }
 
-        async public Task<Answer> FindAsync(int id)
+        async Task<Answer> IAnswerManager.FindAsync(int id)
         {
             return await _unitOfWork.AnswerRepository.FindAsync(id);
         }
@@ -184,16 +184,6 @@ namespace ProjectQ.BusinessLogic
             throw new Exception("Unauthorized");
             
         }*/
-
-        Task IAnswerManager.DeleteAsync(int userId, int answerId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Answer> IAnswerManager.FindAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
 
