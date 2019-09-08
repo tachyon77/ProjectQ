@@ -1,8 +1,9 @@
 <div class='container-fluid no-padding'>
-    <div *ngIf="isLoggedIn">
+    <div *ngIf="isLoggedIn || continueWithoutLogin">
         <div class="row">
             <nav-menu [user]="user"
-                      (loggedOut)="onLogout($event)">
+                      (loggedOut)="onLogout($event)"
+                      (wantsToLogin)="onWantsToLogin()">
             </nav-menu>
         </div>
 
@@ -12,9 +13,10 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!isLoggedIn">
+    <div *ngIf="!isLoggedIn && !continueWithoutLogin">
         <div>
-            <landing-page (loggedIn)="onLogin($event)">
+            <landing-page (loggedIn)="onLogin($event)"
+                          (continuedWithoutLogin)="onContinueWithoutLogin()">
             </landing-page>
         </div>
     </div>

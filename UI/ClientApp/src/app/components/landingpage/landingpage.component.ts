@@ -15,11 +15,16 @@ export class LandingPageComponent {
 
 
     @Output() loggedIn = new EventEmitter();
+    @Output() continuedWithoutLogin = new EventEmitter();
 
     constructor(
         private router: Router) {
 
         this.router.onSameUrlNavigation = 'reload';
+    }
+
+    onContinueWithoutLogin() {
+        this.continuedWithoutLogin.emit();
     }
 
     onRegistrationCompleted() {

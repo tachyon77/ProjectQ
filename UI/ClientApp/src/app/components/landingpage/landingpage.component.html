@@ -18,10 +18,14 @@
         </registration-form>
     </div>
 
-    <div *ngIf="state==0">
+    <div *ngIf="state==0" class="text-center">
         <login-form (loggedIn)="onLoggedIn($event)"
                     (showRegistration)="onShowRegistration()">
         </login-form>
+        <button class="btn btn-sm login-control"
+                (click)="onContinueWithoutLogin()">
+            Continue without signing in
+        </button>
     </div>
 
     <div class="center-align pt-5 mt-5">

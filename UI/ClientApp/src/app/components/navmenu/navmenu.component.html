@@ -40,7 +40,7 @@
                         <i class="far fa-bell"></i>
                         Notifications
                     </a>
-                    <div class="notification-popover" 
+                    <div class="notification-popover"
                          *ngIf="isNotificationsVisible">
                         <notification-popover [notifications]="notifications"
                                               (notificationDismissed)="onNotificationDismissed()"
@@ -59,11 +59,20 @@
                     {{user.name}}
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"
+                *ngIf="user">
                 <a class="nav-link"
                    [routerLink]="['/home']"
                    (click)="logoutClick()">
                     Logout
+                </a>
+            </li>
+            <li class="nav-item"
+                *ngIf="!user">
+                <a class="nav-link"
+                   [routerLink]="['/home']"
+                   (click)="loginClick()">
+                    Login
                 </a>
             </li>
         </ul>

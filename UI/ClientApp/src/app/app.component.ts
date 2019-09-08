@@ -14,6 +14,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 export class AppComponent {
     user: User | undefined;
     isLoggedIn: boolean = false;
+    continueWithoutLogin: boolean = false;
 
     constructor(
         private location: Location,
@@ -26,6 +27,15 @@ export class AppComponent {
     onLogin(u: User) {
         this.user = u;
         this.isLoggedIn = true;
+    }
+
+    onContinueWithoutLogin() {
+        this.continueWithoutLogin = true;
+    }
+
+    onWantsToLogin() {
+        this.isLoggedIn = false;
+        this.continueWithoutLogin = false;
     }
 
     onLogout() {

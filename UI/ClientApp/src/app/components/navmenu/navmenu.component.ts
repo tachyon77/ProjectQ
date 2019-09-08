@@ -14,6 +14,7 @@ export class NavMenuComponent implements AfterViewInit{
     notifications: Notification[] = [];
 
     @Output() loggedOut = new EventEmitter();
+    @Output() wantsToLogin = new EventEmitter();
 
     constructor(private notificationService: NotificationService) {
     }
@@ -75,6 +76,10 @@ export class NavMenuComponent implements AfterViewInit{
 
     logoutClick() {
         this.loggedOut.emit();
+    }
+
+    loginClick() {
+        this.wantsToLogin.emit();
     }
 
     loadNotifications() {
