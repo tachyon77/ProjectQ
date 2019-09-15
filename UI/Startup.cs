@@ -124,7 +124,7 @@ namespace ProjectQ.FrontEnd
             services.AddScoped<IBlobManager, BlobManager>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddSingleton<IGraphQueries, CosmosGraph>();
+            services.AddScoped<IGraphQueries, CosmosGraph>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<INotificationSender, NotificationSender>();
             services.AddSingleton<IBlobClientProvider, BlobClientProvider>();

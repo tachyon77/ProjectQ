@@ -10,6 +10,7 @@ import { FocusDirective } from './directives/focus.directive'
 import { ViewPortWatcherDirective } from './directives/viewport-watcher.directive'
 
 // ProjectQ components
+import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
 import { ApplicationUserService } from './services/application-user.service';
 import { AnswerService } from './services/answers.service';
@@ -35,6 +36,7 @@ import { LoginFormComponent } from './components/loginform/loginform.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationPopoverComponent } from './components/notification-popover/notification-popover.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { PurchasedAnswersComponent } from './components/purchased-answers/purchased-answers.component'
 import { PurchasedAnswerService } from './services/purchased-answers.service';
 import { QuestionDetailComponent } from './components/questiondetail/questiondetail.component';
@@ -57,13 +59,15 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   entryComponents: [
     CredentialsReadonlyComponent,
     CredentialsEditorComponent,
   ],
-  declarations: [
+    declarations: [
+        AboutComponent,
     AppComponent,
     AddQuestionFormComponent,
     AnswerCardComponent,
@@ -81,7 +85,8 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
     LandingPageComponent,
     LoginFormComponent,
     NavMenuComponent,
-    NotificationPopoverComponent,
+        NotificationPopoverComponent,
+        PaymentComponent,
     PurchasedAnswersComponent,
     QuestionDetailComponent,
     QuestionCardComponent,
@@ -117,13 +122,16 @@ import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+      ReactiveFormsModule,
+      NgxStripeModule.forRoot('pk_test_DAraSvJLJBImk4lRam9CiLq8'),
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
+        { path: 'home', component: HomeComponent },
+        { path: 'about', component: AboutComponent },
+        { path: 'payment/:id', component: PaymentComponent },
       { path: 'landing-page', component: LandingPageComponent },
       { path: 'profile/:id', component: UserProfileComponent },
       { path: 'profile', component: UserProfileComponent },

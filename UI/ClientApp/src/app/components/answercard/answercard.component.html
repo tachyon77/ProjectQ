@@ -88,11 +88,11 @@
         <span class="price-tag">{{answerView.answer.price}}.00</span>
 
         <button class="btn btn-success ml-2"
-                (click)="onOpenCreditPay(cardPaymentTemplate)">
+                [routerLink]="['/payment', answerView.answer.id]">
             Buy
         </button>
         <span class="ml-2 price-note"> *Parts of this answer is hidden. You need to buy it to see full answer.</span>
-        
+
         <hr />
         <!--counter offer-->
         <button hidden class="btn btn-secondary btn-sm ml-2"
