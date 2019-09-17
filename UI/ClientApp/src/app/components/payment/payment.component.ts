@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AnswerPaymentService } from '../../services/answer-payment.service';
 import { AnswerPayment } from '../../models/AnswerPayment';
 
-import { StripeService, Elements, Element as StripeElement, ElementsOptions, TokenResult } from "ngx-stripe";
+import { StripeService, Elements, Element as StripeElement, ElementsOptions, StripeFactoryService, StripeInstance  } from "ngx-stripe";
 import { ActivatedRoute } from '@angular/router';
 import { AnswerService } from '../../services/answers.service';
 import { Answer } from '../../models/Answer';
@@ -19,21 +19,26 @@ export class PaymentComponent implements OnInit {
     elements: Elements;
     card: StripeElement;
     private _answer: Answer | undefined;
-
+    private apiKey: string | undefined;
     // optional parameters
     elementsOptions: ElementsOptions = {
         locale: 'en'
     };
 
+    stripeService: StripeInstance;
     stripeForm: FormGroup;
-    private paramsSubscription: any;
+    private paramsSubscription: any; // TODO: destroy on onDestroy
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private answerService: AnswerService,
         private fb: FormBuilder,
-        private stripeService: StripeService,
+        private stripeFactory: StripeFactoryService,
         private answerPaymentService: AnswerPaymentService) { }
+
+    get answer() {
+        return this._answer;
+    }
 
     ngOnInit() {
         this.paramsSubscription =
@@ -43,6 +48,12 @@ export class PaymentComponent implements OnInit {
                     this.loadAnswer(answerId);
                 }
             );
+        if (isDevMode()) {
+            this.apiKey = "pk_test_DAraSvJLJBImk4lRam9CiLq8";
+        } else {
+            this.apiKey = "pk_live_QQ7UoW7BuopdEuScR7861tJG";
+        }
+        this.stripeService = this.stripeFactory.create(this.apiKey);
         this.stripeForm = this.fb.group({
             name: ['', [Validators.required]]
         });

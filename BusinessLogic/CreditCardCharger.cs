@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using Stripe;
 using ProjectQ.Model;
+using Microsoft.Extensions.Configuration;
 
 namespace ProjectQ.BusinessLogic
 {
     public class StripeCharger : ICreditCardCharger
     {
-
-        public StripeCharger()
+        private string APIKey { get; set; }
+        public StripeCharger(IConfiguration configuration)
         {
             // Set your secret key: remember to change this to your live secret key in production
             // See your keys here: https://dashboard.stripe.com/account/apikeys
-            StripeConfiguration.SetApiKey("sk_test_tgL85kP8OIDLA4UU7sW8Oc0T");
+            APIKey = configuration.GetValue<string>("STRIPE_API_KEY");
+            StripeConfiguration.SetApiKey(APIKey);
         }
 
         // Token is created using Checkout or Elements.
@@ -24,8 +26,6 @@ namespace ProjectQ.BusinessLogic
         {
             AnswerPaymentStatus status = new AnswerPaymentStatus();
 
-            StripeConfiguration.SetApiKey("sk_test_tgL85kP8OIDLA4UU7sW8Oc0T");
-
             var options = new StripeChargeCreateOptions
             {
                 Amount = amount * 100,
@@ -33,7 +33,7 @@ namespace ProjectQ.BusinessLogic
                 Description = description,
                 SourceTokenOrExistingSourceId = token,
             };
-            var service = new StripeChargeService("sk_test_tgL85kP8OIDLA4UU7sW8Oc0T");
+            var service = new StripeChargeService(APIKey);
 
             try
             {

@@ -123,7 +123,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     HttpClientModule,
     FormsModule,
       ReactiveFormsModule,
-      NgxStripeModule.forRoot('pk_test_DAraSvJLJBImk4lRam9CiLq8'),
+      NgxStripeModule.forRoot(),
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
