@@ -1,25 +1,23 @@
 <div class='container-fluid no-padding'>
-    <div *ngIf="isLoggedIn || continueWithoutLogin">
+    <div *ngIf="user">
         <div class="row">
-            <nav-menu [user]="user"
-                      (loggedOut)="onLogout($event)"
-                      (wantsToLogin)="onWantsToLogin()">
+            <nav-menu [user]="user">
             </nav-menu>
         </div>
+    </div>
+    <div class="row body-content">
+        <div class="col-md-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 
-        <div class="row body-content">
-            <div class="col-md-12">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="!isLoggedIn && !continueWithoutLogin">
-        <div>
-            <landing-page (loggedIn)="onLogin($event)"
-                          (continuedWithoutLogin)="onContinueWithoutLogin()">
-            </landing-page>
-        </div>
-    </div>
+    <!--div class="center-align pt-5 mt-5">
+        <a class="btn btn-sm btn-link"
+           href="https://tachyon77.wordpress.com/2018/06/13/project-q/">Mission</a>
+        <span class="separator-dot">.</span>
+        <button class="btn btn-sm btn-link" [routerLink]="['/about']">Terms</button>
+    </div-->
+
 </div>
 
 

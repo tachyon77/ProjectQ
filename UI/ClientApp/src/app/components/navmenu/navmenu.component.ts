@@ -2,6 +2,9 @@ import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/
 
 import { User } from '../../models/User';
 import { Notification, NotificationService } from '../../services/notification.service'
+import { LoggedInStatusService } from '../../services/logged-in-status.service';
+import { Router } from '@angular/router';
+import { IdentityService } from '../../services/identity.service';
 
 @Component({
     selector: 'nav-menu',
@@ -16,7 +19,11 @@ export class NavMenuComponent implements AfterViewInit{
     @Output() loggedOut = new EventEmitter();
     @Output() wantsToLogin = new EventEmitter();
 
-    constructor(private notificationService: NotificationService) {
+    constructor(
+        private router: Router,
+        private identityService: IdentityService,
+        private notificationService: NotificationService,
+        private loggedInStatusService: LoggedInStatusService){
     }
 
     onNotificationDismissed() {
@@ -66,20 +73,26 @@ export class NavMenuComponent implements AfterViewInit{
         if (this.user) {
             return this.user.id;
         }
-       
     }
 
     get user(): (User | undefined) {
         return this._user;
     }
 
-
     logoutClick() {
-        this.loggedOut.emit();
+        this.identityService.logout().subscribe(
+            (any) => {
+                this.loggedInStatusService.logOut();
+                this.router.navigateByUrl("/landing-page");
+            },
+            error => {
+                alert("Logout failed: " + error);
+            }
+        );
     }
 
     loginClick() {
-        this.wantsToLogin.emit();
+        this.router.navigateByUrl("/landing-page");
     }
 
     loadNotifications() {

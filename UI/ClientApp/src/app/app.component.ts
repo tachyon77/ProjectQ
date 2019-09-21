@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { User } from './models/User';
-import { IdentityService, LoginCredential } from './services/identity.service';
+import { IdentityService } from './services/identity.service';
 import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LoggedInStatusService } from './services/logged-in-status.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -11,55 +13,45 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
     user: User | undefined;
-    isLoggedIn: boolean = false;
+    private _isLoggedIn: boolean = false;
     continueWithoutLogin: boolean = false;
+    loggedInEventsubscription: Subscription;
+    loggedOutEventsubscription: Subscription;
 
     constructor(
         private location: Location,
         private identityService: IdentityService,
+        private loggedInStatusService: LoggedInStatusService,
         private router: Router) {
 
         this.router.onSameUrlNavigation = 'reload';
-    }
 
-    onLogin(u: User) {
-        this.user = u;
-        this.isLoggedIn = true;
-    }
+        this.loggedInEventsubscription = this.loggedInStatusService.loggedIn$.subscribe(
+            (user: User) => {
+                this.user = user;
+                this.router.navigateByUrl("/home");
+            });
 
-    onContinueWithoutLogin() {
-        this.continueWithoutLogin = true;
-    }
-
-    onWantsToLogin() {
-        this.isLoggedIn = false;
-        this.continueWithoutLogin = false;
-    }
-
-    onLogout() {
-        this.identityService.logout().subscribe(
-            data => { // success path
-                this.isLoggedIn = false;
+        this.loggedOutEventsubscription = this.loggedInStatusService.loggedOut$.subscribe(
+            (ignored) => {
+                this.user = null;
                 this.identityService.refreshCSRFToken()
                     .subscribe();
-            },
-            error => {
-                alert("failed to log out");
-            }
-        );
+                this.router.navigateByUrl("/landing-page");
+            });
     }
-
+  
 
     loadUser() {
         this.identityService.getLoggedInUser().subscribe(
             (user: User) => {
                 if (user) {
                     this.user = user;
-                    this.isLoggedIn = true;
+                    this.router.navigateByUrl("/home");
                 } else {
-                    this.isLoggedIn = false;
+                    this.router.navigateByUrl("/landing-page");
                 }
             },
             error => {
@@ -69,26 +61,12 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        if (this.location.path() == '/anonymous') {
-            var loginForm = new LoginCredential();
-            loginForm.Email = "anonymous@sharedmem.com";
-            loginForm.Password = "anonymous";
+        this.loadUser();
+    }
 
-            this.identityService.login(loginForm).subscribe(
-                (user: User) => {
-                    if (user) {
-                        this.loadUser();
-                    } else {
-                        alert("Login Failed.");
-                    }
-                },
-                error => {
-                    alert("Login failed: " + error);
-                }
-            );
-           
-        } else {
-            this.loadUser();
-        }
+    ngOnDestroy() {
+        // prevent memory leak when component destroyed
+        this.loggedInEventsubscription.unsubscribe();
+        this.loggedOutEventsubscription.unsubscribe();
     }
 }
