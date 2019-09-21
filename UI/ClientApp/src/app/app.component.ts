@@ -15,7 +15,6 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnDestroy {
     user: User | undefined;
-    private _isLoggedIn: boolean = false;
     continueWithoutLogin: boolean = false;
     loggedInEventsubscription: Subscription;
     loggedOutEventsubscription: Subscription;

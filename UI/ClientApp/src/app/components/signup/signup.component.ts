@@ -1,22 +1,21 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { IdentityService, RegistrationForm, RegistrationRequestReponse } from '../../services/identity.service';
+import { IdentityService, SignupForm, RegistrationRequestReponse } from '../../services/identity.service';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'registration-form',
-    templateUrl: './registrationform.component.html',
-    styleUrls: ['./registrationform.component.css']
+    selector: 'signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
-export class RegistrationFormComponent {
+export class SignupComponent {
 
-    isEmailSent: boolean = false;
-    @Output() registrationCompleted = new EventEmitter();
     form: FormGroup | undefined;
 
     constructor(
         private formBuilder: FormBuilder,
+        private router: Router,
         private identityService: IdentityService) {
-
     }
 
     ngOnInit() {
@@ -43,36 +42,15 @@ export class RegistrationFormComponent {
         return pass === confirmPass ? null : { notSame: true }
     }
 
-    confirmRegistration(regForm: RegistrationForm) {
-        this.identityService.confirmRegistration(regForm).subscribe(result => {
-            if (result != null && result.length > 0) {
-                this.registrationCompleted.emit();
-            }
-        }, error => console.error(error));
-    }
-
-    submitRegistration(regForm: RegistrationForm) {
-        this.identityService.register(regForm)
+    onSubmit(signupForm: SignupForm) {
+        this.identityService.register(signupForm)
             .subscribe((result: RegistrationRequestReponse) => {
                 if (result.isSucceeded == true) {
-                    this.isEmailSent = true;
-                    alert('Please check your email to confirm registration');
-                    this.registrationCompleted.emit();
+                    this.router.navigateByUrl("/confirm-signup");
                 }
                 else {
                     alert(result.errorCode);
                 }
             }, error => console.error(error));
     }
-
-    onSubmit(regForm: RegistrationForm) {
-        if (this.isEmailSent) {
-            this.confirmRegistration(regForm);
-        }
-        else {
-            this.submitRegistration(regForm);
-        }
-    }
-
-
 }

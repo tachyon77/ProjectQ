@@ -1,0 +1,52 @@
+.login-control {
+    margin: 0.5em;
+    padding: 0.25em;
+}
+
+.login-form {
+    padding-top: 0.5em;
+    background-color: ghostwhite;
+}
+
+.engraved-text {
+    font-size: 20px;
+    font-family: Futura;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(245,245,245,0.5) 3px 5px 1px;
+}
+
+.landing-page {
+    font-family: "Helvetica Neue";
+}
+
+.center-align {
+    text-align: center;
+}
+
+.company-name {
+    font-size: 2em;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+.motto-text {
+    font-size: 1.5em;
+    padding-bottom: 3em;
+}
+
+.login-control {
+    margin: 0.5em;
+    padding: 0.25em;
+}
+
+.login-form {
+    padding-top: 0.5em;
+}
+
+.separator-dot {
+    font-size: 2em;
+}

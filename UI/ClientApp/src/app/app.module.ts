@@ -22,9 +22,10 @@ import { AnswerRatingService } from './services/answerrating.service';
 import { AnswerCardComponent } from './components/answercard/answercard.component';
 import { AddAnswerComponent } from './components/addanswer/addanswer.component';
 import { AddQuestionFormComponent } from './components/addquestion/addquestionform.component';
-import { CredentialsReadonlyComponent } from './components/credentials-readonly/credentials-readonly.component';
-import { CredentialsEditorComponent } from './components/credentials-editor/credentials-editor.component';
+import { ConfirmSignupComponent } from './components/confirm-signup/confirm-signup.component';
 import { ContentEditorComponent } from './components/content-editor/contenteditor.component';
+import { CredentialsEditorComponent } from './components/credentials-editor/credentials-editor.component';
+import { CredentialsReadonlyComponent } from './components/credentials-readonly/credentials-readonly.component';
 import { DisplayQuestionsComponent } from './components/displayquestions/displayquestions.component';
 import { HomeComponent } from './components/home/home.component';
 import { HtmlContentComponent } from './components/html-content/html-content.component';
@@ -49,9 +50,9 @@ import { QuestionViewService } from './services/question-views.service';
 import { QuestionTopicService } from './services/question-topics.service';
 import { ReadableDatePipe } from './pipes/readable-date.pipe'
 import { RedactorService } from './services/redactor.service'
-import { RegistrationFormComponent } from './components/registrationform/registrationform.component';
 import { RequestInviteComponent } from './components/request-invite/request-invite.component';
 import { RequestInviteService } from './services/request-invite.service';
+import { SignupComponent } from './components/signup/signup.component';
 import { TextSearchComponent } from './components/text-search/textsearch.component';
 import { TextSearchService } from './services/textsearch.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -93,12 +94,13 @@ import { NgxStripeModule } from 'ngx-stripe';
         QuestionCardComponent,
         QuestionEditorComponent,
         ReadableDatePipe,
-        RegistrationFormComponent,
         RequestInviteComponent,
+        SignupComponent,
         TextSearchComponent,
         UserProfileComponent,
         UserQuestionsComponent,
         ViewPortWatcherDirective,
+        ConfirmSignupComponent,
     ],
     providers: [
         ApplicationUserService,
@@ -134,7 +136,8 @@ import { NgxStripeModule } from 'ngx-stripe';
             { path: 'about', component: AboutComponent },
             { path: 'payment/:id', component: PaymentComponent },
             { path: 'landing-page', component: LandingPageComponent },
-            { path: 'signup', component: RegistrationFormComponent },
+            { path: 'signup', component: SignupComponent },
+            { path: 'confirm-signup', component: ConfirmSignupComponent },
             { path: 'profile/:id', component: UserProfileComponent },
             { path: 'profile', component: UserProfileComponent },
             { path: 'add-question-form', component: AddQuestionFormComponent },

@@ -13,9 +13,14 @@ export class LoginCredential {
     ConfirmPassword!: string;
 }
 
-export class RegistrationForm {
+export class SignupForm {
     Email!: string;
     Password!: string;
+    ConfirmEmailCode!: string;
+}
+
+export class SignupConfirmationForm {
+    Email!: string;
     ConfirmEmailCode!: string;
 }
 
@@ -25,14 +30,13 @@ export class RegistrationRequestReponse {
 }
 
 
-
 @Injectable()
 export class IdentityService {
 
     constructor(private http: HttpClient) {
     }
 
-    register(regForm: RegistrationForm): Observable<any> {
+    register(regForm: SignupForm): Observable<any> {
         return this.http.post('api/Account/Register', regForm)
             .pipe(
                 tap(_ => console.log(``)),
@@ -40,7 +44,7 @@ export class IdentityService {
             );
     }
 
-    confirmRegistration(regForm: RegistrationForm): Observable<any> {
+    confirmRegistration(regForm: SignupConfirmationForm): Observable<any> {
         return this.http.post('api/Account/Confirm', regForm)
             .pipe(
                 tap(_ => console.log(``)),

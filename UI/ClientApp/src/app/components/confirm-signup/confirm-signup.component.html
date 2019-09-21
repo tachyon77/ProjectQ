@@ -1,0 +1,40 @@
+<div class="landing-page">
+    <div class="company-name center-align">
+        Shared Mem
+    </div>
+    <div class="motto-text center-align">
+        Ask any question. No restrictions.
+    </div>
+
+    <div class="text-center">
+        Please check your email to confirm registration. Click the link on the email.
+        <form [formGroup]="form"
+              *ngIf="false"
+              (ngSubmit)="onSubmit(form.value)">
+            <div>
+                <input type="text"
+                       autocomplete="off"
+                       class="login-control"
+                       placeholder="Email Confirmation Code"
+                       name="confirmEmailCode" id="confirmEmailCode"
+                       formControlName="ConfirmEmailCode" />
+            </div>
+
+            <div>
+                <button type="submit"
+                        class="login-control btn btn-light">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
