@@ -1,7 +1,4 @@
 <div class="landing-page">
-    <div class="company-name center-align">
-        Shared Mem
-    </div>
     <div class="motto-text center-align">
         Ask any question. No restrictions.
     </div>
@@ -15,10 +12,17 @@
 
     <div class="text-center">
         <login-form></login-form>
-        <button class="btn btn-sm login-control"
+        <button *ngIf="false"
+                class="btn btn-sm login-control"
                 routerLink="/home">
             Continue without signing in
         </button>
+    </div>
+
+    <div class="footer">
+        <button class="btn btn-sm btn-link" [routerLink]="['/about']">About</button>
+        <span class="separator-dot">.</span>
+        <button class="btn btn-sm btn-link" [routerLink]="['/terms']">Terms</button>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 <div class='container-fluid no-padding'>
-    <div *ngIf="user">
+    <div>
         <div class="row">
             <nav-menu [user]="user">
             </nav-menu>
@@ -10,15 +10,8 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-
-    <!--div class="center-align pt-5 mt-5">
-        <a class="btn btn-sm btn-link"
-           href="https://tachyon77.wordpress.com/2018/06/13/project-q/">Mission</a>
-        <span class="separator-dot">.</span>
-        <button class="btn btn-sm btn-link" [routerLink]="['/about']">Terms</button>
-    </div-->
-
 </div>
+    
 
 
 

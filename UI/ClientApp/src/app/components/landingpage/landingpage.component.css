@@ -9,12 +9,13 @@
 .company-name {
     font-size: 2em;
     padding-top:1em;
-    padding-bottom:2em;
+    padding-bottom:1em;
 }
 
 .motto-text {
-    font-size: 1.5em;
-    padding-bottom:3em;
+    font-size: 3.5em;
+    padding-top:2em;
+    padding-bottom:1.25em
 }
 
 .login-control{
@@ -31,3 +32,10 @@
 }
 
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

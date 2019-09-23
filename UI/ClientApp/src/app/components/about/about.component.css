@@ -1,3 +1,17 @@
-﻿.home-page {
-    background-color: #e0e0e0;
+.about-text{
+    font-family:Georgia
 }
+
+.about-text .heading{
+    font-size:large;
+    font-weight:bold;
+    padding-top:1em;
+    padding-bottom:2em;
+}
+
+.about-text .key-point{
+    text-align:center;
+    font-style:italic;
+    text-decoration:underline;
+}
+

@@ -16,9 +16,6 @@ export class NavMenuComponent implements AfterViewInit{
     isNotificationsVisible: boolean = false;
     notifications: Notification[] = [];
 
-    @Output() loggedOut = new EventEmitter();
-    @Output() wantsToLogin = new EventEmitter();
-
     constructor(
         private router: Router,
         private identityService: IdentityService,
@@ -83,16 +80,11 @@ export class NavMenuComponent implements AfterViewInit{
         this.identityService.logout().subscribe(
             (any) => {
                 this.loggedInStatusService.logOut();
-                this.router.navigateByUrl("/landing-page");
             },
             error => {
                 alert("Logout failed: " + error);
             }
         );
-    }
-
-    loginClick() {
-        this.router.navigateByUrl("/landing-page");
     }
 
     loadNotifications() {

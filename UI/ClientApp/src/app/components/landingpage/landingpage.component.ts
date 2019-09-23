@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,17 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent {
 
-    @Output() loggedIn = new EventEmitter();
-    @Output() continuedWithoutLogin = new EventEmitter();
-
     constructor(
         private router: Router) {
-
         this.router.onSameUrlNavigation = 'reload';
-    }
-
-    onLoggedIn(event: Event) {
-        this.loggedIn.emit(event);
     }
 
 }
