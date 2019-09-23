@@ -12,7 +12,7 @@
         <ul class="navbar-nav mr-auto">
             <li [routerLinkActive]="['link-active']">
                 <a class="navbar-brand" [routerLink]="['/about']">
-                    SharedMem
+                    SharedMem <sup>(beta)</sup>
                 </a>
             </li>
             <li *ngIf="user"
@@ -62,6 +62,12 @@
                 </div>
             </li>
 
+            <li class="nav-item"
+                [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/terms']">
+                    Terms
+                </a>
+            </li>
             <li class="nav-item"
                 [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/about']">

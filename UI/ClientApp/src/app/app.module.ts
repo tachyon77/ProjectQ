@@ -53,6 +53,7 @@ import { RedactorService } from './services/redactor.service'
 import { RequestInviteComponent } from './components/request-invite/request-invite.component';
 import { RequestInviteService } from './services/request-invite.service';
 import { SignupComponent } from './components/signup/signup.component';
+import { TermsComponent } from './components/terms/terms.component';
 import { TextSearchComponent } from './components/text-search/textsearch.component';
 import { TextSearchService } from './services/textsearch.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -62,6 +63,7 @@ import { ViewportWatcherService } from './directives/viewport-watcher.service';
 // third-party modules
 import { AlertModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { NgxStripeModule } from 'ngx-stripe';
+
 
 @NgModule({
     entryComponents: [
@@ -101,6 +103,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         UserQuestionsComponent,
         ViewPortWatcherDirective,
         ConfirmSignupComponent,
+        TermsComponent,
     ],
     providers: [
         ApplicationUserService,
@@ -134,6 +137,7 @@ import { NgxStripeModule } from 'ngx-stripe';
         RouterModule.forRoot([
             { path: 'home', component: HomeComponent },
             { path: 'about', component: AboutComponent },
+            { path: 'terms', component: TermsComponent },
             { path: 'payment/:id', component: PaymentComponent },
             { path: 'landing-page', component: LandingPageComponent },
             { path: 'signup', component: SignupComponent },

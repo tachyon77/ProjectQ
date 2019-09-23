@@ -1,0 +1,16 @@
+.terms-text {
+    font-family: Georgia
+}
+
+    .terms-text .heading {
+        font-size: large;
+        font-weight: bold;
+        padding-top: 1em;
+        padding-bottom: 2em;
+    }
+
+    .terms-text .key-point {
+        text-align: center;
+        font-style: italic;
+        text-decoration: underline;
+    }
