@@ -50,7 +50,10 @@ export class AppComponent implements OnDestroy {
                     this.user = user;
                     this.router.navigateByUrl("/home");
                 } else {
-                    this.router.navigateByUrl("/landing-page");
+                    if (this.router.url.includes("question-detail")) {
+                    } else {
+                        this.router.navigateByUrl("/landing-page");
+                    }
                 }
             },
             error => {
