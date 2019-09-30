@@ -51,6 +51,7 @@ export class AppComponent implements OnDestroy {
                     this.router.navigateByUrl("/home");
                 } else {
                     if (this.router.url.includes("question-detail")) {
+                    } else if (this.router.url.includes("home")) {
                     } else {
                         this.router.navigateByUrl("/landing-page");
                     }
